@@ -9,7 +9,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Apple, Check, WifiOff, Shield } from "lucide-react";
+import { Check, WifiOff, Shield } from "lucide-react";
 import {
   staggerContainer,
   staggerItem,
@@ -224,19 +224,23 @@ export default function Hero() {
                 whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
                 className="flex items-center gap-3 px-7 py-3.5 rounded-xl bg-white text-black font-semibold text-base hover:bg-neutral-200 transition-colors duration-300"
               >
-                <Apple className="w-5 h-5" />
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                </svg>
                 Download for iOS
               </motion.a>
 
-              {/* Android */}
+              {/* Google Play */}
               <motion.a
                 href="#download"
                 whileHover={{ y: -2, transition: { duration: 0.2 } }}
                 whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
                 className="flex items-center gap-3 px-7 py-3.5 rounded-xl bg-white/[0.06] border border-white/[0.08] text-white font-semibold text-base hover:bg-white/[0.1] transition-colors duration-300"
               >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2.237a.625.625 0 0 0-.858.23l-1.77 3.107C13.825 5.2 12.7 4.97 11.5 4.97s-2.325.23-3.395.604L6.335 2.467a.625.625 0 0 0-1.088.613l1.656 2.907C4.652 7.472 3 9.84 3 12.62h17c0-2.78-1.652-5.148-3.903-6.633l1.656-2.907a.625.625 0 0 0-.23-.843zM8.5 10.37a.875.875 0 1 1 0-1.75.875.875 0 0 1 0 1.75zm6 0a.875.875 0 1 1 0-1.75.875.875 0 0 1 0 1.75zM3 13.87v5.75c0 .69.56 1.25 1.25 1.25h1.25v2.5a1.25 1.25 0 0 0 2.5 0v-2.5h5v2.5a1.25 1.25 0 0 0 2.5 0v-2.5h1.25c.69 0 1.25-.56 1.25-1.25v-5.75H3z"/></svg>
-                Android
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/>
+                </svg>
+                Google Play
               </motion.a>
             </motion.div>
 
