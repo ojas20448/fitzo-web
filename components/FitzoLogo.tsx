@@ -20,10 +20,10 @@ export function FitzoIcon({ className = "w-8 h-8" }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
-      <rect width="100" height="100" rx="20" fill="white" />
+      <rect width="100" height="100" rx="20" fill="black" />
       <path
         d="M25 80V20H75L65 35H42V44H62L55 57H42V80H25Z"
-        fill="black"
+        fill="white"
       />
     </svg>
   );
