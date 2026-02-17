@@ -58,11 +58,11 @@ function DashboardMini() {
 /* ━━━ Mini App Screen: Learn Tab ━━━ */
 function LearnMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-3 border border-white/[0.04] space-y-2">
-      <p className="text-[8px] text-neutral-500 uppercase tracking-wider">Learn • Path</p>
-      <p className="text-xs font-bold text-white">Nutrition Fundamentals</p>
+    <div className="bg-[#0c0c0c] rounded-xl p-4 border border-white/[0.04] space-y-2.5">
+      <p className="text-[9px] text-neutral-500 uppercase tracking-wider">Learn • Path</p>
+      <p className="text-sm font-bold text-white">Nutrition Fundamentals</p>
       {/* Progress */}
-      <div className="h-1 rounded-full bg-white/[0.06] overflow-hidden">
+      <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: "38%" }}
@@ -71,19 +71,19 @@ function LearnMini() {
           className="h-full rounded-full bg-white"
         />
       </div>
-      <p className="text-[8px] text-neutral-600">3/8 lessons</p>
+      <p className="text-[9px] text-neutral-600">3/8 lessons</p>
       {/* Lessons */}
       {[
         { title: "What are Calories?", xp: "+50 XP", done: true },
         { title: "Protein: Building Block", xp: "+50 XP", done: true },
         { title: "Carbs & Fat", xp: "+75 XP", done: false },
       ].map((l) => (
-        <div key={l.title} className="flex items-center gap-2 py-1">
-          <div className={`w-3 h-3 rounded-full ${l.done ? "bg-white" : "border border-neutral-700"} flex items-center justify-center flex-shrink-0`}>
-            {l.done && <Check className="w-1.5 h-1.5 text-black" />}
+        <div key={l.title} className="flex items-center gap-2 py-1.5">
+          <div className={`w-3.5 h-3.5 rounded-full ${l.done ? "bg-white" : "border border-neutral-700"} flex items-center justify-center flex-shrink-0`}>
+            {l.done && <Check className="w-2 h-2 text-black" />}
           </div>
-          <span className={`text-[9px] flex-1 ${l.done ? "text-neutral-400" : "text-neutral-300"}`}>{l.title}</span>
-          <span className="text-[8px] text-neutral-600">{l.xp}</span>
+          <span className={`text-[10px] flex-1 ${l.done ? "text-neutral-400" : "text-neutral-300"}`}>{l.title}</span>
+          <span className="text-[9px] text-neutral-600">{l.xp}</span>
         </div>
       ))}
     </div>
@@ -93,10 +93,10 @@ function LearnMini() {
 /* ━━━ Mini App Screen: Gym Buddies ━━━ */
 function BuddiesMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-3 border border-white/[0.04] space-y-2.5">
+    <div className="bg-[#0c0c0c] rounded-xl p-4 border border-white/[0.04] space-y-3">
       <div className="flex items-center justify-between">
-        <p className="text-xs font-bold text-white">Gym Buddies</p>
-        <span className="text-[8px] text-neutral-600 uppercase tracking-wider">Add</span>
+        <p className="text-sm font-bold text-white">Gym Buddies</p>
+        <span className="text-[9px] text-neutral-600 uppercase tracking-wider">Add</span>
       </div>
       {/* Buddy list */}
       {[
@@ -104,14 +104,14 @@ function BuddiesMini() {
         { name: "Sarah", status: "Last active 2h ago", active: false },
         { name: "Mike", status: "3 day streak 🔥", active: true },
       ].map((b) => (
-        <div key={b.name} className="flex items-center gap-2.5 py-1.5 border-t border-white/[0.03] first:border-t-0">
+        <div key={b.name} className="flex items-center gap-3 py-2 border-t border-white/[0.03] first:border-t-0">
           <div className="relative">
-            <div className="w-8 h-8 rounded-full bg-neutral-800" />
-            {b.active && <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-400 border-2 border-[#0c0c0c]" />}
+            <div className="w-9 h-9 rounded-full bg-neutral-800" />
+            {b.active && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-400 border-2 border-[#0c0c0c]" />}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[10px] font-semibold text-white">{b.name}</p>
-            <p className="text-[8px] text-neutral-500 truncate">{b.status}</p>
+            <p className="text-[11px] font-semibold text-white">{b.name}</p>
+            <p className="text-[9px] text-neutral-500 truncate">{b.status}</p>
           </div>
         </div>
       ))}
@@ -122,17 +122,17 @@ function BuddiesMini() {
 /* ━━━ Mini App Screen: Food Search / AI ━━━ */
 function FoodSearchMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-3 border border-white/[0.04] space-y-2">
-      <p className="text-xs font-bold text-white">Add Food</p>
+    <div className="bg-[#0c0c0c] rounded-xl p-4 border border-white/[0.04] space-y-2.5">
+      <p className="text-sm font-bold text-white">Add Food</p>
       {/* Search bar */}
-      <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.04]">
-        <ScanLine className="w-3 h-3 text-neutral-600" />
-        <span className="text-[9px] text-neutral-500">Search or scan food…</span>
+      <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.04]">
+        <ScanLine className="w-3.5 h-3.5 text-neutral-600" />
+        <span className="text-[10px] text-neutral-500">Search or scan food…</span>
       </div>
       {/* AI chip */}
-      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.04] w-fit">
-        <Sparkles className="w-3 h-3 text-white" />
-        <span className="text-[9px] text-neutral-400">AI Analysis</span>
+      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.04] w-fit">
+        <Sparkles className="w-3.5 h-3.5 text-white" />
+        <span className="text-[10px] text-neutral-400">AI Analysis</span>
       </div>
       {/* Results */}
       {[
@@ -140,11 +140,11 @@ function FoodSearchMini() {
         { name: "Brown Rice", cal: "112 kcal", per: "100g" },
         { name: "Greek Yogurt", cal: "59 kcal", per: "100g" },
       ].map((f) => (
-        <div key={f.name} className="flex items-center justify-between py-1 border-t border-white/[0.03]">
-          <span className="text-[9px] text-neutral-300">{f.name}</span>
+        <div key={f.name} className="flex items-center justify-between py-1.5 border-t border-white/[0.03]">
+          <span className="text-[10px] text-neutral-300">{f.name}</span>
           <div className="text-right">
-            <span className="text-[9px] font-semibold text-white">{f.cal}</span>
-            <span className="text-[8px] text-neutral-600 ml-1">/ {f.per}</span>
+            <span className="text-[10px] font-semibold text-white">{f.cal}</span>
+            <span className="text-[9px] text-neutral-600 ml-1">/ {f.per}</span>
           </div>
         </div>
       ))}
@@ -219,7 +219,7 @@ function FeatureCard({
   return (
     <motion.div
       variants={bentoItemVariants}
-      className={`glass-card p-6 hover:border-white/[0.12] transition-all duration-500 group relative overflow-hidden ${className}`}
+      className={`glass-card p-7 hover:border-white/[0.12] transition-all duration-500 group relative overflow-hidden ${className}`}
     >
       {/* Hover glow */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
@@ -228,22 +228,22 @@ function FeatureCard({
 
       <div className="relative z-10">
         {/* Header */}
-        <div className="flex items-start justify-between mb-4">
+        <div className="flex items-start justify-between mb-5">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-white/[0.06] border border-white/[0.04] flex items-center justify-center">
+            <div className="w-11 h-11 rounded-2xl bg-white/[0.06] border border-white/[0.04] flex items-center justify-center">
               {icon}
             </div>
-            <h3 className="text-lg font-bold text-white">{title}</h3>
+            <h3 className="text-xl font-bold text-white">{title}</h3>
           </div>
           {badge && (
-            <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-white/[0.06] text-neutral-400 border border-white/[0.04]">
+            <span className="px-3 py-1.5 rounded-full text-[10px] font-semibold bg-white/[0.06] text-neutral-400 border border-white/[0.04]">
               {badge}
             </span>
           )}
         </div>
 
         {/* Description */}
-        <p className="text-sm text-neutral-500 leading-relaxed mb-4">
+        <p className="text-[15px] text-neutral-500 leading-relaxed mb-5">
           {description}
         </p>
 
