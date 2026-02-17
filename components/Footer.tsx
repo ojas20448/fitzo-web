@@ -70,10 +70,10 @@ export default function Footer() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
-      className="relative border-t border-white/[0.04] pt-16 pb-8"
+      className="relative border-t border-white/[0.04] pt-12 pb-6"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16 mb-12">
           {/* ━━━ Brand Column ━━━ */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="inline-block mb-4">

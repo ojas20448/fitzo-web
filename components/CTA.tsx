@@ -16,7 +16,7 @@ import {
 
 export default function CTA() {
   return (
-    <section id="download" className="relative py-24 sm:py-32 overflow-hidden">
+    <section id="download" className="relative py-16 sm:py-24 overflow-hidden">
       {/* Subtle radial glow */}
       <div className="absolute inset-0 radial-fade" />
 
