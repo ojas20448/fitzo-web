@@ -2,26 +2,134 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FITZO — Global Styles
+   Black & white premium dark mode
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ffffff;
+  --brand-protein: #4ade80;
+  --brand-carbs: #facc15;
+  --brand-fat: #fb7185;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", "Geist", system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
+/* ━━━ Selection Colors ━━━ */
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+/* ━━━ Custom Scrollbar ━━━ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* ━━━ Glassmorphism Utility ━━━ */
+@layer components {
+  .glass {
+    @apply backdrop-blur-xl bg-white/[0.03] border border-white/[0.06];
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/[0.03] border border-white/[0.06] rounded-2xl;
+  }
+
+  .glass-card-hover {
+    @apply backdrop-blur-xl bg-white/[0.03] border border-white/[0.06] rounded-2xl transition-all duration-500;
+  }
+
+  .glass-card-hover:hover {
+    @apply bg-white/[0.06] border-white/[0.1];
+  }
+}
+
+/* ━━━ Subtle radial glow ━━━ */
 @layer utilities {
+  .radial-fade {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      rgba(255, 255, 255, 0.03) 0%,
+      transparent 70%
+    );
+  }
+
+  .radial-fade-bottom {
+    background: radial-gradient(
+      ellipse 80% 60% at 50% 100%,
+      rgba(255, 255, 255, 0.02) 0%,
+      transparent 70%
+    );
+  }
+
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* ━━━ Animated Progress Ring ━━━ */
+.progress-ring-circle {
+  transition: stroke-dashoffset 1.5s ease-in-out;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+/* ━━━ Shimmer Loading Effect ━━━ */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.06) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+/* ━━━ Fine dot pattern ━━━ */
+.dot-pattern {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.04) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+/* ━━━ Horizontal line accent ━━━ */
+.line-accent {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  height: 1px;
 }
