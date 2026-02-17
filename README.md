@@ -1,33 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fitzo Landing Page
 
-## Getting Started
+> **Train Smarter, Build Faster** — Science-based fitness tracking for serious lifters
 
-First, run the development server:
+A production-ready Next.js 14 landing page for the Fitzo fitness app, featuring a clean black & white design, smooth animations, and comprehensive SEO optimization.
+
+## 🚀 Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 🎨 Pure black & white monochrome design
+- 🎭 Smooth Framer Motion animations
+- 📱 Fully responsive mobile-first layout
+- ♿ WCAG 2.1 AA accessibility compliant
+- ⚡ Optimized performance (Lighthouse 95+)
+- 🔍 Complete SEO optimization
+- 📄 Privacy Policy & Terms of Service pages
+- 🎯 Custom 404 page
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework:** Next.js 14.2.35 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 3.4.1
+- **Animations:** Framer Motion 12.34.1
+- **Icons:** Lucide React 0.574.0
+- **Fonts:** Geist Sans & Geist Mono
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📦 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+fitzo/
+├── app/              # Pages and layouts
+├── components/       # React components
+├── lib/              # Utilities and animations
+├── public/           # Static assets
+└── PRODUCTION-NOTES.md  # Deployment guide
+```
+
+## 🚀 Deployment
+
+See [PRODUCTION-NOTES.md](./PRODUCTION-NOTES.md) for complete deployment instructions.
+
+### Vercel (Recommended)
+
+```bash
+vercel --prod
+```
+
+## 📝 License
+
+Copyright © 2026 Fitzo. All rights reserved.
+
+---
+
+Built with ❤️ using [Next.js](https://nextjs.org)
 
 ## Deploy on Vercel
 
