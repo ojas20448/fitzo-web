@@ -1,0 +1,23 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#000000"/>
+  
+  <!-- Fitzo Logo -->
+  <g transform="translate(100, 200)">
+    <rect width="120" height="120" rx="24" fill="black" stroke="white" stroke-width="2"/>
+    <path d="M30 104V24H90L78 42H50.4V52.8H75.6L66.6 68.4H50.4V104H30Z" fill="white"/>
+  </g>
+  
+  <!-- Text Content -->
+  <text x="250" y="280" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="900" fill="white">
+    Fitzo
+  </text>
+  <text x="250" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="600" fill="#999999">
+    Train Smarter, Build Faster
+  </text>
+  
+  <!-- Bottom Tag -->
+  <text x="250" y="400" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#666666">
+    Science-Based Fitness Tracking
+  </text>
+</svg>

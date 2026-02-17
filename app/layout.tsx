@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     siteName: "Fitzo",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.svg",
         width: 1200,
         height: 630,
         alt: "Fitzo — Science-Based Fitness Tracking",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     description:
       "Track workouts, macros, and progress with precision. Built for lifters who value data.",
     creator: "@fitzoapp",
-    images: ["/og-image.png"],
+    images: ["/og-image.svg"],
   },
   robots: {
     index: true,
@@ -77,12 +77,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
     ],
-    apple: "/apple-touch-icon.png",
-  },
-  other: {
-    "apple-itunes-app": "app-id=XXXXXXXXXX",
+    apple: "/apple-touch-icon.svg",
   },
 };
 
