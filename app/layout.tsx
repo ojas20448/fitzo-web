@@ -1,23 +1,19 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Cuprum } from "next/font/google";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const cuprum = Cuprum({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cuprum",
+  display: "swap",
 });
 
 /* ━━━ SEO Metadata ━━━ */
 export const metadata: Metadata = {
   metadataBase: new URL("https://fitzo.app"),
   title: {
-    default: "Fitzo — Science-Based Fitness Tracking for Serious Lifters",
+    default: "Fitzo — Train Smarter, Build Faster",
     template: "%s — Fitzo",
   },
   description:
@@ -42,7 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://fitzo.app",
-    title: "Fitzo — Science-Based Fitness Tracking for Serious Lifters",
+    title: "Fitzo — Train Smarter, Build Faster",
     description:
       "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, and science-backed education. Built for lifters who value data.",
     siteName: "Fitzo",
@@ -57,7 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fitzo — Science-Based Fitness Tracking for Serious Lifters",
+    title: "Fitzo — Train Smarter, Build Faster",
     description:
       "Track workouts, macros, and progress with precision. Built for lifters who value data.",
     creator: "@fitzoapp",
@@ -94,7 +90,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
+        className={`${cuprum.variable} font-sans antialiased bg-black text-white`}
       >
         {children}
       </body>

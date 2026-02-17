@@ -21,8 +21,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
-          "Inter",
-          "Geist",
+          "var(--font-cuprum)",
           "system-ui",
           "-apple-system",
           "sans-serif",
