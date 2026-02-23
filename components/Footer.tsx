@@ -21,7 +21,7 @@ const FOOTER_LINKS = {
   Company: [
     { label: "About", href: "#" },
     { label: "Blog", href: "#", badge: "Coming Soon" },
-    { label: "Contact", href: "mailto:support@fitzo.app" },
+    { label: "Contact", href: "mailto:contact@fitzoapp.in" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
