@@ -8,7 +8,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+import { fadeUp } from "@/lib/animations";
 import { Check, Zap } from "lucide-react";
 
 const features = [
