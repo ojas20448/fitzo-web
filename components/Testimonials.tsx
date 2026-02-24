@@ -1,7 +1,7 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO — Testimonials Section
- * Beta tester quotes from Indian users
+ * Beta tester quotes with animated stat counters
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -10,6 +10,7 @@
 import { motion } from "framer-motion";
 import { staggerContainer, fadeUp } from "@/lib/animations";
 import { Quote } from "lucide-react";
+import { useCountUp } from "@/hooks/useCountUp";
 
 const testimonials = [
   {
@@ -61,6 +62,35 @@ const testimonials = [
     quote: "The XP system makes it feel like a game. Stupid but it works lol. I've not missed a workout in 6 weeks because I don't want to break my streak.",
   },
 ];
+
+/* ━━━ Animated Stat Counter ━━━ */
+function StatCounter({
+  end,
+  suffix,
+  label,
+  delay,
+  decimals = 0,
+}: {
+  end: number;
+  suffix: string;
+  label: string;
+  delay: number;
+  decimals?: number;
+}) {
+  const { ref, display } = useCountUp({ end, suffix, duration: 2000, delay, decimals });
+
+  return (
+    <div className="text-center p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+      <p
+        ref={ref as React.RefObject<HTMLParagraphElement>}
+        className="text-2xl sm:text-3xl font-black text-white tabular-nums"
+      >
+        {display}
+      </p>
+      <p className="text-xs sm:text-sm text-neutral-500">{label}</p>
+    </div>
+  );
+}
 
 export default function Testimonials() {
   return (
@@ -141,7 +171,7 @@ export default function Testimonials() {
           ))}
         </motion.div>
 
-        {/* Stats Banner */}
+        {/* Animated Stats Banner */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -149,22 +179,10 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4"
         >
-          {[
-            { value: "2,500+", label: "Beta Users" },
-            { value: "50,000+", label: "Workouts Logged" },
-            { value: "12,000+", label: "Meals Tracked" },
-            { value: "4.8/5", label: "Play Store Rating" },
-          ].map((stat) => (
-            <div
-              key={stat.label}
-              className="text-center p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]"
-            >
-              <p className="text-2xl sm:text-3xl font-black text-white">
-                {stat.value}
-              </p>
-              <p className="text-xs sm:text-sm text-neutral-500">{stat.label}</p>
-            </div>
-          ))}
+          <StatCounter end={2500} suffix="+" label="Beta Users" delay={0} />
+          <StatCounter end={50000} suffix="+" label="Workouts Logged" delay={150} />
+          <StatCounter end={12000} suffix="+" label="Meals Tracked" delay={300} />
+          <StatCounter end={4.8} suffix="/5" label="Play Store Rating" delay={450} decimals={1} />
         </motion.div>
       </div>
     </section>

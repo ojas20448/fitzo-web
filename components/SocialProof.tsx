@@ -1,7 +1,7 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO — Social Proof Bar
- * "Trusted by Athletes" with monochrome brand logos
+ * Infinite marquee with brand logos
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -17,7 +17,30 @@ const BRANDS = [
   "PEAKPERFORMANCE",
   "LIFTLAB",
   "FORGE",
+  "POWERZONE",
+  "ATHLOS",
 ];
+
+function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
+  return (
+    <div className="flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+      <div
+        className={`flex shrink-0 gap-x-12 sm:gap-x-20 items-center ${
+          reverse ? "animate-marquee-reverse" : "animate-marquee"
+        }`}
+      >
+        {[...BRANDS, ...BRANDS].map((brand, i) => (
+          <span
+            key={`${brand}-${i}`}
+            className="text-sm sm:text-base font-bold tracking-[0.15em] text-neutral-700 hover:text-neutral-400 transition-colors duration-300 cursor-default select-none whitespace-nowrap"
+          >
+            {brand}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function SocialProof() {
   return (
@@ -35,21 +58,8 @@ export default function SocialProof() {
           Trusted by athletes from
         </p>
 
-        {/* Brand Logos */}
-        <div className="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-16 gap-y-6">
-          {BRANDS.map((brand, i) => (
-            <motion.span
-              key={brand}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="text-sm sm:text-base font-bold tracking-[0.15em] text-neutral-700 hover:text-neutral-400 transition-colors duration-300 cursor-default select-none"
-            >
-              {brand}
-            </motion.span>
-          ))}
-        </div>
+        {/* Infinite Marquee */}
+        <MarqueeRow />
       </div>
     </motion.section>
   );

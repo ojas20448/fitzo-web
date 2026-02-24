@@ -15,12 +15,13 @@ import FitzoLogo from "./FitzoLogo";
 const FOOTER_LINKS = {
   Product: [
     { label: "Features", href: "#features" },
-    { label: "Pricing", href: "#", badge: "Soon" },
+    { label: "Compare", href: "/compare" },
     { label: "Download", href: "#download" },
   ],
   Company: [
-    { label: "About", href: "#" },
-    { label: "Blog", href: "#", badge: "Coming Soon" },
+    { label: "Blog", href: "/blog" },
+    { label: "Changelog", href: "/changelog" },
+    { label: "Press Kit", href: "/press" },
     { label: "Contact", href: "mailto:contact@fitzoapp.in" },
   ],
   Legal: [
@@ -110,14 +111,9 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="group flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-300 transition-colors duration-300"
+                      className="text-sm text-neutral-600 hover:text-neutral-300 transition-colors duration-300"
                     >
                       {link.label}
-                      {"badge" in link && link.badge && (
-                        <span className="px-1.5 py-0.5 rounded-full text-[9px] bg-white/[0.04] text-neutral-700 border border-white/[0.04]">
-                          {link.badge}
-                        </span>
-                      )}
                     </Link>
                   </li>
                 ))}

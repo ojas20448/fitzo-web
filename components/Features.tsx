@@ -1,7 +1,7 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO — Features Bento Grid
- * B&W asymmetric grid with app screen mockups
+ * B&W asymmetric grid with 3D tilt + cursor glow
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -22,6 +22,7 @@ import {
   bentoItemVariants,
   fadeUp,
 } from "@/lib/animations";
+import TiltCard from "@/components/ui/TiltCard";
 
 /* ━━━ Mini App Screen: Dashboard ━━━ */
 function DashboardMini() {
@@ -102,7 +103,7 @@ function BuddiesMini() {
       {[
         { name: "Alex", status: "Working out now", active: true },
         { name: "Sarah", status: "Last active 2h ago", active: false },
-        { name: "Mike", status: "3 day streak 🔥", active: true },
+        { name: "Mike", status: "3 day streak", active: true },
       ].map((b) => (
         <div key={b.name} className="flex items-center gap-3 py-2 border-t border-white/[0.03] first:border-t-0">
           <div className="relative">
@@ -198,7 +199,7 @@ function ProfileMini() {
   );
 }
 
-/* ━━━ Card Wrapper ━━━ */
+/* ━━━ Card Wrapper with 3D Tilt ━━━ */
 interface FeatureCardProps {
   icon: React.ReactNode;
   title: string;
@@ -217,39 +218,40 @@ function FeatureCard({
   className = "",
 }: FeatureCardProps) {
   return (
-    <motion.div
-      variants={bentoItemVariants}
-      className={`glass-card p-7 hover:border-white/[0.12] transition-all duration-500 group relative overflow-hidden ${className}`}
-    >
-      {/* Hover glow */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-        <div className="absolute -inset-1 rounded-3xl bg-white/[0.02] blur-xl" />
-      </div>
-
-      <div className="relative z-10">
-        {/* Header */}
-        <div className="flex items-start justify-between mb-5">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-white/[0.06] border border-white/[0.04] flex items-center justify-center">
-              {icon}
-            </div>
-            <h3 className="text-xl font-bold text-white">{title}</h3>
+    <motion.div variants={bentoItemVariants} className={className}>
+      <TiltCard className="h-full" tiltDeg={5} glowColor="rgba(255,255,255,0.04)">
+        <div className="glass-card p-7 hover:border-white/[0.12] transition-all duration-500 group relative overflow-hidden h-full">
+          {/* Hover glow */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            <div className="absolute -inset-1 rounded-3xl bg-white/[0.02] blur-xl" />
           </div>
-          {badge && (
-            <span className="px-3 py-1.5 rounded-full text-[10px] font-semibold bg-white/[0.06] text-neutral-400 border border-white/[0.04]">
-              {badge}
-            </span>
-          )}
+
+          <div className="relative z-10">
+            {/* Header */}
+            <div className="flex items-start justify-between mb-5">
+              <div className="flex items-center gap-3">
+                <div className="w-11 h-11 rounded-2xl bg-white/[0.06] border border-white/[0.04] flex items-center justify-center">
+                  {icon}
+                </div>
+                <h3 className="text-xl font-bold text-white">{title}</h3>
+              </div>
+              {badge && (
+                <span className="px-3 py-1.5 rounded-full text-[10px] font-semibold bg-white/[0.06] text-neutral-400 border border-white/[0.04]">
+                  {badge}
+                </span>
+              )}
+            </div>
+
+            {/* Description */}
+            <p className="text-[15px] text-neutral-500 leading-relaxed mb-5">
+              {description}
+            </p>
+
+            {/* Visual */}
+            {children}
+          </div>
         </div>
-
-        {/* Description */}
-        <p className="text-[15px] text-neutral-500 leading-relaxed mb-5">
-          {description}
-        </p>
-
-        {/* Visual */}
-        {children}
-      </div>
+      </TiltCard>
     </motion.div>
   );
 }

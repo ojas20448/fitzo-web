@@ -12,6 +12,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import FitzoLogo from "@/components/FitzoLogo";
+import ThemeToggle from "@/components/ThemeToggle";
 import {
   navbarVariants,
   mobileMenuVariants,
@@ -21,7 +22,7 @@ import {
 const NAV_LINKS = [
   { href: "#features", label: "Features" },
   { href: "#science", label: "Science" },
-  { href: "#community", label: "Community" },
+  { href: "/blog", label: "Blog" },
   { href: "#download", label: "Pricing" },
 ] as const;
 
@@ -47,7 +48,7 @@ export default function Navbar() {
       animate="visible"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "backdrop-blur-2xl bg-black/80 border-b border-white/[0.06]"
+          ? "backdrop-blur-2xl bg-white/80 dark:bg-black/80 border-b border-black/[0.06] dark:border-white/[0.06]"
           : "bg-transparent"
       }`}
     >
@@ -67,20 +68,21 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-[13px] font-medium text-neutral-500 hover:text-white transition-colors duration-300"
+              className="text-[13px] font-medium text-neutral-500 hover:text-black dark:hover:text-white transition-colors duration-300"
             >
               {link.label}
             </Link>
           ))}
         </div>
 
-        {/* ━━━ Desktop CTA ━━━ */}
-        <div className="hidden md:block">
+        {/* ━━━ Desktop CTA + Theme Toggle ━━━ */}
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <motion.a
             href="#download"
             whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
             whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
-            className="px-6 py-2.5 rounded-full text-sm font-semibold text-black bg-white hover:bg-neutral-200 transition-colors duration-300"
+            className="px-6 py-2.5 rounded-full text-sm font-semibold text-white dark:text-black bg-black dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors duration-300"
           >
             Get Started
           </motion.a>
@@ -89,7 +91,7 @@ export default function Navbar() {
         {/* ━━━ Mobile Menu Toggle ━━━ */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden relative z-10 p-2 rounded-lg text-white"
+          className="md:hidden relative z-10 p-2 rounded-lg text-black dark:text-white"
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
         >

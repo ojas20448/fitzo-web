@@ -45,7 +45,7 @@ export default function FitzoLogo({
     <div className={`flex items-center gap-2 ${className}`}>
       <FitzoIcon className={sizes[size].icon} />
       {showWordmark && (
-        <span className={`${sizes[size].text} font-bold tracking-tight text-white`}>
+        <span className={`${sizes[size].text} font-bold tracking-tight text-black dark:text-white`}>
           Fitzo
         </span>
       )}

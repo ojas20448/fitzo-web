@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -31,6 +32,9 @@ const config: Config = {
       animation: {
         float: "float 6s ease-in-out infinite",
         shimmer: "shimmer 2s linear infinite",
+        marquee: "marquee 30s linear infinite",
+        "marquee-reverse": "marquee-reverse 30s linear infinite",
+        fadeIn: "fadeIn 0.3s ease-out",
       },
       keyframes: {
         float: {
@@ -40,6 +44,18 @@ const config: Config = {
         shimmer: {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "marquee-reverse": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        fadeIn: {
+          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
     },

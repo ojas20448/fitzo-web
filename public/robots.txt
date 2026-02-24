@@ -1,5 +1,0 @@
-# Fitzo Robots.txt
-User-agent: *
-Allow: /
-
-Sitemap: https://fitzo.app/sitemap.xml
