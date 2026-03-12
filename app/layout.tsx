@@ -4,6 +4,10 @@ import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,7 +22,7 @@ const geistMono = localFont({
 
 /* ━━━ SEO Metadata ━━━ */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://fitzo.app"),
+  metadataBase: new URL("https://www.fitzoapp.in"),
   title: {
     default: "Fitzo — Train Smarter, Build Faster",
     template: "%s — Fitzo",
@@ -44,17 +48,18 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://fitzo.app",
+    url: "https://www.fitzoapp.in",
     title: "Fitzo — Train Smarter, Build Faster",
     description:
       "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, and science-backed education. Built for lifters who value data.",
     siteName: "Fitzo",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Fitzo — Science-Based Fitness Tracking",
+        type: "image/png",
       },
     ],
   },
@@ -64,7 +69,7 @@ export const metadata: Metadata = {
     description:
       "Track workouts, macros, and progress with precision. Built for lifters who value data.",
     creator: "@fitzoapp",
-    images: ["/og-image.svg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -91,7 +96,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth dark" suppressHydrationWarning>
+    <html lang="en" className={cn("scroll-smooth dark", "font-sans", geist.variable)} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
