@@ -2,6 +2,7 @@
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO — Waitlist Section
  * Email capture for early access
+ * Upgraded with Magic UI + shadcn components
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -11,6 +12,11 @@ import { motion } from "framer-motion";
 import { useState, FormEvent } from "react";
 import { Mail, ArrowRight, Check, Loader2 } from "lucide-react";
 import { fadeUp } from "@/lib/animations";
+import { Ripple } from "@/components/magicui/ripple";
+import { SparklesText } from "@/components/magicui/sparkles-text";
+import { ShimmerButton } from "@/components/magicui/shimmer-button";
+import { MagicCard } from "@/components/magicui/magic-card";
+import { Input } from "@/components/ui/input";
 
 export default function Waitlist() {
   const [email, setEmail] = useState("");
@@ -19,7 +25,7 @@ export default function Waitlist() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || !email.includes("@")) {
       setStatus("error");
       setMessage("Please enter a valid email");
@@ -62,9 +68,14 @@ export default function Waitlist() {
 
   return (
     <section id="waitlist" className="relative py-16 sm:py-24 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-green-950/10 to-black" />
-      
+      {/* Background — Ripple effect replaces gradient div */}
+      <Ripple
+        className="[&>div]:border-green-500/20"
+        mainCircleSize={250}
+        mainCircleOpacity={0.18}
+        numCircles={10}
+      />
+
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           {/* Badge */}
@@ -73,10 +84,17 @@ export default function Waitlist() {
             Early Access
           </span>
 
-          {/* Headline */}
+          {/* Headline — SparklesText on "FITZO" */}
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6">
             Be the first to<br />
-            <span className="text-green-400">get FITZO</span>
+            <span className="text-green-400">
+              get{" "}
+              <SparklesText
+                text="FITZO"
+                className="text-green-400"
+                sparklesCount={8}
+              />
+            </span>
           </h2>
 
           {/* Subheadline */}
@@ -90,10 +108,11 @@ export default function Waitlist() {
           <form onSubmit={handleSubmit} className="relative">
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2">
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
                   <Mail className="w-5 h-5 text-neutral-500" />
                 </div>
-                <input
+                {/* shadcn Input with dark mode styling */}
+                <Input
                   type="email"
                   value={email}
                   onChange={(e) => {
@@ -101,28 +120,34 @@ export default function Waitlist() {
                     if (status === "error") setStatus("idle");
                   }}
                   placeholder="Enter your email"
-                  className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder:text-neutral-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-all duration-300"
+                  className="h-auto w-full pl-12 pr-4 py-4 rounded-xl bg-white/[0.04] border-white/[0.08] text-white placeholder:text-neutral-500 focus-visible:ring-green-500/50 focus-visible:border-green-500/50 transition-all duration-300"
                 />
               </div>
-              <button
+              {/* ShimmerButton replaces plain button */}
+              <ShimmerButton
                 type="submit"
                 disabled={status === "loading" || status === "success"}
-                className="px-8 py-4 rounded-xl bg-white text-black font-semibold hover:bg-neutral-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-2 min-w-[140px]"
+                className="px-8 py-4 text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed min-w-[140px]"
+                shimmerColor="#4ade80"
+                background="rgba(255,255,255,1)"
+                borderRadius="12px"
               >
-                {status === "loading" ? (
-                  <Loader2 className="w-5 h-5 animate-spin" />
-                ) : status === "success" ? (
-                  <>
-                    <Check className="w-5 h-5" />
-                    Joined
-                  </>
-                ) : (
-                  <>
-                    Join
-                    <ArrowRight className="w-4 h-4" />
-                  </>
-                )}
-              </button>
+                <span className="flex items-center justify-center gap-2 text-black">
+                  {status === "loading" ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : status === "success" ? (
+                    <>
+                      <Check className="w-5 h-5" />
+                      Joined
+                    </>
+                  ) : (
+                    <>
+                      Join
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </span>
+              </ShimmerButton>
             </div>
 
             {/* Status Message */}
@@ -144,7 +169,7 @@ export default function Waitlist() {
           </p>
         </motion.div>
 
-        {/* Benefits */}
+        {/* Benefits — wrapped in MagicCard */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -157,14 +182,16 @@ export default function Waitlist() {
             { emoji: "💬", title: "Shape Fitzo", desc: "Your feedback directly influences development" },
             { emoji: "🎁", title: "Exclusive Perks", desc: "Special badges and features for early adopters" },
           ].map((benefit) => (
-            <div
+            <MagicCard
               key={benefit.title}
-              className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]"
+              className="p-4"
+              gradientColor="rgba(74, 222, 128, 0.15)"
+              gradientSize={200}
             >
               <span className="text-2xl mb-2 block">{benefit.emoji}</span>
               <p className="text-sm font-semibold text-white mb-1">{benefit.title}</p>
               <p className="text-xs text-neutral-500">{benefit.desc}</p>
-            </div>
+            </MagicCard>
           ))}
         </motion.div>
       </div>

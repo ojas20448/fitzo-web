@@ -2,6 +2,7 @@
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO — Testimonials Section
  * Beta tester quotes with animated stat counters
+ * Upgraded with Magic UI components
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -10,7 +11,10 @@
 import { motion } from "framer-motion";
 import { staggerContainer, fadeUp } from "@/lib/animations";
 import { Quote } from "lucide-react";
-import { useCountUp } from "@/hooks/useCountUp";
+import { NumberTicker } from "@/components/magicui/number-ticker";
+import { MagicCard } from "@/components/magicui/magic-card";
+import { DotPattern } from "@/components/magicui/dot-pattern";
+import { Badge } from "@/components/ui/badge";
 
 const testimonials = [
   {
@@ -63,7 +67,7 @@ const testimonials = [
   },
 ];
 
-/* ━━━ Animated Stat Counter ━━━ */
+/* ━━━ Stat Counter using NumberTicker ━━━ */
 function StatCounter({
   end,
   suffix,
@@ -77,15 +81,16 @@ function StatCounter({
   delay: number;
   decimals?: number;
 }) {
-  const { ref, display } = useCountUp({ end, suffix, duration: 2000, delay, decimals });
-
   return (
     <div className="text-center p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-      <p
-        ref={ref as React.RefObject<HTMLParagraphElement>}
-        className="text-2xl sm:text-3xl font-black text-white tabular-nums"
-      >
-        {display}
+      <p className="text-2xl sm:text-3xl font-black text-white tabular-nums">
+        <NumberTicker
+          value={end}
+          delay={delay}
+          decimalPlaces={decimals}
+          className="text-white"
+        />
+        {suffix}
       </p>
       <p className="text-xs sm:text-sm text-neutral-500">{label}</p>
     </div>
@@ -104,9 +109,12 @@ export default function Testimonials() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-12"
         >
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-medium bg-white/[0.04] text-neutral-500 border border-white/[0.06] mb-6">
+          <Badge
+            variant="outline"
+            className="mb-6 border-white/[0.06] bg-white/[0.04] text-neutral-500 text-[11px] font-medium px-4 py-1.5"
+          >
             Beta Testers
-          </span>
+          </Badge>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6">
             Loved by<br />
             <span className="text-neutral-500">Indian Lifters</span>
@@ -125,48 +133,55 @@ export default function Testimonials() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {testimonials.map((testimonial) => (
-            <motion.div
-              key={testimonial.name}
-              variants={fadeUp}
-              className="glass-card p-6 rounded-2xl border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300"
-            >
-              {/* Quote Icon */}
-              <Quote className="w-8 h-8 text-neutral-700 mb-4" />
+            <motion.div key={testimonial.name} variants={fadeUp}>
+              <MagicCard
+                className="rounded-2xl border-white/[0.06] hover:border-white/[0.12] transition-all duration-300"
+                gradientColor="rgba(74, 222, 128, 0.08)"
+                gradientSize={250}
+              >
+                <div className="p-6">
+                  {/* Quote Icon */}
+                  <Quote className="w-8 h-8 text-neutral-700 mb-4" />
 
-              {/* Quote */}
-              <p className="text-[15px] text-neutral-300 leading-relaxed mb-6">
-                &quot;{testimonial.quote}&quot;
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                  <span className="text-sm font-bold text-black">
-                    {testimonial.avatar}
-                  </span>
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-white">
-                    {testimonial.name}
+                  {/* Quote */}
+                  <p className="text-[15px] text-neutral-300 leading-relaxed mb-6">
+                    &quot;{testimonial.quote}&quot;
                   </p>
-                  <p className="text-xs text-neutral-500">
-                    {testimonial.location}
-                  </p>
-                </div>
-              </div>
 
-              {/* XP Badge */}
-              <div className="mt-4 pt-4 border-t border-white/[0.04] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">⚡</span>
-                  <span className="text-xs text-neutral-400">
-                    {testimonial.xp} XP earned
-                  </span>
+                  {/* Author */}
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                      <span className="text-sm font-bold text-black">
+                        {testimonial.avatar}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">
+                        {testimonial.name}
+                      </p>
+                      <p className="text-xs text-neutral-500">
+                        {testimonial.location}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* XP Badge */}
+                  <div className="mt-4 pt-4 border-t border-white/[0.04] flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">⚡</span>
+                      <span className="text-xs text-neutral-400">
+                        {testimonial.xp} XP earned
+                      </span>
+                    </div>
+                    <Badge
+                      variant="outline"
+                      className="text-[10px] px-2 py-0.5 border-white/[0.08] bg-white/[0.04] text-neutral-400"
+                    >
+                      {testimonial.level}
+                    </Badge>
+                  </div>
                 </div>
-                <span className="text-[10px] px-2 py-1 rounded-full bg-white/[0.04] text-neutral-400">
-                  {testimonial.level}
-                </span>
-              </div>
+              </MagicCard>
             </motion.div>
           ))}
         </motion.div>
@@ -177,12 +192,22 @@ export default function Testimonials() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4"
+          className="relative mt-12 rounded-2xl overflow-hidden"
         >
-          <StatCounter end={2500} suffix="+" label="Beta Users" delay={0} />
-          <StatCounter end={50000} suffix="+" label="Workouts Logged" delay={150} />
-          <StatCounter end={12000} suffix="+" label="Meals Tracked" delay={300} />
-          <StatCounter end={4.8} suffix="/5" label="Play Store Rating" delay={450} decimals={1} />
+          {/* Dot pattern background */}
+          <DotPattern
+            className="[mask-image:radial-gradient(ellipse_at_center,white_30%,transparent_80%)] opacity-40"
+            width={20}
+            height={20}
+            cr={1}
+          />
+
+          <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <StatCounter end={2500} suffix="+" label="Beta Users" delay={0} />
+            <StatCounter end={50000} suffix="+" label="Workouts Logged" delay={0.15} />
+            <StatCounter end={12000} suffix="+" label="Meals Tracked" delay={0.3} />
+            <StatCounter end={4.8} suffix="/5" label="Play Store Rating" delay={0.45} decimals={1} />
+          </div>
         </motion.div>
       </div>
     </section>

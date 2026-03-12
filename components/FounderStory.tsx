@@ -10,6 +10,9 @@
 import { motion } from "framer-motion";
 import { staggerContainer, staggerItem } from "@/lib/animations";
 import { Code2, Dumbbell, Target } from "lucide-react";
+import { MagicCard } from "@/components/magicui/magic-card";
+import { Particles } from "@/components/magicui/particles";
+import { BlurIn } from "@/components/magicui/blur-in";
 
 /* ━━━ Geometric Avatar Graphic ━━━ */
 function FounderGraphic() {
@@ -90,7 +93,15 @@ function FounderGraphic() {
 
 export default function FounderStory() {
   return (
-    <section className="relative py-16 sm:py-24 bg-black">
+    <section className="relative py-16 sm:py-24 bg-black overflow-hidden">
+      {/* Subtle background particles */}
+      <Particles
+        className="absolute inset-0 z-0"
+        quantity={20}
+        color="#ffffff"
+        size={0.4}
+      />
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* ━━━ Left: Geometric Graphic ━━━ */}
@@ -112,13 +123,19 @@ export default function FounderStory() {
               Meet the Builder
             </motion.span>
 
-            <motion.h2
-              variants={staggerItem}
-              className="text-4xl sm:text-5xl font-black tracking-tight mb-4"
-            >
-              Built by a Lifter,<br />
-              <span className="text-neutral-500">for Lifters.</span>
-            </motion.h2>
+            {/* Section heading with blur-in effect */}
+            <div className="mb-4">
+              <BlurIn
+                word="Built by a Lifter,"
+                className="text-4xl sm:text-5xl font-black tracking-tight text-white"
+                duration={0.8}
+              />
+              <BlurIn
+                word="for Lifters."
+                className="text-4xl sm:text-5xl font-black tracking-tight text-neutral-500"
+                duration={1}
+              />
+            </div>
 
             <motion.div variants={staggerItem} className="mb-6">
               <p className="text-xl font-bold text-white mb-1">Ojas Narang</p>
@@ -139,7 +156,7 @@ export default function FounderStory() {
               </p>
             </motion.div>
 
-            {/* Stats */}
+            {/* Stats wrapped in MagicCard */}
             <motion.div
               variants={staggerItem}
               className="grid grid-cols-3 gap-4"
@@ -149,18 +166,22 @@ export default function FounderStory() {
                 { icon: <Code2 className="w-4 h-4" />, value: "50K+", label: "Lines of Code" },
                 { icon: <Target className="w-4 h-4" />, value: "1", label: "Mission" },
               ].map((stat) => (
-                <div
+                <MagicCard
                   key={stat.label}
-                  className="text-center p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]"
+                  className="bg-white/[0.02] border-white/[0.04]"
+                  gradientColor="rgba(255,255,255,0.08)"
+                  gradientSize={150}
                 >
-                  <div className="flex items-center justify-center text-neutral-600 mb-2">
-                    {stat.icon}
+                  <div className="text-center p-4">
+                    <div className="flex items-center justify-center text-neutral-600 mb-2">
+                      {stat.icon}
+                    </div>
+                    <p className="text-xl font-black text-white">{stat.value}</p>
+                    <p className="text-[10px] text-neutral-500 uppercase tracking-wider mt-1">
+                      {stat.label}
+                    </p>
                   </div>
-                  <p className="text-xl font-black text-white">{stat.value}</p>
-                  <p className="text-[10px] text-neutral-500 uppercase tracking-wider mt-1">
-                    {stat.label}
-                  </p>
-                </div>
+                </MagicCard>
               ))}
             </motion.div>
           </motion.div>

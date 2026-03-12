@@ -2,6 +2,7 @@
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO — Features Bento Grid
  * B&W asymmetric grid with 3D tilt + cursor glow
+ * Upgraded with Magic UI components
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -23,6 +24,9 @@ import {
   fadeUp,
 } from "@/lib/animations";
 import TiltCard from "@/components/ui/TiltCard";
+import { MagicCard } from "@/components/magicui/magic-card";
+import { BlurIn } from "@/components/magicui/blur-in";
+import { Badge } from "@/components/ui/badge";
 
 /* ━━━ Mini App Screen: Dashboard ━━━ */
 function DashboardMini() {
@@ -199,7 +203,7 @@ function ProfileMini() {
   );
 }
 
-/* ━━━ Card Wrapper with 3D Tilt ━━━ */
+/* ━━━ Card Wrapper with 3D Tilt + MagicCard ━━━ */
 interface FeatureCardProps {
   icon: React.ReactNode;
   title: string;
@@ -220,37 +224,41 @@ function FeatureCard({
   return (
     <motion.div variants={bentoItemVariants} className={className}>
       <TiltCard className="h-full" tiltDeg={5} glowColor="rgba(255,255,255,0.04)">
-        <div className="glass-card p-7 hover:border-white/[0.12] transition-all duration-500 group relative overflow-hidden h-full">
-          {/* Hover glow */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-            <div className="absolute -inset-1 rounded-3xl bg-white/[0.02] blur-xl" />
-          </div>
-
-          <div className="relative z-10">
-            {/* Header */}
-            <div className="flex items-start justify-between mb-5">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-white/[0.06] border border-white/[0.04] flex items-center justify-center">
-                  {icon}
+        <MagicCard
+          className="h-full border-white/[0.06] hover:border-white/[0.12] transition-all duration-500"
+          gradientColor="rgba(255,255,255,0.07)"
+          gradientSize={250}
+        >
+          <div className="p-7 group relative h-full">
+            <div className="relative z-10">
+              {/* Header */}
+              <div className="flex items-start justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-2xl bg-white/[0.06] border border-white/[0.04] flex items-center justify-center">
+                    {icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white">{title}</h3>
                 </div>
-                <h3 className="text-xl font-bold text-white">{title}</h3>
+                {badge && (
+                  <Badge
+                    variant="outline"
+                    className="px-3 py-1.5 rounded-full text-[10px] font-semibold bg-white/[0.06] text-neutral-400 border-white/[0.04] hover:bg-white/[0.08]"
+                  >
+                    {badge}
+                  </Badge>
+                )}
               </div>
-              {badge && (
-                <span className="px-3 py-1.5 rounded-full text-[10px] font-semibold bg-white/[0.06] text-neutral-400 border border-white/[0.04]">
-                  {badge}
-                </span>
-              )}
+
+              {/* Description */}
+              <p className="text-[15px] text-neutral-500 leading-relaxed mb-5">
+                {description}
+              </p>
+
+              {/* Visual */}
+              {children}
             </div>
-
-            {/* Description */}
-            <p className="text-[15px] text-neutral-500 leading-relaxed mb-5">
-              {description}
-            </p>
-
-            {/* Visual */}
-            {children}
           </div>
-        </div>
+        </MagicCard>
       </TiltCard>
     </motion.div>
   );
@@ -269,13 +277,24 @@ export default function Features() {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-12"
         >
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-medium bg-white/[0.04] text-neutral-500 border border-white/[0.06] mb-6">
+          <Badge
+            variant="outline"
+            className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-medium bg-white/[0.04] text-neutral-500 border-white/[0.06] mb-6"
+          >
             Features
-          </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6">
-            Everything You Need.<br />
-            <span className="text-neutral-500">Nothing You Don&apos;t.</span>
-          </h2>
+          </Badge>
+
+          <BlurIn
+            word="Everything You Need."
+            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight"
+            duration={0.8}
+          />
+          <BlurIn
+            word="Nothing You Don't."
+            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-500 mb-6"
+            duration={1}
+          />
+
           <p className="text-lg sm:text-xl text-neutral-500 max-w-2xl mx-auto">
             No fluff, no gimmicks. Just the tools serious lifters need to track,
             progress, and dominate.

@@ -10,6 +10,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { fadeUp } from "@/lib/animations";
+import { BorderBeam } from "@/components/magicui/border-beam";
 import {
   Home,
   Dumbbell,
@@ -378,6 +379,15 @@ export default function InteractiveDemo() {
           className="flex flex-col items-center"
         >
           <div className="relative w-[300px] sm:w-[320px] h-[620px] sm:h-[660px] rounded-[2.5rem] border border-white/[0.08] bg-[#0c0c0c] shadow-[0_0_100px_rgba(255,255,255,0.03)] overflow-hidden">
+            {/* BorderBeam */}
+            <BorderBeam
+              size={150}
+              duration={8}
+              colorFrom="#22c55e"
+              colorTo="#ffffff"
+              delay={0}
+            />
+
             {/* Status bar */}
             <div className="flex items-center justify-between px-6 pt-3 pb-1">
               <span className="text-[10px] text-neutral-500 font-medium">9:41</span>
@@ -440,19 +450,13 @@ export default function InteractiveDemo() {
               Love it? Get the real thing.
             </p>
             <div className="flex gap-3 justify-center">
-              <a
-                href="#download"
-                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-colors"
-              >
+              <a href="#download" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-colors">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
                 </svg>
                 Download iOS
               </a>
-              <a
-                href="#download"
-                className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.06] border border-white/[0.08] text-white font-semibold text-sm hover:bg-white/[0.1] transition-colors"
-              >
+              <a href="#download" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.06] border border-white/[0.08] text-white font-semibold text-sm hover:bg-white/[0.1] transition-colors">
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/>
                 </svg>

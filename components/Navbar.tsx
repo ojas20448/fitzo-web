@@ -68,7 +68,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-[13px] font-medium text-neutral-500 hover:text-black dark:hover:text-white transition-colors duration-300"
+              className="relative text-[13px] font-medium text-neutral-500 hover:text-black dark:hover:text-white transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 hover:after:w-full after:bg-current after:transition-all after:duration-300"
             >
               {link.label}
             </Link>
@@ -78,14 +78,12 @@ export default function Navbar() {
         {/* ━━━ Desktop CTA + Theme Toggle ━━━ */}
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
-          <motion.a
+          <a
             href="#download"
-            whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
-            whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
-            className="px-6 py-2.5 rounded-full text-sm font-semibold text-white dark:text-black bg-black dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors duration-300"
+            className="inline-flex items-center px-6 py-2.5 rounded-full text-sm font-semibold text-white dark:text-black bg-black dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors duration-300"
           >
             Get Started
-          </motion.a>
+          </a>
         </div>
 
         {/* ━━━ Mobile Menu Toggle ━━━ */}

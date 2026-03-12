@@ -7,10 +7,16 @@
 
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { ChevronDown, HelpCircle } from "lucide-react";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+import { motion } from "framer-motion";
+import { HelpCircle } from "lucide-react";
+import { fadeUp } from "@/lib/animations";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
+import { MagicCard } from "@/components/magicui/magic-card";
 
 const faqs = [
   {
@@ -55,59 +61,7 @@ const faqs = [
   },
 ];
 
-function FAQItem({
-  question,
-  answer,
-  isOpen,
-  onToggle,
-}: {
-  question: string;
-  answer: string;
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
-  return (
-    <motion.div
-      variants={fadeUp}
-      className="border-b border-white/[0.06] last:border-b-0"
-    >
-      <button
-        onClick={onToggle}
-        className="w-full py-5 flex items-center justify-between text-left group"
-      >
-        <span className="text-base sm:text-lg font-medium text-white group-hover:text-green-400 transition-colors">
-          {question}
-        </span>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.2 }}
-          className="flex-shrink-0 ml-4"
-        >
-          <ChevronDown className="w-5 h-5 text-neutral-500" />
-        </motion.div>
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <p className="pb-5 text-sm sm:text-base text-neutral-400 leading-relaxed">
-              {answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
-
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   return (
     <section id="faq" className="relative py-16 sm:py-24">
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -133,21 +87,32 @@ export default function FAQ() {
 
         {/* FAQ List */}
         <motion.div
-          variants={staggerContainer}
+          variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="glass-card rounded-2xl p-2 sm:p-4"
         >
-          {faqs.map((faq, index) => (
-            <FAQItem
-              key={index}
-              question={faq.question}
-              answer={faq.answer}
-              isOpen={openIndex === index}
-              onToggle={() => setOpenIndex(openIndex === index ? null : index)}
-            />
-          ))}
+          <MagicCard
+            className="rounded-2xl p-2 sm:p-4"
+            gradientColor="rgba(74, 222, 128, 0.15)"
+          >
+            <Accordion type="single" collapsible defaultValue="faq-0">
+              {faqs.map((faq, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`faq-${index}`}
+                  className="border-b border-white/[0.06] last:border-b-0"
+                >
+                  <AccordionTrigger className="py-5 text-left text-base sm:text-lg font-medium text-white hover:text-green-400 hover:no-underline transition-colors">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-sm sm:text-base text-neutral-400 leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </MagicCard>
         </motion.div>
 
         {/* Still Have Questions */}

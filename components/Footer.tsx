@@ -11,6 +11,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/animations";
 import FitzoLogo from "./FitzoLogo";
+import { DotPattern } from "@/components/magicui/dot-pattern";
+import { Separator } from "@/components/ui/separator";
 
 const FOOTER_LINKS = {
   Product: [
@@ -71,9 +73,19 @@ export default function Footer() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
-      className="relative border-t border-white/[0.04] pt-12 pb-6"
+      className="relative overflow-hidden border-t border-white/[0.04] pt-12 pb-6"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ━━━ Dot Pattern Background ━━━ */}
+      <DotPattern
+        width={20}
+        height={20}
+        cx={1}
+        cy={1}
+        cr={0.8}
+        className="opacity-[0.15] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_70%,transparent_100%)]"
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16 mb-12">
           {/* ━━━ Brand Column ━━━ */}
           <div className="col-span-2 md:col-span-1">
@@ -92,7 +104,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.04] flex items-center justify-center text-neutral-600 hover:text-white hover:border-white/[0.12] hover:bg-white/[0.06] transition-all duration-300"
+                  className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.04] flex items-center justify-center text-neutral-600 hover:text-green-400 hover:drop-shadow-[0_0_8px_rgba(74,222,128,0.4)] hover:border-white/[0.12] hover:bg-white/[0.06] transition-all duration-300"
                 >
                   {social.icon}
                 </a>
@@ -123,7 +135,8 @@ export default function Footer() {
         </div>
 
         {/* ━━━ Bottom Bar ━━━ */}
-        <div className="pt-8 border-t border-white/[0.04] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <Separator className="bg-white/[0.04]" />
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-neutral-700">
             &copy; {currentYear} Fitzo. All rights reserved.
           </p>

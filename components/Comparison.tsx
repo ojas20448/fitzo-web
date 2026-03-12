@@ -2,6 +2,7 @@
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO — "Why Fitzo?" Comparison Section
  * B&W side-by-side comparison
+ * Enhanced with Magic UI + shadcn components
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -10,6 +11,10 @@
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
 import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
+import { MagicCard } from "@/components/magicui/magic-card";
+import { BorderBeam } from "@/components/magicui/border-beam";
+import { DotPattern } from "@/components/magicui/dot-pattern";
+import { Badge } from "@/components/ui/badge";
 
 interface ComparisonItem {
   generic: string;
@@ -37,8 +42,16 @@ const COMPARISONS: ComparisonItem[] = [
 
 export default function Comparison() {
   return (
-    <section id="science" className="relative py-16 sm:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="science" className="relative py-16 sm:py-24 overflow-hidden">
+      {/* ━━━ Dot Pattern Background ━━━ */}
+      <DotPattern
+        className="fill-neutral-400/10 dark:fill-neutral-500/10 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
+        width={20}
+        height={20}
+        cr={1}
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* ━━━ Section Header ━━━ */}
         <motion.div
           variants={fadeUp}
@@ -91,9 +104,12 @@ export default function Comparison() {
                   variants={staggerItem}
                   className="flex items-start gap-3 py-3 border-t border-white/[0.04] first:border-t-0"
                 >
-                  <div className="mt-0.5 w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">
-                    <X className="w-3.5 h-3.5 text-red-400/80" />
-                  </div>
+                  <Badge
+                    variant="destructive"
+                    className="mt-0.5 flex-shrink-0 h-6 w-6 p-0 items-center justify-center rounded-full bg-red-500/10 text-red-400/80 border-red-500/20 hover:bg-red-500/10"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </Badge>
                   <p className="text-sm text-neutral-600 leading-relaxed">
                     {item.generic}
                   </p>
@@ -102,42 +118,57 @@ export default function Comparison() {
             </div>
           </motion.div>
 
-          {/* ━━━ Fitzo Column (highlighted) ━━━ */}
-          <motion.div
-            variants={staggerItem}
-            className="glass-card p-8 relative border-white/[0.1]"
-          >
-            {/* Subtle accent */}
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent pointer-events-none" />
+          {/* ━━━ Fitzo Column (highlighted) — MagicCard + BorderBeam ━━━ */}
+          <motion.div variants={staggerItem}>
+            <MagicCard
+              className="p-8 relative rounded-3xl border-white/[0.1]"
+              gradientColor="rgba(74, 222, 128, 0.12)"
+              gradientSize={250}
+            >
+              {/* Border Beam — animated green-to-white border */}
+              <BorderBeam
+                size={180}
+                duration={12}
+                colorFrom="#4ade80"
+                colorTo="#ffffff"
+                delay={0}
+              />
 
-            <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center">
-                  <Check className="w-5 h-5 text-black" />
+              {/* Subtle accent overlay */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-green-500/[0.04] via-transparent to-transparent pointer-events-none" />
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center">
+                    <Check className="w-5 h-5 text-black" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Fitzo</h3>
+                    <p className="text-xs text-neutral-500">Built different</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white">Fitzo</h3>
-                  <p className="text-xs text-neutral-500">Built different</p>
+
+                <div className="space-y-4">
+                  {COMPARISONS.map((item, i) => (
+                    <motion.div
+                      key={i}
+                      variants={staggerItem}
+                      className="flex items-start gap-3 py-3 border-t border-white/[0.04] first:border-t-0"
+                    >
+                      <Badge
+                        variant="default"
+                        className="mt-0.5 flex-shrink-0 h-6 w-6 p-0 items-center justify-center rounded-full bg-green-500/15 text-green-400 border border-green-500/25 hover:bg-green-500/15"
+                      >
+                        <Check className="w-3.5 h-3.5" />
+                      </Badge>
+                      <p className="text-sm text-neutral-300 leading-relaxed">
+                        {item.fitzo}
+                      </p>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
-
-              <div className="space-y-4">
-                {COMPARISONS.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    variants={staggerItem}
-                    className="flex items-start gap-3 py-3 border-t border-white/[0.04] first:border-t-0"
-                  >
-                    <div className="mt-0.5 w-6 h-6 rounded-full bg-white/[0.08] flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3.5 h-3.5 text-white" />
-                    </div>
-                    <p className="text-sm text-neutral-300 leading-relaxed">
-                      {item.fitzo}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+            </MagicCard>
           </motion.div>
         </motion.div>
       </div>
