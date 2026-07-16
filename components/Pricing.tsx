@@ -19,13 +19,13 @@ import { Badge } from "@/components/ui/badge";
 
 const features = [
   "Unlimited Workout Logging",
-  "Full Exercise Library",
-  "Indian Food Database",
-  "Progress Tracking & Charts",
-  "Gym Buddies & Accountability",
-  "AI Form Assistant (Limited)",
-  "Custom Workout Routines",
-  "Data Export (CSV/JSON)",
+  "Full Exercise Library & Video Guides",
+  "Indian Food Database + Barcode Scanner",
+  "Progress Tracking & Measurements",
+  "Gym Buddies & Workout Intents",
+  "QR Check-in & Class Booking",
+  "AI Coach (Gemini-Powered)",
+  "Gamified Learn Module (8 Units)",
 ];
 
 export default function Pricing() {

@@ -9,7 +9,7 @@
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { Check, WifiOff, Shield, Sparkles, TrendingUp, Dumbbell } from "lucide-react";
+import { Check, WifiOff, Shield, Sparkles, TrendingUp, Dumbbell, Home, Utensils, BarChart2, Plus } from "lucide-react";
 import {
   staggerContainer,
   staggerItem,
@@ -37,13 +37,22 @@ function DashboardScreen() {
       {/* User Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-full bg-neutral-800 border border-white/[0.06]" />
+          <img src="/avatar_zeus.png" className="w-10 h-10 rounded-full border border-white/[0.06] bg-black object-cover" alt="Ojas Avatar" />
           <div>
             <p className="text-[9px] text-neutral-500 uppercase tracking-wider font-medium">Consistency Matters.</p>
             <p className="text-sm font-bold text-white">Ojas</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4 }}
+            className="flex items-center gap-1 px-2 py-1 rounded-lg bg-green-400/10 border border-green-400/20"
+          >
+            <span className="w-1 h-1 rounded-full bg-green-400" />
+            <span className="text-[8px] font-semibold text-green-400 uppercase tracking-wider">Checked In</span>
+          </motion.div>
           <div className="w-7 h-7 rounded-lg bg-white/[0.06] flex items-center justify-center">
             <span className="text-[10px]">🔥</span>
           </div>
@@ -402,51 +411,64 @@ function PhoneShell({ children, activeScreen, onScreenChange }: {
       </div>
 
       {/* Screen Content */}
-      <div className="h-[calc(100%-7.5rem)] overflow-hidden">
+      <div className="h-[calc(100%-4.5rem)] overflow-hidden">
         <AnimatePresence mode="wait">
           {children}
         </AnimatePresence>
       </div>
 
-      {/* Bottom Nav */}
-      <div className="absolute bottom-0 left-0 right-0 h-14 bg-[#0c0c0c] border-t border-white/[0.04] flex items-center justify-around px-4">
+      {/* Bottom Nav Dock */}
+      <div className="absolute bottom-3 left-3 right-3 h-14 bg-black/80 backdrop-blur-md border border-white/[0.08] rounded-2xl flex items-center justify-around px-2 z-20">
         {[
-          { label: "Home", idx: 0 },
-          { label: "Workout", idx: 1 },
+          { label: "Home", idx: 0, icon: Home },
+          { label: "Workout", idx: 1, icon: Dumbbell },
           { label: "", idx: -1, isAdd: true },
-          { label: "Nutrition", idx: 2 },
-          { label: "Progress", idx: 3 },
-        ].map((item) => (
-          <button
-            key={item.label || "add"}
-            onClick={() => !item.isAdd && onScreenChange(item.idx)}
-            className="flex flex-col items-center gap-0.5"
-          >
-            {item.isAdd ? (
-              <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center -mt-4">
-                <span className="text-black text-lg font-light">+</span>
-              </div>
-            ) : (
-              <>
-                <div className={`w-5 h-5 rounded-sm transition-colors duration-200 ${activeScreen === item.idx ? "bg-white" : "bg-neutral-700"}`} />
-                <span className={`text-[8px] transition-colors duration-200 ${activeScreen === item.idx ? "text-white" : "text-neutral-600"}`}>{item.label}</span>
-              </>
-            )}
-          </button>
-        ))}
-      </div>
-
-      {/* Screen Dots */}
-      <div className="absolute bottom-[3.75rem] left-0 right-0 flex justify-center gap-1.5 pb-1">
-        {Array.from({ length: SCREEN_COUNT }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => onScreenChange(i)}
-            className={`w-1 h-1 rounded-full transition-all duration-300 ${
-              activeScreen === i ? "w-4 bg-white" : "bg-neutral-700"
-            }`}
-          />
-        ))}
+          { label: "Nutrition", idx: 2, icon: Utensils },
+          { label: "Progress", idx: 3, icon: BarChart2 },
+        ].map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <button
+              key={item.label || `add-${i}`}
+              onClick={() => !item.isAdd && onScreenChange(item.idx)}
+              className="flex flex-col items-center justify-center gap-0.5 w-10 h-10 relative"
+            >
+              {item.isAdd ? (
+                <motion.div 
+                  whileTap={{ scale: 0.95 }}
+                  className="w-9 h-9 rounded-full bg-white flex items-center justify-center -mt-6 shadow-lg shadow-black/50 border border-white/10"
+                >
+                  <Plus className="w-5 h-5 text-black stroke-[2.5]" />
+                </motion.div>
+              ) : (
+                <>
+                  {Icon && (
+                    <Icon 
+                      className={`w-4 h-4 transition-all duration-300 ${
+                        activeScreen === item.idx 
+                          ? "text-white scale-110" 
+                          : "text-neutral-500 hover:text-neutral-300"
+                      }`} 
+                    />
+                  )}
+                  <span 
+                    className={`text-[8px] font-semibold tracking-tight transition-colors duration-300 mt-0.5 ${
+                      activeScreen === item.idx ? "text-white" : "text-neutral-600"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
+                  {activeScreen === item.idx && (
+                    <motion.div 
+                      layoutId="activeTabIndicatorHero"
+                      className="absolute -bottom-1.5 w-4 h-[2px] bg-white rounded-full" 
+                    />
+                  )}
+                </>
+              )}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

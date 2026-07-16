@@ -8,7 +8,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { UserPlus, Dumbbell, TrendingUp } from "lucide-react";
+import { UserPlus, QrCode, TrendingUp } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/animations";
 
 import { WordPullUp } from "@/components/magicui/word-pull-up";
@@ -26,10 +26,10 @@ const steps = [
   },
   {
     number: "02",
-    icon: <Dumbbell className="w-6 h-6" />,
-    title: "Track",
+    icon: <QrCode className="w-6 h-6" />,
+    title: "Check In & Train",
     description:
-      "Log workouts, scan food, track macros. All in a few taps. Works offline so you never miss a session.",
+      "Scan your gym's QR, set today's focus, then log workouts, scan food, and track macros — all in a few taps, even offline.",
   },
   {
     number: "03",

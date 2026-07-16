@@ -23,7 +23,7 @@ const NAV_LINKS = [
   { href: "#features", label: "Features" },
   { href: "#science", label: "Science" },
   { href: "/blog", label: "Blog" },
-  { href: "#download", label: "Pricing" },
+  { href: "#contact", label: "Contact" },
 ] as const;
 
 export default function Navbar() {

@@ -17,6 +17,8 @@ import {
   ScanLine,
   Target,
   Check,
+  QrCode,
+  Flame,
 } from "lucide-react";
 import {
   staggerContainer,
@@ -157,47 +159,101 @@ function FoodSearchMini() {
   );
 }
 
-/* ━━━ Mini App Screen: Fitness Profile ━━━ */
-function ProfileMini() {
+/* ━━━ Mini App Screen: Heatmap ━━━ */
+function HeatmapMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-3 border border-white/[0.04] space-y-2.5">
-      <p className="text-xs font-bold text-white">Fitness Profile</p>
-      {/* Stats grid */}
-      <div className="grid grid-cols-2 gap-1.5">
-        {[
-          { label: "Height", value: "5'10\"" },
-          { label: "Weight", value: "165 lbs" },
-          { label: "BMI", value: "23.7" },
-          { label: "Activity", value: "High" },
-        ].map((s) => (
-          <div key={s.label} className="bg-white/[0.03] rounded-lg p-2 text-center">
-            <p className="text-[7px] text-neutral-600 uppercase tracking-wider">{s.label}</p>
-            <p className="text-[10px] font-bold text-white">{s.value}</p>
-          </div>
-        ))}
+    <div className="bg-[#0c0c0c] rounded-xl p-3 border border-white/[0.04] flex items-center justify-center h-44 overflow-hidden relative group">
+      <img 
+        src="/heatmap.png" 
+        className="h-full object-contain filter invert dark:invert-0 opacity-80 group-hover:scale-105 transition-transform duration-500" 
+        alt="Anatomy Heatmap Mannequin" 
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-2">
+        <span className="text-[9px] font-bold text-neutral-400 tracking-wider uppercase">Interactive Muscle Heatmap</span>
       </div>
-      {/* Goal */}
-      <div>
-        <p className="text-[8px] text-neutral-600 uppercase tracking-wider mb-1">Goal</p>
-        <div className="flex gap-1.5">
-          {["Lose Fat", "Maintain", "Build Muscle"].map((g, i) => (
-            <span
-              key={g}
-              className={`text-[8px] px-2 py-1 rounded-full ${
-                i === 2
-                  ? "bg-white text-black font-semibold"
-                  : "bg-white/[0.04] text-neutral-500"
-              }`}
-            >
-              {g}
-            </span>
-          ))}
+    </div>
+  );
+}
+
+/* ━━━ Mini App Screen: Gym Check-in ━━━ */
+function GymMini() {
+  return (
+    <div className="bg-[#0c0c0c] rounded-xl p-4 border border-white/[0.04] space-y-3">
+      {/* QR Check-in */}
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center flex-shrink-0">
+          <QrCode className="w-5 h-5 text-black" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-[11px] font-semibold text-white">Checked In</p>
+          <p className="text-[9px] text-neutral-500">Iron Temple Gym · 6:42 PM</p>
+        </div>
+        <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white/[0.04]">
+          <Flame className="w-3 h-3 text-orange-400" />
+          <span className="text-[10px] font-bold text-white">12</span>
         </div>
       </div>
-      {/* Weekly target */}
-      <div className="flex items-center justify-between">
-        <span className="text-[8px] text-neutral-500">Weekly workouts</span>
-        <span className="text-[10px] font-bold text-white">5x / week</span>
+      {/* Crowd meter */}
+      <div>
+        <div className="flex items-center justify-between mb-1.5">
+          <p className="text-[9px] text-neutral-500 uppercase tracking-wider">Gym Crowd</p>
+          <span className="text-[9px] font-semibold text-green-400">Not Busy</span>
+        </div>
+        <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: "35%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="h-full rounded-full bg-green-400"
+          />
+        </div>
+      </div>
+      {/* Next class */}
+      <div className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.04]">
+        <div>
+          <p className="text-[10px] font-semibold text-white">HIIT Blast · 7:30 PM</p>
+          <p className="text-[9px] text-neutral-500">with Coach Arjun · 4 spots left</p>
+        </div>
+        <span className="text-[9px] px-2 py-1 rounded-full bg-white text-black font-semibold">Book</span>
+      </div>
+    </div>
+  );
+}
+
+/* ━━━ Mini App Screen: Share Receipts ━━━ */
+function ReceiptMini() {
+  return (
+    <div className="bg-[#0c0c0c] rounded-xl p-4 border border-white/[0.04] space-y-3 relative overflow-hidden h-44 flex flex-col justify-between">
+      <div className="bg-white text-black p-3.5 rounded-lg font-mono text-[9px] shadow-lg leading-relaxed flex-1 flex flex-col justify-between">
+        <div>
+          <div className="flex justify-between border-b border-black/10 pb-1 font-bold">
+            <span>FITZO RECIPE</span>
+            <span>#1840</span>
+          </div>
+          <div className="mt-1 space-y-0.5">
+            <div className="flex justify-between">
+              <span>BENCH PRESS</span>
+              <span>4x100kg</span>
+            </div>
+            <div className="flex justify-between">
+              <span>SQUAT (PR)</span>
+              <span>3x130kg</span>
+            </div>
+            <div className="flex justify-between font-bold">
+              <span>TOTAL VOL</span>
+              <span>1,840 kg</span>
+            </div>
+          </div>
+        </div>
+        
+        <div className="flex items-center justify-between border-t border-black/10 pt-1 mt-1">
+          <img src="/barbell_dither.png" className="w-8 h-8 object-contain" alt="Barbell Dither" />
+          <div className="text-right text-[7px] text-neutral-500 leading-none">
+            <p>EQUIV. TO</p>
+            <p className="font-bold text-black text-[8px] mt-0.5">BARBELL ARMS</p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -320,14 +376,14 @@ export default function Features() {
             <DashboardMini />
           </FeatureCard>
 
-          {/* Card 2: Workouts */}
+          {/* Card 2: Heatmaps */}
           <FeatureCard
             icon={<Dumbbell className="w-5 h-5 text-white" />}
-            title="Science-Based Workouts"
-            description="10+ training splits: PPL, Upper/Lower, Bro Split, Anterior/Posterior, PHUL, PHAT, Arnold, and custom routines."
-            badge="10 Splits"
+            title="Interactive Heatmaps"
+            description="Track training volume sets scientifically on a 3D mannequin model. Tap leg, arm, core, back, and chest groups to expand details."
+            badge="Heatmap"
           >
-            <ProfileMini />
+            <HeatmapMini />
           </FeatureCard>
 
           {/* Card 3: Education */}
@@ -348,7 +404,17 @@ export default function Features() {
             <BuddiesMini />
           </FeatureCard>
 
-          {/* Card 5: AI Food — spans 2 cols */}
+          {/* Card 5: Share Receipts */}
+          <FeatureCard
+            icon={<Target className="w-5 h-5 text-white" />}
+            title="1-Bit Thermal Receipts"
+            description="Generate and share beautiful 1-bit thermal receipts of your workout. Drag it over your workout selfie or share it raw."
+            badge="Thermal Share"
+          >
+            <ReceiptMini />
+          </FeatureCard>
+
+          {/* Card 6: AI Food — spans 2 cols */}
           <FeatureCard
             icon={<Sparkles className="w-5 h-5 text-white" />}
             title="AI Nutrition Coach"
@@ -357,6 +423,16 @@ export default function Features() {
             className="lg:col-span-2"
           >
             <FoodSearchMini />
+          </FeatureCard>
+
+          {/* Card 7: Gym Ecosystem */}
+          <FeatureCard
+            icon={<QrCode className="w-5 h-5 text-white" />}
+            title="Your Gym, Connected"
+            description="QR check-in, live crowd meter, and class booking — your digital membership card lives in your pocket."
+            badge="Gym OS"
+          >
+            <GymMini />
           </FeatureCard>
         </motion.div>
       </div>

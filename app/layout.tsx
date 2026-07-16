@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s — Fitzo",
   },
   description:
-    "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, and science-backed education. Built for lifters who value data.",
+    "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, QR gym check-in, gym buddies, and science-backed education. Built for lifters who value data.",
   keywords: [
     "fitness tracker",
     "macro tracking",
@@ -32,6 +32,10 @@ export const metadata: Metadata = {
     "evidence-based fitness",
     "calorie counter",
     "hypertrophy training",
+    "gym check-in app",
+    "gym buddies",
+    "indian food calorie tracker",
+    "gym class booking",
   ],
   authors: [{ name: "Fitzo" }],
   creator: "Fitzo",
@@ -42,7 +46,7 @@ export const metadata: Metadata = {
     url: "https://www.fitzoapp.in",
     title: "Fitzo — Train Smarter, Build Faster",
     description:
-      "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, and science-backed education. Built for lifters who value data.",
+      "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, QR gym check-in, gym buddies, and science-backed education. Built for lifters who value data.",
     siteName: "Fitzo",
     images: [
       {

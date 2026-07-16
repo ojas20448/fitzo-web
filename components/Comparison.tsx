@@ -38,6 +38,10 @@ const COMPARISONS: ComparisonItem[] = [
     generic: "Cookie-cutter workout plans",
     fitzo: "10+ customizable splits for every training style",
   },
+  {
+    generic: "Zero connection to your actual gym",
+    fitzo: "QR check-in, class booking, crowd meter & trainer sync built in",
+  },
 ];
 
 export default function Comparison() {

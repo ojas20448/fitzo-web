@@ -16,11 +16,13 @@ import {
   Dumbbell,
   UtensilsCrossed,
   User,
+  Users,
   Check,
   Sparkles,
   Trophy,
   Flame,
   Plus,
+  QrCode,
 } from "lucide-react";
 
 /* ━━━ Demo Screen: Home ━━━ */
@@ -265,6 +267,94 @@ function DemoNutrition() {
   );
 }
 
+/* ━━━ Demo Screen: Buddies ━━━ */
+function DemoBuddies() {
+  const [nudged, setNudged] = useState<Set<number>>(new Set());
+
+  const buddies = [
+    { name: "Rahul", intent: "Hitting Legs 🦵", status: "Checked in", active: true },
+    { name: "Priya", intent: "Cardio at 7 PM", status: "Planning", active: false },
+    { name: "Arjun", intent: "Push Day 💪", status: "Checked in", active: true },
+    { name: "Sneha", intent: "Rest day", status: "Resting", active: false },
+  ];
+
+  const toggleNudge = (i: number) => {
+    setNudged((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between">
+        <p className="text-base font-black text-white">Gym Buddies</p>
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.06]">
+          <QrCode className="w-3 h-3 text-neutral-400" />
+          <span className="text-[10px] text-neutral-400">Add via QR</span>
+        </div>
+      </div>
+
+      {/* Crowd indicator */}
+      <div className="bg-white/[0.04] rounded-xl p-3 border border-white/[0.04]">
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-[10px] font-semibold text-white">Gym Crowd Right Now</p>
+          <span className="text-[9px] font-semibold text-green-400">Not Busy</span>
+        </div>
+        <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "35%" }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="h-full rounded-full bg-green-400"
+          />
+        </div>
+        <p className="text-[8px] text-neutral-600 mt-1.5">Best time to train · 2 buddies there now</p>
+      </div>
+
+      {/* Buddy list */}
+      <p className="text-[10px] text-neutral-500 uppercase tracking-wider">Today&apos;s Intents · Tap to nudge</p>
+      <div className="space-y-1.5">
+        {buddies.map((b, i) => (
+          <motion.button
+            key={b.name}
+            onClick={() => toggleNudge(i)}
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05 }}
+            className={`w-full flex items-center gap-3 p-2.5 rounded-xl border transition-all duration-200 text-left ${
+              nudged.has(i) ? "bg-green-400/5 border-green-400/20" : "border-white/[0.04] hover:bg-white/[0.02]"
+            }`}
+          >
+            <div className="relative flex-shrink-0">
+              <div className="w-9 h-9 rounded-full bg-neutral-800" />
+              {b.active && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-400 border-2 border-[#0c0c0c]" />}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[11px] font-semibold text-white">{b.name}</p>
+              <p className="text-[9px] text-neutral-500 truncate">{b.intent} · {b.status}</p>
+            </div>
+            <motion.span
+              key={nudged.has(i) ? "nudged" : "nudge"}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className={`text-[9px] px-2.5 py-1 rounded-full font-semibold flex-shrink-0 ${
+                nudged.has(i)
+                  ? "bg-green-400/15 text-green-400 border border-green-400/25"
+                  : "bg-white/[0.06] text-neutral-400 border border-white/[0.06]"
+              }`}
+            >
+              {nudged.has(i) ? "Nudged 👊" : "Nudge"}
+            </motion.span>
+          </motion.button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ━━━ Demo Screen: Profile ━━━ */
 function DemoProfile() {
   return (
@@ -340,6 +430,7 @@ const tabs = [
   { label: "Home", icon: Home, component: DemoHome },
   { label: "Workout", icon: Dumbbell, component: DemoWorkout },
   { label: "Nutrition", icon: UtensilsCrossed, component: DemoNutrition },
+  { label: "Buddies", icon: Users, component: DemoBuddies },
   { label: "Profile", icon: User, component: DemoProfile },
 ];
 
@@ -398,7 +489,7 @@ export default function InteractiveDemo() {
             </div>
 
             {/* Screen Content */}
-            <div className="px-4 pt-2 h-[calc(100%-7rem)] overflow-y-auto scrollbar-hide">
+            <div className="px-4 pt-2 h-[calc(100%-4.5rem)] overflow-y-auto scrollbar-hide">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTab}
@@ -412,24 +503,24 @@ export default function InteractiveDemo() {
               </AnimatePresence>
             </div>
 
-            {/* Bottom Tab Bar */}
-            <div className="absolute bottom-0 left-0 right-0 h-14 bg-[#0c0c0c] border-t border-white/[0.04] flex items-center justify-around px-6">
+            {/* Bottom Tab Bar Dock */}
+            <div className="absolute bottom-3 left-3 right-3 h-14 bg-black/80 backdrop-blur-md border border-white/[0.08] rounded-2xl flex items-center justify-around px-2 z-20">
               {tabs.map((tab, i) => {
                 const Icon = tab.icon;
                 return (
                   <button
                     key={tab.label}
                     onClick={() => setActiveTab(i)}
-                    className="flex flex-col items-center gap-0.5 relative"
+                    className="flex flex-col items-center justify-center gap-0.5 w-10 h-10 relative"
                   >
-                    <Icon className={`w-5 h-5 transition-colors duration-200 ${activeTab === i ? "text-white" : "text-neutral-600"}`} />
-                    <span className={`text-[8px] transition-colors duration-200 ${activeTab === i ? "text-white" : "text-neutral-600"}`}>
+                    <Icon className={`w-4 h-4 transition-all duration-300 ${activeTab === i ? "text-white scale-110" : "text-neutral-500 hover:text-neutral-300"}`} />
+                    <span className={`text-[8px] font-semibold tracking-tight transition-colors duration-300 mt-0.5 ${activeTab === i ? "text-white" : "text-neutral-600"}`}>
                       {tab.label}
                     </span>
                     {activeTab === i && (
                       <motion.div
                         layoutId="demo-tab-indicator"
-                        className="absolute -top-2 w-8 h-0.5 rounded-full bg-white"
+                        className="absolute -bottom-1.5 w-4 h-[2px] bg-white rounded-full"
                       />
                     )}
                   </button>
