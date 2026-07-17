@@ -16,9 +16,9 @@ import { Separator } from "@/components/ui/separator";
 
 const FOOTER_LINKS = {
   Product: [
-    { label: "Features", href: "#features" },
+    { label: "Features", href: "/#features" },
     { label: "Compare", href: "/compare" },
-    { label: "Download", href: "#download" },
+    { label: "Early Access", href: "/#download" },
   ],
   Company: [
     { label: "Blog", href: "/blog" },

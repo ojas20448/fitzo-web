@@ -5,10 +5,16 @@
  */
 
 import Link from "next/link";
+import { FitzoIcon } from "@/components/FitzoLogo";
 
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 text-center">
+      {/* Brand */}
+      <Link href="/" aria-label="Fitzo home" className="mb-6">
+        <FitzoIcon className="w-12 h-12" />
+      </Link>
+
       {/* Big number */}
       <h1 className="text-[120px] sm:text-[180px] font-black leading-none tracking-tighter text-white/[0.06] select-none">
         404
@@ -32,10 +38,10 @@ export default function NotFound() {
             Go Home
           </Link>
           <Link
-            href="#download"
+            href="/#download"
             className="px-7 py-3.5 rounded-xl bg-white/[0.06] border border-white/[0.08] text-white text-base font-semibold hover:bg-white/[0.1] transition-colors"
           >
-            Download Fitzo
+            Get Early Access
           </Link>
         </div>
       </div>

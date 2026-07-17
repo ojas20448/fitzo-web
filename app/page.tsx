@@ -11,10 +11,7 @@ import SocialProof from "@/components/SocialProof";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import Testimonials from "@/components/Testimonials";
-import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
-import Blog from "@/components/Blog";
-import Waitlist from "@/components/Waitlist";
 import Comparison from "@/components/Comparison";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
@@ -62,13 +59,29 @@ export default function Home() {
       {/* Navigation */}
       <Navbar />
 
-      {/* Main Content */}
+      {/* Main Content — show the product early, one conversion point at the end */}
       <main>
         {/* Hero Section */}
         <Hero />
 
         {/* Social Proof Bar */}
         <SocialProof />
+
+        {/* Divider */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
+        </div>
+
+        {/* Interactive Demo — show, don't tell */}
+        <InteractiveDemo />
+
+        {/* Divider */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
+        </div>
+
+        {/* Features Bento Grid */}
+        <Features />
 
         {/* Divider */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,8 +96,8 @@ export default function Home() {
           <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
         </div>
 
-        {/* Features Bento Grid */}
-        <Features />
+        {/* Why Fitzo — Comparison */}
+        <Comparison />
 
         {/* Divider */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -110,47 +123,7 @@ export default function Home() {
         {/* FAQ */}
         <FAQ />
 
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* Blog */}
-        <Blog />
-
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* Why Fitzo — Comparison */}
-        <Comparison />
-
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* Interactive Demo */}
-        <InteractiveDemo />
-
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* Pricing */}
-        <Pricing />
-
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* Waitlist */}
-        <Waitlist />
-
-        {/* Final CTA */}
+        {/* Final CTA + Early Access (id="download" — every CTA lands here) */}
         <CTA />
       </main>
 

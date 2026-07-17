@@ -20,10 +20,10 @@ import {
 
 /** Navigation links matching the reference design */
 const NAV_LINKS = [
-  { href: "#features", label: "Features" },
-  { href: "#science", label: "Science" },
+  { href: "/#features", label: "Features" },
+  { href: "/#science", label: "Science" },
   { href: "/blog", label: "Blog" },
-  { href: "#contact", label: "Contact" },
+  { href: "mailto:contact@fitzoapp.in", label: "Contact" },
 ] as const;
 
 export default function Navbar() {
@@ -79,7 +79,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
           <a
-            href="#download"
+            href="/#download"
             className="inline-flex items-center px-6 py-2.5 rounded-full text-sm font-semibold text-white dark:text-black bg-black dark:bg-white hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors duration-300"
           >
             Get Started
@@ -143,7 +143,7 @@ export default function Navbar() {
                 exit={{ opacity: 0, y: 20 }}
               >
                 <a
-                  href="#download"
+                  href="/#download"
                   onClick={() => setIsOpen(false)}
                   className="px-8 py-3 rounded-full text-base font-semibold text-black bg-white"
                 >

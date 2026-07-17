@@ -15,10 +15,6 @@ import {
   staggerItem,
   floatAnimation,
 } from "@/lib/animations";
-import { Particles } from "@/components/magicui/particles";
-import { SparklesText } from "@/components/magicui/sparkles-text";
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
-import { BorderBeam } from "@/components/magicui/border-beam";
 import { Badge } from "@/components/ui/badge";
 
 const SCREEN_INTERVAL = 4000;
@@ -508,15 +504,7 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-screen flex items-center overflow-hidden pt-20 md:pt-0"
     >
-      {/* Particle background */}
-      <Particles
-        className="absolute inset-0 z-0"
-        quantity={80}
-        color="#ffffff"
-        size={0.4}
-        staticity={50}
-      />
-      {/* Subtle radial gradient */}
+      {/* Single quiet backdrop */}
       <div className="absolute inset-0 radial-fade dark:radial-fade" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -541,8 +529,9 @@ export default function Hero() {
               variants={staggerItem}
               className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[0.95] mb-6"
             >
-              <SparklesText text="Science-Based" sparklesCount={8} /><br />
-              Consistency.
+              The coach that
+              <br />
+              actually knows you.
             </motion.h1>
 
             {/* Subheadline */}
@@ -550,9 +539,9 @@ export default function Hero() {
               variants={staggerItem}
               className="text-lg sm:text-xl text-neutral-500 leading-relaxed max-w-md mx-auto lg:mx-0 mb-8"
             >
-              Stop guessing. Start growing. Fitzo combines cutting-edge
-              hypertrophy science with seamless tracking to ensure you never
-              miss a beat in your training journey.
+              Fitzo tracks your lifts, your food — dal to biryani — and its AI
+              coach reads all of it. Science-based training, built for Indian
+              lifters.
             </motion.p>
 
             {/* ━━━ CTA Buttons ━━━ */}
@@ -560,30 +549,24 @@ export default function Hero() {
               variants={staggerItem}
               className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-6"
             >
-              {/* iOS */}
-              <ShimmerButton
-                className="flex items-center gap-3 px-7 py-3.5 text-base font-semibold"
-                background="rgba(0,0,0,1)"
-                shimmerColor="#ffffff"
-                borderRadius="0.75rem"
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-                </svg>
-                Download for iOS
-              </ShimmerButton>
-
-              {/* Google Play */}
+              {/* Primary: early access */}
               <motion.a
                 href="#download"
                 whileHover={{ y: -2, transition: { duration: 0.2 } }}
                 whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
-                className="flex items-center gap-3 px-7 py-3.5 rounded-xl bg-black/[0.06] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] text-black dark:text-white font-semibold text-base hover:bg-black/[0.1] dark:hover:bg-white/[0.1] transition-colors duration-300"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-base hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors duration-300"
               >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/>
-                </svg>
-                Google Play
+                Get early access
+              </motion.a>
+
+              {/* Secondary: see the product */}
+              <motion.a
+                href="#demo"
+                whileHover={{ y: -2, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-black/[0.06] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] text-black dark:text-white font-semibold text-base hover:bg-black/[0.1] dark:hover:bg-white/[0.1] transition-colors duration-300"
+              >
+                See it in action
               </motion.a>
             </motion.div>
 
@@ -618,14 +601,12 @@ export default function Hero() {
             className="flex justify-center lg:justify-end"
           >
             <motion.div {...floatAnimation} className="relative">
-              {/* Enhanced glow */}
-              <div className="absolute -inset-20 bg-gradient-to-br from-white/[0.06] via-green-400/[0.03] to-white/[0.02] rounded-full blur-[80px] -z-10" />
+              {/* Quiet glow */}
+              <div className="absolute -inset-20 bg-white/[0.04] rounded-full blur-[80px] -z-10" />
               <div className="relative">
                 <PhoneShell activeScreen={activeScreen} onScreenChange={goToScreen}>
                   <ActiveComponent key={activeScreen} />
                 </PhoneShell>
-                {/* Animated border beam */}
-                <BorderBeam size={250} duration={12} colorFrom="#ffffff" colorTo="#4ade80" />
               </div>
             </motion.div>
           </motion.div>

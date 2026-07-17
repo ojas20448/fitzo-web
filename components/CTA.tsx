@@ -1,107 +1,149 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Final CTA Section
- * B&W conversion-optimized download section
- * Upgraded with Magic UI components
+ * FITZO — Final CTA + Early Access
+ * The single conversion point of the page: big brand moment,
+ * one working email form, honest store status.
+ * Every "#download" link on the site lands here.
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import {
-  staggerContainer,
-  staggerItem,
-} from "@/lib/animations";
-import { RetroGrid } from "@/components/magicui/retro-grid";
-import { WordPullUp } from "@/components/magicui/word-pull-up";
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
-import { Particles } from "@/components/magicui/particles";
+import { ArrowRight, Check, Loader2, Mail } from "lucide-react";
+import { staggerContainer, staggerItem } from "@/lib/animations";
+import { FitzoIcon } from "@/components/FitzoLogo";
 
 export default function CTA() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) {
+      setStatus("error");
+      setMessage("Please enter a valid email.");
+      return;
+    }
+    setStatus("loading");
+    setMessage("");
+    try {
+      const response = await fetch("https://formspree.io/f/xpwzgvqr", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ email, source: "fitzoapp.in early access" }),
+      });
+      if (response.ok) {
+        setStatus("success");
+        setMessage("You're on the list — see you at launch. 💪");
+        setEmail("");
+      } else {
+        // Honest failure — never fake success and silently lose a lead
+        setStatus("error");
+        setMessage("Couldn't sign you up. Email us at contact@fitzoapp.in instead.");
+      }
+    } catch {
+      setStatus("error");
+      setMessage("Network error — try again, or email contact@fitzoapp.in.");
+    }
+  };
+
   return (
-    <section id="download" className="relative py-16 sm:py-24 overflow-hidden">
-      {/* RetroGrid background (replaces radial-fade) */}
-      <RetroGrid className="opacity-30 dark:opacity-20" angle={65} />
+    <section id="download" className="relative py-20 sm:py-32 overflow-hidden">
+      {/* Single quiet backdrop */}
+      <div className="absolute inset-0 radial-fade dark:radial-fade" />
 
-      {/* Ambient particle motion */}
-      <Particles
-        className="absolute inset-0 z-[1]"
-        quantity={30}
-        color="#ffffff"
-        size={0.6}
-      />
-
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {/* Badge */}
-          <motion.div variants={staggerItem} className="mb-8">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-medium bg-white/[0.04] text-neutral-400 border border-white/[0.06] dark:bg-white/[0.04] dark:text-neutral-400 dark:border-white/[0.06]">
-              <ArrowRight className="w-3 h-3" />
-              Start Training Smarter
-            </span>
+          {/* Brand moment */}
+          <motion.div variants={staggerItem} className="flex justify-center mb-8">
+            <FitzoIcon className="w-16 h-16 sm:w-20 sm:h-20" />
           </motion.div>
 
-          {/* Headline — WordPullUp reveal */}
-          <motion.div variants={staggerItem} className="mb-6">
-            <WordPullUp
-              words="Ready to Train Smarter?"
-              className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-black dark:text-white"
-              delay={0.05}
-            />
-          </motion.div>
+          {/* Headline */}
+          <motion.h2
+            variants={staggerItem}
+            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-black dark:text-white mb-5"
+          >
+            Train with a coach
+            <br />
+            that knows you.
+          </motion.h2>
 
           {/* Subtext */}
           <motion.p
             variants={staggerItem}
-            className="text-lg sm:text-xl text-neutral-500 max-w-xl mx-auto mb-10 leading-relaxed"
+            className="text-lg text-neutral-500 max-w-md mx-auto mb-10 leading-relaxed"
           >
-            Join thousands of lifters who ditched the guesswork. Track with
-            precision. Progress with data.
+            Get early access before launch. Free for early members — no card, no
+            spam, one email when it&apos;s your turn.
           </motion.p>
 
-          {/* ━━━ Download Buttons ━━━ */}
-          <motion.div
+          {/* ━━━ Early access form (the one conversion action) ━━━ */}
+          <motion.form
             variants={staggerItem}
-            className="flex flex-col sm:flex-row gap-3 justify-center"
+            onSubmit={handleSubmit}
+            className="max-w-md mx-auto"
           >
-            {/* iOS — Primary CTA with ShimmerButton */}
-            <ShimmerButton
-              className="flex items-center gap-3 px-8 py-4 text-base font-semibold"
-              shimmerColor="#ffffff"
-              background="rgba(255, 255, 255, 1)"
-              borderRadius="12px"
-            >
-              <svg className="w-5 h-5 text-black" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-              </svg>
-              <span className="text-black">Download for iOS</span>
-            </ShimmerButton>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="relative flex-1">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (status === "error") setStatus("idle");
+                  }}
+                  placeholder="you@example.com"
+                  aria-label="Email address"
+                  className="w-full pl-11 pr-4 py-4 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.1] text-black dark:text-white placeholder:text-neutral-500 text-sm outline-none focus:border-black/30 dark:focus:border-white/30 transition-colors"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={status === "loading" || status === "success"}
+                className="px-8 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black text-sm font-semibold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors disabled:opacity-60 disabled:cursor-not-allowed min-w-[160px] flex items-center justify-center gap-2"
+              >
+                {status === "loading" ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : status === "success" ? (
+                  <>
+                    <Check className="w-4 h-4" /> Joined
+                  </>
+                ) : (
+                  <>
+                    Get early access <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </div>
 
-            {/* Google Play — Secondary CTA with shadcn outline Button */}
-            <a
-              href="#"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-base font-semibold border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.04] dark:bg-white/[0.06] text-black dark:text-white hover:bg-black/[0.08] dark:hover:bg-white/[0.1] transition-colors duration-300"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/>
-              </svg>
-              Google Play
-            </a>
-          </motion.div>
+            {message && (
+              <motion.p
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`mt-4 text-sm ${status === "error" ? "text-red-400" : "text-green-500"}`}
+                role="status"
+              >
+                {message}
+              </motion.p>
+            )}
+          </motion.form>
 
-          {/* Trust note */}
+          {/* Honest store status */}
           <motion.p
             variants={staggerItem}
-            className="mt-8 text-xs text-neutral-600 dark:text-neutral-600"
+            className="mt-8 text-xs text-neutral-500 tracking-wide uppercase"
           >
-            Free to download · No credit card required · Cancel anytime
+            Android &amp; iOS · Launching soon
           </motion.p>
         </motion.div>
       </div>
