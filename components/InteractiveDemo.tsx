@@ -152,13 +152,13 @@ function DemoHome() {
           <span className="text-[8px] font-bold uppercase tracking-[0.12em] text-ink-faint">LOG FOOD</span>
         </div>
         <div className="flex items-center gap-3">
-          <div className="relative h-16 w-16 flex-shrink-0">
+          <div className="relative h-16 w-16 flex-shrink-0 flex items-center justify-center">
             <svg className="h-16 w-16 -rotate-90" viewBox="0 0 64 64">
               <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="5" />
               <circle cx="32" cy="32" r="26" fill="none" stroke="white" strokeWidth="5" strokeDasharray="163" strokeDashoffset="40" strokeLinecap="round" />
             </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span className="text-xs font-black leading-none text-white">2690</span>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+              <span className="text-xs font-black leading-none text-white tracking-tight">2690</span>
               <span className="text-[5px] font-bold uppercase tracking-[0.1em] text-ink-faint mt-0.5">REMAINING</span>
             </div>
           </div>

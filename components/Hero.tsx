@@ -202,14 +202,14 @@ function DashboardScreen() {
           <span className="text-xs font-bold text-white">Today&apos;s Nutrition</span>
           <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-ink-faint">LOG FOOD</span>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="relative h-18 w-18 flex-shrink-0">
-            <svg className="h-18 w-18 -rotate-90" viewBox="0 0 64 64" aria-hidden>
+        <div className="flex items-center gap-3.5">
+          <div className="relative h-[72px] w-[72px] flex-shrink-0 flex items-center justify-center">
+            <svg className="h-[72px] w-[72px] -rotate-90" viewBox="0 0 64 64" aria-hidden>
               <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="5" />
-              <circle cx="32" cy="32" r="26" fill="none" stroke="white" strokeWidth="5" strokeDasharray="163" strokeDashoffset="40" strokeLinecap="round" />
+              <circle cx="32" cy="32" r="26" fill="none" stroke="white" strokeWidth="5" strokeDasharray="163" strokeDashoffset="38" strokeLinecap="round" />
             </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span className="text-sm font-black leading-none text-white">2690</span>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+              <span className="text-sm font-black leading-none text-white tracking-tight">2690</span>
               <span className="text-[6px] font-bold uppercase tracking-[0.1em] text-ink-faint mt-0.5">REMAINING</span>
             </div>
           </div>
