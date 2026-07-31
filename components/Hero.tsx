@@ -47,247 +47,256 @@ const SCREEN_COUNT = 4;
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Shared: the app's calorie ring + macro readout
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-function NutritionRing() {
-  const macros = [
-    { label: "Protein", current: 128, target: 150, tone: "text-protein", bar: "bg-protein" },
-    { label: "Carbs", current: 175, target: 200, tone: "text-carbs", bar: "bg-carbs" },
-    { label: "Fat", current: 52, target: 65, tone: "text-fat", bar: "bg-fat" },
-  ];
 
+
+/* ━━━ Shared: Muscle Volume Status Anatomy Map ━━━ */
+function MuscleVolumeMap() {
   return (
-    <div className="well p-4">
-      <div className="flex items-center gap-4">
-        <div className="relative h-16 w-16 flex-shrink-0">
-          <svg className="h-16 w-16 -rotate-90" viewBox="0 0 64 64" aria-hidden>
-            <circle
-              cx="32"
-              cy="32"
-              r="27"
-              fill="none"
-              stroke="rgba(255,255,255,0.07)"
-              strokeWidth="5"
-            />
-            <motion.circle
-              cx="32"
-              cy="32"
-              r="27"
-              fill="none"
-              stroke="white"
-              strokeWidth="5"
-              strokeLinecap="round"
-              initial={{ strokeDasharray: "170 170", strokeDashoffset: 170 }}
-              animate={{ strokeDashoffset: 30 }}
-              transition={{ duration: 1.4, delay: 0.4, ease: EASE_OUT_EXPO }}
-            />
+    <div className="rounded-2xl border border-white/[0.08] bg-black/60 p-3">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-[11px] font-bold text-white tracking-tight">Muscle Volume Status</span>
+        <span className="text-[9px] text-ink-faint">Target: 6 sets/week</span>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2 my-1 text-center">
+        {/* FRONT BODY */}
+        <div className="rounded-xl border border-white/[0.04] bg-white/[0.02] p-2">
+          <span className="text-[8px] font-bold tracking-[0.14em] text-ink-faint uppercase block mb-1">FRONT</span>
+          <svg viewBox="0 0 100 150" className="h-24 mx-auto stroke-neutral-600 fill-none" strokeWidth="1.6">
+            {/* Head */}
+            <circle cx="50" cy="14" r="9" />
+            {/* Traps/Shoulders */}
+            <path d="M34 32c4-5 10-7 16-7s12 2 16 7" />
+            {/* Delts */}
+            <path d="M26 34c2 7 4 13 6 17" />
+            <path d="M74 34c-2 7-4 13-6 17" />
+            {/* Chest - HIGHLIGHTED GOLD */}
+            <path d="M34 32c6 1 11 4 16 8c5-4 10-7 16-8c2 9-2 16-16 17c-14 0-18-8-16-17Z" className="stroke-amber-400 fill-amber-400/25" strokeWidth="2.2" />
+            {/* Abs */}
+            <path d="M38 58h24v28H38z" />
+            <path d="M50 58v28M38 67h24M38 76h24" />
+            {/* Arms */}
+            <path d="M24 48c-2 10-4 20-6 30" />
+            <path d="M76 48c2 10 4 20 6 30" />
+            {/* Quads / Legs */}
+            <path d="M36 88c-2 16-4 32-6 44" />
+            <path d="M64 88c2 16 4 32 6 44" />
+            <path d="M48 88v44M52 88v44" />
           </svg>
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-[15px] font-bold tabular-nums leading-none text-white">
-              160
-            </span>
-            <span className="mt-0.5 text-[7px] uppercase tracking-[0.12em] text-ink-faint">
-              Left
-            </span>
-          </div>
         </div>
 
-        <div className="flex-1 space-y-2">
-          {macros.map((m, i) => (
-            <div key={m.label} className="flex items-center gap-2">
-              <span className="w-10 text-[10px] text-ink-muted">{m.label}</span>
-              <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/[0.08]">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={{ width: `${(m.current / m.target) * 100}%` }}
-                  transition={{
-                    duration: 1.1,
-                    delay: 0.6 + i * 0.12,
-                    ease: EASE_OUT_EXPO,
-                  }}
-                  className={`h-full rounded-full ${m.bar}`}
-                />
-              </div>
-              <span className="font-mono text-[9px] tabular-nums text-ink-faint">
-                {m.current}/{m.target}g
-              </span>
-            </div>
-          ))}
+        {/* BACK BODY */}
+        <div className="rounded-xl border border-white/[0.04] bg-white/[0.02] p-2">
+          <span className="text-[8px] font-bold tracking-[0.14em] text-ink-faint uppercase block mb-1">BACK</span>
+          <svg viewBox="0 0 100 150" className="h-24 mx-auto stroke-neutral-600 fill-none" strokeWidth="1.6">
+            {/* Head */}
+            <circle cx="50" cy="14" r="9" />
+            {/* Traps */}
+            <path d="M34 32c4-5 10-7 16-7s12 2 16 7" />
+            <path d="M50 25v22L34 32M50 47L66 32" />
+            {/* Lats */}
+            <path d="M32 38c5 7 9 14 11 20" />
+            <path d="M68 38c-5 7-9 14-11 20" />
+            {/* Lower back / Glutes */}
+            <path d="M38 58h24v18H38z" />
+            <path d="M36 76c4 9 10 12 14 12s10-3 14-12" />
+            {/* Hamstrings / Calves */}
+            <path d="M36 88c-2 16-4 32-6 44" />
+            <path d="M64 88c2 16 4 32 6 44" />
+            <path d="M48 88v44M52 88v44" />
+          </svg>
         </div>
+      </div>
+
+      <div className="flex items-center justify-between pt-1.5 border-t border-white/[0.06]">
+        <span className="text-[10px] font-bold text-white">CHEST ▾</span>
+        <span className="text-[9px] font-mono text-amber-400 font-bold">2 / 6 sets</span>
       </div>
     </div>
   );
 }
 
-/* ━━━ Screen 1: Dashboard ━━━ */
+/* ━━━ Screen 1: Dashboard (Real App Match) ━━━ */
 function DashboardScreen() {
   return (
-    <div className="space-y-3 px-4 pt-1 sm:space-y-3.5">
+    <div className="space-y-3 px-3.5 pt-1">
+      {/* Real App Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <Image
-            src="/avatar_zeus.png"
-            width={40}
-            height={40}
-            priority
-            className="h-10 w-10 rounded-full border border-white/[0.08] bg-black object-cover"
-            alt=""
-          />
+          <div className="relative">
+            <Image
+              src="/avatar_zeus.png"
+              width={38}
+              height={38}
+              priority
+              className="h-9.5 w-9.5 rounded-full border border-white/10 bg-black object-cover"
+              alt="Profile"
+            />
+            <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-white text-[7px] font-black text-black">✓</span>
+          </div>
           <div>
-            <p className="text-[9px] font-medium uppercase tracking-[0.14em] text-ink-faint">
-              Consistency matters.
+            <p className="text-[8px] font-bold uppercase tracking-[0.14em] text-ink-faint">
+              CONSISTENCY MATTERS.
             </p>
-            <p className="text-sm font-bold text-white">Ojas</p>
+            <p className="text-sm font-black tracking-tight text-white">Ojas</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="flex items-center gap-1 rounded-lg border border-protein/25 bg-protein/10 px-2 py-1">
-            <span className="h-1 w-1 rounded-full bg-protein" />
-            <span className="text-[8px] font-semibold uppercase tracking-[0.12em] text-protein">
-              Checked in
-            </span>
+        <div className="flex items-center gap-1.5">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-white">
+            <Sparkles className="h-3.5 w-3.5 text-white" />
           </span>
-          <span className="flex h-7 items-center gap-1 rounded-lg bg-white/[0.07] px-2 text-[10px]">
-            🔥
-            <span className="font-mono text-[11px] font-bold text-white">12</span>
+          <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-white">
+            <BarChart2 className="h-3.5 w-3.5 text-white" />
+          </span>
+          <span className="flex h-7 items-center gap-1 rounded-full border border-white/10 bg-white/[0.06] px-2 text-[10px]">
+            🔥 <span className="font-mono text-[10px] font-bold text-white">12</span>
           </span>
         </div>
       </div>
 
-      <div>
-        <p className="text-[10px] text-ink-faint">Today&apos;s training</p>
-        <p className="text-lg font-black tracking-tight text-white">
-          ANTERIOR · CUSTOM
+      {/* Coach's Daily Insight */}
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3">
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.14em] text-white">
+            <TrendingUp className="h-3 w-3 text-protein" /> COACH&apos;S DAILY INSIGHT
+          </span>
+          <span className="text-[10px] text-ink-faint">›</span>
+        </div>
+        <p className="text-[10px] leading-relaxed text-ink-muted">
+          Your 12-day streak is solid! Let&apos;s prioritize skipped back & leg muscle groups for a balanced session today.
+        </p>
+        <p className="mt-2 text-[9px] font-medium text-ink-faint hover:text-white">
+          Ask your coach anything →
         </p>
       </div>
 
-      <div className="well p-3 sm:p-3.5">
-        <div className="mb-3 flex items-center justify-center gap-2">
-          <span className="flex h-4 w-4 items-center justify-center rounded-full bg-protein">
-            <Check className="h-2.5 w-2.5 text-black" strokeWidth={3} />
+      {/* Next Up Routine Card */}
+      <div className="flex items-center justify-between rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3">
+        <div className="flex items-center gap-2.5">
+          <span className="rounded-full bg-white px-3 py-1 text-[10px] font-black uppercase text-black">
+            PULL
           </span>
-          <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
-            Completed today
-          </span>
-        </div>
-        <div className="flex">
-          <div className="flex-1 border-r border-white/[0.07] text-center">
-            <p className="mb-1 text-[9px] uppercase tracking-[0.12em] text-ink-faint">
-              Workouts
-            </p>
-            <p className="text-2xl font-bold tabular-nums text-white">1</p>
-          </div>
-          <div className="flex-1 text-center">
-            <p className="mb-1 text-[9px] uppercase tracking-[0.12em] text-ink-faint">
-              Calories
-            </p>
-            <p className="text-2xl font-bold tabular-nums text-white">1,840</p>
+          <div>
+            <p className="text-[9px] font-bold text-white">Next up</p>
+            <p className="text-[9px] text-ink-faint">Seedha Putha Routine</p>
           </div>
         </div>
+        <span className="flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[10px] font-bold text-black">
+          Let&apos;s Go ⇄
+        </span>
       </div>
 
-      {/* The "Log workout / Log calories" button row lived here. It was
-          decorative chrome, and its ~60px pushed the AI-coach line — the only
-          place this screen states the product's thesis — underneath the dock.
-          Substance beats chrome: the row is gone so the thesis fits. */}
-
-      <div>
-        <div className="mb-2 flex items-center justify-between">
-          <p className="text-sm font-bold text-white">Today&apos;s nutrition</p>
-          <p className="text-[10px] uppercase tracking-[0.12em] text-ink-faint">
-            Log food
-          </p>
-        </div>
-        <NutritionRing />
+      {/* Action Buttons: Log Workout & Log Calories */}
+      <div className="grid grid-cols-2 gap-2">
+        <button className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-3 text-[11px] font-black text-black shadow-lg">
+          <Plus className="h-3.5 w-3.5" strokeWidth={3} /> LOG WORKOUT
+        </button>
+        <button className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-3 text-[11px] font-black text-black shadow-lg">
+          <Plus className="h-3.5 w-3.5" strokeWidth={3} /> LOG CALORIES
+        </button>
       </div>
 
-      {/* The differentiator, stated in the product's own voice:
-          it read the lifts AND the food, and it has something to say. */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.6, ease: EASE_OUT_EXPO }}
-        className="flex items-start gap-2.5 rounded-xl border border-protein/20 bg-protein/[0.06] p-3"
-      >
-        <Sparkles className="mt-px h-3.5 w-3.5 flex-shrink-0 text-protein" />
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-protein">
-            AI coach
-          </p>
-          <p className="mt-1 text-[10px] leading-relaxed text-ink-muted">
-            Push day done, but you&apos;re 22g short on protein. A scoop of whey
-            or 150g paneer closes it before bed.
-          </p>
+      {/* Today's Nutrition Ring & Breakdown */}
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-xs font-bold text-white">Today&apos;s Nutrition</span>
+          <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-ink-faint">LOG FOOD</span>
         </div>
-      </motion.div>
+        <div className="flex items-center gap-3">
+          <div className="relative h-18 w-18 flex-shrink-0">
+            <svg className="h-18 w-18 -rotate-90" viewBox="0 0 64 64" aria-hidden>
+              <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="5" />
+              <circle cx="32" cy="32" r="26" fill="none" stroke="white" strokeWidth="5" strokeDasharray="163" strokeDashoffset="40" strokeLinecap="round" />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span className="text-sm font-black leading-none text-white">2690</span>
+              <span className="text-[6px] font-bold uppercase tracking-[0.1em] text-ink-faint mt-0.5">REMAINING</span>
+            </div>
+          </div>
+
+          <div className="flex-1 space-y-1.5">
+            <div className="flex items-center justify-between text-[9px]">
+              <span className="flex items-center gap-1 text-ink-muted"><span className="h-1.5 w-1.5 rounded-full bg-cyan-400" /> Protein</span>
+              <span className="font-mono text-ink-faint">128g / 235g</span>
+            </div>
+            <div className="h-1 overflow-hidden rounded-full bg-white/[0.08]">
+              <div className="h-full w-[54%] rounded-full bg-cyan-400" />
+            </div>
+
+            <div className="flex items-center justify-between text-[9px]">
+              <span className="flex items-center gap-1 text-ink-muted"><span className="h-1.5 w-1.5 rounded-full bg-amber-400" /> Carbs</span>
+              <span className="font-mono text-ink-faint">175g / 235g</span>
+            </div>
+            <div className="h-1 overflow-hidden rounded-full bg-white/[0.08]">
+              <div className="h-full w-[74%] rounded-full bg-amber-400" />
+            </div>
+
+            <div className="flex items-center justify-between text-[9px]">
+              <span className="flex items-center gap-1 text-ink-muted"><span className="h-1.5 w-1.5 rounded-full bg-rose-400" /> Fat</span>
+              <span className="font-mono text-ink-faint">52g / 90g</span>
+            </div>
+            <div className="h-1 overflow-hidden rounded-full bg-white/[0.08]">
+              <div className="h-full w-[57%] rounded-full bg-rose-400" />
+            </div>
+          </div>
+        </div>
+        <div className="mt-3 pt-2 border-t border-white/[0.06] text-center">
+          <span className="text-[9px] font-semibold text-ink-muted hover:text-white flex items-center justify-center gap-1">
+            <TrendingUp className="h-2.5 w-2.5" /> View Detailed Insights ›
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
 
-/* ━━━ Screen 2: Live workout ━━━ */
+/* ━━━ Screen 2: Live Workout ━━━ */
 function WorkoutScreen() {
   const exercises = [
     { name: "Bench Press", sets: "4 × 8", weight: "80 kg", done: true },
     { name: "Incline DB Press", sets: "3 × 10", weight: "30 kg", done: true },
     { name: "Cable Flyes", sets: "3 × 12", weight: "15 kg", done: false },
     { name: "Tricep Pushdown", sets: "3 × 12", weight: "25 kg", done: false },
-    { name: "Overhead Extension", sets: "3 × 10", weight: "20 kg", done: false },
   ];
 
   return (
-    <div className="space-y-3 px-4 pt-1">
+    <div className="space-y-3 px-3.5 pt-1">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
-            Active workout
-          </p>
+          <p className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-faint">Active session</p>
           <p className="text-lg font-black tracking-tight text-white">PUSH DAY</p>
         </div>
-        <span className="flex items-center gap-1.5 rounded-lg border border-protein/25 bg-protein/10 px-3 py-1.5">
-          <span
-            className="h-1.5 w-1.5 rounded-full bg-protein animate-breathe"
-            data-motion="ambient"
-          />
-          <span className="text-[10px] font-semibold text-protein">LIVE</span>
+        <span className="flex items-center gap-1.5 rounded-full border border-protein/30 bg-protein/10 px-3 py-1">
+          <span className="h-1.5 w-1.5 rounded-full bg-protein animate-pulse" />
+          <span className="text-[9px] font-bold text-protein">LIVE</span>
         </span>
       </div>
 
-      <div className="py-2 text-center">
-        <p className="font-mono text-[28px] font-bold tabular-nums tracking-tight text-white">
-          00:42:18
-        </p>
-        <p className="mt-0.5 text-[9px] uppercase tracking-[0.14em] text-ink-faint">
-          Duration
-        </p>
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] py-2.5 text-center">
+        <p className="font-mono text-2xl font-black tabular-nums tracking-tight text-white">00:42:18</p>
+        <p className="mt-0.5 text-[8px] uppercase tracking-[0.14em] text-ink-faint">Session Duration</p>
       </div>
 
-      <div className="space-y-1">
+      {/* Muscle Volume Status Component */}
+      <MuscleVolumeMap />
+
+      <div className="space-y-1.5">
         {exercises.map((ex, i) => (
           <motion.div
             key={ex.name}
-            initial={{ opacity: 0, x: -14 }}
+            initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 + i * 0.07, ease: EASE_OUT_EXPO }}
-            className={`flex items-center gap-3 rounded-xl border border-white/[0.05] p-2.5 ${
-              ex.done ? "bg-white/[0.04]" : "bg-transparent"
+            transition={{ delay: 0.15 + i * 0.05, ease: EASE_OUT_EXPO }}
+            className={`flex items-center gap-2.5 rounded-xl border p-2.5 ${
+              ex.done ? "border-white/[0.04] bg-white/[0.04]" : "border-white/[0.08] bg-white/[0.01]"
             }`}
           >
-            <span
-              className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${
-                ex.done ? "bg-protein" : "border border-white/20"
-              }`}
-            >
+            <span className={`flex h-4.5 w-4.5 items-center justify-center rounded-full ${ex.done ? "bg-protein" : "border border-white/20"}`}>
               {ex.done && <Check className="h-3 w-3 text-black" strokeWidth={3} />}
             </span>
             <div className="min-w-0 flex-1">
-              <p
-                className={`text-[11px] font-semibold ${
-                  ex.done ? "text-ink-faint line-through" : "text-white"
-                }`}
-              >
-                {ex.name}
-              </p>
-              <p className="font-mono text-[9px] tabular-nums text-ink-faint">
-                {ex.sets} · {ex.weight}
-              </p>
+              <p className={`text-[11px] font-bold ${ex.done ? "text-ink-faint line-through" : "text-white"}`}>{ex.name}</p>
+              <p className="font-mono text-[9px] text-ink-faint">{ex.sets} · {ex.weight}</p>
             </div>
           </motion.div>
         ))}
@@ -296,165 +305,116 @@ function WorkoutScreen() {
   );
 }
 
-/* ━━━ Screen 3: Nutrition ━━━ */
+/* ━━━ Screen 3: Nutrition Insights ━━━ */
 function NutritionScreen() {
-  const meals = [
-    { name: "Breakfast", items: "Oats + banana + whey", cal: 520 },
-    { name: "Lunch", items: "Chicken rice bowl", cal: 680 },
-    { name: "Snack", items: "Greek yogurt + almonds", cal: 280 },
-    { name: "Dinner", items: "Add meal…", cal: 0, empty: true },
-  ];
-
   return (
-    <div className="space-y-3 px-4 pt-1">
+    <div className="space-y-3 px-3.5 pt-1">
       <div className="flex items-center justify-between">
-        <p className="text-lg font-black tracking-tight text-white">Nutrition</p>
-        <span className="flex items-center gap-1.5">
-          <Sparkles className="h-3.5 w-3.5 text-white" />
-          <span className="text-[10px] text-ink-muted">AI coach</span>
-        </span>
+        <p className="text-base font-black text-white">Nutrition Insights</p>
+        <span className="rounded-full bg-white/[0.06] border border-white/10 px-2.5 py-1 text-[9px] font-bold text-white">+ Log</span>
       </div>
 
-      <NutritionRing />
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-ink-faint">NUTRITION & MACROS</span>
+          <span className="rounded bg-white/10 px-1.5 py-0.5 text-[8px] font-mono text-white">2,690 Target</span>
+        </div>
 
-      <div className="space-y-2">
-        <p className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
-          Today&apos;s meals
-        </p>
-        {meals.map((meal, i) => (
-          <motion.div
-            key={meal.name}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25 + i * 0.07, ease: EASE_OUT_EXPO }}
-            className={`flex items-center justify-between rounded-xl border p-3 ${
-              meal.empty
-                ? "border-dashed border-white/[0.09]"
-                : "border-white/[0.05] bg-white/[0.025]"
-            }`}
-          >
-            <div>
-              <p className="text-[11px] font-semibold text-white">{meal.name}</p>
-              <p
-                className={`text-[9px] ${
-                  meal.empty ? "text-ink-faint" : "text-ink-muted"
-                }`}
-              >
-                {meal.items}
-              </p>
+        {/* Weekly Bar Chart */}
+        <div className="flex items-end justify-between h-20 pt-4 px-1 border-b border-white/[0.06] pb-2">
+          {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day, idx) => (
+            <div key={day} className="flex flex-col items-center gap-1">
+              <div className="w-4 rounded-t bg-white/10" style={{ height: `${[40, 65, 80, 50, 90, 70, 30][idx]}%` }}>
+                <div className="w-full bg-cyan-400 rounded-t" style={{ height: '40%' }} />
+              </div>
+              <span className={`text-[8px] font-mono ${idx === 6 ? 'text-white font-bold' : 'text-ink-faint'}`}>{day}</span>
             </div>
-            {!meal.empty && (
-              <span className="text-[11px] font-bold tabular-nums text-white">
-                {meal.cal}
-              </span>
-            )}
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
+          ))}
+        </div>
 
-/* ━━━ Screen 4: Progress ━━━ */
-function ProgressScreen() {
-  const chart =
-    "M0,40 C20,38 40,35 60,30 C80,25 100,28 120,22 C140,18 160,15 180,10 C200,8 220,12 240,6";
-
-  return (
-    <div className="space-y-3 px-4 pt-1">
-      <div className="flex items-center justify-between">
-        <p className="text-lg font-black tracking-tight text-white">Progress</p>
-        <span className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
-          This month
-        </span>
-      </div>
-
-      <div className="grid grid-cols-3 gap-2">
-        {[
-          { label: "Workouts", value: "18", icon: <Dumbbell className="h-3 w-3" /> },
-          { label: "Streak", value: "12d", icon: <span className="text-[10px]">🔥</span> },
-          { label: "XP", value: "2,450", icon: <TrendingUp className="h-3 w-3" /> },
-        ].map((s, i) => (
-          <motion.div
-            key={s.label}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.15 + i * 0.08, ease: EASE_OUT_EXPO }}
-            className="well p-2.5 text-center"
-          >
-            <div className="mb-1 flex items-center justify-center text-ink-faint">
-              {s.icon}
-            </div>
-            <p className="text-sm font-bold tabular-nums text-white">
-              {s.value}
-            </p>
-            <p className="text-[8px] uppercase tracking-[0.1em] text-ink-faint">
-              {s.label}
-            </p>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="well p-4">
-        <p className="mb-3 text-[10px] uppercase tracking-[0.14em] text-ink-faint">
-          Weight progress
-        </p>
-        <svg className="h-12 w-full" viewBox="0 0 240 50" fill="none" aria-hidden>
-          <motion.path
-            d={chart}
-            stroke="hsl(var(--protein))"
-            strokeWidth="2"
-            strokeLinecap="round"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1.6, delay: 0.3, ease: EASE_OUT_EXPO }}
-          />
-          <motion.path
-            d={`${chart} L240,50 L0,50 Z`}
-            fill="url(#heroChartGrad)"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.4 }}
-          />
-          <defs>
-            <linearGradient id="heroChartGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="hsl(var(--protein))" stopOpacity="0.28" />
-              <stop offset="100%" stopColor="hsl(var(--protein))" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div className="mt-2 flex justify-between font-mono text-[9px] text-ink-faint">
-          <span>Week 1</span>
-          <span>Week 4</span>
+        <div className="flex items-center justify-around pt-2 text-[9px]">
+          <span className="flex items-center gap-1 text-amber-400 font-bold"><span className="h-1.5 w-1.5 rounded-full bg-amber-400" /> Fat 0g</span>
+          <span className="flex items-center gap-1 text-cyan-400 font-bold"><span className="h-1.5 w-1.5 rounded-full bg-cyan-400" /> Carbs 0g</span>
+          <span className="flex items-center gap-1 text-purple-400 font-bold"><span className="h-1.5 w-1.5 rounded-full bg-purple-400" /> Protein 0g</span>
         </div>
       </div>
 
-      <div>
-        <p className="mb-2 text-[10px] uppercase tracking-[0.14em] text-ink-faint">
-          Recent PRs
-        </p>
-        {[
-          { exercise: "Bench Press", pr: "100 kg", date: "2 days ago" },
-          { exercise: "Squat", pr: "130 kg", date: "1 week ago" },
-        ].map((pr, i) => (
-          <motion.div
-            key={pr.exercise}
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.7 + i * 0.12, ease: EASE_OUT_EXPO }}
-            className="flex items-center justify-between border-t border-white/[0.05] py-2"
-          >
-            <div>
-              <p className="text-[11px] font-semibold text-white">{pr.exercise}</p>
-              <p className="text-[9px] text-ink-faint">{pr.date}</p>
-            </div>
-            <span className="font-mono text-[11px] font-bold tabular-nums text-protein">
-              {pr.pr}
-            </span>
-          </motion.div>
-        ))}
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3 space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-ink-faint">CALORIE OVERVIEW</span>
+          <span className="text-[10px] font-mono font-bold text-white">0%</span>
+        </div>
+        <div className="text-base font-black text-white">0 / 2690 kcal</div>
+        <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+          <div className="h-full w-0 bg-white" />
+        </div>
+
+        <div className="space-y-1 pt-1 text-[10px]">
+          <div className="flex justify-between text-ink-muted"><span>Consumed</span><span className="font-mono text-white">0 kcal</span></div>
+          <div className="flex justify-between text-ink-muted"><span>Burnt (workouts)</span><span className="font-mono text-white">0 kcal</span></div>
+          <div className="flex justify-between text-ink-muted"><span>Net Calories</span><span className="font-mono text-white">0 kcal</span></div>
+          <div className="flex justify-between text-ink-muted"><span>Maintenance</span><span className="font-mono text-white">2690 kcal</span></div>
+        </div>
+
+        <div className="pt-2 border-t border-white/[0.06] text-[10px] font-bold text-amber-400">
+          DEFICIT: 2690 kcal below maintenance
+        </div>
       </div>
+    </div>
+  );
+}
+
+/* ━━━ Screen 4: Training & Weekly Report ━━━ */
+function ProgressScreen() {
+  return (
+    <div className="space-y-3 px-3.5 pt-1">
+      {/* Segmented Control */}
+      <div className="flex rounded-xl bg-white/[0.06] p-1 text-[10px] font-bold">
+        <span className="flex-1 text-center py-1 rounded-lg bg-black text-white shadow">Training</span>
+        <span className="flex-1 text-center py-1 text-ink-faint">Nutrition</span>
+      </div>
+
+      {/* Weekly Workouts Summary */}
+      <div className="flex items-center justify-between rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3">
+        <div>
+          <p className="text-[9px] font-bold uppercase tracking-wider text-ink-faint">WEEKLY WORKOUTS</p>
+          <p className="text-lg font-black text-white">0 sessions</p>
+        </div>
+        <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white">
+          <Dumbbell className="h-4 w-4" />
+        </span>
+      </div>
+
+      {/* ✨ Weekly Report Card */}
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3 space-y-2">
+        <div className="flex items-center justify-between">
+          <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-white">
+            <Sparkles className="h-3 w-3 text-white" /> WEEKLY REPORT
+          </span>
+          <span className="text-ink-faint text-xs">↗</span>
+        </div>
+        <p className="text-[9.5px] leading-relaxed text-ink-muted">
+          This week, you recorded 0 workouts, 0 gym check-ins, and your nutrition data was untracked. Let&apos;s focus on completing just one workout to begin building consistency.
+        </p>
+
+        <div className="grid grid-cols-3 gap-1 pt-2 border-t border-white/[0.06] text-center">
+          <div>
+            <p className="text-[8px] text-ink-faint uppercase">Workout Load</p>
+            <p className="text-xs font-black text-white">0 workouts</p>
+          </div>
+          <div>
+            <p className="text-[8px] text-ink-faint uppercase">Gym Attendance</p>
+            <p className="text-xs font-black text-white">0 days</p>
+          </div>
+          <div>
+            <p className="text-[8px] text-ink-faint uppercase">Streak Size</p>
+            <p className="text-xs font-black text-white">0 days</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Anatomical Muscle Volume Status */}
+      <MuscleVolumeMap />
     </div>
   );
 }

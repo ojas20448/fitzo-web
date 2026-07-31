@@ -1,7 +1,7 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Background with rounded corners -->
-  <rect width="180" height="180" rx="40" fill="black"/>
+  <rect width="180" height="180" rx="36" fill="black"/>
   
   <!-- Fitzo F Logo -->
-  <path d="M45 156V36H135L117 63H75.6V79.2H113.4L99.9 102.6H75.6V156H45Z" fill="white"/>
+  <path d="M36 36H142.2L133.2 57.6H57.6V79.2H120.6V100.8H57.6V144H36Z" fill="white"/>
 </svg>

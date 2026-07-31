@@ -33,7 +33,6 @@ const FOOTER_LINKS = {
   Company: [
     { label: "Blog", href: "/blog" },
     { label: "Changelog", href: "/changelog" },
-    { label: "Press kit", href: "/press" },
     { label: "Contact", href: "mailto:contact@fitzoapp.in" },
   ],
   Legal: [

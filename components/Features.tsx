@@ -34,7 +34,13 @@ function DashboardMini() {
   return (
     <div className="well space-y-2.5 p-3">
       <div className="flex items-center gap-2">
-        <span className="h-7 w-7 rounded-full bg-white/[0.09]" />
+        <Image
+          src="/avatar_zeus.png"
+          width={28}
+          height={28}
+          className="h-7 w-7 rounded-full border border-white/10 bg-black object-cover"
+          alt="Ojas"
+        />
         <div>
           <p className="text-[8px] uppercase tracking-[0.14em] text-ink-faint">
             Consistency matters.
@@ -109,25 +115,33 @@ function LearnMini() {
 
 /* ━━━ Buddies ━━━ */
 function BuddiesMini() {
+  const buddies = [
+    { name: "Rahul", status: "Hitting Legs 🦵 · Live now", active: true, avatar: "/avatar_discobolus.png" },
+    { name: "Priya", status: "3 day streak 🔥 · Active 15m ago", active: false, avatar: "/avatar_runner.png" },
+    { name: "Arjun", status: "Push Day 💪 · Checked in", active: true, avatar: "/avatar_lion.png" },
+  ];
+
   return (
     <div className="well space-y-3 p-4">
       <div className="flex items-center justify-between">
         <p className="text-sm font-bold text-white">Gym buddies</p>
-        <span className="text-[9px] uppercase tracking-[0.14em] text-ink-faint">
-          Add
+        <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-faint">
+          ADD
         </span>
       </div>
-      {[
-        { name: "Alex", status: "Working out now", active: true },
-        { name: "Sarah", status: "Last active 2h ago", active: false },
-        { name: "Mike", status: "3 day streak", active: true },
-      ].map((b) => (
+      {buddies.map((b) => (
         <div
           key={b.name}
           className="flex items-center gap-3 border-t border-white/[0.05] py-2 first:border-t-0"
         >
-          <div className="relative">
-            <span className="block h-9 w-9 rounded-full bg-white/[0.09]" />
+          <div className="relative flex-shrink-0">
+            <Image
+              src={b.avatar}
+              width={36}
+              height={36}
+              className="h-9 w-9 rounded-full border border-white/10 bg-black object-cover"
+              alt={b.name}
+            />
             {b.active && (
               <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#050506] bg-protein" />
             )}
@@ -289,6 +303,7 @@ function ReceiptMini() {
 }
 
 /* ━━━ Cell ━━━ */
+/* ━━━ Cell ━━━ */
 function FeatureCell({
   icon,
   title,
@@ -297,6 +312,8 @@ function FeatureCell({
   children,
   className = "",
   showcase = false,
+  glow = "shadow-[0_0_20px_rgba(74,222,128,0.15)] border-protein/40 text-protein bg-protein/10",
+  dot = "bg-protein shadow-[0_0_8px_#4ade80]",
 }: {
   icon: React.ReactNode;
   title: string;
@@ -304,19 +321,14 @@ function FeatureCell({
   badge?: string;
   children?: React.ReactNode;
   className?: string;
-  /**
-   * Showcase cells keep their app screen on every viewport. The rest drop it
-   * below `sm`: seven mini-screens stacked full-width ran this section to
-   * nearly four phone screens, and past the first few the visual stopped
-   * earning its height. The claim still lands; only the illustration waits
-   * for a wider viewport.
-   */
   showcase?: boolean;
+  glow?: string;
+  dot?: string;
 }) {
   return (
     <motion.article
       variants={stackItem}
-      className={`panel panel-interactive p-5 sm:p-7 ${className}`}
+      className={`panel panel-interactive group p-5 sm:p-7 ${className}`}
     >
       <div className="mb-3 flex items-start justify-between gap-3 sm:mb-5 sm:gap-4">
         <div
@@ -326,8 +338,9 @@ function FeatureCell({
               : "flex-col items-start sm:flex-row sm:items-center sm:gap-3"
           }`}
         >
-          <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.06] text-white sm:h-11 sm:w-11 sm:rounded-2xl">
+          <span className={`relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl border backdrop-blur-md transition-all duration-300 group-hover:scale-105 sm:h-12 sm:w-12 ${glow}`}>
             {icon}
+            <span className={`absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full ${dot}`} />
           </span>
           <h3 className="text-[15px] font-bold leading-tight tracking-tight text-white sm:text-xl">
             {title}
@@ -390,6 +403,8 @@ export default function Features() {
             description="Workouts, nutrition, streaks and daily targets in one view."
             badge="V2.0"
             className="col-span-2"
+            glow="shadow-[0_0_25px_rgba(74,222,128,0.15)] border-protein/40 text-protein bg-protein/10"
+            dot="bg-protein shadow-[0_0_8px_#4ade80]"
             showcase
           >
             <DashboardMini />
@@ -401,6 +416,8 @@ export default function Features() {
             description="Training volume on a 3D mannequin. Tap a group for detail."
             badge="Heatmap"
             className="col-span-2 lg:col-span-1"
+            glow="shadow-[0_0_25px_rgba(250,204,21,0.15)] border-carbs/40 text-carbs bg-carbs/10"
+            dot="bg-carbs shadow-[0_0_8px_#facc15]"
             showcase
           >
             <HeatmapMini />
@@ -412,6 +429,8 @@ export default function Features() {
             description="500K+ foods with AI scanning. Instant macros, Indian food included."
             badge="AI"
             className="col-span-2"
+            glow="shadow-[0_0_25px_rgba(34,211,238,0.15)] border-cyan-400/40 text-cyan-400 bg-cyan-400/10"
+            dot="bg-cyan-400 shadow-[0_0_8px_#22d3ee]"
             showcase
           >
             <FoodSearchMini />
@@ -421,6 +440,8 @@ export default function Features() {
             icon={<BookOpen className="h-5 w-5" />}
             title="Built-in education"
             description="Science-backed lessons between sets. XP for every one you finish."
+            glow="shadow-[0_0_25px_rgba(192,132,252,0.15)] border-purple-400/40 text-purple-400 bg-purple-400/10"
+            dot="bg-purple-400 shadow-[0_0_8px_#c084fc]"
           >
             <LearnMini />
           </FeatureCell>
@@ -429,6 +450,8 @@ export default function Features() {
             icon={<Users className="h-5 w-5" />}
             title="Gym buddies"
             description="See who's training right now. Stay accountable together."
+            glow="shadow-[0_0_25px_rgba(74,222,128,0.15)] border-protein/40 text-protein bg-protein/10"
+            dot="bg-protein shadow-[0_0_8px_#4ade80]"
           >
             <BuddiesMini />
           </FeatureCell>
@@ -438,6 +461,8 @@ export default function Features() {
             title="1-bit thermal receipts"
             description="Print your session. Share it raw, or over a gym selfie."
             badge="Share"
+            glow="shadow-[0_0_25px_rgba(244,114,182,0.15)] border-pink-400/40 text-pink-400 bg-pink-400/10"
+            dot="bg-pink-400 shadow-[0_0_8px_#f472b6]"
           >
             <ReceiptMini />
           </FeatureCell>
@@ -447,6 +472,8 @@ export default function Features() {
             title="Your gym, connected"
             description="QR check-in, live crowd meter, class booking."
             badge="Gym OS"
+            glow="shadow-[0_0_25px_rgba(251,146,60,0.15)] border-orange-400/40 text-orange-400 bg-orange-400/10"
+            dot="bg-orange-400 shadow-[0_0_8px_#fb923c]"
           >
             <GymMini />
           </FeatureCell>

@@ -14,7 +14,7 @@ interface FitzoLogoProps {
   size?: "sm" | "md" | "lg";
 }
 
-/** The angular F mark, cut out of a white plate. */
+/** The angular F mark on a black tile (the official Fitzo logo). */
 export function FitzoIcon({ className = "w-8 h-8" }: { className?: string }) {
   return (
     <svg
@@ -25,23 +25,8 @@ export function FitzoIcon({ className = "w-8 h-8" }: { className?: string }) {
       role="img"
       aria-label="Fitzo"
     >
-      <defs>
-        <linearGradient id="fitzo-plate" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#dedee2" />
-        </linearGradient>
-        <mask id="fitzo-cut">
-          <rect width="100" height="100" fill="white" />
-          <path d="M25 80V20H75L65 35H42V44H62L55 57H42V80H25Z" fill="black" />
-        </mask>
-      </defs>
-      <rect
-        width="100"
-        height="100"
-        rx="22"
-        fill="url(#fitzo-plate)"
-        mask="url(#fitzo-cut)"
-      />
+      <rect width="100" height="100" rx="20" fill="black" />
+      <path d="M20 20H79L74 32H32V44H67V56H32V80H20Z" fill="white" />
     </svg>
   );
 }

@@ -40,12 +40,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/press`,
-      lastModified: new Date("2026-01-15"),
-      changeFrequency: "monthly",
-      priority: 0.4,
-    },
-    {
       url: `${baseUrl}/privacy-policy`,
       lastModified: new Date("2025-06-01"),
       changeFrequency: "yearly",

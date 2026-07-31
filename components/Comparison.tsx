@@ -1,17 +1,6 @@
-/**
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Why switch
- *
- * A two-column argument. The status-quo column is deliberately flatter and
- * quieter than the Fitzo column — the hierarchy does the persuading, so the
- * copy doesn't have to shout.
- * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- */
-
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, X } from "lucide-react";
 import { rise, stack, stackItem, VIEWPORT } from "@/lib/motion";
 
 const COMPARISONS = [
@@ -77,8 +66,8 @@ export default function Comparison() {
             className="hidden rounded-2xl border border-white/[0.06] bg-white/[0.012] p-7 sm:block sm:p-8"
           >
             <div className="mb-7 flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.06] bg-white/[0.03]">
-                <X className="h-5 w-5 text-ink-faint" />
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.03]">
+                <span className="font-mono text-sm text-ink-faint">—</span>
               </span>
               <div>
                 <h3 className="text-lg font-bold text-ink-muted">
@@ -92,9 +81,9 @@ export default function Comparison() {
               {COMPARISONS.map((item) => (
                 <li
                   key={item.generic}
-                  className="flex items-start gap-3 border-t border-white/[0.05] py-3 first:border-t-0 sm:py-3.5"
+                  className="flex items-start gap-3 border-t border-white/[0.05] py-3.5 first:border-t-0"
                 >
-                  <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-fat/50" />
+                  <span className="mt-2.5 h-0.5 w-2.5 rounded-full bg-neutral-700 flex-shrink-0" />
                   <p className="text-sm leading-relaxed text-ink-faint">
                     {item.generic}
                   </p>
@@ -103,7 +92,7 @@ export default function Comparison() {
             </ul>
           </motion.div>
 
-          {/* ━━━ Fitzo — full elevation, the accent does the work ━━━ */}
+          {/* ━━━ Fitzo — full elevation with official Fitzo logo & glowing protein indicators ━━━ */}
           <motion.div
             variants={stackItem}
             className="panel relative overflow-hidden p-5 sm:p-8"
@@ -119,8 +108,10 @@ export default function Comparison() {
 
             <div className="relative z-10">
               <div className="mb-7 flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-protein">
-                  <Check className="h-5 w-5 text-black" strokeWidth={3} />
+                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black border border-white/15 shadow-md">
+                  <svg viewBox="0 0 100 100" className="h-6 w-6" fill="none">
+                    <path d="M20 20H79L74 32H32V44H67V56H32V80H20Z" fill="white" />
+                  </svg>
                 </span>
                 <div>
                   <h3 className="text-lg font-bold text-white">Fitzo</h3>
@@ -132,13 +123,10 @@ export default function Comparison() {
                 {COMPARISONS.map((item) => (
                   <li
                     key={item.fitzo}
-                    className="flex items-start gap-3 border-t border-white/[0.06] py-3 first:border-t-0 sm:py-3.5"
+                    className="flex items-start gap-3.5 border-t border-white/[0.06] py-3.5 first:border-t-0"
                   >
-                    <Check
-                      className="mt-0.5 h-4 w-4 flex-shrink-0 text-protein"
-                      strokeWidth={2.5}
-                    />
-                    <p className="text-sm leading-relaxed text-white">
+                    <span className="mt-2 h-2 w-2 rounded-full bg-protein shadow-[0_0_10px_rgba(74,222,128,0.8)] flex-shrink-0" />
+                    <p className="text-sm font-medium leading-relaxed text-white">
                       {item.fitzo}
                     </p>
                   </li>

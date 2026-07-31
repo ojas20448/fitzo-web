@@ -7,6 +7,7 @@
 
 "use client";
 
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { rise, VIEWPORT } from "@/lib/motion";
@@ -19,77 +20,167 @@ import {
   Users,
   Check,
   Sparkles,
-  Trophy,
-  Flame,
   Plus,
   QrCode,
   ArrowRight,
 } from "lucide-react";
 
 /* ━━━ Demo Screen: Home ━━━ */
+/* ━━━ Shared: Muscle Volume Status Anatomy Map ━━━ */
+function DemoAnatomyMap() {
+  return (
+    <div className="rounded-2xl border border-white/[0.08] bg-black/60 p-3">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-[11px] font-bold text-white tracking-tight">Muscle Volume Status</span>
+        <span className="text-[9px] text-ink-faint">Target: 6 sets/week</span>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2 my-1 text-center">
+        <div className="rounded-xl border border-white/[0.04] bg-white/[0.02] p-2">
+          <span className="text-[8px] font-bold tracking-[0.14em] text-ink-faint uppercase block mb-1">FRONT</span>
+          <svg viewBox="0 0 100 150" className="h-24 mx-auto stroke-neutral-600 fill-none" strokeWidth="1.6">
+            <circle cx="50" cy="14" r="9" />
+            <path d="M34 32c4-5 10-7 16-7s12 2 16 7" />
+            <path d="M26 34c2 7 4 13 6 17" />
+            <path d="M74 34c-2 7-4 13-6 17" />
+            <path d="M34 32c6 1 11 4 16 8c5-4 10-7 16-8c2 9-2 16-16 17c-14 0-18-8-16-17Z" className="stroke-amber-400 fill-amber-400/25" strokeWidth="2.2" />
+            <path d="M38 58h24v28H38z" />
+            <path d="M50 58v28M38 67h24M38 76h24" />
+            <path d="M24 48c-2 10-4 20-6 30" />
+            <path d="M76 48c2 10 4 20 6 30" />
+            <path d="M36 88c-2 16-4 32-6 44" />
+            <path d="M64 88c2 16 4 32 6 44" />
+            <path d="M48 88v44M52 88v44" />
+          </svg>
+        </div>
+
+        <div className="rounded-xl border border-white/[0.04] bg-white/[0.02] p-2">
+          <span className="text-[8px] font-bold tracking-[0.14em] text-ink-faint uppercase block mb-1">BACK</span>
+          <svg viewBox="0 0 100 150" className="h-24 mx-auto stroke-neutral-600 fill-none" strokeWidth="1.6">
+            <circle cx="50" cy="14" r="9" />
+            <path d="M34 32c4-5 10-7 16-7s12 2 16 7" />
+            <path d="M50 25v22L34 32M50 47L66 32" />
+            <path d="M32 38c5 7 9 14 11 20" />
+            <path d="M68 38c-5 7-9 14-11 20" />
+            <path d="M38 58h24v18H38z" />
+            <path d="M36 76c4 9 10 12 14 12s10-3 14-12" />
+            <path d="M36 88c-2 16-4 32-6 44" />
+            <path d="M64 88c2 16 4 32 6 44" />
+            <path d="M48 88v44M52 88v44" />
+          </svg>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between pt-1.5 border-t border-white/[0.06]">
+        <span className="text-[10px] font-bold text-white">CHEST ▾</span>
+        <span className="text-[9px] font-mono text-amber-400 font-bold">2 / 6 sets</span>
+      </div>
+    </div>
+  );
+}
+
+/* ━━━ Demo Screen: Home ━━━ */
 function DemoHome() {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 px-0.5">
+      {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-full bg-white/[0.09] border border-white/[0.06]" />
+          <div className="relative">
+            <div className="h-9 w-9 rounded-full border border-white/10 bg-black overflow-hidden flex items-center justify-center">
+              {/* Avatar Zeus */}
+              <span className="text-xs font-bold text-white">⚡</span>
+            </div>
+            <span className="absolute -bottom-0.5 -right-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-white text-[7px] font-black text-black">✓</span>
+          </div>
           <div>
-            <p className="text-[9px] text-ink-muted uppercase tracking-wider">Good morning</p>
-            <p className="text-sm font-bold text-white">Guest User</p>
+            <p className="text-[8px] font-bold uppercase tracking-[0.14em] text-ink-faint">CONSISTENCY MATTERS.</p>
+            <p className="text-sm font-black tracking-tight text-white">Ojas</p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04]">
-          <Flame className="w-3 h-3 text-carbs" />
-          <span className="text-xs font-bold text-white">7</span>
+        <div className="flex items-center gap-1.5">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-white">
+            <Sparkles className="h-3.5 w-3.5 text-white" />
+          </span>
+          <span className="flex h-7 items-center gap-1 rounded-full border border-white/10 bg-white/[0.06] px-2 text-[10px]">
+            🔥 <span className="font-mono text-[10px] font-bold text-white">12</span>
+          </span>
         </div>
       </div>
 
-      <div className="well p-3">
-        <p className="text-[10px] text-ink-muted mb-1">Today&apos;s Training</p>
-        <p className="text-base font-black text-white tracking-tight">PUSH • PPL SPLIT</p>
-        <div className="flex items-center gap-1.5 mt-1.5">
-          <div className="w-1.5 h-1.5 rounded-full bg-protein" />
-          <span className="text-[9px] text-ink-muted">6 exercises · ~55 min</span>
+      {/* Coach's Daily Insight */}
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3">
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-[0.14em] text-white">
+            <Sparkles className="h-3 w-3 text-protein" /> COACH&apos;S DAILY INSIGHT
+          </span>
+          <span className="text-[10px] text-ink-faint">›</span>
         </div>
+        <p className="text-[9.5px] leading-relaxed text-ink-muted">
+          Your 12-day gym streak is going strong! Let&apos;s prioritize back and legs for a balanced session today.
+        </p>
       </div>
 
+      {/* Next Up Routine Card */}
+      <div className="flex items-center justify-between rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3">
+        <div className="flex items-center gap-2.5">
+          <span className="rounded-full bg-white px-3 py-1 text-[10px] font-black uppercase text-black">PULL</span>
+          <div>
+            <p className="text-[9px] font-bold text-white">Next up</p>
+            <p className="text-[9px] text-ink-faint">Seedha Putha Routine</p>
+          </div>
+        </div>
+        <span className="flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[10px] font-bold text-black">
+          Let&apos;s Go ⇄
+        </span>
+      </div>
+
+      {/* Action Buttons */}
       <div className="grid grid-cols-2 gap-2">
-        <div className="well p-3 text-center">
-          <p className="text-[9px] text-ink-muted uppercase mb-1">Workouts</p>
-          <p className="text-xl font-bold text-white">0</p>
-        </div>
-        <div className="well p-3 text-center">
-          <p className="text-[9px] text-ink-muted uppercase mb-1">Calories</p>
-          <p className="text-xl font-bold text-white">0 <span className="text-[9px] font-normal text-ink-faint">kcal</span></p>
-        </div>
+        <button className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-2.5 text-[10px] font-black text-black shadow-lg">
+          <Plus className="h-3 w-3" strokeWidth={3} /> LOG WORKOUT
+        </button>
+        <button className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-2.5 text-[10px] font-black text-black shadow-lg">
+          <Plus className="h-3 w-3" strokeWidth={3} /> LOG CALORIES
+        </button>
       </div>
 
-      {/* Decorative chrome inside the mockup — rendered as spans, not buttons,
-          so keyboard users never land on a control that does nothing. */}
-      <div className="flex gap-2" aria-hidden>
-        <span className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-white py-2.5 text-[11px] font-semibold text-black">
-          <Plus className="h-3 w-3" /> Start Workout
-        </span>
-        <span className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-white/[0.07] bg-white/[0.06] py-2.5 text-[11px] font-semibold text-white">
-          <Plus className="h-3 w-3 text-ink-muted" /> Log Food
-        </span>
-      </div>
+      {/* Nutrition Ring */}
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs font-bold text-white">Today&apos;s Nutrition</span>
+          <span className="text-[8px] font-bold uppercase tracking-[0.12em] text-ink-faint">LOG FOOD</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="relative h-16 w-16 flex-shrink-0">
+            <svg className="h-16 w-16 -rotate-90" viewBox="0 0 64 64">
+              <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="5" />
+              <circle cx="32" cy="32" r="26" fill="none" stroke="white" strokeWidth="5" strokeDasharray="163" strokeDashoffset="40" strokeLinecap="round" />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <span className="text-xs font-black leading-none text-white">2690</span>
+              <span className="text-[5px] font-bold uppercase tracking-[0.1em] text-ink-faint mt-0.5">REMAINING</span>
+            </div>
+          </div>
 
-      <div className="well p-3">
-        <div className="flex items-center gap-2 mb-2">
-          <Trophy className="w-3.5 h-3.5 text-carbs" />
-          <p className="text-[10px] font-semibold text-white">Weekly Challenge</p>
+          <div className="flex-1 space-y-1">
+            <div className="flex items-center justify-between text-[8px]">
+              <span className="text-ink-muted">Protein</span>
+              <span className="font-mono text-ink-faint">128g / 235g</span>
+            </div>
+            <div className="h-1 overflow-hidden rounded-full bg-white/[0.08]"><div className="h-full w-[54%] rounded-full bg-cyan-400" /></div>
+            <div className="flex items-center justify-between text-[8px]">
+              <span className="text-ink-muted">Carbs</span>
+              <span className="font-mono text-ink-faint">175g / 235g</span>
+            </div>
+            <div className="h-1 overflow-hidden rounded-full bg-white/[0.08]"><div className="h-full w-[74%] rounded-full bg-amber-400" /></div>
+            <div className="flex items-center justify-between text-[8px]">
+              <span className="text-ink-muted">Fat</span>
+              <span className="font-mono text-ink-faint">52g / 90g</span>
+            </div>
+            <div className="h-1 overflow-hidden rounded-full bg-white/[0.08]"><div className="h-full w-[57%] rounded-full bg-rose-400" /></div>
+          </div>
         </div>
-        <p className="text-[10px] text-ink-muted">Complete 4 workouts this week</p>
-        <div className="h-1.5 rounded-full bg-white/[0.06] mt-2 overflow-hidden">
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "25%" }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="h-full rounded-full bg-carbs"
-          />
-        </div>
-        <p className="text-[8px] text-ink-faint mt-1">1/4 completed</p>
       </div>
     </div>
   );
@@ -137,6 +228,8 @@ function DemoWorkout() {
           className="h-full rounded-full bg-protein"
         />
       </div>
+
+      <DemoAnatomyMap />
 
       <div className="space-y-1.5 max-h-[320px] overflow-y-auto">
         {exercises.map((ex, i) => (
@@ -275,10 +368,10 @@ function DemoBuddies() {
   const [nudged, setNudged] = useState<Set<number>>(new Set());
 
   const buddies = [
-    { name: "Rahul", intent: "Hitting Legs 🦵", status: "Checked in", active: true },
-    { name: "Priya", intent: "Cardio at 7 PM", status: "Planning", active: false },
-    { name: "Arjun", intent: "Push Day 💪", status: "Checked in", active: true },
-    { name: "Sneha", intent: "Rest day", status: "Resting", active: false },
+    { name: "Rahul", intent: "Hitting Legs 🦵", status: "Checked in", active: true, avatar: "/avatar_discobolus.png" },
+    { name: "Priya", intent: "Cardio at 7 PM", status: "Planning", active: false, avatar: "/avatar_runner.png" },
+    { name: "Arjun", intent: "Push Day 💪", status: "Checked in", active: true, avatar: "/avatar_lion.png" },
+    { name: "Sneha", intent: "Rest day", status: "Resting", active: false, avatar: "/avatar_kettlebell.png" },
   ];
 
   const toggleNudge = (i: number) => {
@@ -332,7 +425,13 @@ function DemoBuddies() {
             }`}
           >
             <div className="relative flex-shrink-0">
-              <div className="w-9 h-9 rounded-full bg-white/[0.09]" />
+              <Image
+                src={b.avatar}
+                width={36}
+                height={36}
+                className="h-9 w-9 rounded-full border border-white/10 bg-black object-cover"
+                alt={b.name}
+              />
               {b.active && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-protein border-2 border-[#050506]" />}
             </div>
             <div className="flex-1 min-w-0">

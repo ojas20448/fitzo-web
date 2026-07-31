@@ -5,7 +5,7 @@
   <!-- Fitzo Logo -->
   <g transform="translate(100, 200)">
     <rect width="120" height="120" rx="24" fill="black" stroke="white" stroke-width="2"/>
-    <path d="M30 104V24H90L78 42H50.4V52.8H75.6L66.6 68.4H50.4V104H30Z" fill="white"/>
+    <path d="M24 24H94.8L88.8 38.4H38.4V52.8H80.4V67.2H38.4V96H24Z" fill="white"/>
   </g>
   
   <!-- Text Content -->
