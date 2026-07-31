@@ -413,11 +413,11 @@ export default function WeeklyReadout() {
                    and while the week is still resolving it says so rather than
                    sitting as an empty rectangle. The wait became part of the
                    argument: the coach is reading. ━━━ */}
-            <div className="relative mt-5 min-h-[7.5rem] sm:min-h-[6.5rem]">
+            <div className="relative mt-5 min-h-[10.5rem] sm:min-h-[8.5rem]">
               <motion.div
                 aria-hidden
                 style={reduce ? { opacity: 0 } : { opacity: readingOpacity }}
-                className="absolute inset-0 flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] p-4"
+                className="absolute inset-0 flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] p-4 sm:p-5"
               >
                 <span className="flex gap-1">
                   {[0, 1, 2].map((n) => (
@@ -441,14 +441,14 @@ export default function WeeklyReadout() {
 
               <motion.div
                 style={reduce ? undefined : { opacity: coachOpacity, y: coachY }}
-                className="absolute inset-0 flex items-start gap-3 rounded-xl border border-protein/20 bg-protein/[0.05] p-4"
+                className="absolute inset-0 flex items-start gap-3 rounded-xl border border-protein/20 bg-protein/[0.05] p-4 sm:p-5 overflow-y-auto scrollbar-hide"
               >
                 <Sparkles className="mt-0.5 h-4 w-4 flex-shrink-0 text-protein" />
                 <div>
                   <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-protein">
                     Fitzo&apos;s read
                   </p>
-                  <p className="mt-1.5 max-w-[62ch] text-sm leading-relaxed text-ink-muted sm:text-[15px]">
+                  <p className="mt-1.5 max-w-[62ch] text-xs leading-relaxed text-ink-muted sm:text-sm">
                     Leg volume is up 14% on last week and protein held at 148g a
                     day across six sessions. Friday is the one you dropped —
                     short on protein after a heavy push. Thursday&apos;s rest
