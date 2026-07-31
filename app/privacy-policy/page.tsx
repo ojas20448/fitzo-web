@@ -46,7 +46,7 @@ export default function PrivacyPolicy() {
           </Link>
           <Link
             href="/"
-            className="text-sm text-neutral-400 hover:text-white transition-colors"
+            className="text-sm text-ink-muted hover:text-white transition-colors"
           >
             &larr; Back to Home
           </Link>
@@ -54,13 +54,13 @@ export default function PrivacyPolicy() {
       </header>
 
       {/* ━━━ Content ━━━ */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+      <main id="main" className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
         {/* Page Title */}
         <div className="mb-12">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">
             Privacy Policy
           </h1>
-          <p className="text-neutral-500">
+          <p className="text-ink-muted">
             Last updated: February 17, 2026
           </p>
         </div>
@@ -91,7 +91,7 @@ export default function PrivacyPolicy() {
               <h3 className="text-lg font-semibold text-white mb-2">
                 2.1 Personal Information
               </h3>
-              <ul className="list-disc list-inside space-y-2 text-neutral-400">
+              <ul className="list-disc list-inside space-y-2 text-ink-muted">
                 <li>
                   <span className="text-neutral-300">Name and email address</span>{" "}
                   — provided during account registration
@@ -113,7 +113,7 @@ export default function PrivacyPolicy() {
               <h3 className="text-lg font-semibold text-white mb-2">
                 2.2 Fitness & Health Data
               </h3>
-              <ul className="list-disc list-inside space-y-2 text-neutral-400">
+              <ul className="list-disc list-inside space-y-2 text-ink-muted">
                 <li>
                   <span className="text-neutral-300">Workout data</span> —
                   exercises, sets, reps, weights, workout duration
@@ -134,7 +134,7 @@ export default function PrivacyPolicy() {
               <h3 className="text-lg font-semibold text-white mb-2">
                 2.3 Automatically Collected Data
               </h3>
-              <ul className="list-disc list-inside space-y-2 text-neutral-400">
+              <ul className="list-disc list-inside space-y-2 text-ink-muted">
                 <li>Device information (device type, operating system)</li>
                 <li>App usage analytics (features used, session duration)</li>
                 <li>Crash reports and performance data</li>
@@ -146,7 +146,7 @@ export default function PrivacyPolicy() {
         {/* ━━━ Usage ━━━ */}
         <Section title="3. How We Use Your Data">
           <p>We use the information we collect to:</p>
-          <ul className="list-disc list-inside space-y-2 text-neutral-400">
+          <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>Provide, maintain, and improve the Fitzo Service</li>
             <li>
               Personalize your experience (workout recommendations, AI nutrition
@@ -185,7 +185,7 @@ export default function PrivacyPolicy() {
             We do not sell your personal data to third parties.
           </p>
           <p>We may share data with:</p>
-          <ul className="list-disc list-inside space-y-2 text-neutral-400">
+          <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>
               <span className="text-neutral-300">Service providers</span> —
               cloud hosting, analytics, and AI services (e.g., Google Gemini
@@ -206,7 +206,7 @@ export default function PrivacyPolicy() {
         {/* ━━━ User Rights ━━━ */}
         <Section title="6. Your Rights">
           <p>You have the right to:</p>
-          <ul className="list-disc list-inside space-y-2 text-neutral-400">
+          <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>
               <span className="text-neutral-300">Access</span> — Request a
               copy of the personal data we hold about you
@@ -282,10 +282,10 @@ export default function PrivacyPolicy() {
         </Section>
         {/* Related Links */}
         <div className="pt-8 border-t border-white/[0.06]">
-          <p className="text-sm text-neutral-500 mb-3">Related</p>
+          <p className="text-sm text-ink-muted mb-3">Related</p>
           <Link
             href="/terms"
-            className="text-sm text-neutral-400 hover:text-white transition-colors"
+            className="text-sm text-ink-muted hover:text-white transition-colors"
           >
             Terms of Service &rarr;
           </Link>
@@ -295,19 +295,19 @@ export default function PrivacyPolicy() {
       {/* ━━━ Footer ━━━ */}
       <footer className="border-t border-white/[0.06] py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-neutral-700">
+          <p className="text-xs text-ink-faint">
             &copy; {new Date().getFullYear()} Fitzo. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link
               href="/terms"
-              className="text-xs text-neutral-600 hover:text-white transition-colors"
+              className="text-xs text-ink-faint hover:text-white transition-colors"
             >
               Terms of Service
             </Link>
             <Link
               href="/"
-              className="text-xs text-neutral-600 hover:text-white transition-colors"
+              className="text-xs text-ink-faint hover:text-white transition-colors"
             >
               Back to Home
             </Link>

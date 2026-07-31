@@ -1,0 +1,14 @@
+import { chromium } from "playwright";
+const b = await chromium.launch();
+const c = await b.newContext({ viewport:{width:1440,height:900} });
+const p = await c.newPage();
+const msgs=[];
+p.on("console", m=>{ if(/error|warn/i.test(m.type())) msgs.push(`[${m.type()}] ${m.text().slice(0,140)}`); });
+p.on("pageerror", e=>msgs.push("PAGEERROR: "+e.message));
+p.on("response", r=>{ if(r.status()>=400) msgs.push(`HTTP ${r.status()} ${r.url()}`); });
+await p.goto("http://localhost:3011", { waitUntil:"networkidle" });
+await p.evaluate(async()=>{const h=document.body.scrollHeight;for(let y=0;y<h;y+=400){window.scrollTo(0,y);await new Promise(r=>setTimeout(r,60));}});
+await p.waitForTimeout(2500);
+console.log("PRODUCTION console issues:", msgs.length);
+[...new Set(msgs)].forEach(m=>console.log("  "+m));
+await b.close();

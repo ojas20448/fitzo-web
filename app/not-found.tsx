@@ -25,7 +25,7 @@ export default function NotFound() {
         <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
           Page Not Found
         </h2>
-        <p className="text-neutral-500 mb-8 max-w-md">
+        <p className="text-ink-muted mb-8 max-w-md">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
           Let&apos;s get you back on track.
         </p>
@@ -47,7 +47,7 @@ export default function NotFound() {
       </div>
 
       {/* Bottom credit */}
-      <p className="absolute bottom-8 text-xs text-neutral-700">
+      <p className="absolute bottom-8 text-xs text-ink-faint">
         &copy; {new Date().getFullYear()} Fitzo
       </p>
     </div>

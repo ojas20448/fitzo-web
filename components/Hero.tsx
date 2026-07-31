@@ -1,170 +1,114 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Hero Section
- * Animated phone mockup cycling through 4 app screens
+ * FITZO — Hero
+ *
+ * The phone is the argument: it runs the real app loop — dashboard, workout,
+ * nutrition, progress — on a timer you can take control of. Underneath, a spec
+ * plate states what the product actually reads. No claim here that the app
+ * cannot already do.
+ *
+ * Two defects this replaces:
+ *   · AnimatePresence mode="wait" left the centrepiece blank for ~800ms of
+ *     every 4s cycle. Screens now crossfade in place.
+ *   · The auto-cycle ignored the visitor — tapping a tab got overridden a
+ *     moment later. It now yields to interaction and shows its own timer.
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
 "use client";
 
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect, useCallback } from "react";
-import { Check, WifiOff, Shield, Sparkles, TrendingUp, Dumbbell, Home, Utensils, BarChart2, Plus } from "lucide-react";
 import {
-  staggerContainer,
-  staggerItem,
-  floatAnimation,
-} from "@/lib/animations";
-import { Badge } from "@/components/ui/badge";
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+  useReducedMotion,
+} from "framer-motion";
+import Image from "next/image";
+import { useRef, useState, useEffect, useCallback } from "react";
+import {
+  Check,
+  WifiOff,
+  Shield,
+  Sparkles,
+  TrendingUp,
+  Dumbbell,
+  Home,
+  Utensils,
+  BarChart2,
+  Plus,
+  ArrowRight,
+} from "lucide-react";
+import { stack, stackItem, EASE_OUT_EXPO } from "@/lib/motion";
 
-const SCREEN_INTERVAL = 4000;
+const SCREEN_INTERVAL = 5200;
 const SCREEN_COUNT = 4;
 
-/* ━━━ Screen 1: Dashboard ━━━ */
-function DashboardScreen() {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
-      className="px-4 pt-1 space-y-3.5"
-    >
-      {/* User Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <img src="/avatar_zeus.png" className="w-10 h-10 rounded-full border border-white/[0.06] bg-black object-cover" alt="Ojas Avatar" />
-          <div>
-            <p className="text-[9px] text-neutral-500 uppercase tracking-wider font-medium">Consistency Matters.</p>
-            <p className="text-sm font-bold text-white">Ojas</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="flex items-center gap-1 px-2 py-1 rounded-lg bg-green-400/10 border border-green-400/20"
-          >
-            <span className="w-1 h-1 rounded-full bg-green-400" />
-            <span className="text-[8px] font-semibold text-green-400 uppercase tracking-wider">Checked In</span>
-          </motion.div>
-          <div className="w-7 h-7 rounded-lg bg-white/[0.06] flex items-center justify-center">
-            <span className="text-[10px]">🔥</span>
-          </div>
-          <motion.span
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.6, type: "spring" }}
-            className="text-xs font-bold text-white"
-          >
-            12
-          </motion.span>
-        </div>
-      </div>
-
-      {/* Today's Training */}
-      <div>
-        <p className="text-[10px] text-neutral-500 mb-0.5">Today&apos;s Training</p>
-        <p className="text-lg font-black tracking-tight text-white">ANTERIOR • CUSTOM</p>
-      </div>
-
-      {/* Completed Today */}
-      <div className="bg-white/[0.04] rounded-2xl p-3.5 border border-white/[0.04]">
-        <div className="flex items-center justify-center gap-2 mb-3">
-          <div className="w-4 h-4 rounded-full bg-white flex items-center justify-center">
-            <Check className="w-2.5 h-2.5 text-black" />
-          </div>
-          <span className="text-[11px] font-semibold text-white uppercase tracking-wider">Completed Today</span>
-        </div>
-        <div className="flex">
-          <div className="flex-1 text-center border-r border-white/[0.06]">
-            <p className="text-[10px] text-neutral-500 uppercase tracking-wider mb-0.5">Workouts</p>
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-2xl font-bold text-white"
-            >
-              1
-            </motion.p>
-          </div>
-          <div className="flex-1 text-center">
-            <p className="text-[10px] text-neutral-500 uppercase tracking-wider mb-0.5">Calories Logged</p>
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-2xl font-bold text-white"
-            >
-              1,840 <span className="text-xs font-normal text-neutral-500">kcal</span>
-            </motion.p>
-          </div>
-        </div>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex gap-2">
-        <button className="flex-1 py-2.5 rounded-xl bg-white/[0.06] border border-white/[0.06] text-[11px] font-semibold text-white flex items-center justify-center gap-1.5">
-          <span className="text-neutral-400">+</span> Log Workout
-        </button>
-        <button className="flex-1 py-2.5 rounded-xl bg-white/[0.06] border border-white/[0.06] text-[11px] font-semibold text-white flex items-center justify-center gap-1.5">
-          <span className="text-neutral-400">+</span> Log Calories
-        </button>
-      </div>
-
-      {/* Today's Nutrition with animated bars */}
-      <div>
-        <div className="flex justify-between items-center mb-2">
-          <p className="text-sm font-bold text-white">Today&apos;s Nutrition</p>
-          <p className="text-[10px] text-neutral-500 uppercase tracking-wider">Log Food</p>
-        </div>
-        <NutritionRing />
-      </div>
-    </motion.div>
-  );
-}
-
-/* ━━━ Nutrition Ring (shared) ━━━ */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Shared: the app's calorie ring + macro readout
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 function NutritionRing() {
+  const macros = [
+    { label: "Protein", current: 128, target: 150, tone: "text-protein", bar: "bg-protein" },
+    { label: "Carbs", current: 175, target: 200, tone: "text-carbs", bar: "bg-carbs" },
+    { label: "Fat", current: 52, target: 65, tone: "text-fat", bar: "bg-fat" },
+  ];
+
   return (
-    <div className="bg-white/[0.04] rounded-2xl p-4 border border-white/[0.04]">
+    <div className="well p-4">
       <div className="flex items-center gap-4">
-        {/* Calorie Ring */}
-        <div className="relative w-16 h-16 flex-shrink-0">
-          <svg className="w-16 h-16 -rotate-90" viewBox="0 0 64 64">
-            <circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="5" />
+        <div className="relative h-16 w-16 flex-shrink-0">
+          <svg className="h-16 w-16 -rotate-90" viewBox="0 0 64 64" aria-hidden>
+            <circle
+              cx="32"
+              cy="32"
+              r="27"
+              fill="none"
+              stroke="rgba(255,255,255,0.07)"
+              strokeWidth="5"
+            />
             <motion.circle
-              cx="32" cy="32" r="27" fill="none" stroke="white" strokeWidth="5" strokeLinecap="round"
+              cx="32"
+              cy="32"
+              r="27"
+              fill="none"
+              stroke="white"
+              strokeWidth="5"
+              strokeLinecap="round"
               initial={{ strokeDasharray: "170 170", strokeDashoffset: 170 }}
               animate={{ strokeDashoffset: 30 }}
-              transition={{ duration: 1.5, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+              transition={{ duration: 1.4, delay: 0.4, ease: EASE_OUT_EXPO }}
             />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-sm font-bold text-white leading-none">160</span>
-            <span className="text-[7px] text-neutral-500 uppercase tracking-wider">Remaining</span>
+            <span className="text-[15px] font-bold tabular-nums leading-none text-white">
+              160
+            </span>
+            <span className="mt-0.5 text-[7px] uppercase tracking-[0.12em] text-ink-faint">
+              Left
+            </span>
           </div>
         </div>
-        {/* Macro Bars */}
+
         <div className="flex-1 space-y-2">
-          {[
-            { label: "Protein", current: "128g", target: "150g", color: "bg-green-400", width: "85%" },
-            { label: "Carbs", current: "175g", target: "200g", color: "bg-yellow-400", width: "87%" },
-            { label: "Fat", current: "52g", target: "65g", color: "bg-rose-400", width: "80%" },
-          ].map((m, i) => (
+          {macros.map((m, i) => (
             <div key={m.label} className="flex items-center gap-2">
-              <div className={`w-1.5 h-1.5 rounded-full ${m.color}`} />
-              <span className="text-[10px] text-neutral-400 w-10">{m.label}</span>
-              <div className="flex-1 h-1 rounded-full bg-white/[0.06] overflow-hidden">
+              <span className="w-10 text-[10px] text-ink-muted">{m.label}</span>
+              <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/[0.08]">
                 <motion.div
                   initial={{ width: 0 }}
-                  animate={{ width: m.width }}
-                  transition={{ duration: 1.2, delay: 0.8 + i * 0.15, ease: [0.25, 0.4, 0.25, 1] }}
-                  className={`h-full rounded-full ${m.color}`}
+                  animate={{ width: `${(m.current / m.target) * 100}%` }}
+                  transition={{
+                    duration: 1.1,
+                    delay: 0.6 + i * 0.12,
+                    ease: EASE_OUT_EXPO,
+                  }}
+                  className={`h-full rounded-full ${m.bar}`}
                 />
               </div>
-              <span className="text-[9px] text-neutral-500">{m.current} / {m.target}</span>
+              <span className="font-mono text-[9px] tabular-nums text-ink-faint">
+                {m.current}/{m.target}g
+              </span>
             </div>
           ))}
         </div>
@@ -173,7 +117,112 @@ function NutritionRing() {
   );
 }
 
-/* ━━━ Screen 2: Workout Log ━━━ */
+/* ━━━ Screen 1: Dashboard ━━━ */
+function DashboardScreen() {
+  return (
+    <div className="space-y-3 px-4 pt-1 sm:space-y-3.5">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <Image
+            src="/avatar_zeus.png"
+            width={40}
+            height={40}
+            priority
+            className="h-10 w-10 rounded-full border border-white/[0.08] bg-black object-cover"
+            alt=""
+          />
+          <div>
+            <p className="text-[9px] font-medium uppercase tracking-[0.14em] text-ink-faint">
+              Consistency matters.
+            </p>
+            <p className="text-sm font-bold text-white">Ojas</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="flex items-center gap-1 rounded-lg border border-protein/25 bg-protein/10 px-2 py-1">
+            <span className="h-1 w-1 rounded-full bg-protein" />
+            <span className="text-[8px] font-semibold uppercase tracking-[0.12em] text-protein">
+              Checked in
+            </span>
+          </span>
+          <span className="flex h-7 items-center gap-1 rounded-lg bg-white/[0.07] px-2 text-[10px]">
+            🔥
+            <span className="font-mono text-[11px] font-bold text-white">12</span>
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <p className="text-[10px] text-ink-faint">Today&apos;s training</p>
+        <p className="text-lg font-black tracking-tight text-white">
+          ANTERIOR · CUSTOM
+        </p>
+      </div>
+
+      <div className="well p-3 sm:p-3.5">
+        <div className="mb-3 flex items-center justify-center gap-2">
+          <span className="flex h-4 w-4 items-center justify-center rounded-full bg-protein">
+            <Check className="h-2.5 w-2.5 text-black" strokeWidth={3} />
+          </span>
+          <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
+            Completed today
+          </span>
+        </div>
+        <div className="flex">
+          <div className="flex-1 border-r border-white/[0.07] text-center">
+            <p className="mb-1 text-[9px] uppercase tracking-[0.12em] text-ink-faint">
+              Workouts
+            </p>
+            <p className="text-2xl font-bold tabular-nums text-white">1</p>
+          </div>
+          <div className="flex-1 text-center">
+            <p className="mb-1 text-[9px] uppercase tracking-[0.12em] text-ink-faint">
+              Calories
+            </p>
+            <p className="text-2xl font-bold tabular-nums text-white">1,840</p>
+          </div>
+        </div>
+      </div>
+
+      {/* The "Log workout / Log calories" button row lived here. It was
+          decorative chrome, and its ~60px pushed the AI-coach line — the only
+          place this screen states the product's thesis — underneath the dock.
+          Substance beats chrome: the row is gone so the thesis fits. */}
+
+      <div>
+        <div className="mb-2 flex items-center justify-between">
+          <p className="text-sm font-bold text-white">Today&apos;s nutrition</p>
+          <p className="text-[10px] uppercase tracking-[0.12em] text-ink-faint">
+            Log food
+          </p>
+        </div>
+        <NutritionRing />
+      </div>
+
+      {/* The differentiator, stated in the product's own voice:
+          it read the lifts AND the food, and it has something to say. */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5, duration: 0.6, ease: EASE_OUT_EXPO }}
+        className="flex items-start gap-2.5 rounded-xl border border-protein/20 bg-protein/[0.06] p-3"
+      >
+        <Sparkles className="mt-px h-3.5 w-3.5 flex-shrink-0 text-protein" />
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-protein">
+            AI coach
+          </p>
+          <p className="mt-1 text-[10px] leading-relaxed text-ink-muted">
+            Push day done, but you&apos;re 22g short on protein. A scoop of whey
+            or 150g paneer closes it before bed.
+          </p>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+/* ━━━ Screen 2: Live workout ━━━ */
 function WorkoutScreen() {
   const exercises = [
     { name: "Bench Press", sets: "4 × 8", weight: "80 kg", done: true },
@@ -184,433 +233,619 @@ function WorkoutScreen() {
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
-      className="px-4 pt-1 space-y-3"
-    >
+    <div className="space-y-3 px-4 pt-1">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-[10px] text-neutral-500 uppercase tracking-wider">Active Workout</p>
+          <p className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
+            Active workout
+          </p>
           <p className="text-lg font-black tracking-tight text-white">PUSH DAY</p>
         </div>
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-green-400/10 border border-green-400/20">
-          <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-[10px] font-semibold text-green-400">LIVE</span>
-        </div>
+        <span className="flex items-center gap-1.5 rounded-lg border border-protein/25 bg-protein/10 px-3 py-1.5">
+          <span
+            className="h-1.5 w-1.5 rounded-full bg-protein animate-breathe"
+            data-motion="ambient"
+          />
+          <span className="text-[10px] font-semibold text-protein">LIVE</span>
+        </span>
       </div>
 
-      {/* Timer */}
-      <div className="text-center py-2">
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-3xl font-black text-white tabular-nums tracking-wider"
-        >
+      <div className="py-2 text-center">
+        <p className="font-mono text-[28px] font-bold tabular-nums tracking-tight text-white">
           00:42:18
-        </motion.p>
-        <p className="text-[9px] text-neutral-600 uppercase tracking-wider mt-0.5">Duration</p>
+        </p>
+        <p className="mt-0.5 text-[9px] uppercase tracking-[0.14em] text-ink-faint">
+          Duration
+        </p>
       </div>
 
-      {/* Exercise List */}
       <div className="space-y-1">
         {exercises.map((ex, i) => (
           <motion.div
             key={ex.name}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -14 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 + i * 0.1, ease: [0.25, 0.4, 0.25, 1] }}
-            className={`flex items-center gap-3 p-2.5 rounded-xl ${ex.done ? "bg-white/[0.04]" : "bg-transparent"} border border-white/[0.03]`}
+            transition={{ delay: 0.2 + i * 0.07, ease: EASE_OUT_EXPO }}
+            className={`flex items-center gap-3 rounded-xl border border-white/[0.05] p-2.5 ${
+              ex.done ? "bg-white/[0.04]" : "bg-transparent"
+            }`}
           >
-            <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${ex.done ? "bg-white" : "border border-neutral-700"}`}>
-              {ex.done && <Check className="w-3 h-3 text-black" />}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className={`text-[11px] font-semibold ${ex.done ? "text-neutral-400 line-through" : "text-white"}`}>{ex.name}</p>
-              <p className="text-[9px] text-neutral-600">{ex.sets} · {ex.weight}</p>
+            <span
+              className={`flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${
+                ex.done ? "bg-protein" : "border border-white/20"
+              }`}
+            >
+              {ex.done && <Check className="h-3 w-3 text-black" strokeWidth={3} />}
+            </span>
+            <div className="min-w-0 flex-1">
+              <p
+                className={`text-[11px] font-semibold ${
+                  ex.done ? "text-ink-faint line-through" : "text-white"
+                }`}
+              >
+                {ex.name}
+              </p>
+              <p className="font-mono text-[9px] tabular-nums text-ink-faint">
+                {ex.sets} · {ex.weight}
+              </p>
             </div>
           </motion.div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
-/* ━━━ Screen 3: Nutrition Tracker ━━━ */
+/* ━━━ Screen 3: Nutrition ━━━ */
 function NutritionScreen() {
   const meals = [
-    { name: "Breakfast", items: "Oats + Banana + Whey", cal: 520 },
-    { name: "Lunch", items: "Chicken Rice Bowl", cal: 680 },
-    { name: "Snack", items: "Greek Yogurt + Almonds", cal: 280 },
-    { name: "Dinner", items: "Add meal...", cal: 0, empty: true },
+    { name: "Breakfast", items: "Oats + banana + whey", cal: 520 },
+    { name: "Lunch", items: "Chicken rice bowl", cal: 680 },
+    { name: "Snack", items: "Greek yogurt + almonds", cal: 280 },
+    { name: "Dinner", items: "Add meal…", cal: 0, empty: true },
   ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
-      className="px-4 pt-1 space-y-3"
-    >
+    <div className="space-y-3 px-4 pt-1">
       <div className="flex items-center justify-between">
         <p className="text-lg font-black tracking-tight text-white">Nutrition</p>
-        <div className="flex items-center gap-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-white" />
-          <span className="text-[10px] text-neutral-400">AI Coach</span>
-        </div>
+        <span className="flex items-center gap-1.5">
+          <Sparkles className="h-3.5 w-3.5 text-white" />
+          <span className="text-[10px] text-ink-muted">AI coach</span>
+        </span>
       </div>
 
       <NutritionRing />
 
-      {/* Meals */}
       <div className="space-y-2">
-        <p className="text-[10px] text-neutral-500 uppercase tracking-wider">Today&apos;s Meals</p>
+        <p className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
+          Today&apos;s meals
+        </p>
         {meals.map((meal, i) => (
           <motion.div
             key={meal.name}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 + i * 0.1 }}
-            className={`flex items-center justify-between p-3 rounded-xl border ${meal.empty ? "border-dashed border-white/[0.06]" : "border-white/[0.04] bg-white/[0.02]"}`}
+            transition={{ delay: 0.25 + i * 0.07, ease: EASE_OUT_EXPO }}
+            className={`flex items-center justify-between rounded-xl border p-3 ${
+              meal.empty
+                ? "border-dashed border-white/[0.09]"
+                : "border-white/[0.05] bg-white/[0.025]"
+            }`}
           >
             <div>
               <p className="text-[11px] font-semibold text-white">{meal.name}</p>
-              <p className={`text-[9px] ${meal.empty ? "text-neutral-600" : "text-neutral-500"}`}>{meal.items}</p>
+              <p
+                className={`text-[9px] ${
+                  meal.empty ? "text-ink-faint" : "text-ink-muted"
+                }`}
+              >
+                {meal.items}
+              </p>
             </div>
             {!meal.empty && (
-              <span className="text-[11px] font-bold text-white">{meal.cal} kcal</span>
+              <span className="text-[11px] font-bold tabular-nums text-white">
+                {meal.cal}
+              </span>
             )}
           </motion.div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 /* ━━━ Screen 4: Progress ━━━ */
 function ProgressScreen() {
-  const chartPoints = "M0,40 C20,38 40,35 60,30 C80,25 100,28 120,22 C140,18 160,15 180,10 C200,8 220,12 240,6";
+  const chart =
+    "M0,40 C20,38 40,35 60,30 C80,25 100,28 120,22 C140,18 160,15 180,10 C200,8 220,12 240,6";
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
-      className="px-4 pt-1 space-y-3"
-    >
+    <div className="space-y-3 px-4 pt-1">
       <div className="flex items-center justify-between">
         <p className="text-lg font-black tracking-tight text-white">Progress</p>
-        <span className="text-[10px] text-neutral-500 uppercase tracking-wider">This Month</span>
+        <span className="text-[10px] uppercase tracking-[0.14em] text-ink-faint">
+          This month
+        </span>
       </div>
 
-      {/* Stats Row */}
       <div className="grid grid-cols-3 gap-2">
         {[
-          { label: "Workouts", value: "18", icon: <Dumbbell className="w-3 h-3" /> },
+          { label: "Workouts", value: "18", icon: <Dumbbell className="h-3 w-3" /> },
           { label: "Streak", value: "12d", icon: <span className="text-[10px]">🔥</span> },
-          { label: "XP", value: "2,450", icon: <TrendingUp className="w-3 h-3" /> },
+          { label: "XP", value: "2,450", icon: <TrendingUp className="h-3 w-3" /> },
         ].map((s, i) => (
           <motion.div
             key={s.label}
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 + i * 0.1, type: "spring" }}
-            className="bg-white/[0.04] rounded-xl p-2.5 text-center border border-white/[0.04]"
+            transition={{ delay: 0.15 + i * 0.08, ease: EASE_OUT_EXPO }}
+            className="well p-2.5 text-center"
           >
-            <div className="flex items-center justify-center text-neutral-500 mb-1">{s.icon}</div>
-            <p className="text-sm font-bold text-white">{s.value}</p>
-            <p className="text-[8px] text-neutral-600 uppercase">{s.label}</p>
+            <div className="mb-1 flex items-center justify-center text-ink-faint">
+              {s.icon}
+            </div>
+            <p className="text-sm font-bold tabular-nums text-white">
+              {s.value}
+            </p>
+            <p className="text-[8px] uppercase tracking-[0.1em] text-ink-faint">
+              {s.label}
+            </p>
           </motion.div>
         ))}
       </div>
 
-      {/* Chart */}
-      <div className="bg-white/[0.04] rounded-2xl p-4 border border-white/[0.04]">
-        <p className="text-[10px] text-neutral-500 uppercase tracking-wider mb-3">Weight Progress</p>
-        <svg className="w-full h-12" viewBox="0 0 240 50" fill="none">
+      <div className="well p-4">
+        <p className="mb-3 text-[10px] uppercase tracking-[0.14em] text-ink-faint">
+          Weight progress
+        </p>
+        <svg className="h-12 w-full" viewBox="0 0 240 50" fill="none" aria-hidden>
           <motion.path
-            d={chartPoints}
-            stroke="white"
+            d={chart}
+            stroke="hsl(var(--protein))"
             strokeWidth="2"
             strokeLinecap="round"
             fill="none"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
-            transition={{ duration: 2, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+            transition={{ duration: 1.6, delay: 0.3, ease: EASE_OUT_EXPO }}
           />
           <motion.path
-            d={`${chartPoints} L240,50 L0,50 Z`}
-            fill="url(#chartGrad)"
+            d={`${chart} L240,50 L0,50 Z`}
+            fill="url(#heroChartGrad)"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.3 }}
-            transition={{ duration: 1, delay: 2 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.4 }}
           />
           <defs>
-            <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="white" stopOpacity="0.2" />
-              <stop offset="100%" stopColor="white" stopOpacity="0" />
+            <linearGradient id="heroChartGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="hsl(var(--protein))" stopOpacity="0.28" />
+              <stop offset="100%" stopColor="hsl(var(--protein))" stopOpacity="0" />
             </linearGradient>
           </defs>
         </svg>
-        <div className="flex justify-between mt-2">
-          <span className="text-[9px] text-neutral-600">Week 1</span>
-          <span className="text-[9px] text-neutral-600">Week 4</span>
+        <div className="mt-2 flex justify-between font-mono text-[9px] text-ink-faint">
+          <span>Week 1</span>
+          <span>Week 4</span>
         </div>
       </div>
 
-      {/* Personal Records */}
       <div>
-        <p className="text-[10px] text-neutral-500 uppercase tracking-wider mb-2">Recent PRs</p>
+        <p className="mb-2 text-[10px] uppercase tracking-[0.14em] text-ink-faint">
+          Recent PRs
+        </p>
         {[
           { exercise: "Bench Press", pr: "100 kg", date: "2 days ago" },
           { exercise: "Squat", pr: "130 kg", date: "1 week ago" },
         ].map((pr, i) => (
           <motion.div
             key={pr.exercise}
-            initial={{ opacity: 0, x: -10 }}
+            initial={{ opacity: 0, x: -8 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1 + i * 0.15 }}
-            className="flex items-center justify-between py-2 border-t border-white/[0.03]"
+            transition={{ delay: 0.7 + i * 0.12, ease: EASE_OUT_EXPO }}
+            className="flex items-center justify-between border-t border-white/[0.05] py-2"
           >
             <div>
               <p className="text-[11px] font-semibold text-white">{pr.exercise}</p>
-              <p className="text-[9px] text-neutral-600">{pr.date}</p>
+              <p className="text-[9px] text-ink-faint">{pr.date}</p>
             </div>
-            <span className="text-[11px] font-bold text-green-400">{pr.pr}</span>
+            <span className="font-mono text-[11px] font-bold tabular-nums text-protein">
+              {pr.pr}
+            </span>
           </motion.div>
         ))}
-      </div>
-    </motion.div>
-  );
-}
-
-/* ━━━ Phone Shell ━━━ */
-function PhoneShell({ children, activeScreen, onScreenChange }: {
-  children: React.ReactNode;
-  activeScreen: number;
-  onScreenChange: (i: number) => void;
-}) {
-  return (
-    <div className="relative w-[280px] sm:w-[300px] h-[580px] sm:h-[620px] rounded-[2.5rem] border border-white/[0.08] bg-[#0c0c0c] shadow-[0_0_80px_rgba(0,0,0,0.8)] overflow-hidden">
-      {/* Status bar */}
-      <div className="flex items-center justify-between px-6 pt-3 pb-1">
-        <span className="text-[10px] text-neutral-500 font-medium">9:41</span>
-        <div className="w-[72px] h-[22px] rounded-full bg-black" />
-        <div className="flex items-center gap-1">
-          <div className="w-[15px] h-[10px] rounded-[2px] border border-neutral-600" />
-        </div>
-      </div>
-
-      {/* Screen Content */}
-      <div className="h-[calc(100%-4.5rem)] overflow-hidden">
-        <AnimatePresence mode="wait">
-          {children}
-        </AnimatePresence>
-      </div>
-
-      {/* Bottom Nav Dock */}
-      <div className="absolute bottom-3 left-3 right-3 h-14 bg-black/80 backdrop-blur-md border border-white/[0.08] rounded-2xl flex items-center justify-around px-2 z-20">
-        {[
-          { label: "Home", idx: 0, icon: Home },
-          { label: "Workout", idx: 1, icon: Dumbbell },
-          { label: "", idx: -1, isAdd: true },
-          { label: "Nutrition", idx: 2, icon: Utensils },
-          { label: "Progress", idx: 3, icon: BarChart2 },
-        ].map((item, i) => {
-          const Icon = item.icon;
-          return (
-            <button
-              key={item.label || `add-${i}`}
-              onClick={() => !item.isAdd && onScreenChange(item.idx)}
-              className="flex flex-col items-center justify-center gap-0.5 w-10 h-10 relative"
-            >
-              {item.isAdd ? (
-                <motion.div 
-                  whileTap={{ scale: 0.95 }}
-                  className="w-9 h-9 rounded-full bg-white flex items-center justify-center -mt-6 shadow-lg shadow-black/50 border border-white/10"
-                >
-                  <Plus className="w-5 h-5 text-black stroke-[2.5]" />
-                </motion.div>
-              ) : (
-                <>
-                  {Icon && (
-                    <Icon 
-                      className={`w-4 h-4 transition-all duration-300 ${
-                        activeScreen === item.idx 
-                          ? "text-white scale-110" 
-                          : "text-neutral-500 hover:text-neutral-300"
-                      }`} 
-                    />
-                  )}
-                  <span 
-                    className={`text-[8px] font-semibold tracking-tight transition-colors duration-300 mt-0.5 ${
-                      activeScreen === item.idx ? "text-white" : "text-neutral-600"
-                    }`}
-                  >
-                    {item.label}
-                  </span>
-                  {activeScreen === item.idx && (
-                    <motion.div 
-                      layoutId="activeTabIndicatorHero"
-                      className="absolute -bottom-1.5 w-4 h-[2px] bg-white rounded-full" 
-                    />
-                  )}
-                </>
-              )}
-            </button>
-          );
-        })}
       </div>
     </div>
   );
 }
 
-/* ━━━ Screens Array ━━━ */
-const screens = [DashboardScreen, WorkoutScreen, NutritionScreen, ProgressScreen];
+const SCREENS = [
+  { Component: DashboardScreen, label: "Home", icon: Home },
+  { Component: WorkoutScreen, label: "Workout", icon: Dumbbell },
+  { Component: NutritionScreen, label: "Nutrition", icon: Utensils },
+  { Component: ProgressScreen, label: "Progress", icon: BarChart2 },
+];
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Phone shell
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function PhoneShell({
+  active,
+  onSelect,
+  paused,
+}: {
+  active: number;
+  onSelect: (i: number) => void;
+  paused: boolean;
+}) {
+  const reduce = useReducedMotion();
+  const Active = SCREENS[active].Component;
+
+  return (
+    <div className="relative h-[580px] w-[280px] overflow-hidden rounded-[2.5rem] border border-white/[0.1] bg-[#0a0a0b] shadow-[0_2px_4px_rgba(0,0,0,0.8),0_40px_80px_-24px_rgba(0,0,0,1)] sm:h-[620px] sm:w-[300px]">
+      {/* Top bezel highlight — the plate catches light */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
+      />
+
+      <div className="flex items-center justify-between px-6 pb-1 pt-3">
+        <span className="font-mono text-[10px] text-ink-faint">9:41</span>
+        <div className="h-[22px] w-[72px] rounded-full bg-black" />
+        <div className="h-[10px] w-[15px] rounded-[2px] border border-white/25" />
+      </div>
+
+      {/* Screens crossfade in place — never blank.
+          The dock is an absolute overlay 56px tall sitting 12px off the base,
+          so the screen must reserve that as real padding. Without it the last
+          element of each screen renders underneath the dock — which was
+          swallowing the AI-coach line, the one place the hero states the
+          product's actual thesis. */}
+      <div className="relative h-[calc(100%-2.75rem)] overflow-hidden">
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, scale: 0.985 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.008 }}
+            transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
+            className="scrollbar-hide absolute inset-0 overflow-y-auto pb-[4.75rem]"
+          >
+            <Active />
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Dock */}
+      <div className="absolute inset-x-3 bottom-3 z-20 flex h-14 items-center justify-around rounded-2xl border border-white/[0.1] bg-black/85 px-2 backdrop-blur-md">
+        {SCREENS.slice(0, 2).map((s, i) => (
+          <DockButton
+            key={s.label}
+            {...s}
+            index={i}
+            active={active}
+            onSelect={onSelect}
+            paused={paused}
+            reduce={!!reduce}
+          />
+        ))}
+
+        <span className="relative -mt-6 flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white shadow-lg shadow-black/60">
+          <Plus className="h-5 w-5 text-black" strokeWidth={2.5} />
+        </span>
+
+        {SCREENS.slice(2).map((s, i) => (
+          <DockButton
+            key={s.label}
+            {...s}
+            index={i + 2}
+            active={active}
+            onSelect={onSelect}
+            paused={paused}
+            reduce={!!reduce}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DockButton({
+  label,
+  icon: Icon,
+  index,
+  active,
+  onSelect,
+  paused,
+  reduce,
+}: {
+  label: string;
+  icon: typeof Home;
+  index: number;
+  active: number;
+  onSelect: (i: number) => void;
+  paused: boolean;
+  reduce: boolean;
+}) {
+  const isActive = active === index;
+  return (
+    <button
+      onClick={() => onSelect(index)}
+      aria-label={`Show ${label} screen`}
+      aria-pressed={isActive}
+      className="relative flex h-11 w-11 flex-col items-center justify-center gap-0.5 rounded-lg"
+    >
+      <Icon
+        className={`h-4 w-4 transition-all duration-300 ${
+          isActive ? "scale-110 text-white" : "text-ink-faint"
+        }`}
+      />
+      <span
+        className={`mt-0.5 text-[8px] font-semibold tracking-tight transition-colors duration-300 ${
+          isActive ? "text-white" : "text-ink-faint"
+        }`}
+      >
+        {label}
+      </span>
+      {isActive && (
+        <span className="absolute bottom-0.5 h-[2px] w-5 overflow-hidden rounded-full bg-white/20">
+          {/* The dwell timer, made visible — cycling stops being a surprise.
+              `initial` must NOT depend on useReducedMotion(): that hook reads
+              false during SSR and true on a reduced-motion client, which
+              hydration-mismatches the inline width. Start at 0% always and let
+              the transition duration collapse to zero instead. */}
+          <motion.span
+            key={`${index}-${paused}`}
+            className="block h-full rounded-full bg-white"
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{
+              duration: reduce || paused ? 0 : SCREEN_INTERVAL / 1000,
+              ease: "linear",
+            }}
+          />
+        </span>
+      )}
+    </button>
+  );
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Spec plate — what the product actually reads.
+   Every figure here is a capability the app ships, not a market claim.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const SPECS = [
+  { to: 500, suffix: "K+", label: "Foods indexed", detail: "Indian + USDA" },
+  { to: 10, suffix: "+", label: "Training splits", detail: "PPL, PHUL, PHAT, custom" },
+  { to: 6, suffix: "", label: "App tabs, no clutter", detail: "Train, eat, learn, share" },
+  { to: 0, suffix: "", label: "Ads, ever", detail: "Offline-first, your data stays yours" },
+];
+
+/**
+ * Counts once on mount. The direction contract promises instrumentation that
+ * "begins counting on load", and a static number is not an instrument — but a
+ * counter that never settles is noise, so this runs exactly once.
+ *
+ * Gated on reduced motion at its own call site: MotionConfig does not cover
+ * rAF-driven work like this.
+ */
+function CountUp({
+  to,
+  suffix,
+  duration = 1400,
+}: {
+  to: number;
+  suffix: string;
+  duration?: number;
+}) {
+  const reduce = useReducedMotion();
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    if (reduce || to === 0) {
+      setN(to);
+      return;
+    }
+    let raf = 0;
+    let start: number | null = null;
+    const tick = (t: number) => {
+      if (start === null) start = t;
+      const p = Math.min((t - start) / duration, 1);
+      // exponential ease-out, same family as the rest of the page
+      setN(Math.round(to * (1 - Math.pow(2, -10 * p))));
+      if (p < 1) raf = requestAnimationFrame(tick);
+      else setN(to);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [to, duration, reduce]);
+
+  return (
+    <>
+      {n}
+      {suffix}
+    </>
+  );
+}
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
+  const phoneY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const phoneRotate = useTransform(scrollYProgress, [0, 1], [0, -6]);
+  const copyY = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
-  const rotateY = useTransform(scrollYProgress, [0, 1], [0, -8]);
-  const phoneY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
 
-  const [activeScreen, setActiveScreen] = useState(0);
-
-  const goToScreen = useCallback((i: number) => {
-    setActiveScreen(i);
+  const select = useCallback((i: number) => {
+    setActive(i);
+    setPaused(true);
   }, []);
 
-  // Auto-cycle
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveScreen((prev) => (prev + 1) % SCREEN_COUNT);
-    }, SCREEN_INTERVAL);
-    return () => clearInterval(timer);
-  }, []);
-
-  const ActiveComponent = screens[activeScreen];
+    if (paused || reduce) return;
+    const t = setInterval(
+      () => setActive((p) => (p + 1) % SCREEN_COUNT),
+      SCREEN_INTERVAL
+    );
+    return () => clearInterval(t);
+  }, [paused, reduce, active]);
 
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center overflow-hidden pt-20 md:pt-0"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden pt-24 md:pt-20"
     >
-      {/* Single quiet backdrop */}
-      <div className="absolute inset-0 radial-fade dark:radial-fade" />
+      {/* One quiet backdrop — a cold overhead wash, like gym lighting */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(255,255,255,0.09),transparent_70%)]"
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-[calc(100vh-5rem)]">
-          {/* ━━━ Left: Copy ━━━ */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 sm:px-6 lg:px-8">
+        <div className="grid flex-1 items-center gap-8 py-6 sm:gap-12 sm:py-8 lg:grid-cols-[1.12fr_1fr] lg:gap-10">
+          {/* ━━━ Copy ━━━ */}
           <motion.div
-            variants={staggerContainer}
+            style={{ y: copyY }}
+            variants={stack}
             initial="hidden"
             animate="visible"
             className="text-center lg:text-left"
           >
-            {/* Badge */}
-            <motion.div variants={staggerItem} className="mb-8">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-medium bg-black/[0.04] dark:bg-white/[0.04] text-neutral-500 dark:text-neutral-400 border border-black/[0.06] dark:border-white/[0.06]">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                V2.0 NOW AVAILABLE
+            <motion.p variants={stackItem} className="mb-5 sm:mb-7">
+              <span className="kicker">
+                <span
+                  className="h-1.5 w-1.5 rounded-full bg-protein animate-breathe"
+                  data-motion="ambient"
+                />
+                V2.0 now available
               </span>
-            </motion.div>
-
-            {/* Headline */}
-            <motion.h1
-              variants={staggerItem}
-              className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[0.95] mb-6"
-            >
-              The coach that
-              <br />
-              actually knows you.
-            </motion.h1>
-
-            {/* Subheadline */}
-            <motion.p
-              variants={staggerItem}
-              className="text-lg sm:text-xl text-neutral-500 leading-relaxed max-w-md mx-auto lg:mx-0 mb-8"
-            >
-              Fitzo tracks your lifts, your food — dal to biryani — and its AI
-              coach reads all of it. Science-based training, built for Indian
-              lifters.
             </motion.p>
 
-            {/* ━━━ CTA Buttons ━━━ */}
-            <motion.div
-              variants={staggerItem}
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-6"
+            {/* The headline used to be "The coach that actually knows you" —
+                true, but it could sit on any AI wellness app, and the one
+                thing only Fitzo does was demoted to the paragraph below. The
+                mechanism now runs at display scale; the old line survives as
+                the payoff on the third row. */}
+            <motion.h1
+              variants={stackItem}
+              className="mb-6 text-[clamp(2.1rem,4.6vw,3.3rem)] font-black leading-[1.02] tracking-[-0.045em] text-balance"
             >
-              {/* Primary: early access */}
+              Every set. Every roti.
+              <br />
+              <span className="text-ink-faint">One coach reads both.</span>
+            </motion.h1>
+
+            <motion.p
+              variants={stackItem}
+              className="mx-auto mb-7 max-w-[38ch] sm:mb-9 text-lg leading-relaxed text-ink-muted text-pretty sm:text-xl lg:mx-0"
+            >
+              Fitzo logs your lifts and your food — dal to biryani — in one
+              place, then coaches from all of it. Science-based training, built
+              for Indian lifters.
+            </motion.p>
+
+            <motion.div
+              variants={stackItem}
+              className="mb-7 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start"
+            >
               <motion.a
                 href="#download"
-                whileHover={{ y: -2, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-base hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors duration-300"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.975 }}
+                transition={{ duration: 0.18, ease: EASE_OUT_EXPO }}
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold text-black transition-colors duration-300 hover:bg-protein"
               >
-                Get early access
+                Get Fitzo free
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1" />
               </motion.a>
 
-              {/* Secondary: see the product */}
               <motion.a
                 href="#demo"
-                whileHover={{ y: -2, transition: { duration: 0.2 } }}
-                whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
-                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-black/[0.06] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] text-black dark:text-white font-semibold text-base hover:bg-black/[0.1] dark:hover:bg-white/[0.1] transition-colors duration-300"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.975 }}
+                transition={{ duration: 0.18, ease: EASE_OUT_EXPO }}
+                className="inline-flex items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.05] px-8 py-4 text-base font-semibold text-white transition-colors duration-300 hover:border-white/25 hover:bg-white/[0.09]"
               >
-                See it in action
+                Try it, no download
               </motion.a>
             </motion.div>
 
-            {/* Trust Badges */}
-            <motion.div
-              variants={staggerItem}
-              className="flex flex-wrap gap-3 justify-center lg:justify-start"
+            <motion.ul
+              variants={stackItem}
+              className="flex flex-wrap justify-center gap-x-5 gap-y-2 lg:justify-start"
             >
               {[
-                { icon: <Check className="w-3 h-3" />, label: "No Ads" },
-                { icon: <Shield className="w-3 h-3" />, label: "Privacy First" },
-                { icon: <WifiOff className="w-3 h-3" />, label: "Offline Mode" },
-              ].map((badge) => (
-                <Badge
-                  key={badge.label}
-                  variant="outline"
-                  className="flex items-center gap-1.5 text-[12px] border-black/[0.08] dark:border-white/[0.08] text-neutral-500 dark:text-neutral-400 bg-black/[0.02] dark:bg-white/[0.03] px-3 py-1"
+                { icon: Check, label: "No ads" },
+                { icon: Shield, label: "Privacy first" },
+                { icon: WifiOff, label: "Offline mode" },
+              ].map(({ icon: Icon, label }) => (
+                <li
+                  key={label}
+                  className="flex items-center gap-1.5 text-[13px] text-ink-muted"
                 >
-                  <span className="text-green-400">{badge.icon}</span>
-                  {badge.label}
-                </Badge>
+                  <Icon className="h-3.5 w-3.5 text-protein" />
+                  {label}
+                </li>
               ))}
-            </motion.div>
+            </motion.ul>
           </motion.div>
 
-          {/* ━━━ Right: Animated Phone Mockup ━━━ */}
+          {/* ━━━ Phone ━━━ */}
           <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
-            style={{ rotateY, y: phoneY, perspective: 1200 }}
+            initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1, delay: 0.25, ease: EASE_OUT_EXPO }}
             className="flex justify-center lg:justify-end"
           >
-            <motion.div {...floatAnimation} className="relative">
-              {/* Quiet glow */}
-              <div className="absolute -inset-20 bg-white/[0.04] rounded-full blur-[80px] -z-10" />
-              <div className="relative">
-                <PhoneShell activeScreen={activeScreen} onScreenChange={goToScreen}>
-                  <ActiveComponent key={activeScreen} />
-                </PhoneShell>
-              </div>
+            <motion.div
+              style={{
+                y: phoneY,
+                rotateY: phoneRotate,
+                transformPerspective: 1400,
+              }}
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+              onFocusCapture={() => setPaused(true)}
+              className="relative"
+            >
+              <div
+                aria-hidden
+                className="absolute -inset-16 -z-10 rounded-full bg-white/[0.05] blur-[90px]"
+              />
+              <PhoneShell active={active} onSelect={select} paused={paused} />
             </motion.div>
           </motion.div>
         </div>
+
+        {/* ━━━ Spec plate ━━━ */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7, ease: EASE_OUT_EXPO }}
+          className="mt-auto pb-8 sm:pb-10"
+        >
+          <div className="rule mb-6" />
+          <dl className="grid grid-cols-4 gap-x-3 gap-y-6 sm:gap-x-6">
+            {SPECS.map((s) => (
+              <div key={s.label}>
+                <dd className="text-[22px] font-black tabular-nums leading-none tracking-[-0.03em] text-white sm:text-[38px]">
+                  <CountUp to={s.to} suffix={s.suffix} />
+                </dd>
+                <dt className="mt-1.5 text-[11px] font-medium leading-tight text-white sm:mt-2 sm:text-[13px]">
+                  {s.label}
+                </dt>
+                <p className="mt-0.5 hidden text-xs text-ink-faint sm:block">{s.detail}</p>
+              </div>
+            ))}
+          </dl>
+        </motion.div>
       </div>
     </section>
   );

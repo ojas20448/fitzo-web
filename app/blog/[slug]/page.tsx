@@ -7,6 +7,7 @@ import Link from "next/link";
 import FitzoLogo from "@/components/FitzoLogo";
 import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { getArticleSchema, getBreadcrumbSchema } from "@/lib/structured-data";
+import { SITE_URL } from "@/lib/links";
 
 interface PageProps {
   params: { slug: string };
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = getPostBySlug(params.slug);
   if (!post) return {};
 
-  const url = `https://fitzo.app/blog/${post.slug}`;
+  const url = `${SITE_URL}/blog/${post.slug}`;
 
   return {
     title: post.title,
@@ -61,9 +62,9 @@ export default function BlogPostPage({ params }: PageProps) {
     .slice(0, 3);
 
   const breadcrumbs = [
-    { name: "Home", url: "https://fitzo.app" },
-    { name: "Blog", url: "https://fitzo.app/blog" },
-    { name: post.title, url: `https://fitzo.app/blog/${post.slug}` },
+    { name: "Home", url: SITE_URL },
+    { name: "Blog", url: `${SITE_URL}/blog` },
+    { name: post.title, url: `${SITE_URL}/blog/${post.slug}` },
   ];
 
   return (
@@ -81,11 +82,11 @@ export default function BlogPostPage({ params }: PageProps) {
       {/* Header */}
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 dark:bg-black/80 border-b border-black/[0.04] dark:border-white/[0.04]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <Link href="/blog" className="flex items-center gap-3 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors">
+          <Link href="/blog" className="flex items-center gap-3 text-ink-muted hover:text-black dark:hover:text-white transition-colors">
             <ArrowLeft className="w-4 h-4" />
             <FitzoLogo size="sm" />
           </Link>
-          <span className="text-[11px] uppercase tracking-wider text-neutral-400 dark:text-neutral-600">
+          <span className="text-[11px] uppercase tracking-wider text-ink-muted dark:text-ink-faint">
             {post.category}
           </span>
         </div>
@@ -93,26 +94,26 @@ export default function BlogPostPage({ params }: PageProps) {
 
       {/* Breadcrumb Navigation */}
       <nav className="max-w-3xl mx-auto px-4 sm:px-6 pt-6" aria-label="Breadcrumb">
-        <ol className="flex items-center gap-2 text-[12px] text-neutral-400">
+        <ol className="flex items-center gap-2 text-[12px] text-ink-muted">
           <li><Link href="/" className="hover:text-black dark:hover:text-white transition-colors">Home</Link></li>
           <li>/</li>
           <li><Link href="/blog" className="hover:text-black dark:hover:text-white transition-colors">Blog</Link></li>
           <li>/</li>
-          <li className="text-neutral-600 dark:text-neutral-500 truncate max-w-[200px]">{post.title}</li>
+          <li className="text-ink-faint dark:text-ink-muted truncate max-w-[200px]">{post.title}</li>
         </ol>
       </nav>
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <main id="main" className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         {/* Article Header */}
         <div className="mb-10">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-semibold bg-black/[0.04] dark:bg-white/[0.06] text-neutral-500 dark:text-neutral-400 border border-black/[0.04] dark:border-white/[0.04] mb-6">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-semibold bg-black/[0.04] dark:bg-white/[0.06] text-ink-muted border border-black/[0.04] dark:border-white/[0.04] mb-6">
             {post.category}
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-6 leading-tight">
             {post.title}
           </h1>
-          <p className="text-lg text-neutral-500 mb-6">{post.description}</p>
-          <div className="flex items-center gap-4 text-sm text-neutral-500">
+          <p className="text-lg text-ink-muted mb-6">{post.description}</p>
+          <div className="flex items-center gap-4 text-sm text-ink-muted">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5" />
               <time dateTime={post.date}>
@@ -149,13 +150,13 @@ export default function BlogPostPage({ params }: PageProps) {
                   href={`/blog/${related.slug}`}
                   className="group p-4 rounded-xl border border-black/[0.04] dark:border-white/[0.04] hover:border-black/[0.1] dark:hover:border-white/[0.1] transition-colors"
                 >
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-muted">
                     {related.category}
                   </span>
                   <h3 className="text-sm font-bold mt-2 group-hover:text-green-500 transition-colors line-clamp-2">
                     {related.title}
                   </h3>
-                  <p className="text-[12px] text-neutral-500 mt-1">{related.readTime}</p>
+                  <p className="text-[12px] text-ink-muted mt-1">{related.readTime}</p>
                 </Link>
               ))}
             </div>
@@ -168,11 +169,11 @@ export default function BlogPostPage({ params }: PageProps) {
             <p className="text-xl font-bold mb-2">
               Track your fitness with Fitzo
             </p>
-            <p className="text-neutral-500 text-sm mb-6">
+            <p className="text-ink-muted text-sm mb-6">
               50,000+ Indian foods. Science-based workouts. Free forever.
             </p>
             <Link
-              href="/#waitlist"
+              href="/#download"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
             >
               Join the Waitlist
@@ -184,7 +185,7 @@ export default function BlogPostPage({ params }: PageProps) {
         <div className="mt-8 text-center">
           <Link
             href="/blog"
-            className="text-sm text-neutral-500 hover:text-black dark:hover:text-white transition-colors"
+            className="text-sm text-ink-muted hover:text-black dark:hover:text-white transition-colors"
           >
             &larr; Back to all articles
           </Link>

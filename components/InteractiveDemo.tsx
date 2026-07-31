@@ -9,7 +9,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { fadeUp } from "@/lib/animations";
+import { rise, VIEWPORT } from "@/lib/motion";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import {
   Home,
@@ -23,6 +23,7 @@ import {
   Flame,
   Plus,
   QrCode,
+  ArrowRight,
 } from "lucide-react";
 
 /* ━━━ Demo Screen: Home ━━━ */
@@ -31,62 +32,64 @@ function DemoHome() {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-full bg-neutral-800 border border-white/[0.06]" />
+          <div className="w-9 h-9 rounded-full bg-white/[0.09] border border-white/[0.06]" />
           <div>
-            <p className="text-[9px] text-neutral-500 uppercase tracking-wider">Good morning</p>
+            <p className="text-[9px] text-ink-muted uppercase tracking-wider">Good morning</p>
             <p className="text-sm font-bold text-white">Guest User</p>
           </div>
         </div>
         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04]">
-          <Flame className="w-3 h-3 text-orange-400" />
+          <Flame className="w-3 h-3 text-carbs" />
           <span className="text-xs font-bold text-white">7</span>
         </div>
       </div>
 
-      <div className="bg-white/[0.04] rounded-xl p-3 border border-white/[0.04]">
-        <p className="text-[10px] text-neutral-500 mb-1">Today&apos;s Training</p>
+      <div className="well p-3">
+        <p className="text-[10px] text-ink-muted mb-1">Today&apos;s Training</p>
         <p className="text-base font-black text-white tracking-tight">PUSH • PPL SPLIT</p>
         <div className="flex items-center gap-1.5 mt-1.5">
-          <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
-          <span className="text-[9px] text-neutral-500">6 exercises · ~55 min</span>
+          <div className="w-1.5 h-1.5 rounded-full bg-protein" />
+          <span className="text-[9px] text-ink-muted">6 exercises · ~55 min</span>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-2">
-        <div className="bg-white/[0.03] rounded-xl p-3 border border-white/[0.04] text-center">
-          <p className="text-[9px] text-neutral-500 uppercase mb-1">Workouts</p>
+        <div className="well p-3 text-center">
+          <p className="text-[9px] text-ink-muted uppercase mb-1">Workouts</p>
           <p className="text-xl font-bold text-white">0</p>
         </div>
-        <div className="bg-white/[0.03] rounded-xl p-3 border border-white/[0.04] text-center">
-          <p className="text-[9px] text-neutral-500 uppercase mb-1">Calories</p>
-          <p className="text-xl font-bold text-white">0 <span className="text-[9px] font-normal text-neutral-600">kcal</span></p>
+        <div className="well p-3 text-center">
+          <p className="text-[9px] text-ink-muted uppercase mb-1">Calories</p>
+          <p className="text-xl font-bold text-white">0 <span className="text-[9px] font-normal text-ink-faint">kcal</span></p>
         </div>
       </div>
 
-      <div className="flex gap-2">
-        <button className="flex-1 py-2 rounded-xl bg-white text-black text-[11px] font-semibold flex items-center justify-center gap-1.5">
-          <Plus className="w-3 h-3" /> Start Workout
-        </button>
-        <button className="flex-1 py-2 rounded-xl bg-white/[0.06] border border-white/[0.06] text-[11px] font-semibold text-white flex items-center justify-center gap-1.5">
-          <Plus className="w-3 h-3 text-neutral-400" /> Log Food
-        </button>
+      {/* Decorative chrome inside the mockup — rendered as spans, not buttons,
+          so keyboard users never land on a control that does nothing. */}
+      <div className="flex gap-2" aria-hidden>
+        <span className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-white py-2.5 text-[11px] font-semibold text-black">
+          <Plus className="h-3 w-3" /> Start Workout
+        </span>
+        <span className="flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-white/[0.07] bg-white/[0.06] py-2.5 text-[11px] font-semibold text-white">
+          <Plus className="h-3 w-3 text-ink-muted" /> Log Food
+        </span>
       </div>
 
-      <div className="bg-white/[0.04] rounded-xl p-3 border border-white/[0.04]">
+      <div className="well p-3">
         <div className="flex items-center gap-2 mb-2">
-          <Trophy className="w-3.5 h-3.5 text-yellow-400" />
+          <Trophy className="w-3.5 h-3.5 text-carbs" />
           <p className="text-[10px] font-semibold text-white">Weekly Challenge</p>
         </div>
-        <p className="text-[10px] text-neutral-500">Complete 4 workouts this week</p>
+        <p className="text-[10px] text-ink-muted">Complete 4 workouts this week</p>
         <div className="h-1.5 rounded-full bg-white/[0.06] mt-2 overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "25%" }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="h-full rounded-full bg-yellow-400"
+            className="h-full rounded-full bg-carbs"
           />
         </div>
-        <p className="text-[8px] text-neutral-600 mt-1">1/4 completed</p>
+        <p className="text-[8px] text-ink-faint mt-1">1/4 completed</p>
       </div>
     </div>
   );
@@ -118,10 +121,10 @@ function DemoWorkout() {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-[10px] text-neutral-500 uppercase tracking-wider">Push Day</p>
+          <p className="text-[10px] text-ink-muted uppercase tracking-wider">Push Day</p>
           <p className="text-base font-black text-white tracking-tight">PPL SPLIT</p>
         </div>
-        <span className="text-[10px] px-2.5 py-1 rounded-full bg-green-400/10 text-green-400 font-semibold border border-green-400/20">
+        <span className="text-[10px] px-2.5 py-1 rounded-full bg-protein/10 text-protein font-semibold border border-protein/25">
           {completed.size}/{exercises.length}
         </span>
       </div>
@@ -131,7 +134,7 @@ function DemoWorkout() {
         <motion.div
           animate={{ width: `${(completed.size / exercises.length) * 100}%` }}
           transition={{ duration: 0.3 }}
-          className="h-full rounded-full bg-green-400"
+          className="h-full rounded-full bg-protein"
         />
       </div>
 
@@ -150,21 +153,21 @@ function DemoWorkout() {
             }`}
           >
             <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
-              completed.has(i) ? "bg-green-400" : "border border-neutral-700"
+              completed.has(i) ? "bg-protein" : "border border-white/20"
             }`}>
               {completed.has(i) && <Check className="w-3 h-3 text-black" />}
             </div>
             <div className="flex-1 min-w-0">
-              <p className={`text-[11px] font-semibold ${completed.has(i) ? "text-neutral-400 line-through" : "text-white"}`}>
+              <p className={`text-[11px] font-semibold ${completed.has(i) ? "text-ink-muted line-through" : "text-white"}`}>
                 {ex.name}
               </p>
-              <p className="text-[9px] text-neutral-600">{ex.sets} · {ex.muscle}</p>
+              <p className="text-[9px] text-ink-faint">{ex.sets} · {ex.muscle}</p>
             </div>
           </motion.button>
         ))}
       </div>
 
-      <p className="text-[9px] text-neutral-600 text-center">Tap exercises to mark complete</p>
+      <p className="text-[9px] text-ink-faint text-center">Tap exercises to mark complete</p>
     </div>
   );
 }
@@ -189,14 +192,14 @@ function DemoNutrition() {
         <p className="text-base font-black text-white">Nutrition</p>
         <div className="flex items-center gap-1.5">
           <Sparkles className="w-3 h-3 text-white" />
-          <span className="text-[10px] text-neutral-400">AI Coach</span>
+          <span className="text-[10px] text-ink-muted">AI Coach</span>
         </div>
       </div>
 
       {/* Quick stats */}
       <div className="grid grid-cols-2 gap-2">
-        <div className="bg-white/[0.04] rounded-xl p-3 border border-white/[0.04] text-center">
-          <p className="text-[9px] text-neutral-500 uppercase">Calories</p>
+        <div className="well p-3 text-center">
+          <p className="text-[9px] text-ink-muted uppercase">Calories</p>
           <motion.p
             key={totalCal}
             initial={{ scale: 1.1 }}
@@ -205,24 +208,24 @@ function DemoNutrition() {
           >
             {totalCal}
           </motion.p>
-          <p className="text-[8px] text-neutral-600">/ 2000 kcal</p>
+          <p className="text-[8px] text-ink-faint">/ 2000 kcal</p>
         </div>
-        <div className="bg-white/[0.04] rounded-xl p-3 border border-white/[0.04] text-center">
-          <p className="text-[9px] text-neutral-500 uppercase">Protein</p>
+        <div className="well p-3 text-center">
+          <p className="text-[9px] text-ink-muted uppercase">Protein</p>
           <motion.p
             key={totalProtein}
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
-            className="text-lg font-bold text-green-400"
+            className="text-lg font-bold text-protein"
           >
             {totalProtein}g
           </motion.p>
-          <p className="text-[8px] text-neutral-600">/ 150g target</p>
+          <p className="text-[8px] text-ink-faint">/ 150g target</p>
         </div>
       </div>
 
       {/* Food list */}
-      <p className="text-[10px] text-neutral-500 uppercase tracking-wider">Tap to log food</p>
+      <p className="text-[10px] text-ink-muted uppercase tracking-wider">Tap to log food</p>
       <div className="space-y-1.5">
         {foods.map((food, i) => (
           <motion.button
@@ -239,23 +242,23 @@ function DemoNutrition() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
             className={`w-full flex items-center gap-3 p-2.5 rounded-xl border transition-all duration-200 text-left ${
-              logged.has(i) ? "bg-green-400/5 border-green-400/20" : "border-white/[0.04] hover:bg-white/[0.02]"
+              logged.has(i) ? "bg-protein/[0.06] border-protein/25" : "border-white/[0.04] hover:bg-white/[0.02]"
             }`}
           >
             <span className="text-base">{food.emoji}</span>
             <div className="flex-1 min-w-0">
               <p className="text-[11px] font-semibold text-white">{food.name}</p>
-              <p className="text-[9px] text-neutral-500">{food.protein}g protein</p>
+              <p className="text-[9px] text-ink-muted">{food.protein}g protein</p>
             </div>
             <div className="text-right">
               <p className="text-[10px] font-bold text-white">{food.cal}</p>
-              <p className="text-[8px] text-neutral-600">kcal</p>
+              <p className="text-[8px] text-ink-faint">kcal</p>
             </div>
             {logged.has(i) && (
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="w-4 h-4 rounded-full bg-green-400 flex items-center justify-center"
+                className="w-4 h-4 rounded-full bg-protein flex items-center justify-center"
               >
                 <Check className="w-2.5 h-2.5 text-black" />
               </motion.div>
@@ -292,30 +295,30 @@ function DemoBuddies() {
       <div className="flex items-center justify-between">
         <p className="text-base font-black text-white">Gym Buddies</p>
         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.06]">
-          <QrCode className="w-3 h-3 text-neutral-400" />
-          <span className="text-[10px] text-neutral-400">Add via QR</span>
+          <QrCode className="w-3 h-3 text-ink-muted" />
+          <span className="text-[10px] text-ink-muted">Add via QR</span>
         </div>
       </div>
 
       {/* Crowd indicator */}
-      <div className="bg-white/[0.04] rounded-xl p-3 border border-white/[0.04]">
+      <div className="well p-3">
         <div className="flex items-center justify-between mb-2">
           <p className="text-[10px] font-semibold text-white">Gym Crowd Right Now</p>
-          <span className="text-[9px] font-semibold text-green-400">Not Busy</span>
+          <span className="text-[9px] font-semibold text-protein">Not Busy</span>
         </div>
         <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: "35%" }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="h-full rounded-full bg-green-400"
+            className="h-full rounded-full bg-protein"
           />
         </div>
-        <p className="text-[8px] text-neutral-600 mt-1.5">Best time to train · 2 buddies there now</p>
+        <p className="text-[8px] text-ink-faint mt-1.5">Best time to train · 2 buddies there now</p>
       </div>
 
       {/* Buddy list */}
-      <p className="text-[10px] text-neutral-500 uppercase tracking-wider">Today&apos;s Intents · Tap to nudge</p>
+      <p className="text-[10px] text-ink-muted uppercase tracking-wider">Today&apos;s Intents · Tap to nudge</p>
       <div className="space-y-1.5">
         {buddies.map((b, i) => (
           <motion.button
@@ -325,16 +328,16 @@ function DemoBuddies() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
             className={`w-full flex items-center gap-3 p-2.5 rounded-xl border transition-all duration-200 text-left ${
-              nudged.has(i) ? "bg-green-400/5 border-green-400/20" : "border-white/[0.04] hover:bg-white/[0.02]"
+              nudged.has(i) ? "bg-protein/[0.06] border-protein/25" : "border-white/[0.04] hover:bg-white/[0.02]"
             }`}
           >
             <div className="relative flex-shrink-0">
-              <div className="w-9 h-9 rounded-full bg-neutral-800" />
-              {b.active && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-400 border-2 border-[#0c0c0c]" />}
+              <div className="w-9 h-9 rounded-full bg-white/[0.09]" />
+              {b.active && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-protein border-2 border-[#050506]" />}
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-[11px] font-semibold text-white">{b.name}</p>
-              <p className="text-[9px] text-neutral-500 truncate">{b.intent} · {b.status}</p>
+              <p className="text-[9px] text-ink-muted truncate">{b.intent} · {b.status}</p>
             </div>
             <motion.span
               key={nudged.has(i) ? "nudged" : "nudge"}
@@ -342,8 +345,8 @@ function DemoBuddies() {
               animate={{ scale: 1, opacity: 1 }}
               className={`text-[9px] px-2.5 py-1 rounded-full font-semibold flex-shrink-0 ${
                 nudged.has(i)
-                  ? "bg-green-400/15 text-green-400 border border-green-400/25"
-                  : "bg-white/[0.06] text-neutral-400 border border-white/[0.06]"
+                  ? "bg-protein/15 text-protein border border-protein/25"
+                  : "bg-white/[0.06] text-ink-muted border border-white/[0.06]"
               }`}
             >
               {nudged.has(i) ? "Nudged 👊" : "Nudge"}
@@ -360,12 +363,12 @@ function DemoProfile() {
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-3">
-        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-protein to-protein/60 flex items-center justify-center">
           <span className="text-lg font-bold text-black">GU</span>
         </div>
         <div>
           <p className="text-base font-bold text-white">Guest User</p>
-          <p className="text-[10px] text-neutral-500">Level 1 · 0 XP</p>
+          <p className="text-[10px] text-ink-muted">Level 1 · 0 XP</p>
         </div>
       </div>
 
@@ -376,16 +379,16 @@ function DemoProfile() {
           { label: "Streak", value: "0d" },
           { label: "Weight", value: "—" },
         ].map((s) => (
-          <div key={s.label} className="bg-white/[0.04] rounded-xl p-2.5 text-center border border-white/[0.04]">
+          <div key={s.label} className="well p-2.5 text-center">
             <p className="text-sm font-bold text-white">{s.value}</p>
-            <p className="text-[8px] text-neutral-600 uppercase">{s.label}</p>
+            <p className="text-[8px] text-ink-faint uppercase">{s.label}</p>
           </div>
         ))}
       </div>
 
       {/* Achievements */}
       <div>
-        <p className="text-[10px] text-neutral-500 uppercase tracking-wider mb-2">Achievements</p>
+        <p className="text-[10px] text-ink-muted uppercase tracking-wider mb-2">Achievements</p>
         <div className="grid grid-cols-4 gap-2">
           {["🏋️", "🔥", "📚", "🎯"].map((emoji, i) => (
             <motion.div
@@ -405,20 +408,20 @@ function DemoProfile() {
 
       {/* Settings preview */}
       <div className="space-y-1">
-        <p className="text-[10px] text-neutral-500 uppercase tracking-wider mb-2">Quick Settings</p>
+        <p className="text-[10px] text-ink-muted uppercase tracking-wider mb-2">Quick Settings</p>
         {[
           { label: "Training Split", value: "PPL" },
           { label: "Calorie Target", value: "2000 kcal" },
           { label: "Protein Goal", value: "150g" },
         ].map((setting) => (
           <div key={setting.label} className="flex items-center justify-between p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.03]">
-            <span className="text-[11px] text-neutral-400">{setting.label}</span>
+            <span className="text-[11px] text-ink-muted">{setting.label}</span>
             <span className="text-[11px] font-semibold text-white">{setting.value}</span>
           </div>
         ))}
       </div>
 
-      <p className="text-[9px] text-neutral-600 text-center pt-2">
+      <p className="text-[9px] text-ink-faint text-center pt-2">
         Download Fitzo to unlock your full profile
       </p>
     </div>
@@ -439,49 +442,49 @@ export default function InteractiveDemo() {
   const ActiveScreen = tabs[activeTab].component;
 
   return (
-    <section id="demo" className="relative py-16 sm:py-24 bg-black">
+    <section id="demo" className="relative py-14 sm:py-24 lg:py-32">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-[0.95fr_1fr] lg:gap-16">
         {/* Header */}
         <motion.div
-          variants={fadeUp}
+          variants={rise}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-12"
+          viewport={VIEWPORT}
         >
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-medium bg-white/[0.04] text-neutral-500 border border-white/[0.06] mb-6">
-            Interactive
-          </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6">
-            Try Fitzo.<br />
-            <span className="text-neutral-500">No Download Required.</span>
+          <span className="kicker mb-6">Interactive</span>
+          <h2 className="text-[clamp(2rem,4.6vw,3.25rem)] font-black leading-[0.98] tracking-[-0.04em] text-balance">
+            Try Fitzo.
+            <br />
+            <span className="text-ink-faint">No download required.</span>
           </h2>
-          <p className="text-lg sm:text-xl text-neutral-500 max-w-2xl mx-auto">
-            Tap around. Explore the features. See why lifters love it.
+          <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-ink-muted text-pretty">
+            Tap through five screens of the real app. Log a set, tick off a
+            meal, nudge a buddy — it all responds.
           </p>
         </motion.div>
 
         {/* Phone Demo */}
         <motion.div
-          variants={fadeUp}
+          variants={rise}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT}
           className="flex flex-col items-center"
         >
-          <div className="relative w-[300px] sm:w-[320px] h-[620px] sm:h-[660px] rounded-[2.5rem] border border-white/[0.08] bg-[#0c0c0c] shadow-[0_0_100px_rgba(255,255,255,0.03)] overflow-hidden">
+          <div className="relative h-[560px] w-[288px] sm:h-[660px] sm:w-[320px] rounded-[2.5rem] border border-white/[0.08] bg-panel shadow-[0_0_100px_rgba(255,255,255,0.03)] overflow-hidden">
             {/* BorderBeam */}
             <BorderBeam
               size={150}
               duration={8}
-              colorFrom="#22c55e"
+              colorFrom="#4ade80"
               colorTo="#ffffff"
               delay={0}
             />
 
             {/* Status bar */}
             <div className="flex items-center justify-between px-6 pt-3 pb-1">
-              <span className="text-[10px] text-neutral-500 font-medium">9:41</span>
+              <span className="text-[10px] text-ink-muted font-medium">9:41</span>
               <div className="w-[72px] h-[22px] rounded-full bg-black" />
               <div className="flex items-center gap-1">
                 <div className="w-[15px] h-[10px] rounded-[2px] border border-neutral-600" />
@@ -489,14 +492,18 @@ export default function InteractiveDemo() {
             </div>
 
             {/* Screen Content */}
-            <div className="px-4 pt-2 h-[calc(100%-4.5rem)] overflow-y-auto scrollbar-hide">
-              <AnimatePresence mode="wait">
+            <div className="relative h-[calc(100%-2.75rem)] overflow-hidden">
+              {/* Crossfade in place. mode="wait" ran exit (0.25s) fully before
+                  enter, so the phone went blank between every tab — the exact
+                  defect the hero phone was rebuilt to remove. */}
+              <AnimatePresence initial={false}>
                 <motion.div
                   key={activeTab}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.25, ease: [0.25, 0.4, 0.25, 1] }}
+                  initial={{ opacity: 0, scale: 0.99 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.006 }}
+                  transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                  className="scrollbar-hide absolute inset-0 overflow-y-auto px-4 pb-[4.75rem] pt-2"
                 >
                   <ActiveScreen />
                 </motion.div>
@@ -511,10 +518,10 @@ export default function InteractiveDemo() {
                   <button
                     key={tab.label}
                     onClick={() => setActiveTab(i)}
-                    className="flex flex-col items-center justify-center gap-0.5 w-10 h-10 relative"
+                    className="relative flex h-11 w-11 flex-col items-center justify-center gap-0.5 rounded-lg"
                   >
-                    <Icon className={`w-4 h-4 transition-all duration-300 ${activeTab === i ? "text-white scale-110" : "text-neutral-500 hover:text-neutral-300"}`} />
-                    <span className={`text-[8px] font-semibold tracking-tight transition-colors duration-300 mt-0.5 ${activeTab === i ? "text-white" : "text-neutral-600"}`}>
+                    <Icon className={`w-4 h-4 transition-all duration-300 ${activeTab === i ? "text-white scale-110" : "text-ink-muted hover:text-ink-muted"}`} />
+                    <span className={`text-[8px] font-semibold tracking-tight transition-colors duration-300 mt-0.5 ${activeTab === i ? "text-white" : "text-ink-faint"}`}>
                       {tab.label}
                     </span>
                     {activeTab === i && (
@@ -533,29 +540,32 @@ export default function InteractiveDemo() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={VIEWPORT}
             transition={{ delay: 0.5 }}
             className="mt-8 text-center"
           >
-            <p className="text-neutral-500 text-sm mb-4">
-              Love it? Get the real thing.
+            {/* Honesty: these used to be "Download iOS" and "Google Play"
+                buttons that both scrolled to an email form. Fitzo has no store
+                listing yet, so the label now matches what the click does. */}
+            <p className="mb-5 text-sm text-ink-muted">
+              This is the real interface, running in your browser.
             </p>
-            <div className="flex gap-3 justify-center">
-              <a href="#download" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 transition-colors">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-                </svg>
-                Download iOS
-              </a>
-              <a href="#download" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/[0.06] border border-white/[0.08] text-white font-semibold text-sm hover:bg-white/[0.1] transition-colors">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z"/>
-                </svg>
-                Google Play
-              </a>
-            </div>
+            <motion.a
+              href="#download"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.975 }}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold text-black transition-colors duration-300 hover:bg-protein"
+            >
+              Get the real thing
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1" />
+            </motion.a>
+            <p className="mt-4 text-xs uppercase tracking-[0.14em] text-ink-faint">
+              Google Play · iOS TestFlight beta
+            </p>
           </motion.div>
         </motion.div>
+      </div>
       </div>
     </section>
   );

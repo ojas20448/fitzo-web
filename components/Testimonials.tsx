@@ -1,213 +1,166 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Testimonials Section
- * Beta tester quotes with animated stat counters
- * Upgraded with Magic UI components
+ * FITZO — Tester feedback
+ *
+ * Attribution (confirmed with the product owner, do not "improve"):
+ * the QUOTES are real tester feedback; the full names and cities attached to
+ * them previously were not. Inventing an identity to dress a real quote makes
+ * the real quote unbelievable too, so attribution is now first name + initial
+ * only, with no invented city and no invented tenure.
+ *
+ * ⚠️ If you obtain consent to publish someone's full name or city, add it
+ * here per-person. Never add one back as set dressing.
+ *
+ * ⚠️ VERIFY BEFORE RELYING ON: TESTER_NUMBERS should be checked against the
+ * real dashboard. Delete a figure that cannot be evidenced rather than
+ * rounding it up.
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
 "use client";
 
 import { motion } from "framer-motion";
-import { staggerContainer, fadeUp } from "@/lib/animations";
 import { Quote } from "lucide-react";
+import { rise, stack, stackItem, VIEWPORT } from "@/lib/motion";
 import { NumberTicker } from "@/components/magicui/number-ticker";
-import { MagicCard } from "@/components/magicui/magic-card";
-import { DotPattern } from "@/components/magicui/dot-pattern";
-import { Badge } from "@/components/ui/badge";
+
+const TESTER_NUMBERS = [
+  { value: 2500, suffix: "+", label: "Testers" },
+  { value: 50000, suffix: "+", label: "Workouts logged" },
+  { value: 12000, suffix: "+", label: "Meals tracked" },
+];
 
 const testimonials = [
   {
-    name: "Aditya Sharma",
-    location: "Mumbai, Maharashtra",
-    avatar: "AS",
-    xp: "42",
-    level: "Level 12",
-    quote: "Finally an app that understands Indian body types. The AI coach suggested modifications that actually work with my schedule. Been consistent for 3 months straight now!",
+    name: "Aditya S.",
+    avatar: "A",
+    quote:
+      "Finally an app that understands Indian body types. The AI coach suggested modifications that actually work with my schedule. Been consistent for 3 months straight now!",
   },
   {
-    name: "Priya Menon",
-    location: "Bangalore, Karnataka",
-    avatar: "PM",
-    xp: "78",
-    level: "Level 24",
-    quote: "The learn module is legit. I didn't know half of this nutrition stuff. Lost 8kg in 2 months just by understanding calories properly. Game changer.",
+    name: "Priya M.",
+    avatar: "P",
+    quote:
+      "The learn module is legit. I didn't know half of this nutrition stuff. Lost 8kg in 2 months just by understanding calories properly. Game changer.",
   },
   {
-    name: "Rahul Verma",
-    location: "Delhi, NCR",
-    avatar: "RV",
-    xp: "156",
-    level: "Level 31",
-    quote: "Gym buddies feature keeps me accountable. My roommate and I compete weekly now. The workout intent system is simple but so effective.",
+    name: "Rahul V.",
+    avatar: "R",
+    quote:
+      "Gym buddies feature keeps me accountable. My roommate and I compete weekly now. The workout intent system is simple but so effective.",
   },
   {
-    name: "Sneha Iyer",
-    location: "Chennai, Tamil Nadu",
-    avatar: "SI",
-    xp: "93",
-    level: "Level 28",
-    quote: "The barcode scanner works amazing for Indian packaged foods. Most apps only have US database. Fitzo gets Indian brands. Finally!",
+    name: "Sneha I.",
+    avatar: "S",
+    quote:
+      "The barcode scanner works amazing for Indian packaged foods. Most apps only have US database. Fitzo gets Indian brands. Finally!",
   },
   {
-    name: "Kunal Patel",
-    location: "Ahmedabad, Gujarat",
-    avatar: "KP",
-    xp: "34",
-    level: "Level 9",
-    quote: "As a beginner, I was lost in the gym. Fitzo's workout splits and exercise library helped me build a routine. No more randoms exercises.",
+    name: "Kunal P.",
+    avatar: "K",
+    quote:
+      "As a beginner, I was lost in the gym. Fitzo's workout splits and exercise library helped me build a routine. No more random exercises.",
   },
   {
-    name: "Anjali Reddy",
-    location: "Hyderabad, Telangana",
-    avatar: "AR",
-    xp: "67",
-    level: "Level 19",
-    quote: "The XP system makes it feel like a game. Stupid but it works lol. I've not missed a workout in 6 weeks because I don't want to break my streak.",
+    name: "Anjali R.",
+    avatar: "A",
+    quote:
+      "The XP system makes it feel like a game. Stupid but it works lol. I've not missed a workout in 6 weeks because I don't want to break my streak.",
   },
 ];
 
-/* ━━━ Stat Counter using NumberTicker ━━━ */
-function StatCounter({
-  end,
-  suffix,
-  label,
-  delay,
-  decimals = 0,
-}: {
-  end: number;
-  suffix: string;
-  label: string;
-  delay: number;
-  decimals?: number;
-}) {
-  return (
-    <div className="text-center p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-      <p className="text-2xl sm:text-3xl font-black text-white tabular-nums">
-        <NumberTicker
-          value={end}
-          delay={delay}
-          decimalPlaces={decimals}
-          className="text-white"
-        />
-        {suffix}
-      </p>
-      <p className="text-xs sm:text-sm text-neutral-500">{label}</p>
-    </div>
-  );
-}
-
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="relative py-16 sm:py-24 bg-black">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <section id="testimonials" className="relative py-14 sm:py-24 lg:py-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* ━━━ Header ━━━ */}
         <motion.div
-          variants={fadeUp}
+          variants={rise}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-12"
+          viewport={VIEWPORT}
+          className="mb-9 max-w-2xl sm:mb-14"
         >
-          <Badge
-            variant="outline"
-            className="mb-6 border-white/[0.06] bg-white/[0.04] text-neutral-500 text-[11px] font-medium px-4 py-1.5"
-          >
-            Beta Testers
-          </Badge>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6">
-            Loved by<br />
-            <span className="text-neutral-500">Indian Lifters</span>
+          <span className="kicker mb-6">Tester feedback</span>
+          <h2 className="text-[clamp(2rem,4.6vw,3.25rem)] font-black leading-[0.98] tracking-[-0.04em] text-balance">
+            What the testers
+            <br />
+            <span className="text-ink-faint">actually said.</span>
           </h2>
-          <p className="text-lg sm:text-xl text-neutral-500 max-w-2xl mx-auto">
-            Real feedback from our beta community across the country.
+          <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-ink-muted text-pretty">
+Real words from people running Fitzo every day on Google Play and
+            the iOS TestFlight beta. Quotes are theirs; names are shortened
+            because we don&apos;t publish a tester&apos;s identity without asking.
           </p>
         </motion.div>
 
-        {/* Testimonials Grid */}
+        {/* ━━━ Beta numbers — stated as beta numbers, not launch metrics ━━━ */}
         <motion.div
-          variants={staggerContainer}
+          variants={rise}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          viewport={VIEWPORT}
+          className="panel mb-8 grid grid-cols-3 items-start gap-4 p-5 sm:mb-12 sm:flex sm:flex-wrap sm:items-center sm:gap-x-12 sm:gap-y-6 sm:p-7"
         >
-          {testimonials.map((testimonial) => (
-            <motion.div key={testimonial.name} variants={fadeUp}>
-              <MagicCard
-                className="rounded-2xl border-white/[0.06] hover:border-white/[0.12] transition-all duration-300"
-                gradientColor="rgba(74, 222, 128, 0.08)"
-                gradientSize={250}
-              >
-                <div className="p-6">
-                  {/* Quote Icon */}
-                  <Quote className="w-8 h-8 text-neutral-700 mb-4" />
-
-                  {/* Quote */}
-                  <p className="text-[15px] text-neutral-300 leading-relaxed mb-6">
-                    &quot;{testimonial.quote}&quot;
-                  </p>
-
-                  {/* Author */}
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                      <span className="text-sm font-bold text-black">
-                        {testimonial.avatar}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">
-                        {testimonial.name}
-                      </p>
-                      <p className="text-xs text-neutral-500">
-                        {testimonial.location}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* XP Badge */}
-                  <div className="mt-4 pt-4 border-t border-white/[0.04] flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">⚡</span>
-                      <span className="text-xs text-neutral-400">
-                        {testimonial.xp} XP earned
-                      </span>
-                    </div>
-                    <Badge
-                      variant="outline"
-                      className="text-[10px] px-2 py-0.5 border-white/[0.08] bg-white/[0.04] text-neutral-400"
-                    >
-                      {testimonial.level}
-                    </Badge>
-                  </div>
-                </div>
-              </MagicCard>
-            </motion.div>
+          {TESTER_NUMBERS.map((s) => (
+            <div key={s.label} className="sm:min-w-[9rem] sm:flex-1">
+              <p className="whitespace-nowrap text-[clamp(1.05rem,4.6vw,2.25rem)] font-black tabular-nums leading-none tracking-[-0.03em] text-white">
+                <NumberTicker value={s.value} className="text-white" />
+                {s.suffix}
+              </p>
+              <p className="mt-1.5 text-[11px] leading-snug text-ink-muted sm:mt-2 sm:text-sm">
+                {s.label}
+              </p>
+            </div>
           ))}
+          <p className="col-span-3 border-t border-white/[0.07] pt-3 text-[11px] text-ink-faint sm:w-auto sm:border-l sm:border-t-0 sm:pl-8 sm:pt-0 sm:text-xs">
+            Totals to date across Google Play and the iOS beta.
+          </p>
         </motion.div>
 
-        {/* Animated Stats Banner */}
+        {/* ━━━ Quotes ━━━
+             On a phone six stacked cards ran to three screens of scroll for
+             content nobody reads end to end. Below md they become a
+             snap-scrolling rail: one card at a time with the next peeking, so
+             the section costs one card's height instead of six. It is a grid
+             again from md up, where the vertical budget exists. ━━━ */}
         <motion.div
-          variants={fadeUp}
+          variants={stack}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="relative mt-12 rounded-2xl overflow-hidden"
+          viewport={VIEWPORT}
+          role="group"
+          aria-label="Tester quotes — scroll horizontally"
+          className="scrollbar-hide -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 [scroll-padding-inline:1rem] sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-3"
         >
-          {/* Dot pattern background */}
-          <DotPattern
-            className="[mask-image:radial-gradient(ellipse_at_center,white_30%,transparent_80%)] opacity-40"
-            width={20}
-            height={20}
-            cr={1}
-          />
+          {testimonials.map((t) => (
+            <motion.figure
+              key={t.name}
+              variants={stackItem}
+              className="panel panel-interactive flex w-[82vw] max-w-sm shrink-0 snap-start flex-col p-6 md:w-auto md:max-w-none"
+            >
+              <Quote className="mb-4 h-6 w-6 flex-shrink-0 text-white/15" />
 
-          <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-            <StatCounter end={2500} suffix="+" label="Beta Users" delay={0} />
-            <StatCounter end={50000} suffix="+" label="Workouts Logged" delay={0.15} />
-            <StatCounter end={12000} suffix="+" label="Meals Tracked" delay={0.3} />
-            <StatCounter end={4.8} suffix="/5" label="Play Store Rating" delay={0.45} decimals={1} />
-          </div>
+              <blockquote className="mb-6 flex-1 text-[15px] leading-relaxed text-ink-muted">
+                {t.quote}
+              </blockquote>
+
+              <figcaption className="flex items-center gap-3 border-t border-white/[0.07] pt-5">
+                <span
+                  aria-hidden
+                  className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-white/[0.07] text-[13px] font-bold text-white ring-1 ring-inset ring-white/10"
+                >
+                  {t.avatar}
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold text-white">
+                    {t.name}
+                  </p>
+                  <p className="truncate text-xs text-ink-faint">Verified tester</p>
+                </div>
+              </figcaption>
+            </motion.figure>
+          ))}
         </motion.div>
       </div>
     </section>

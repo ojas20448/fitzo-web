@@ -42,7 +42,7 @@ export default function TermsOfService() {
           </Link>
           <Link
             href="/"
-            className="text-sm text-neutral-400 hover:text-white transition-colors"
+            className="text-sm text-ink-muted hover:text-white transition-colors"
           >
             &larr; Back to Home
           </Link>
@@ -50,13 +50,13 @@ export default function TermsOfService() {
       </header>
 
       {/* ━━━ Content ━━━ */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+      <main id="main" className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
         {/* Page Title */}
         <div className="mb-12">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">
             Terms of Service
           </h1>
-          <p className="text-neutral-500">Last updated: February 17, 2026</p>
+          <p className="text-ink-muted">Last updated: February 17, 2026</p>
         </div>
 
         {/* ━━━ Agreement ━━━ */}
@@ -90,7 +90,7 @@ export default function TermsOfService() {
             To use certain features of the Service, you may need to create an
             account. You are responsible for:
           </p>
-          <ul className="list-disc list-inside space-y-2 text-neutral-400">
+          <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>
               <span className="text-neutral-300">
                 Maintaining the confidentiality
@@ -117,7 +117,7 @@ export default function TermsOfService() {
         {/* ━━━ Acceptable Use ━━━ */}
         <Section title="4. Acceptable Use">
           <p>You agree not to:</p>
-          <ul className="list-disc list-inside space-y-2 text-neutral-400">
+          <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>Use the Service for any unlawful purpose</li>
             <li>
               Attempt to gain unauthorized access to any part of the Service
@@ -149,7 +149,7 @@ export default function TermsOfService() {
             Fitzo may offer free and paid subscription plans. If you purchase a
             subscription:
           </p>
-          <ul className="list-disc list-inside space-y-2 text-neutral-400">
+          <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>
               <span className="text-neutral-300">Billing</span> — Payment is
               processed through the Apple App Store or Google Play Store. Your
@@ -183,7 +183,7 @@ export default function TermsOfService() {
             trademark, trade secret, and other intellectual property laws. You
             may not:
           </p>
-          <ul className="list-disc list-inside space-y-2 text-neutral-400">
+          <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>
               Copy, modify, or create derivative works of the Service
             </li>
@@ -221,7 +221,7 @@ export default function TermsOfService() {
               Fitzo is not a medical device and does not provide medical advice.
             </strong>
           </p>
-          <ul className="list-disc list-inside space-y-2 text-neutral-400">
+          <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>
               The workout programs, nutrition information, and educational
               content provided through the Service are for informational
@@ -276,7 +276,7 @@ export default function TermsOfService() {
             without prior notice, for any reason, including breach of these
             Terms. Upon termination:
           </p>
-          <ul className="list-disc list-inside space-y-2 text-neutral-400">
+          <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>
               Your right to use the Service will immediately cease
             </li>
@@ -324,10 +324,10 @@ export default function TermsOfService() {
 
         {/* Related Links */}
         <div className="pt-8 border-t border-white/[0.06]">
-          <p className="text-sm text-neutral-500 mb-3">Related</p>
+          <p className="text-sm text-ink-muted mb-3">Related</p>
           <Link
             href="/privacy-policy"
-            className="text-sm text-neutral-400 hover:text-white transition-colors"
+            className="text-sm text-ink-muted hover:text-white transition-colors"
           >
             Privacy Policy &rarr;
           </Link>
@@ -337,19 +337,19 @@ export default function TermsOfService() {
       {/* ━━━ Footer ━━━ */}
       <footer className="border-t border-white/[0.06] py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-neutral-700">
+          <p className="text-xs text-ink-faint">
             &copy; {new Date().getFullYear()} Fitzo. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link
               href="/privacy-policy"
-              className="text-xs text-neutral-600 hover:text-white transition-colors"
+              className="text-xs text-ink-faint hover:text-white transition-colors"
             >
               Privacy Policy
             </Link>
             <Link
               href="/"
-              className="text-xs text-neutral-600 hover:text-white transition-colors"
+              className="text-xs text-ink-faint hover:text-white transition-colors"
             >
               Back to Home
             </Link>

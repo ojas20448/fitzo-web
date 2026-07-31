@@ -1,22 +1,27 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Main Landing Page
- * Science-Based Fitness Tracking for Serious Lifters
+ * FITZO — Landing page
+ *
+ * Scroll pacing: a dense first viewport, then the one authored motion moment
+ * (WeeklyReadout), then hands-on (InteractiveDemo), then the catalogue, then
+ * the argument, then the people, then one close. Sections own their own top
+ * and bottom rhythm — the previous seven identical hairline dividers were
+ * grammar nobody chose.
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import SocialProof from "@/components/SocialProof";
+import WeeklyReadout from "@/components/WeeklyReadout";
+import InteractiveDemo from "@/components/InteractiveDemo";
 import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
-import Testimonials from "@/components/Testimonials";
-import FAQ from "@/components/FAQ";
 import Comparison from "@/components/Comparison";
+import Testimonials from "@/components/Testimonials";
+import FounderStory from "@/components/FounderStory";
+import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import FounderStory from "@/components/FounderStory";
-import InteractiveDemo from "@/components/InteractiveDemo";
 import {
   getOrganizationSchema,
   getWebSiteSchema,
@@ -37,8 +42,7 @@ const faqData = [
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-white dark:bg-black transition-colors duration-300">
-      {/* JSON-LD Structured Data */}
+    <div className="relative min-h-screen bg-background">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getOrganizationSchema()) }}
@@ -56,78 +60,33 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getFAQSchema(faqData)) }}
       />
 
-      {/* Navigation */}
       <Navbar />
 
-      {/* Main Content — show the product early, one conversion point at the end */}
-      <main>
-        {/* Hero Section */}
+      <main id="main">
         <Hero />
 
-        {/* Social Proof Bar */}
-        <SocialProof />
+        {/* The one authored motion moment: a week of training, scrubbed. */}
+        <WeeklyReadout />
 
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* Interactive Demo — show, don't tell */}
+        {/* Show, then let them touch it. */}
         <InteractiveDemo />
 
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* Features Bento Grid */}
         <Features />
 
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* How It Works */}
         <HowItWorks />
 
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* Why Fitzo — Comparison */}
         <Comparison />
 
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* Testimonials */}
         <Testimonials />
 
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* Founder Story */}
         <FounderStory />
 
-        {/* Divider */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-px bg-gradient-to-r from-transparent via-black/10 dark:via-white/10 to-transparent" />
-        </div>
-
-        {/* FAQ */}
         <FAQ />
 
-        {/* Final CTA + Early Access (id="download" — every CTA lands here) */}
+        {/* One conversion point — every CTA on the site lands here. */}
         <CTA />
       </main>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

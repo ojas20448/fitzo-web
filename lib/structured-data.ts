@@ -1,6 +1,7 @@
 import { BlogPost } from "./blog";
+import { SITE_URL } from "@/lib/links";
 
-const SITE_URL = "https://fitzo.app";
+
 
 export function getOrganizationSchema() {
   return {
@@ -53,13 +54,20 @@ export function getSoftwareApplicationSchema() {
       price: "0",
       priceCurrency: "INR",
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      ratingCount: "2500",
-      bestRating: "5",
-      worstRating: "1",
-    },
+    /*
+     * ⚠️ aggregateRating removed deliberately — do not restore from memory.
+     *
+     * This shipped `ratingValue: "4.8"` with `ratingCount: "2500"` to Google
+     * as review markup. Two problems: the count was the tester headcount, not
+     * a count of ratings, and neither figure was traceable to the Play
+     * listing. Google treats unverifiable review markup as a structured-data
+     * violation and can demote the whole site for it.
+     *
+     * To put it back, take BOTH numbers from the live Play Console rating
+     * summary and keep them in sync when they move. If nobody owns that,
+     * leave this out — Google reads the real rating from the Play listing
+     * regardless.
+     */
     featureList: [
       "Workout tracking with 10+ training splits",
       "AI-powered nutrition coach",

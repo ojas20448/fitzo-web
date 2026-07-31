@@ -12,8 +12,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, Loader2, Mail } from "lucide-react";
-import { staggerContainer, staggerItem } from "@/lib/animations";
+import { stack, stackItem, VIEWPORT } from "@/lib/motion";
 import { FitzoIcon } from "@/components/FitzoLogo";
+import { STORE } from "@/lib/links";
 
 export default function CTA() {
   const [email, setEmail] = useState("");
@@ -51,26 +52,29 @@ export default function CTA() {
   };
 
   return (
-    <section id="download" className="relative py-20 sm:py-32 overflow-hidden">
+    <section id="download" className="relative overflow-hidden py-16 sm:py-28 lg:py-40">
       {/* Single quiet backdrop */}
-      <div className="absolute inset-0 radial-fade dark:radial-fade" />
+      <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_100%,rgba(74,222,128,0.09),transparent_70%)]"
+        />
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
-          variants={staggerContainer}
+          variants={stack}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={VIEWPORT}
         >
           {/* Brand moment */}
-          <motion.div variants={staggerItem} className="flex justify-center mb-8">
+          <motion.div variants={stackItem} className="flex justify-center mb-8">
             <FitzoIcon className="w-16 h-16 sm:w-20 sm:h-20" />
           </motion.div>
 
           {/* Headline */}
           <motion.h2
-            variants={staggerItem}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-black dark:text-white mb-5"
+            variants={stackItem}
+            className="text-[clamp(2.25rem,5.4vw,3.75rem)] font-black leading-[0.96] tracking-[-0.045em] text-balance text-white mb-5"
           >
             Train with a coach
             <br />
@@ -79,22 +83,69 @@ export default function CTA() {
 
           {/* Subtext */}
           <motion.p
-            variants={staggerItem}
-            className="text-lg text-neutral-500 max-w-md mx-auto mb-10 leading-relaxed"
+            variants={stackItem}
+            className="text-lg text-ink-muted max-w-lg mx-auto mb-9 leading-relaxed text-pretty"
           >
-            Get early access before launch. Free for early members — no card, no
-            spam, one email when it&apos;s your turn.
+            Android is live on Google Play. iOS is in open TestFlight beta.
+            Both free — no card, no ads.
           </motion.p>
 
-          {/* ━━━ Early access form (the one conversion action) ━━━ */}
+          {/* ━━━ The real destinations.
+                 These used to be an email form wearing "Download iOS" and
+                 "Google Play" labels. They are now the actual listings, and
+                 the iOS one says TestFlight because that is what it is. ━━━ */}
+          <motion.div
+            variants={stackItem}
+            className="mb-10 flex flex-col justify-center gap-3 sm:flex-row"
+          >
+            <motion.a
+              href={STORE.android}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.975 }}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-white px-7 py-4 text-base font-semibold text-black transition-colors duration-300 hover:bg-protein"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.802 8.99l-2.303 2.303-8.635-8.635z" />
+              </svg>
+              Get it on Google Play
+            </motion.a>
+
+            <motion.a
+              href={STORE.iosTestFlight}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.975 }}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center justify-center gap-2.5 rounded-full border border-white/[0.14] bg-white/[0.05] px-7 py-4 text-base font-semibold text-white transition-colors duration-300 hover:border-white/30 hover:bg-white/[0.09]"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+              </svg>
+              Join the iOS beta
+            </motion.a>
+          </motion.div>
+
+          <motion.div variants={stackItem} className="mb-7 flex items-center gap-4">
+            <span className="h-px flex-1 bg-white/[0.09]" />
+            <span className="text-[11px] uppercase tracking-[0.16em] text-ink-faint">
+              or get launch news
+            </span>
+            <span className="h-px flex-1 bg-white/[0.09]" />
+          </motion.div>
+
+          {/* ━━━ Email list — now the secondary path, not a fake download ━━━ */}
           <motion.form
-            variants={staggerItem}
+            variants={stackItem}
             onSubmit={handleSubmit}
             className="max-w-md mx-auto"
           >
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-muted" />
                 <input
                   type="email"
                   value={email}
@@ -104,13 +155,13 @@ export default function CTA() {
                   }}
                   placeholder="you@example.com"
                   aria-label="Email address"
-                  className="w-full pl-11 pr-4 py-4 rounded-full bg-black/[0.04] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.1] text-black dark:text-white placeholder:text-neutral-500 text-sm outline-none focus:border-black/30 dark:focus:border-white/30 transition-colors"
+                  className="w-full pl-11 pr-4 py-4 rounded-full border border-white/[0.12] bg-white/[0.05] text-white placeholder:text-ink-faint text-sm outline-none focus:border-white/30 transition-colors"
                 />
               </div>
               <button
                 type="submit"
                 disabled={status === "loading" || status === "success"}
-                className="px-8 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black text-sm font-semibold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors disabled:opacity-60 disabled:cursor-not-allowed min-w-[160px] flex items-center justify-center gap-2"
+                className="px-8 py-4 rounded-full bg-white text-black text-sm font-semibold hover:bg-protein transition-colors disabled:opacity-60 disabled:cursor-not-allowed min-w-[160px] flex items-center justify-center gap-2"
               >
                 {status === "loading" ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
@@ -120,7 +171,7 @@ export default function CTA() {
                   </>
                 ) : (
                   <>
-                    Get early access <ArrowRight className="w-4 h-4" />
+                    Notify me <ArrowRight className="w-4 h-4" />
                   </>
                 )}
               </button>
@@ -130,7 +181,7 @@ export default function CTA() {
               <motion.p
                 initial={{ opacity: 0, y: -6 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`mt-4 text-sm ${status === "error" ? "text-red-400" : "text-green-500"}`}
+                className={`mt-4 text-sm ${status === "error" ? "text-fat" : "text-protein"}`}
                 role="status"
               >
                 {message}
@@ -138,12 +189,12 @@ export default function CTA() {
             )}
           </motion.form>
 
-          {/* Honest store status */}
           <motion.p
-            variants={staggerItem}
-            className="mt-8 text-xs text-neutral-500 tracking-wide uppercase"
+            variants={stackItem}
+            className="mx-auto mt-7 max-w-sm text-xs leading-relaxed text-ink-faint"
           >
-            Android &amp; iOS · Launching soon
+            One email when the public iOS release lands. No spam, unsubscribe
+            any time.
           </motion.p>
         </motion.div>
       </div>

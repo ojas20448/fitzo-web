@@ -1,0 +1,12 @@
+import { chromium } from "playwright";
+const b = await chromium.launch();
+const c = await b.newContext({ viewport:{width:1440,height:900} });
+const p = await c.newPage();
+const msgs=[];
+p.on("console", m => { if(["error","warning"].includes(m.type())) msgs.push(`[${m.type()}] ${m.text()}`); });
+p.on("pageerror", e => msgs.push(`[pageerror] ${e.message}`));
+await p.goto("http://localhost:3002", { waitUntil:"networkidle" });
+await p.evaluate(async()=>{const h=document.body.scrollHeight;for(let y=0;y<h;y+=400){window.scrollTo(0,y);await new Promise(r=>setTimeout(r,80));}});
+await p.waitForTimeout(2000);
+console.log(msgs.length ? [...new Set(msgs)].join("\n\n") : "no console errors/warnings");
+await b.close();

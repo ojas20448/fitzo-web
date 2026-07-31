@@ -2,12 +2,13 @@ import { Metadata } from "next";
 import Link from "next/link";
 import FitzoLogo from "@/components/FitzoLogo";
 import { ArrowLeft } from "lucide-react";
+import { SITE_URL } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: "Changelog — What's New in Fitzo",
   description: "Every update, feature, and improvement shipped in Fitzo. From v1.0 to v2.0 — see the complete evolution of India's best fitness tracking app.",
   alternates: {
-    canonical: "https://fitzo.app/changelog",
+    canonical: `${SITE_URL}/changelog`,
   },
 };
 
@@ -91,7 +92,7 @@ const entries = [
 function TagBadge({ tag }: { tag: string }) {
   const colors: Record<string, string> = {
     Major: "bg-green-400/10 text-green-400 border-green-400/20",
-    Feature: "bg-white/[0.06] text-neutral-400 border-white/[0.06]",
+    Feature: "bg-white/[0.06] text-ink-muted border-white/[0.06]",
     Launch: "bg-yellow-400/10 text-yellow-400 border-yellow-400/20",
     Fix: "bg-rose-400/10 text-rose-400 border-rose-400/20",
   };
@@ -109,24 +110,24 @@ export default function ChangelogPage() {
       {/* Header */}
       <header className="sticky top-0 z-50 backdrop-blur-xl bg-black/80 border-b border-white/[0.04]">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors">
+          <Link href="/" className="flex items-center gap-3 text-ink-muted hover:text-white transition-colors">
             <ArrowLeft className="w-4 h-4" />
             <FitzoLogo size="sm" />
           </Link>
-          <span className="text-[11px] uppercase tracking-wider text-neutral-600">Changelog</span>
+          <span className="text-[11px] uppercase tracking-wider text-ink-faint">Changelog</span>
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+      <main id="main" className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
         {/* Page Header */}
         <div className="mb-16">
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-medium bg-white/[0.04] text-neutral-500 border border-white/[0.06] mb-6">
+          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-medium bg-white/[0.04] text-ink-muted border border-white/[0.06] mb-6">
             Updates
           </span>
           <h1 className="text-4xl sm:text-5xl font-black tracking-tight mb-4">
             Changelog
           </h1>
-          <p className="text-lg text-neutral-500">
+          <p className="text-lg text-ink-muted">
             Every update, feature, and fix — shipped fast, documented clearly.
           </p>
         </div>
@@ -147,14 +148,14 @@ export default function ChangelogPage() {
                   <div className="flex items-center gap-3 mb-2 flex-wrap">
                     <span className="text-sm font-bold text-white">{entry.version}</span>
                     <TagBadge tag={entry.tag} />
-                    <span className="text-xs text-neutral-600">{entry.date}</span>
+                    <span className="text-xs text-ink-faint">{entry.date}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">{entry.title}</h3>
-                  <p className="text-sm text-neutral-500 mb-4">{entry.description}</p>
+                  <h2 className="text-xl font-bold text-white mb-2">{entry.title}</h2>
+                  <p className="text-sm text-ink-muted mb-4">{entry.description}</p>
                   <ul className="space-y-1.5">
                     {entry.changes.map((change) => (
-                      <li key={change} className="flex items-start gap-2 text-sm text-neutral-400">
-                        <span className="text-neutral-600 mt-1.5 flex-shrink-0">•</span>
+                      <li key={change} className="flex items-start gap-2 text-sm text-ink-muted">
+                        <span className="text-ink-faint mt-1.5 flex-shrink-0">•</span>
                         {change}
                       </li>
                     ))}

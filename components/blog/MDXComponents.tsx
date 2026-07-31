@@ -11,16 +11,16 @@ export const mdxComponents = {
     <h3 className="text-xl font-bold text-white mt-8 mb-3" {...props} />
   ),
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <p className="text-neutral-400 leading-relaxed mb-4 text-[15px] sm:text-base" {...props} />
+    <p className="text-ink-muted leading-relaxed mb-4 text-[15px] sm:text-base" {...props} />
   ),
   ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className="text-neutral-400 space-y-2 mb-4 ml-4 list-disc list-outside" {...props} />
+    <ul className="text-ink-muted space-y-2 mb-4 ml-4 list-disc list-outside" {...props} />
   ),
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
-    <ol className="text-neutral-400 space-y-2 mb-4 ml-4 list-decimal list-outside" {...props} />
+    <ol className="text-ink-muted space-y-2 mb-4 ml-4 list-decimal list-outside" {...props} />
   ),
   li: (props: React.HTMLAttributes<HTMLLIElement>) => (
-    <li className="text-neutral-400 text-[15px] sm:text-base leading-relaxed" {...props} />
+    <li className="text-ink-muted text-[15px] sm:text-base leading-relaxed" {...props} />
   ),
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
     <strong className="text-white font-semibold" {...props} />
@@ -29,7 +29,7 @@ export const mdxComponents = {
     <em className="text-neutral-300 italic" {...props} />
   ),
   blockquote: (props: React.HTMLAttributes<HTMLQuoteElement>) => (
-    <blockquote className="border-l-2 border-white/20 pl-4 my-6 text-neutral-500 italic" {...props} />
+    <blockquote className="border-l-2 border-white/20 pl-4 my-6 text-ink-muted italic" {...props} />
   ),
   table: (props: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="overflow-x-auto mb-6">
@@ -40,10 +40,10 @@ export const mdxComponents = {
     <thead className="border-b border-white/[0.08]" {...props} />
   ),
   th: (props: React.HTMLAttributes<HTMLTableCellElement>) => (
-    <th className="text-left py-2 px-3 text-neutral-400 font-semibold text-xs uppercase tracking-wider" {...props} />
+    <th className="text-left py-2 px-3 text-ink-muted font-semibold text-xs uppercase tracking-wider" {...props} />
   ),
   td: (props: React.HTMLAttributes<HTMLTableCellElement>) => (
-    <td className="py-2 px-3 text-neutral-400 border-b border-white/[0.04] text-[13px]" {...props} />
+    <td className="py-2 px-3 text-ink-muted border-b border-white/[0.04] text-[13px]" {...props} />
   ),
   tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
     <tr className="hover:bg-white/[0.02]" {...props} />

@@ -1,8 +1,10 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — "Why Fitzo?" Comparison Section
- * B&W side-by-side comparison
- * Enhanced with Magic UI + shadcn components
+ * FITZO — Why switch
+ *
+ * A two-column argument. The status-quo column is deliberately flatter and
+ * quieter than the Fitzo column — the hierarchy does the persuading, so the
+ * copy doesn't have to shout.
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -10,18 +12,9 @@
 
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
-import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
-import { MagicCard } from "@/components/magicui/magic-card";
-import { BorderBeam } from "@/components/magicui/border-beam";
-import { DotPattern } from "@/components/magicui/dot-pattern";
-import { Badge } from "@/components/ui/badge";
+import { rise, stack, stackItem, VIEWPORT } from "@/lib/motion";
 
-interface ComparisonItem {
-  generic: string;
-  fitzo: string;
-}
-
-const COMPARISONS: ComparisonItem[] = [
+const COMPARISONS = [
   {
     generic: "Guesswork-based advice",
     fitzo: "Evidence-based methodology",
@@ -32,147 +25,126 @@ const COMPARISONS: ComparisonItem[] = [
   },
   {
     generic: "Inaccurate calorie tracking",
-    fitzo: "AI-powered food scanner with 500K+ database",
+    fitzo: "AI food scanner across a 500K+ database",
   },
   {
     generic: "Cookie-cutter workout plans",
-    fitzo: "10+ customizable splits for every training style",
+    fitzo: "10+ customisable splits for every training style",
+  },
+  {
+    generic: "US-only food databases",
+    fitzo: "Indian food first — dal, roti, paneer, biryani",
   },
   {
     generic: "Zero connection to your actual gym",
-    fitzo: "QR check-in, class booking, crowd meter & trainer sync built in",
+    fitzo: "QR check-in, class booking, crowd meter, trainer sync",
   },
 ];
 
 export default function Comparison() {
   return (
-    <section id="science" className="relative py-16 sm:py-24 overflow-hidden">
-      {/* ━━━ Dot Pattern Background ━━━ */}
-      <DotPattern
-        className="fill-neutral-400/10 dark:fill-neutral-500/10 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
-        width={20}
-        height={20}
-        cr={1}
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ━━━ Section Header ━━━ */}
+    <section id="science" className="relative overflow-hidden py-14 sm:py-24 lg:py-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          variants={fadeUp}
+          variants={rise}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-12"
+          viewport={VIEWPORT}
+          className="mb-9 max-w-2xl sm:mb-14"
         >
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-medium bg-white/[0.04] text-neutral-500 border border-white/[0.06] mb-6">
-            Why Switch?
-          </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6">
-            Why <span className="text-white">Fitzo</span>?
+          <span className="kicker mb-6">Why switch</span>
+          <h2 className="text-[clamp(2rem,4.6vw,3.25rem)] font-black leading-[0.98] tracking-[-0.04em] text-balance">
+            Most fitness apps
+            <br />
+            <span className="text-ink-faint">aren&apos;t built for lifters.</span>
           </h2>
-          <p className="text-lg sm:text-xl text-neutral-500 max-w-2xl mx-auto">
-            Most fitness apps are built for casual users. Fitzo is built for
-            lifters who take their training seriously.
+          <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-ink-muted text-pretty">
+            They&apos;re built for casual users who want a step counter. Fitzo is
+            built for people who log every set.
           </p>
         </motion.div>
 
-        {/* ━━━ Comparison Grid ━━━ */}
         <motion.div
-          variants={staggerContainer}
+          variants={stack}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-5xl mx-auto"
+          viewport={VIEWPORT}
+          className="mx-auto grid max-w-5xl grid-cols-1 gap-4 lg:grid-cols-2 sm:gap-5"
         >
-          {/* ━━━ Generic Apps Column ━━━ */}
+          {/* ━━━ The status quo — flatter, quieter, no elevation ━━━ */}
           <motion.div
-            variants={staggerItem}
-            className="glass-card p-8 relative opacity-60"
+            variants={stackItem}
+            className="hidden rounded-2xl border border-white/[0.06] bg-white/[0.012] p-7 sm:block sm:p-8"
           >
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-2xl bg-white/[0.04] border border-white/[0.04] flex items-center justify-center">
-                <X className="w-5 h-5 text-neutral-600" />
-              </div>
+            <div className="mb-7 flex items-center gap-3">
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.06] bg-white/[0.03]">
+                <X className="h-5 w-5 text-ink-faint" />
+              </span>
               <div>
-                <h3 className="text-xl font-bold text-neutral-500">
-                  Generic Fitness Apps
+                <h3 className="text-lg font-bold text-ink-muted">
+                  Generic fitness apps
                 </h3>
-                <p className="text-xs text-neutral-700">The status quo</p>
+                <p className="text-xs text-ink-faint">The status quo</p>
               </div>
             </div>
 
-            <div className="space-y-4">
-              {COMPARISONS.map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={staggerItem}
-                  className="flex items-start gap-3 py-3 border-t border-white/[0.04] first:border-t-0"
+            <ul className="space-y-0">
+              {COMPARISONS.map((item) => (
+                <li
+                  key={item.generic}
+                  className="flex items-start gap-3 border-t border-white/[0.05] py-3 first:border-t-0 sm:py-3.5"
                 >
-                  <Badge
-                    variant="destructive"
-                    className="mt-0.5 flex-shrink-0 h-6 w-6 p-0 items-center justify-center rounded-full bg-red-500/10 text-red-400/80 border-red-500/20 hover:bg-red-500/10"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                  </Badge>
-                  <p className="text-sm text-neutral-600 leading-relaxed">
+                  <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-fat/50" />
+                  <p className="text-sm leading-relaxed text-ink-faint">
                     {item.generic}
                   </p>
-                </motion.div>
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
 
-          {/* ━━━ Fitzo Column (highlighted) — MagicCard + BorderBeam ━━━ */}
-          <motion.div variants={staggerItem}>
-            <MagicCard
-              className="p-8 relative rounded-3xl border-white/[0.1]"
-              gradientColor="rgba(74, 222, 128, 0.12)"
-              gradientSize={250}
-            >
-              {/* Border Beam — animated green-to-white border */}
-              <BorderBeam
-                size={180}
-                duration={12}
-                colorFrom="#4ade80"
-                colorTo="#ffffff"
-                delay={0}
-              />
+          {/* ━━━ Fitzo — full elevation, the accent does the work ━━━ */}
+          <motion.div
+            variants={stackItem}
+            className="panel relative overflow-hidden p-5 sm:p-8"
+          >
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-protein/60 to-transparent"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_60%_at_50%_0%,rgba(74,222,128,0.07),transparent_70%)]"
+            />
 
-              {/* Subtle accent overlay */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-green-500/[0.04] via-transparent to-transparent pointer-events-none" />
-
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center">
-                    <Check className="w-5 h-5 text-black" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">Fitzo</h3>
-                    <p className="text-xs text-neutral-500">Built different</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  {COMPARISONS.map((item, i) => (
-                    <motion.div
-                      key={i}
-                      variants={staggerItem}
-                      className="flex items-start gap-3 py-3 border-t border-white/[0.04] first:border-t-0"
-                    >
-                      <Badge
-                        variant="default"
-                        className="mt-0.5 flex-shrink-0 h-6 w-6 p-0 items-center justify-center rounded-full bg-green-500/15 text-green-400 border border-green-500/25 hover:bg-green-500/15"
-                      >
-                        <Check className="w-3.5 h-3.5" />
-                      </Badge>
-                      <p className="text-sm text-neutral-300 leading-relaxed">
-                        {item.fitzo}
-                      </p>
-                    </motion.div>
-                  ))}
+            <div className="relative z-10">
+              <div className="mb-7 flex items-center gap-3">
+                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-protein">
+                  <Check className="h-5 w-5 text-black" strokeWidth={3} />
+                </span>
+                <div>
+                  <h3 className="text-lg font-bold text-white">Fitzo</h3>
+                  <p className="text-xs text-ink-faint">Built different</p>
                 </div>
               </div>
-            </MagicCard>
+
+              <ul className="space-y-0">
+                {COMPARISONS.map((item) => (
+                  <li
+                    key={item.fitzo}
+                    className="flex items-start gap-3 border-t border-white/[0.06] py-3 first:border-t-0 sm:py-3.5"
+                  >
+                    <Check
+                      className="mt-0.5 h-4 w-4 flex-shrink-0 text-protein"
+                      strokeWidth={2.5}
+                    />
+                    <p className="text-sm leading-relaxed text-white">
+                      {item.fitzo}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </motion.div>
         </motion.div>
       </div>

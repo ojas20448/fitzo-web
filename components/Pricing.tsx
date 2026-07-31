@@ -46,9 +46,9 @@ export default function Pricing() {
           </span>
           <h2 className="text-4xl sm:text-5xl font-black tracking-tight mb-6">
             Everything You Need,<br />
-            <span className="text-neutral-500">Completely Free.</span>
+            <span className="text-ink-muted">Completely Free.</span>
           </h2>
-          <p className="text-lg text-neutral-500 max-w-xl mx-auto">
+          <p className="text-lg text-ink-muted max-w-xl mx-auto">
             We believe tracking your progress shouldn&apos;t come with a subscription. Fitzo is built for the community.
           </p>
         </motion.div>
@@ -88,7 +88,7 @@ export default function Pricing() {
               <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-2">Beta Access</h3>
-                  <p className="text-neutral-500 text-sm mb-6">Full access to all features during beta.</p>
+                  <p className="text-ink-muted text-sm mb-6">Full access to all features during beta.</p>
 
                   <div className="flex items-baseline gap-1">
                     <SparklesText
@@ -96,7 +96,7 @@ export default function Pricing() {
                       className="text-5xl font-black text-white"
                       sparklesCount={8}
                     />
-                    <span className="text-neutral-500">/ forever</span>
+                    <span className="text-ink-muted">/ forever</span>
                   </div>
                 </div>
 
@@ -115,7 +115,7 @@ export default function Pricing() {
               </div>
 
               <div className="mt-10 pt-10 border-t border-white/[0.04] text-center">
-                <a href="#waitlist" className="inline-block w-full md:w-auto">
+                <a href="/#download" className="inline-block w-full md:w-auto">
                   <ShimmerButton
                     className="px-8 py-4 text-base font-bold w-full md:w-auto"
                     shimmerColor="#4ade80"
@@ -125,7 +125,7 @@ export default function Pricing() {
                     Get Started Now
                   </ShimmerButton>
                 </a>
-                <p className="mt-4 text-xs text-neutral-600">
+                <p className="mt-4 text-xs text-ink-faint">
                   No credit card required. No hidden fees.
                 </p>
               </div>
