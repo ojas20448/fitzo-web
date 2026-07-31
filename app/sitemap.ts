@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { SITE_URL } from "@/lib/links";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://fitzo.app";
+  const baseUrl = SITE_URL;
   const posts = getAllPosts();
 
   const blogEntries = posts.map((post) => ({

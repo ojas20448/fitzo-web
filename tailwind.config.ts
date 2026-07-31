@@ -43,13 +43,22 @@ const config: Config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        brand: {
-          protein: "#4ade80",
-          carbs: "#facc15",
-          fat: "#fb7185",
-          dark: "#000000",
-          card: "rgba(255, 255, 255, 0.03)",
+
+        /* ━━━ Fitzo surfaces ━━━ */
+        panel: {
+          DEFAULT: "hsl(var(--panel))",
+          raised: "hsl(var(--panel-raised))",
         },
+        ink: {
+          DEFAULT: "hsl(var(--text-primary))",
+          muted: "hsl(var(--text-secondary))",
+          faint: "hsl(var(--text-tertiary))",
+        },
+
+        /* ━━━ Macro triad — each colour has one job ━━━ */
+        protein: "hsl(var(--protein))",
+        carbs: "hsl(var(--carbs))",
+        fat: "hsl(var(--fat))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -57,32 +66,23 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: [
-          "Inter",
-          "Geist",
-          "system-ui",
-          "-apple-system",
-          "sans-serif",
-        ],
+        sans: ["var(--font-sans)", "system-ui", "-apple-system", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
+      },
+      transitionTimingFunction: {
+        "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)",
       },
       animation: {
-        float: "float 6s ease-in-out infinite",
-        shimmer: "shimmer 2s linear infinite",
-        marquee: "marquee 30s linear infinite",
-        "marquee-reverse": "marquee-reverse 30s linear infinite",
-        fadeIn: "fadeIn 0.3s ease-out",
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        marquee: "marquee var(--marquee-duration, 40s) linear infinite",
+        "marquee-reverse":
+          "marquee-reverse var(--marquee-duration, 40s) linear infinite",
+        "accordion-down": "accordion-down 0.24s cubic-bezier(0.16,1,0.3,1)",
+        "accordion-up": "accordion-up 0.24s cubic-bezier(0.16,1,0.3,1)",
+        breathe: "breathe 5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "scan-sweep": "scan-sweep 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite",
       },
       keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
-        },
-        shimmer: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
         marquee: {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
@@ -91,17 +91,23 @@ const config: Config = {
           "0%": { transform: "translateX(-50%)" },
           "100%": { transform: "translateX(0)" },
         },
-        fadeIn: {
-          "0%": { opacity: "0", transform: "translateY(8px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: { height: "0", opacity: "0" },
+          to: { height: "var(--radix-accordion-content-height)", opacity: "1" },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: { height: "var(--radix-accordion-content-height)", opacity: "1" },
+          to: { height: "0", opacity: "0" },
+        },
+        breathe: {
+          "0%, 100%": { opacity: "0.35" },
+          "50%": { opacity: "0.9" },
+        },
+        "scan-sweep": {
+          "0%": { transform: "translateY(-100%)", opacity: "0" },
+          "12%": { opacity: "1" },
+          "88%": { opacity: "1" },
+          "100%": { transform: "translateY(100%)", opacity: "0" },
         },
       },
     },

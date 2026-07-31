@@ -36,3 +36,9 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# design-review artifacts (screenshots from scripts/*.mjs)
+/output/
+
+# local editor config
+/.claude/

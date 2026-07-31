@@ -1,140 +1,122 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — How It Works Section
- * 3-step explanation  |  Magic UI upgraded
+ * FITZO — How it works
+ *
+ * Fixed here: the closing CTA pointed at "#waitlist", an anchor that exists
+ * nowhere on this page — the button silently did nothing. Every conversion
+ * path on the site lands on "#download".
+ *
+ * The 01/02/03 numerals stay: this is an ordered sequence, so the numbers
+ * carry information rather than decorating.
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
 "use client";
 
 import { motion } from "framer-motion";
-import { UserPlus, QrCode, TrendingUp } from "lucide-react";
-import { fadeUp, staggerContainer } from "@/lib/animations";
-
-import { WordPullUp } from "@/components/magicui/word-pull-up";
-import { MagicCard } from "@/components/magicui/magic-card";
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
-import { DotPattern } from "@/components/magicui/dot-pattern";
+import { UserPlus, QrCode, TrendingUp, ArrowRight } from "lucide-react";
+import { rise, stack, stackItem, VIEWPORT, EASE_OUT_EXPO } from "@/lib/motion";
 
 const steps = [
   {
     number: "01",
-    icon: <UserPlus className="w-6 h-6" />,
-    title: "Sign Up",
+    icon: UserPlus,
+    title: "Sign up",
     description:
-      "Create your profile in 30 seconds. Set your goals, activity level, and preferences. Our AI calculates your optimal targets.",
+      "Build your profile in 30 seconds. Set goals, activity level and preferences — Fitzo works out your targets from there.",
   },
   {
     number: "02",
-    icon: <QrCode className="w-6 h-6" />,
-    title: "Check In & Train",
+    icon: QrCode,
+    title: "Check in & train",
     description:
-      "Scan your gym's QR, set today's focus, then log workouts, scan food, and track macros — all in a few taps, even offline.",
+      "Scan your gym's QR, set today's focus, then log lifts, scan food and track macros in a few taps. Works offline.",
   },
   {
     number: "03",
-    icon: <TrendingUp className="w-6 h-6" />,
+    icon: TrendingUp,
     title: "Progress",
     description:
-      "Watch your streaks grow, earn XP, level up. Learn while you train with our gamified education module.",
+      "Streaks grow, XP adds up, levels climb. Learn while you train through the built-in education module.",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative py-16 sm:py-24 overflow-hidden">
-      {/* Dot pattern background with radial fade mask */}
-      <DotPattern
-        className="absolute inset-0 z-0 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_70%)] dark:[mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_70%)] opacity-40 dark:opacity-25"
-        width={20}
-        height={20}
-        cr={1}
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+    <section id="how-it-works" className="relative overflow-hidden py-14 sm:py-24 lg:py-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          variants={fadeUp}
+          variants={rise}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-12"
+          viewport={VIEWPORT}
+          className="mb-9 max-w-2xl sm:mb-14"
         >
-          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-medium bg-white/[0.04] text-neutral-500 border border-white/[0.06] mb-6">
-            How It Works
-          </span>
-
-          {/* Word-by-word pull-up heading */}
-          <WordPullUp
-            words="Three steps to a better you"
-            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6"
-          />
+          <h2 className="text-[clamp(2rem,4.6vw,3.25rem)] font-black leading-[0.98] tracking-[-0.04em] text-balance">
+            Three steps to
+            <br />
+            <span className="text-ink-faint">a better you.</span>
+          </h2>
         </motion.div>
 
-        {/* Steps */}
-        <motion.div
-          variants={staggerContainer}
+        <motion.ol
+          variants={stack}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          viewport={VIEWPORT}
+          className="grid grid-cols-1 gap-4 md:grid-cols-3 sm:gap-5"
         >
-          {steps.map((step, index) => (
-            <motion.div
-              key={step.number}
-              variants={fadeUp}
-              className="relative"
-            >
-              <MagicCard
-                className="relative text-center p-8 h-full"
-                gradientColor="rgba(255,255,255,0.08)"
-                gradientSize={250}
+          {steps.map((step, i) => {
+            const Icon = step.icon;
+            return (
+              <motion.li
+                key={step.number}
+                variants={stackItem}
+                className="panel panel-interactive relative flex flex-col p-5 sm:p-8"
               >
-                {/* Number */}
-                <span className="text-8xl font-black text-white/[0.03] dark:text-white/[0.03] absolute -top-4 left-1/2 -translate-x-1/2 select-none">
+                {/* Step numeral — structural, sits behind the content */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute right-6 top-4 select-none text-[5rem] font-black leading-none tracking-tighter text-white/[0.045]"
+                >
                   {step.number}
                 </span>
 
-                {/* Icon */}
-                <div className="relative z-10 w-16 h-16 mx-auto mb-6 rounded-2xl bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white">
-                  {step.icon}
-                </div>
+                <div className="relative z-10 mb-2.5 flex items-center gap-3 sm:mb-6 sm:block">
+                  <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.06] text-white sm:mb-6 sm:h-14 sm:w-14 sm:rounded-2xl">
+                    <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                  </span>
 
-                {/* Content */}
-                <h3 className="text-xl font-bold text-white mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-neutral-500 text-sm leading-relaxed max-w-xs mx-auto">
+                  <h3 className="text-lg font-bold tracking-tight text-white sm:mb-3 sm:text-xl">
+                    <span className="sr-only">Step {i + 1}: </span>
+                    {step.title}
+                  </h3>
+                </div>
+                <p className="relative z-10 max-w-[42ch] text-[15px] leading-relaxed text-ink-muted text-pretty">
                   {step.description}
                 </p>
-              </MagicCard>
+              </motion.li>
+            );
+          })}
+        </motion.ol>
 
-              {/* Connector */}
-              {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 -translate-y-1/2 left-[60%] w-[80%] h-px bg-gradient-to-r from-white/[0.1] to-transparent z-30" />
-              )}
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CTA */}
         <motion.div
-          variants={fadeUp}
+          variants={rise}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="mt-16 text-center"
+          viewport={VIEWPORT}
+          className="mt-10 flex justify-center sm:mt-14"
         >
-          <a href="#waitlist">
-            <ShimmerButton
-              className="px-8 py-4 text-base font-semibold"
-              shimmerColor="#ffffff"
-              background="rgba(255,255,255,1)"
-              borderRadius="12px"
-            >
-              <span className="text-black">Start Your Journey</span>
-            </ShimmerButton>
-          </a>
+          <motion.a
+            href="#download"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.975 }}
+            transition={{ duration: 0.18, ease: EASE_OUT_EXPO }}
+            className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold text-black transition-colors duration-300 hover:bg-protein"
+          >
+            Start your journey
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1" />
+          </motion.a>
         </motion.div>
       </div>
     </section>

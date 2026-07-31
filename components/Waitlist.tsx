@@ -98,7 +98,7 @@ export default function Waitlist() {
           </h2>
 
           {/* Subheadline */}
-          <p className="text-lg sm:text-xl text-neutral-400 max-w-xl mx-auto mb-10">
+          <p className="text-lg sm:text-xl text-ink-muted max-w-xl mx-auto mb-10">
             Join 2,500+ beta testers. Get early access, exclusive features, and shape the app with your feedback.
           </p>
         </motion.div>
@@ -109,7 +109,7 @@ export default function Waitlist() {
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
                 <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-                  <Mail className="w-5 h-5 text-neutral-500" />
+                  <Mail className="w-5 h-5 text-ink-muted" />
                 </div>
                 {/* shadcn Input with dark mode styling */}
                 <Input
@@ -120,7 +120,7 @@ export default function Waitlist() {
                     if (status === "error") setStatus("idle");
                   }}
                   placeholder="Enter your email"
-                  className="h-auto w-full pl-12 pr-4 py-4 rounded-xl bg-white/[0.04] border-white/[0.08] text-white placeholder:text-neutral-500 focus-visible:ring-green-500/50 focus-visible:border-green-500/50 transition-all duration-300"
+                  className="h-auto w-full pl-12 pr-4 py-4 rounded-xl bg-white/[0.04] border-white/[0.08] text-white placeholder:text-ink-muted focus-visible:ring-green-500/50 focus-visible:border-green-500/50 transition-all duration-300"
                 />
               </div>
               {/* ShimmerButton replaces plain button */}
@@ -163,9 +163,9 @@ export default function Waitlist() {
           </form>
 
           {/* Trust */}
-          <p className="mt-6 text-xs text-neutral-500">
+          <p className="mt-6 text-xs text-ink-muted">
             No spam, ever. We email at{" "}
-            <span className="text-neutral-400">contact@fitzoapp.in</span> only when it matters.
+            <span className="text-ink-muted">contact@fitzoapp.in</span> only when it matters.
           </p>
         </motion.div>
 
@@ -190,7 +190,7 @@ export default function Waitlist() {
             >
               <span className="text-2xl mb-2 block">{benefit.emoji}</span>
               <p className="text-sm font-semibold text-white mb-1">{benefit.title}</p>
-              <p className="text-xs text-neutral-500">{benefit.desc}</p>
+              <p className="text-xs text-ink-muted">{benefit.desc}</p>
             </MagicCard>
           ))}
         </motion.div>

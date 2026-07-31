@@ -1,13 +1,20 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Features Bento Grid
- * B&W asymmetric grid with 3D tilt + cursor glow
- * Upgraded with Magic UI components
+ * FITZO — Feature grid
+ *
+ * Each cell carries a real screen from the app, so the grid demonstrates
+ * rather than lists. Structure change from the previous build:
+ *   · TiltCard wrapping MagicCard wrapping a card wrapping a well was four
+ *     nested containers deep. It is now one panel with one inset well.
+ *   · Cards used a 6% white border on pure black and effectively vanished.
+ *     The panel surface carries a hairline, an inner top highlight and a real
+ *     offset shadow, so a cell reads as an object.
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Dumbbell,
@@ -20,105 +27,114 @@ import {
   QrCode,
   Flame,
 } from "lucide-react";
-import {
-  staggerContainer,
-  bentoItemVariants,
-  fadeUp,
-} from "@/lib/animations";
-import TiltCard from "@/components/ui/TiltCard";
-import { MagicCard } from "@/components/magicui/magic-card";
-import { BlurIn } from "@/components/magicui/blur-in";
-import { Badge } from "@/components/ui/badge";
+import { rise, stack, stackItem, VIEWPORT } from "@/lib/motion";
 
-/* ━━━ Mini App Screen: Dashboard ━━━ */
+/* ━━━ Dashboard ━━━ */
 function DashboardMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-3 border border-white/[0.04] space-y-2.5">
-      {/* Header */}
+    <div className="well space-y-2.5 p-3">
       <div className="flex items-center gap-2">
-        <div className="w-7 h-7 rounded-full bg-neutral-800" />
+        <span className="h-7 w-7 rounded-full bg-white/[0.09]" />
         <div>
-          <p className="text-[8px] text-neutral-600 uppercase tracking-wider">Consistency Matters.</p>
+          <p className="text-[8px] uppercase tracking-[0.14em] text-ink-faint">
+            Consistency matters.
+          </p>
           <p className="text-[10px] font-bold text-white">Ojas</p>
         </div>
       </div>
-      {/* Training */}
       <div>
-        <p className="text-[8px] text-neutral-600">Today&apos;s Training</p>
-        <p className="text-xs font-black text-white tracking-tight">ANTERIOR • CUSTOM</p>
+        <p className="text-[8px] text-ink-faint">Today&apos;s training</p>
+        <p className="text-xs font-black tracking-tight text-white">
+          ANTERIOR · CUSTOM
+        </p>
       </div>
-      {/* Stats */}
       <div className="flex gap-2">
-        <div className="flex-1 bg-white/[0.03] rounded-lg p-2 text-center">
-          <p className="text-[8px] text-neutral-500 uppercase">Workouts</p>
-          <p className="text-sm font-bold text-white">1</p>
-        </div>
-        <div className="flex-1 bg-white/[0.03] rounded-lg p-2 text-center">
-          <p className="text-[8px] text-neutral-500 uppercase">Calories</p>
-          <p className="text-sm font-bold text-white">0</p>
-        </div>
+        {[
+          { label: "Workouts", value: "1" },
+          { label: "Calories", value: "1,840" },
+        ].map((s) => (
+          <div
+            key={s.label}
+            className="flex-1 rounded-lg bg-white/[0.04] p-2 text-center"
+          >
+            <p className="text-[8px] uppercase tracking-[0.1em] text-ink-faint">
+              {s.label}
+            </p>
+            <p className="text-sm font-bold tabular-nums text-white">{s.value}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-/* ━━━ Mini App Screen: Learn Tab ━━━ */
+/* ━━━ Learn ━━━ */
 function LearnMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-4 border border-white/[0.04] space-y-2.5">
-      <p className="text-[9px] text-neutral-500 uppercase tracking-wider">Learn • Path</p>
-      <p className="text-sm font-bold text-white">Nutrition Fundamentals</p>
-      {/* Progress */}
-      <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+    <div className="well space-y-2.5 p-4">
+      <p className="text-[9px] uppercase tracking-[0.14em] text-ink-faint">
+        Learn · path
+      </p>
+      <p className="text-sm font-bold text-white">Nutrition fundamentals</p>
+      <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: "38%" }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.2, delay: 0.5 }}
-          className="h-full rounded-full bg-white"
+          viewport={VIEWPORT}
+          transition={{ duration: 1.1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="h-full rounded-full bg-carbs"
         />
       </div>
-      <p className="text-[9px] text-neutral-600">3/8 lessons</p>
-      {/* Lessons */}
+      <p className="text-[9px] tabular-nums text-ink-faint">3 / 8 lessons</p>
       {[
-        { title: "What are Calories?", xp: "+50 XP", done: true },
-        { title: "Protein: Building Block", xp: "+50 XP", done: true },
-        { title: "Carbs & Fat", xp: "+75 XP", done: false },
+        { title: "What are calories?", xp: "+50 XP", done: true },
+        { title: "Protein: building block", xp: "+50 XP", done: true },
+        { title: "Carbs & fat", xp: "+75 XP", done: false },
       ].map((l) => (
         <div key={l.title} className="flex items-center gap-2 py-1.5">
-          <div className={`w-3.5 h-3.5 rounded-full ${l.done ? "bg-white" : "border border-neutral-700"} flex items-center justify-center flex-shrink-0`}>
-            {l.done && <Check className="w-2 h-2 text-black" />}
-          </div>
-          <span className={`text-[10px] flex-1 ${l.done ? "text-neutral-400" : "text-neutral-300"}`}>{l.title}</span>
-          <span className="text-[9px] text-neutral-600">{l.xp}</span>
+          <span
+            className={`flex h-3.5 w-3.5 flex-shrink-0 items-center justify-center rounded-full ${
+              l.done ? "bg-protein" : "border border-white/20"
+            }`}
+          >
+            {l.done && <Check className="h-2 w-2 text-black" strokeWidth={3.5} />}
+          </span>
+          <span className="flex-1 text-[10px] text-ink-muted">{l.title}</span>
+          <span className="text-[9px] tabular-nums text-ink-faint">{l.xp}</span>
         </div>
       ))}
     </div>
   );
 }
 
-/* ━━━ Mini App Screen: Gym Buddies ━━━ */
+/* ━━━ Buddies ━━━ */
 function BuddiesMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-4 border border-white/[0.04] space-y-3">
+    <div className="well space-y-3 p-4">
       <div className="flex items-center justify-between">
-        <p className="text-sm font-bold text-white">Gym Buddies</p>
-        <span className="text-[9px] text-neutral-600 uppercase tracking-wider">Add</span>
+        <p className="text-sm font-bold text-white">Gym buddies</p>
+        <span className="text-[9px] uppercase tracking-[0.14em] text-ink-faint">
+          Add
+        </span>
       </div>
-      {/* Buddy list */}
       {[
         { name: "Alex", status: "Working out now", active: true },
         { name: "Sarah", status: "Last active 2h ago", active: false },
         { name: "Mike", status: "3 day streak", active: true },
       ].map((b) => (
-        <div key={b.name} className="flex items-center gap-3 py-2 border-t border-white/[0.03] first:border-t-0">
+        <div
+          key={b.name}
+          className="flex items-center gap-3 border-t border-white/[0.05] py-2 first:border-t-0"
+        >
           <div className="relative">
-            <div className="w-9 h-9 rounded-full bg-neutral-800" />
-            {b.active && <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-400 border-2 border-[#0c0c0c]" />}
+            <span className="block h-9 w-9 rounded-full bg-white/[0.09]" />
+            {b.active && (
+              <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#050506] bg-protein" />
+            )}
           </div>
-          <div className="flex-1 min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="text-[11px] font-semibold text-white">{b.name}</p>
-            <p className="text-[9px] text-neutral-500 truncate">{b.status}</p>
+            <p className="truncate text-[9px] text-ink-faint">{b.status}</p>
           </div>
         </div>
       ))}
@@ -126,119 +142,127 @@ function BuddiesMini() {
   );
 }
 
-/* ━━━ Mini App Screen: Food Search / AI ━━━ */
+/* ━━━ Food search ━━━ */
 function FoodSearchMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-4 border border-white/[0.04] space-y-2.5">
-      <p className="text-sm font-bold text-white">Add Food</p>
-      {/* Search bar */}
-      <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.04]">
-        <ScanLine className="w-3.5 h-3.5 text-neutral-600" />
-        <span className="text-[10px] text-neutral-500">Search or scan food…</span>
+    <div className="well space-y-2.5 p-4">
+      <p className="text-sm font-bold text-white">Add food</p>
+      <div className="flex items-center gap-2 rounded-lg border border-white/[0.06] bg-white/[0.04] px-3 py-2">
+        <ScanLine className="h-3.5 w-3.5 text-ink-faint" />
+        <span className="text-[10px] text-ink-faint">Search or scan food…</span>
       </div>
-      {/* AI chip */}
-      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.04] w-fit">
-        <Sparkles className="w-3.5 h-3.5 text-white" />
-        <span className="text-[10px] text-neutral-400">AI Analysis</span>
+      <div className="flex w-fit items-center gap-1.5 rounded-lg border border-white/[0.06] bg-white/[0.04] px-3 py-1.5">
+        <Sparkles className="h-3.5 w-3.5 text-protein" />
+        <span className="text-[10px] text-ink-muted">AI analysis</span>
       </div>
-      {/* Results */}
       {[
-        { name: "Chicken Breast", cal: "165 kcal", per: "100g" },
-        { name: "Brown Rice", cal: "112 kcal", per: "100g" },
-        { name: "Greek Yogurt", cal: "59 kcal", per: "100g" },
+        { name: "Chicken breast", cal: "165", per: "100g" },
+        { name: "Brown rice", cal: "112", per: "100g" },
       ].map((f) => (
-        <div key={f.name} className="flex items-center justify-between py-1.5 border-t border-white/[0.03]">
-          <span className="text-[10px] text-neutral-300">{f.name}</span>
-          <div className="text-right">
-            <span className="text-[10px] font-semibold text-white">{f.cal}</span>
-            <span className="text-[9px] text-neutral-600 ml-1">/ {f.per}</span>
-          </div>
+        <div
+          key={f.name}
+          className="flex items-center justify-between border-t border-white/[0.05] py-1.5"
+        >
+          <span className="text-[10px] text-ink-muted">{f.name}</span>
+          <span className="text-[10px] tabular-nums text-ink-faint">
+            <span className="font-semibold text-white">{f.cal}</span> kcal /{" "}
+            {f.per}
+          </span>
         </div>
       ))}
     </div>
   );
 }
 
-/* ━━━ Mini App Screen: Heatmap ━━━ */
+/* ━━━ Heatmap ━━━ */
 function HeatmapMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-3 border border-white/[0.04] flex items-center justify-center h-44 overflow-hidden relative group">
-      <img 
-        src="/heatmap.png" 
-        className="h-full object-contain filter invert dark:invert-0 opacity-80 group-hover:scale-105 transition-transform duration-500" 
-        alt="Anatomy Heatmap Mannequin" 
+    <div className="well group relative flex h-44 items-center justify-center overflow-hidden p-3">
+      <Image
+        src="/heatmap.png"
+        width={176}
+        height={176}
+        className="h-full w-auto object-contain opacity-90 transition-transform duration-700 ease-out-expo group-hover:scale-105"
+        alt="Muscle heatmap showing training volume per muscle group"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-center pb-2">
-        <span className="text-[9px] font-bold text-neutral-400 tracking-wider uppercase">Interactive Muscle Heatmap</span>
+      <div className="pointer-events-none absolute inset-0 flex items-end justify-center bg-gradient-to-t from-black/85 via-transparent to-transparent pb-2">
+        <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-muted">
+          Interactive muscle heatmap
+        </span>
       </div>
     </div>
   );
 }
 
-/* ━━━ Mini App Screen: Gym Check-in ━━━ */
+/* ━━━ Gym ━━━ */
 function GymMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-4 border border-white/[0.04] space-y-3">
-      {/* QR Check-in */}
+    <div className="well space-y-3 p-4">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center flex-shrink-0">
-          <QrCode className="w-5 h-5 text-black" />
+        <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-white">
+          <QrCode className="h-5 w-5 text-black" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="text-[11px] font-semibold text-white">Checked in</p>
+          <p className="text-[9px] text-ink-faint">Iron Temple Gym · 6:42 PM</p>
         </div>
-        <div className="flex-1 min-w-0">
-          <p className="text-[11px] font-semibold text-white">Checked In</p>
-          <p className="text-[9px] text-neutral-500">Iron Temple Gym · 6:42 PM</p>
-        </div>
-        <div className="flex items-center gap-1 px-2 py-1 rounded-lg bg-white/[0.04]">
-          <Flame className="w-3 h-3 text-orange-400" />
-          <span className="text-[10px] font-bold text-white">12</span>
-        </div>
+        <span className="flex items-center gap-1 rounded-lg bg-white/[0.05] px-2 py-1">
+          <Flame className="h-3 w-3 text-carbs" />
+          <span className="text-[10px] font-bold tabular-nums text-white">12</span>
+        </span>
       </div>
-      {/* Crowd meter */}
       <div>
-        <div className="flex items-center justify-between mb-1.5">
-          <p className="text-[9px] text-neutral-500 uppercase tracking-wider">Gym Crowd</p>
-          <span className="text-[9px] font-semibold text-green-400">Not Busy</span>
+        <div className="mb-1.5 flex items-center justify-between">
+          <p className="text-[9px] uppercase tracking-[0.14em] text-ink-faint">
+            Gym crowd
+          </p>
+          <span className="text-[9px] font-semibold text-protein">Not busy</span>
         </div>
-        <div className="h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+        <div className="h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: "35%" }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="h-full rounded-full bg-green-400"
+            viewport={VIEWPORT}
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="h-full rounded-full bg-protein"
           />
         </div>
       </div>
-      {/* Next class */}
-      <div className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.04]">
+      <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.03] p-2.5">
         <div>
-          <p className="text-[10px] font-semibold text-white">HIIT Blast · 7:30 PM</p>
-          <p className="text-[9px] text-neutral-500">with Coach Arjun · 4 spots left</p>
+          <p className="text-[10px] font-semibold text-white">
+            HIIT Blast · 7:30 PM
+          </p>
+          <p className="text-[9px] text-ink-faint">
+            with Coach Arjun · 4 spots left
+          </p>
         </div>
-        <span className="text-[9px] px-2 py-1 rounded-full bg-white text-black font-semibold">Book</span>
+        <span className="rounded-full bg-white px-2 py-1 text-[9px] font-semibold text-black">
+          Book
+        </span>
       </div>
     </div>
   );
 }
 
-/* ━━━ Mini App Screen: Share Receipts ━━━ */
+/* ━━━ Receipt ━━━ */
 function ReceiptMini() {
   return (
-    <div className="bg-[#0c0c0c] rounded-xl p-4 border border-white/[0.04] space-y-3 relative overflow-hidden h-44 flex flex-col justify-between">
-      <div className="bg-white text-black p-3.5 rounded-lg font-mono text-[9px] shadow-lg leading-relaxed flex-1 flex flex-col justify-between">
+    <div className="well flex h-44 flex-col justify-between overflow-hidden p-4">
+      <div className="flex flex-1 flex-col justify-between rounded-lg bg-white p-3.5 font-mono text-[9px] leading-relaxed text-black shadow-lg">
         <div>
-          <div className="flex justify-between border-b border-black/10 pb-1 font-bold">
-            <span>FITZO RECIPE</span>
+          <div className="flex justify-between border-b border-black/15 pb-1 font-bold">
+            <span>FITZO RECEIPT</span>
             <span>#1840</span>
           </div>
-          <div className="mt-1 space-y-0.5">
+          <div className="mt-1 space-y-0.5 tabular-nums">
             <div className="flex justify-between">
               <span>BENCH PRESS</span>
-              <span>4x100kg</span>
+              <span>4×100kg</span>
             </div>
             <div className="flex justify-between">
               <span>SQUAT (PR)</span>
-              <span>3x130kg</span>
+              <span>3×130kg</span>
             </div>
             <div className="flex justify-between font-bold">
               <span>TOTAL VOL</span>
@@ -246,12 +270,17 @@ function ReceiptMini() {
             </div>
           </div>
         </div>
-        
-        <div className="flex items-center justify-between border-t border-black/10 pt-1 mt-1">
-          <img src="/barbell_dither.png" className="w-8 h-8 object-contain" alt="Barbell Dither" />
-          <div className="text-right text-[7px] text-neutral-500 leading-none">
+        <div className="mt-1 flex items-center justify-between border-t border-black/15 pt-1">
+          <Image
+            src="/barbell_dither.png"
+            width={32}
+            height={32}
+            className="h-8 w-8 object-contain"
+            alt=""
+          />
+          <div className="text-right text-[7px] leading-none text-neutral-600">
             <p>EQUIV. TO</p>
-            <p className="font-bold text-black text-[8px] mt-0.5">BARBELL ARMS</p>
+            <p className="mt-0.5 text-[8px] font-bold text-black">BARBELL ARMS</p>
           </div>
         </div>
       </div>
@@ -259,181 +288,168 @@ function ReceiptMini() {
   );
 }
 
-/* ━━━ Card Wrapper with 3D Tilt + MagicCard ━━━ */
-interface FeatureCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  badge?: string;
-  children?: React.ReactNode;
-  className?: string;
-}
-
-function FeatureCard({
+/* ━━━ Cell ━━━ */
+function FeatureCell({
   icon,
   title,
   description,
   badge,
   children,
   className = "",
-}: FeatureCardProps) {
+  showcase = false,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  badge?: string;
+  children?: React.ReactNode;
+  className?: string;
+  /**
+   * Showcase cells keep their app screen on every viewport. The rest drop it
+   * below `sm`: seven mini-screens stacked full-width ran this section to
+   * nearly four phone screens, and past the first few the visual stopped
+   * earning its height. The claim still lands; only the illustration waits
+   * for a wider viewport.
+   */
+  showcase?: boolean;
+}) {
   return (
-    <motion.div variants={bentoItemVariants} className={className}>
-      <TiltCard className="h-full" tiltDeg={5} glowColor="rgba(255,255,255,0.04)">
-        <MagicCard
-          className="h-full border-white/[0.06] hover:border-white/[0.12] transition-all duration-500"
-          gradientColor="rgba(255,255,255,0.07)"
-          gradientSize={250}
+    <motion.article
+      variants={stackItem}
+      className={`panel panel-interactive p-5 sm:p-7 ${className}`}
+    >
+      <div className="mb-3 flex items-start justify-between gap-3 sm:mb-5 sm:gap-4">
+        <div
+          className={`flex gap-2.5 ${
+            showcase
+              ? "flex-row items-center sm:gap-3"
+              : "flex-col items-start sm:flex-row sm:items-center sm:gap-3"
+          }`}
         >
-          <div className="p-7 group relative h-full">
-            <div className="relative z-10">
-              {/* Header */}
-              <div className="flex items-start justify-between mb-5">
-                <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-white/[0.06] border border-white/[0.04] flex items-center justify-center">
-                    {icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-white">{title}</h3>
-                </div>
-                {badge && (
-                  <Badge
-                    variant="outline"
-                    className="px-3 py-1.5 rounded-full text-[10px] font-semibold bg-white/[0.06] text-neutral-400 border-white/[0.04] hover:bg-white/[0.08]"
-                  >
-                    {badge}
-                  </Badge>
-                )}
-              </div>
+          <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.06] text-white sm:h-11 sm:w-11 sm:rounded-2xl">
+            {icon}
+          </span>
+          <h3 className="text-[15px] font-bold leading-tight tracking-tight text-white sm:text-xl">
+            {title}
+          </h3>
+        </div>
+        {badge && (
+          <span className="hidden flex-shrink-0 rounded-full border border-white/[0.07] bg-white/[0.05] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-ink-faint sm:inline-block">
+            {badge}
+          </span>
+        )}
+      </div>
 
-              {/* Description */}
-              <p className="text-[15px] text-neutral-500 leading-relaxed mb-5">
-                {description}
-              </p>
+      <p className="max-w-[52ch] text-sm leading-relaxed text-ink-muted text-pretty sm:mb-5 sm:text-[15px]">
+        {description}
+      </p>
 
-              {/* Visual */}
-              {children}
-            </div>
-          </div>
-        </MagicCard>
-      </TiltCard>
-    </motion.div>
+      {children && (
+        <div className={showcase ? "mt-4 sm:mt-0" : "hidden sm:block"}>
+          {children}
+        </div>
+      )}
+    </motion.article>
   );
 }
 
-/* ━━━ Main Features Export ━━━ */
 export default function Features() {
   return (
-    <section id="features" className="relative py-16 sm:py-24">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ━━━ Section Header ━━━ */}
+    <section id="features" className="relative py-14 sm:py-24 lg:py-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* ━━━ Header ━━━ */}
         <motion.div
-          variants={fadeUp}
+          variants={rise}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-center mb-12"
+          viewport={VIEWPORT}
+          className="mb-9 max-w-2xl sm:mb-14"
         >
-          <Badge
-            variant="outline"
-            className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-medium bg-white/[0.04] text-neutral-500 border-white/[0.06] mb-6"
-          >
-            Features
-          </Badge>
-
-          <BlurIn
-            word="Everything You Need."
-            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight"
-            duration={0.8}
-          />
-          <BlurIn
-            word="Nothing You Don't."
-            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-neutral-500 mb-6"
-            duration={1}
-          />
-
-          <p className="text-lg sm:text-xl text-neutral-500 max-w-2xl mx-auto">
+          <h2 className="text-[clamp(2rem,4.6vw,3.25rem)] font-black leading-[0.98] tracking-[-0.04em] text-balance">
+            Everything you need.
+            <br />
+            <span className="text-ink-faint">Nothing you don&apos;t.</span>
+          </h2>
+          <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-ink-muted text-pretty">
             No fluff, no gimmicks. Just the tools serious lifters need to track,
-            progress, and dominate.
+            progress and dominate.
           </p>
         </motion.div>
 
-        {/* ━━━ Bento Grid ━━━ */}
+        {/* ━━━ Grid ━━━ */}
         <motion.div
-          variants={staggerContainer}
+          variants={stack}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
+          viewport={VIEWPORT}
+          className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3"
         >
-          {/* Card 1: Dashboard — spans 2 cols */}
-          <FeatureCard
-            icon={<Target className="w-5 h-5 text-white" />}
-            title="Smart Dashboard"
-            description="Everything you need at a glance — workouts, nutrition, streaks, and daily targets in one clean view."
+          <FeatureCell
+            icon={<Target className="h-5 w-5" />}
+            title="Smart dashboard"
+            description="Workouts, nutrition, streaks and daily targets in one view."
             badge="V2.0"
-            className="lg:col-span-2"
+            className="col-span-2"
+            showcase
           >
             <DashboardMini />
-          </FeatureCard>
+          </FeatureCell>
 
-          {/* Card 2: Heatmaps */}
-          <FeatureCard
-            icon={<Dumbbell className="w-5 h-5 text-white" />}
-            title="Interactive Heatmaps"
-            description="Track training volume sets scientifically on a 3D mannequin model. Tap leg, arm, core, back, and chest groups to expand details."
+          <FeatureCell
+            icon={<Dumbbell className="h-5 w-5" />}
+            title="Muscle heatmaps"
+            description="Training volume on a 3D mannequin. Tap a group for detail."
             badge="Heatmap"
+            className="col-span-2 lg:col-span-1"
+            showcase
           >
             <HeatmapMini />
-          </FeatureCard>
+          </FeatureCell>
 
-          {/* Card 3: Education */}
-          <FeatureCard
-            icon={<BookOpen className="w-5 h-5 text-white" />}
-            title="Built-In Education"
-            description="Learn from science-backed content while you train. Earn XP for every lesson completed."
-          >
-            <LearnMini />
-          </FeatureCard>
-
-          {/* Card 4: Social */}
-          <FeatureCard
-            icon={<Users className="w-5 h-5 text-white" />}
-            title="Gym Buddies"
-            description="Add gym buddies, see who&apos;s working out, and stay accountable together."
-          >
-            <BuddiesMini />
-          </FeatureCard>
-
-          {/* Card 5: Share Receipts */}
-          <FeatureCard
-            icon={<Target className="w-5 h-5 text-white" />}
-            title="1-Bit Thermal Receipts"
-            description="Generate and share beautiful 1-bit thermal receipts of your workout. Drag it over your workout selfie or share it raw."
-            badge="Thermal Share"
-          >
-            <ReceiptMini />
-          </FeatureCard>
-
-          {/* Card 6: AI Food — spans 2 cols */}
-          <FeatureCard
-            icon={<Sparkles className="w-5 h-5 text-white" />}
-            title="AI Nutrition Coach"
-            description="500K+ food database with AI-powered scanning. Get instant macro breakdowns and smart meal suggestions."
-            badge="AI-Powered"
-            className="lg:col-span-2"
+          <FeatureCell
+            icon={<Sparkles className="h-5 w-5" />}
+            title="AI nutrition coach"
+            description="500K+ foods with AI scanning. Instant macros, Indian food included."
+            badge="AI"
+            className="col-span-2"
+            showcase
           >
             <FoodSearchMini />
-          </FeatureCard>
+          </FeatureCell>
 
-          {/* Card 7: Gym Ecosystem */}
-          <FeatureCard
-            icon={<QrCode className="w-5 h-5 text-white" />}
-            title="Your Gym, Connected"
-            description="QR check-in, live crowd meter, and class booking — your digital membership card lives in your pocket."
+          <FeatureCell
+            icon={<BookOpen className="h-5 w-5" />}
+            title="Built-in education"
+            description="Science-backed lessons between sets. XP for every one you finish."
+          >
+            <LearnMini />
+          </FeatureCell>
+
+          <FeatureCell
+            icon={<Users className="h-5 w-5" />}
+            title="Gym buddies"
+            description="See who's training right now. Stay accountable together."
+          >
+            <BuddiesMini />
+          </FeatureCell>
+
+          <FeatureCell
+            icon={<Target className="h-5 w-5" />}
+            title="1-bit thermal receipts"
+            description="Print your session. Share it raw, or over a gym selfie."
+            badge="Share"
+          >
+            <ReceiptMini />
+          </FeatureCell>
+
+          <FeatureCell
+            icon={<QrCode className="h-5 w-5" />}
+            title="Your gym, connected"
+            description="QR check-in, live crowd meter, class booking."
             badge="Gym OS"
           >
             <GymMini />
-          </FeatureCard>
+          </FeatureCell>
         </motion.div>
       </div>
     </section>

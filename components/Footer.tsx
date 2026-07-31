@@ -1,7 +1,17 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO — Footer
- * B&W footer with links and socials
+ *
+ * Two defects fixed here:
+ *   · Contrast. Link and copyright text sat on neutral-600/700 over pure
+ *     black — roughly 2.0–2.7:1, well under the 4.5:1 floor. Everything now
+ *     uses the ink ramp, which is built to clear it.
+ *   · Dead links. All three social icons pointed at "#". Only the X handle is
+ *     evidenced anywhere in this codebase (layout.tsx twitter.creator), so
+ *     that one survives and the unverifiable ones are gone.
+ *
+ * ⚠️ TO ADD: real Instagram / Reddit / YouTube URLs when those accounts exist.
+ * Add them to SOCIALS — do not reintroduce href="#".
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -9,58 +19,43 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { fadeUp } from "@/lib/animations";
+import { Mail } from "lucide-react";
+import { rise, VIEWPORT } from "@/lib/motion";
 import FitzoLogo from "./FitzoLogo";
-import { DotPattern } from "@/components/magicui/dot-pattern";
-import { Separator } from "@/components/ui/separator";
 
 const FOOTER_LINKS = {
   Product: [
     { label: "Features", href: "/#features" },
+    { label: "Try the demo", href: "/#demo" },
     { label: "Compare", href: "/compare" },
-    { label: "Early Access", href: "/#download" },
+    { label: "Early access", href: "/#download" },
   ],
   Company: [
     { label: "Blog", href: "/blog" },
     { label: "Changelog", href: "/changelog" },
-    { label: "Press Kit", href: "/press" },
+    { label: "Press kit", href: "/press" },
     { label: "Contact", href: "mailto:contact@fitzoapp.in" },
   ],
   Legal: [
-    { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Terms of Service", href: "/terms" },
+    { label: "Privacy policy", href: "/privacy-policy" },
+    { label: "Terms of service", href: "/terms" },
   ],
 } as const;
 
 const SOCIALS = [
   {
-    label: "Twitter / X",
-    href: "#",
+    label: "Fitzo on X",
+    href: "https://x.com/fitzoapp",
     icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+      <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
       </svg>
     ),
   },
   {
-    label: "Instagram",
-    href: "#",
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-      </svg>
-    ),
-  },
-  {
-    label: "Reddit",
-    href: "#",
-    icon: (
-      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z" />
-      </svg>
-    ),
+    label: "Email Fitzo",
+    href: "mailto:contact@fitzoapp.in",
+    icon: <Mail className="h-[18px] w-[18px]" aria-hidden />,
   },
 ];
 
@@ -69,42 +64,37 @@ export default function Footer() {
 
   return (
     <motion.footer
-      variants={fadeUp}
+      variants={rise}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
-      className="relative overflow-hidden border-t border-white/[0.04] pt-12 pb-6"
+      viewport={VIEWPORT}
+      className="relative border-t border-white/[0.07] pb-8 pt-12 sm:pt-16"
     >
-      {/* ━━━ Dot Pattern Background ━━━ */}
-      <DotPattern
-        width={20}
-        height={20}
-        cx={1}
-        cy={1}
-        cr={0.8}
-        className="opacity-[0.15] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_70%,transparent_100%)]"
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16 mb-12">
-          {/* ━━━ Brand Column ━━━ */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="inline-block mb-4">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 grid grid-cols-3 gap-x-4 gap-y-8 sm:gap-10 md:mb-14 md:grid-cols-4 lg:gap-16">
+          {/* ━━━ Brand ━━━ */}
+          <div className="col-span-3 md:col-span-1">
+            <Link href="/" className="mb-5 -m-2 inline-block p-2">
               <FitzoLogo size="sm" showWordmark />
             </Link>
-            <p className="text-sm text-neutral-600 leading-relaxed mb-6">
-              For Serious Lifters. Track workouts, nutrition, and progress with
+            <p className="mb-7 max-w-[34ch] text-sm leading-relaxed text-ink-muted">
+              For serious lifters. Track workouts, nutrition and progress with
               precision.
             </p>
 
-            {/* Social Icons */}
             <div className="flex gap-3">
               {SOCIALS.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.04] flex items-center justify-center text-neutral-600 hover:text-green-400 hover:drop-shadow-[0_0_8px_rgba(74,222,128,0.4)] hover:border-white/[0.12] hover:bg-white/[0.06] transition-all duration-300"
+                  target={social.href.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    social.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.04] text-ink-muted transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-protein"
                 >
                   {social.icon}
                 </a>
@@ -112,48 +102,36 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ━━━ Link Columns ━━━ */}
+          {/* ━━━ Link columns ━━━ */}
           {Object.entries(FOOTER_LINKS).map(([category, links]) => (
-            <div key={category}>
-              <h4 className="text-sm font-semibold text-white mb-4">
+            <nav key={category} aria-label={category}>
+              <h2 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint">
                 {category}
-              </h4>
+              </h2>
               <ul className="space-y-3">
                 {links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-neutral-600 hover:text-neutral-300 transition-colors duration-300"
+                      className="-my-1 inline-block py-2 text-[13px] text-ink-muted transition-colors duration-300 hover:text-white sm:text-sm"
                     >
                       {link.label}
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           ))}
         </div>
 
-        {/* ━━━ Bottom Bar ━━━ */}
-        <Separator className="bg-white/[0.04]" />
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-neutral-700">
+        {/* ━━━ Bottom bar ━━━ */}
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/[0.07] pt-7 sm:flex-row">
+          <p className="text-xs text-ink-faint">
             &copy; {currentYear} Fitzo. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/privacy-policy"
-              className="text-xs text-neutral-600 hover:text-white transition-colors"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-xs text-neutral-600 hover:text-white transition-colors"
-            >
-              Terms of Service
-            </Link>
-          </div>
+          <p className="text-xs text-ink-faint">
+            Made for the gym floor, in India.
+          </p>
         </div>
       </div>
     </motion.footer>

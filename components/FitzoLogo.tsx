@@ -1,7 +1,10 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Logo Component
- * Geometric angular "F" mark + wordmark
+ * FITZO — Logo
+ *
+ * The mark is a plate, not a sticker: on the black ground it reads as a milled
+ * white tile with the F cut out of it. (The previous black-on-black plate was
+ * invisible on this world — only the glyph survived.)
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -11,7 +14,7 @@ interface FitzoLogoProps {
   size?: "sm" | "md" | "lg";
 }
 
-/** The geometric angular F icon matching the app icon */
+/** The angular F mark, cut out of a white plate. */
 export function FitzoIcon({ className = "w-8 h-8" }: { className?: string }) {
   return (
     <svg
@@ -19,17 +22,31 @@ export function FitzoIcon({ className = "w-8 h-8" }: { className?: string }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
+      role="img"
+      aria-label="Fitzo"
     >
-      <rect width="100" height="100" rx="20" fill="black" />
-      <path
-        d="M25 80V20H75L65 35H42V44H62L55 57H42V80H25Z"
-        fill="white"
+      <defs>
+        <linearGradient id="fitzo-plate" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="100%" stopColor="#dedee2" />
+        </linearGradient>
+        <mask id="fitzo-cut">
+          <rect width="100" height="100" fill="white" />
+          <path d="M25 80V20H75L65 35H42V44H62L55 57H42V80H25Z" fill="black" />
+        </mask>
+      </defs>
+      <rect
+        width="100"
+        height="100"
+        rx="22"
+        fill="url(#fitzo-plate)"
+        mask="url(#fitzo-cut)"
       />
     </svg>
   );
 }
 
-/** Full logo with optional wordmark */
+/** Full logo with optional wordmark. */
 export default function FitzoLogo({
   className = "",
   showWordmark = true,
@@ -42,10 +59,12 @@ export default function FitzoLogo({
   };
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex items-center gap-2.5 ${className}`}>
       <FitzoIcon className={sizes[size].icon} />
       {showWordmark && (
-        <span className={`${sizes[size].text} font-bold tracking-tight text-black dark:text-white`}>
+        <span
+          className={`${sizes[size].text} font-extrabold tracking-[-0.03em] text-white`}
+        >
           Fitzo
         </span>
       )}
