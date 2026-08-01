@@ -83,7 +83,7 @@ export default function Comparison() {
                   key={item.generic}
                   className="flex items-start gap-3 border-t border-white/[0.05] py-3.5 first:border-t-0"
                 >
-                  <span className="mt-2.5 h-0.5 w-2.5 rounded-full bg-neutral-700 flex-shrink-0" />
+                  <span className="mt-2.5 h-0.5 w-2.5 flex-shrink-0 rounded-full bg-white/20" />
                   <p className="text-sm leading-relaxed text-ink-faint">
                     {item.generic}
                   </p>

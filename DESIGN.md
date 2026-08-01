@@ -243,6 +243,8 @@ Kept in `scripts/`, all run against a dev server on `:3002`:
 | `routes.mjs` | one screenshot per secondary route |
 | `heights.mjs` | per-section scroll cost; `W`/`H` env vars set the viewport |
 | `msec.mjs` | one mobile section shot + per-card heights (`SEL=#features`) |
+| `polish-audit.mjs` | keyboard path, focus rings, scroll-region reachability, hover states, CLS, console |
+| `phonefit.mjs` | asserts no phone-mockup screen overflows its bezel |
 
 Run `audit.mjs` after any UI change. It is the floor, not the ceiling.
 

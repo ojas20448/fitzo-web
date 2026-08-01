@@ -137,12 +137,12 @@ function DemoHome() {
 
       {/* Action Buttons */}
       <div className="grid grid-cols-2 gap-2">
-        <button className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-2.5 text-[10px] font-black text-black shadow-lg">
+        <span className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-2.5 text-[10px] font-black text-black shadow-lg">
           <Plus className="h-3 w-3" strokeWidth={3} /> LOG WORKOUT
-        </button>
-        <button className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-2.5 text-[10px] font-black text-black shadow-lg">
+        </span>
+        <span className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-2.5 text-[10px] font-black text-black shadow-lg">
           <Plus className="h-3 w-3" strokeWidth={3} /> LOG CALORIES
-        </button>
+        </span>
       </div>
 
       {/* Nutrition Ring */}

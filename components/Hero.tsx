@@ -188,12 +188,12 @@ function DashboardScreen() {
 
       {/* Action Buttons: Log Workout & Log Calories */}
       <div className="grid grid-cols-2 gap-2">
-        <button className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-3 text-[11px] font-black text-black shadow-lg">
+        <span className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-3 text-[11px] font-black text-black shadow-lg">
           <Plus className="h-3.5 w-3.5" strokeWidth={3} /> LOG WORKOUT
-        </button>
-        <button className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-3 text-[11px] font-black text-black shadow-lg">
+        </span>
+        <span className="flex items-center justify-center gap-1.5 rounded-2xl bg-white py-3 text-[11px] font-black text-black shadow-lg">
           <Plus className="h-3.5 w-3.5" strokeWidth={3} /> LOG CALORIES
-        </button>
+        </span>
       </div>
 
       {/* Today's Nutrition Ring & Breakdown */}
@@ -260,7 +260,7 @@ function WorkoutScreen() {
   ];
 
   return (
-    <div className="space-y-3 px-3.5 pt-1">
+    <div className="space-y-2.5 px-3.5 pt-1 sm:space-y-3">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-[9px] font-bold uppercase tracking-[0.14em] text-ink-faint">Active session</p>
@@ -272,22 +272,25 @@ function WorkoutScreen() {
         </span>
       </div>
 
-      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] py-2.5 text-center">
-        <p className="font-mono text-2xl font-black tabular-nums tracking-tight text-white">00:42:18</p>
+      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] py-2 text-center sm:py-2.5">
+        <p className="font-mono text-xl font-black tabular-nums tracking-tight text-white sm:text-2xl">00:42:18</p>
         <p className="mt-0.5 text-[8px] uppercase tracking-[0.14em] text-ink-faint">Session Duration</p>
       </div>
 
       {/* Muscle Volume Status Component */}
       <MuscleVolumeMap />
 
-      <div className="space-y-1.5">
+      <div className="space-y-1">
         {exercises.map((ex, i) => (
           <motion.div
             key={ex.name}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.15 + i * 0.05, ease: EASE_OUT_EXPO }}
-            className={`flex items-center gap-2.5 rounded-xl border p-2.5 ${
+            /* The 4th row overran the bezel by 12px on a 390px phone — a
+               partially-sliced row reads as a bug, not a bezel. It rejoins
+               the list from `sm` up, where the frame is taller. */
+            className={`${i === 3 ? "hidden sm:flex" : "flex"} items-center gap-2.5 rounded-xl border p-2 ${
               ex.done ? "border-white/[0.04] bg-white/[0.04]" : "border-white/[0.08] bg-white/[0.01]"
             }`}
           >
@@ -469,7 +472,14 @@ function PhoneShell({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.008 }}
             transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
-            className="scrollbar-hide absolute inset-0 overflow-y-auto pb-[4.75rem]"
+            /* Clips rather than scrolls. As a scroll region this was a
+               keyboard trap: content taller than the frame, no focusable
+               children, so a keyboard user could neither reach nor scroll it.
+               A phone mockup should behave like a phone bezel — the padding
+               below keeps the AI-coach line clear of the dock, and anything
+               past that is meant to be cut off. The demo phone below is a
+               real scroller because its content is interactive. */
+            className="absolute inset-0 overflow-hidden pb-[4.75rem]"
           >
             <Active />
           </motion.div>
