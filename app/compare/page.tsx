@@ -5,7 +5,7 @@ import { ArrowLeft, Check, X } from "lucide-react";
 import { SITE_URL } from "@/lib/links";
 
 export const metadata: Metadata = {
-  title: "Compare — Fitzo vs MyFitnessPal vs Strong vs Hevy",
+  title: "Fitzo",
   description: "See how Fitzo compares to MyFitnessPal, Strong, and Hevy. Free, no ads, offline, AI nutrition, Indian food database, and 10+ workout splits.",
   alternates: {
     canonical: `${SITE_URL}/compare`,

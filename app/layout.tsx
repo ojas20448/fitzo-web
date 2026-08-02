@@ -30,10 +30,7 @@ export const viewport: Viewport = {
 /* ━━━ SEO Metadata ━━━ */
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.fitzoapp.in"),
-  title: {
-    default: "Fitzo — Train Smarter, Build Faster",
-    template: "%s — Fitzo",
-  },
+  title: "Fitzo",
   description:
     "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, QR gym check-in, gym buddies, and science-backed education. Built for lifters who value data.",
   keywords: [

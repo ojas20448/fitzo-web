@@ -8,7 +8,7 @@ import { getBlogListSchema, getBreadcrumbSchema } from "@/lib/structured-data";
 import { SITE_URL } from "@/lib/links";
 
 export const metadata: Metadata = {
-  title: "Blog — Fitness, Nutrition & Training Articles",
+  title: "Fitzo",
   description:
     "Science-backed fitness, nutrition, and training articles for Indian lifters. Learn about workout splits, macro tracking, supplements, and more.",
   alternates: {

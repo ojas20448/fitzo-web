@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { SITE_URL } from "@/lib/links";
 
 export const metadata: Metadata = {
-  title: "Changelog — What's New in Fitzo",
+  title: "Fitzo",
   description: "Every update, feature, and improvement shipped in Fitzo. From v1.0 to v2.0 — see the complete evolution of India's best fitness tracking app.",
   alternates: {
     canonical: `${SITE_URL}/changelog`,

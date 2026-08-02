@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Fitzo",
+  title: "Fitzo",
   description:
     "Fitzo Terms of Service. Read our terms and conditions for using the Fitzo fitness tracking application.",
 };
