@@ -22,7 +22,7 @@ const COMPARISONS = [
   },
   {
     generic: "US-only food databases",
-    fitzo: "Indian food first — dal, roti, paneer, biryani",
+    fitzo: "Indian food first: dal, roti, paneer, biryani",
   },
   {
     generic: "Zero connection to your actual gym",
@@ -60,14 +60,14 @@ export default function Comparison() {
           viewport={VIEWPORT}
           className="mx-auto grid max-w-5xl grid-cols-1 gap-4 lg:grid-cols-2 sm:gap-5"
         >
-          {/* ━━━ The status quo — flatter, quieter, no elevation ━━━ */}
+          {/* ━━━ The status quo: flatter, quieter, no elevation ━━━ */}
           <motion.div
             variants={stackItem}
             className="hidden rounded-2xl border border-white/[0.06] bg-white/[0.012] p-7 sm:block sm:p-8"
           >
             <div className="mb-7 flex items-center gap-3">
               <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.03]">
-                <span className="font-mono text-sm text-ink-faint">—</span>
+                <span className="font-mono text-sm text-ink-faint">:</span>
               </span>
               <div>
                 <h3 className="text-lg font-bold text-ink-muted">
@@ -92,7 +92,7 @@ export default function Comparison() {
             </ul>
           </motion.div>
 
-          {/* ━━━ Fitzo — full elevation with official Fitzo logo & glowing protein indicators ━━━ */}
+          {/* ━━━ Fitzo: full elevation with official Fitzo logo & glowing protein indicators ━━━ */}
           <motion.div
             variants={stackItem}
             className="panel relative overflow-hidden p-5 sm:p-8"

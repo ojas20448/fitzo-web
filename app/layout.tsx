@@ -5,7 +5,7 @@ import MotionProvider from "@/components/MotionProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-/* ━━━ Display + UI: Archivo. A signage grotesque with real width authority —
+/* ━━━ Display + UI: Archivo. A signage grotesque with real width authority :
        it holds up at 900 weight for headlines and at 400 for body. ━━━ */
 const archivo = Archivo({
   subsets: ["latin"],
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://www.fitzoapp.in",
-    title: "Fitzo — Train Smarter, Build Faster",
+    title: "Fitzo: Train Smarter, Build Faster",
     description:
       "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, QR gym check-in, gym buddies, and science-backed education. Built for lifters who value data.",
     siteName: "Fitzo",
@@ -75,14 +75,14 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Fitzo — Science-Based Fitness Tracking",
+        alt: "Fitzo: Science-Based Fitness Tracking",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fitzo — Train Smarter, Build Faster",
+    title: "Fitzo: Train Smarter, Build Faster",
     description:
       "Track workouts, macros, and progress with precision. Built for lifters who value data.",
     creator: "@fitzoapp",
@@ -111,7 +111,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    /* Single committed dark world — `dark` is permanent, not a toggle state. */
+    /* Single committed dark world: `dark` is permanent, not a toggle state. */
     <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <body
         className={`${archivo.variable} ${martianMono.variable} font-sans antialiased bg-background text-foreground`}

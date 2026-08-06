@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const url = `${SITE_URL}/blog/${post.slug}`;
 
   return {
-    // Tab title is the site name everywhere, not per-page content — the
+    // Tab title is the site name everywhere, not per-page content: the
     // post title still carries the page's identity via og:title/description
     // for link previews, just not in the browser tab itself.
     title: "Fitzo",

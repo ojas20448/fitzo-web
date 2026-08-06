@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Reusable Framer Motion Variants
+ * FITZO: Reusable Framer Motion Variants
  * Consistent, buttery-smooth animations
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */

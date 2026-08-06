@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Privacy Policy Page
+ * FITZO: Privacy Policy Page
  * App Store & Google Play compliant
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
@@ -94,17 +94,17 @@ export default function PrivacyPolicy() {
               <ul className="list-disc list-inside space-y-2 text-ink-muted">
                 <li>
                   <span className="text-neutral-300">Name and email address</span>{" "}
-                  — provided during account registration
+                 : provided during account registration
                 </li>
                 <li>
                   <span className="text-neutral-300">Profile information</span>{" "}
-                  — username, profile picture, bio
+                 : username, profile picture, bio
                 </li>
                 <li>
                   <span className="text-neutral-300">
                     Authentication data
                   </span>{" "}
-                  — when signing in via Google OAuth or email/password
+                 : when signing in via Google OAuth or email/password
                 </li>
               </ul>
             </div>
@@ -115,15 +115,15 @@ export default function PrivacyPolicy() {
               </h3>
               <ul className="list-disc list-inside space-y-2 text-ink-muted">
                 <li>
-                  <span className="text-neutral-300">Workout data</span> —
+                  <span className="text-neutral-300">Workout data</span> :
                   exercises, sets, reps, weights, workout duration
                 </li>
                 <li>
-                  <span className="text-neutral-300">Nutrition data</span> —
+                  <span className="text-neutral-300">Nutrition data</span> :
                   food logs, macronutrient intake, calorie tracking
                 </li>
                 <li>
-                  <span className="text-neutral-300">Progress data</span> —
+                  <span className="text-neutral-300">Progress data</span> :
                   body measurements, progress photos (if uploaded), XP and level
                   information
                 </li>
@@ -187,16 +187,16 @@ export default function PrivacyPolicy() {
           <p>We may share data with:</p>
           <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>
-              <span className="text-neutral-300">Service providers</span> —
+              <span className="text-neutral-300">Service providers</span> :
               cloud hosting, analytics, and AI services (e.g., Google Gemini
               for nutrition coaching) that help us operate the Service
             </li>
             <li>
-              <span className="text-neutral-300">Legal requirements</span> —
+              <span className="text-neutral-300">Legal requirements</span> :
               if required by law, regulation, or legal process
             </li>
             <li>
-              <span className="text-neutral-300">Your consent</span> — when
+              <span className="text-neutral-300">Your consent</span>: when
               you explicitly choose to share data with other users through
               social features
             </li>
@@ -208,24 +208,24 @@ export default function PrivacyPolicy() {
           <p>You have the right to:</p>
           <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>
-              <span className="text-neutral-300">Access</span> — Request a
+              <span className="text-neutral-300">Access</span>: Request a
               copy of the personal data we hold about you
             </li>
             <li>
-              <span className="text-neutral-300">Correction</span> — Request
+              <span className="text-neutral-300">Correction</span>: Request
               correction of inaccurate personal data
             </li>
             <li>
-              <span className="text-neutral-300">Deletion</span> — Request
+              <span className="text-neutral-300">Deletion</span>: Request
               deletion of your account and associated data
             </li>
             <li>
-              <span className="text-neutral-300">Export</span> — Request an
+              <span className="text-neutral-300">Export</span>: Request an
               export of your data in a portable format
             </li>
             <li>
               <span className="text-neutral-300">Withdrawal of consent</span>{" "}
-              — Withdraw consent for data processing at any time
+             : Withdraw consent for data processing at any time
             </li>
           </ul>
           <p>

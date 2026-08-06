@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Waitlist Section
+ * FITZO: Waitlist Section
  * Email capture for early access
  * Upgraded with Magic UI + shadcn components
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -68,7 +68,7 @@ export default function Waitlist() {
 
   return (
     <section id="waitlist" className="relative py-16 sm:py-24 overflow-hidden">
-      {/* Background — Ripple effect replaces gradient div */}
+      {/* Background: Ripple effect replaces gradient div */}
       <Ripple
         className="[&>div]:border-green-500/20"
         mainCircleSize={250}
@@ -84,7 +84,7 @@ export default function Waitlist() {
             Early Access
           </span>
 
-          {/* Headline — SparklesText on "FITZO" */}
+          {/* Headline: SparklesText on "FITZO" */}
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight mb-6">
             Be the first to<br />
             <span className="text-green-400">
@@ -169,7 +169,7 @@ export default function Waitlist() {
           </p>
         </motion.div>
 
-        {/* Benefits — wrapped in MagicCard */}
+        {/* Benefits: wrapped in MagicCard */}
         <motion.div
           variants={fadeUp}
           initial="hidden"

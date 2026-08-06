@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Terms of Service Page
+ * FITZO: Terms of Service Page
  * App Store & Google Play compliant
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
@@ -151,24 +151,24 @@ export default function TermsOfService() {
           </p>
           <ul className="list-disc list-inside space-y-2 text-ink-muted">
             <li>
-              <span className="text-neutral-300">Billing</span> — Payment is
+              <span className="text-neutral-300">Billing</span>: Payment is
               processed through the Apple App Store or Google Play Store. Your
               subscription automatically renews unless cancelled at least 24
               hours before the end of the current billing period.
             </li>
             <li>
-              <span className="text-neutral-300">Cancellation</span> — You can
+              <span className="text-neutral-300">Cancellation</span>: You can
               cancel your subscription at any time through your device&apos;s app
               store settings. Cancellation takes effect at the end of the
               current billing period.
             </li>
             <li>
-              <span className="text-neutral-300">Refunds</span> — Refund
+              <span className="text-neutral-300">Refunds</span>: Refund
               requests are handled by the Apple App Store or Google Play Store
               in accordance with their respective refund policies.
             </li>
             <li>
-              <span className="text-neutral-300">Price changes</span> — We
+              <span className="text-neutral-300">Price changes</span>: We
               reserve the right to change subscription prices. You will be
               notified in advance of any price changes.
             </li>

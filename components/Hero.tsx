@@ -1,16 +1,16 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Hero
+ * FITZO: Hero
  *
- * The phone is the argument: it runs the real app loop — dashboard, workout,
- * nutrition, progress — on a timer you can take control of. Underneath, a spec
+ * The phone is the argument: it runs the real app loop: dashboard, workout,
+ * nutrition, progress: on a timer you can take control of. Underneath, a spec
  * plate states what the product actually reads. No claim here that the app
  * cannot already do.
  *
  * Two defects this replaces:
  *   · AnimatePresence mode="wait" left the centrepiece blank for ~800ms of
  *     every 4s cycle. Screens now crossfade in place.
- *   · The auto-cycle ignored the visitor — tapping a tab got overridden a
+ *   · The auto-cycle ignored the visitor: tapping a tab got overridden a
  *     moment later. It now yields to interaction and shows its own timer.
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
@@ -287,7 +287,7 @@ function WorkoutScreen() {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.15 + i * 0.05, ease: EASE_OUT_EXPO }}
-            /* The 4th row overran the bezel by 12px on a 390px phone — a
+            /* The 4th row overran the bezel by 12px on a 390px phone: a
                partially-sliced row reads as a bug, not a bezel. It rejoins
                the list from `sm` up, where the frame is taller. */
             className={`${i === 3 ? "hidden sm:flex" : "flex"} items-center gap-2.5 rounded-xl border p-2 ${
@@ -446,7 +446,7 @@ function PhoneShell({
 
   return (
     <div className="relative h-[580px] w-[280px] overflow-hidden rounded-[2.5rem] border border-white/[0.1] bg-[#0a0a0b] shadow-[0_2px_4px_rgba(0,0,0,0.8),0_40px_80px_-24px_rgba(0,0,0,1)] sm:h-[620px] sm:w-[300px]">
-      {/* Top bezel highlight — the plate catches light */}
+      {/* Top bezel highlight: the plate catches light */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
@@ -458,10 +458,10 @@ function PhoneShell({
         <div className="h-[10px] w-[15px] rounded-[2px] border border-white/25" />
       </div>
 
-      {/* Screens crossfade in place — never blank.
+      {/* Screens crossfade in place: never blank.
           The dock is an absolute overlay 56px tall sitting 12px off the base,
           so the screen must reserve that as real padding. Without it the last
-          element of each screen renders underneath the dock — which was
+          element of each screen renders underneath the dock: which was
           swallowing the AI-coach line, the one place the hero states the
           product's actual thesis. */}
       <div className="relative h-[calc(100%-2.75rem)] overflow-hidden">
@@ -475,7 +475,7 @@ function PhoneShell({
             /* Clips rather than scrolls. As a scroll region this was a
                keyboard trap: content taller than the frame, no focusable
                children, so a keyboard user could neither reach nor scroll it.
-               A phone mockup should behave like a phone bezel — the padding
+               A phone mockup should behave like a phone bezel: the padding
                below keeps the AI-coach line clear of the dock, and anything
                past that is meant to be cut off. The demo phone below is a
                real scroller because its content is interactive. */
@@ -559,7 +559,7 @@ function DockButton({
       </span>
       {isActive && (
         <span className="absolute bottom-0.5 h-[2px] w-5 overflow-hidden rounded-full bg-white/20">
-          {/* The dwell timer, made visible — cycling stops being a surprise.
+          {/* The dwell timer, made visible: cycling stops being a surprise.
               `initial` must NOT depend on useReducedMotion(): that hook reads
               false during SSR and true on a reduced-motion client, which
               hydration-mismatches the inline width. Start at 0% always and let
@@ -581,7 +581,7 @@ function DockButton({
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Spec plate — what the product actually reads.
+   Spec plate: what the product actually reads.
    Every figure here is a capability the app ships, not a market claim.
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 const SPECS = [
@@ -593,7 +593,7 @@ const SPECS = [
 
 /**
  * Counts once on mount. The direction contract promises instrumentation that
- * "begins counting on load", and a static number is not an instrument — but a
+ * "begins counting on load", and a static number is not an instrument: but a
  * counter that never settles is noise, so this runs exactly once.
  *
  * Gated on reduced motion at its own call site: MotionConfig does not cover
@@ -672,7 +672,7 @@ export default function Hero() {
       ref={ref}
       className="relative flex min-h-[100svh] flex-col overflow-hidden pt-24 md:pt-20"
     >
-      {/* One quiet backdrop — a cold overhead wash, like gym lighting */}
+      {/* One quiet backdrop: a cold overhead wash, like gym lighting */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_-10%,rgba(255,255,255,0.09),transparent_70%)]"
@@ -698,7 +698,7 @@ export default function Hero() {
               </span>
             </motion.p>
 
-            {/* The headline used to be "The coach that actually knows you" —
+            {/* The headline used to be "The coach that actually knows you" :
                 true, but it could sit on any AI wellness app, and the one
                 thing only Fitzo does was demoted to the paragraph below. The
                 mechanism now runs at display scale; the old line survives as
@@ -717,7 +717,7 @@ export default function Hero() {
               variants={stackItem}
               className="mx-auto mb-7 max-w-[38ch] sm:mb-9 text-lg leading-relaxed text-ink-muted text-pretty sm:text-xl lg:mx-0"
             >
-              Fitzo logs your lifts and your food — dal to biryani — in one
+              Fitzo logs your lifts and your food: dal to biryani: in one
               place, then coaches from all of it. Science-based training, built
               for Indian lifters.
             </motion.p>

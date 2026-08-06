@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Canonical origin and distribution links
+ * FITZO: Canonical origin and distribution links
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -14,7 +14,7 @@
  *
  * A canonical that names a different origin than the one serving the page
  * tells Google the content belongs somewhere else, which de-indexes the real
- * site. Every URL now derives from here — if the primary domain changes,
+ * site. Every URL now derives from here: if the primary domain changes,
  * change it in this one place.
  */
 export const SITE_URL = "https://www.fitzoapp.in";
@@ -27,7 +27,7 @@ export const SITE_URL = "https://www.fitzoapp.in";
  * press page claimed the app was already live.
  *
  * Android ships through Google Play. iOS is in TestFlight beta and is NOT on
- * the public App Store — copy must say "TestFlight" or "beta", never
+ * the public App Store: copy must say "TestFlight" or "beta", never
  * "Download on the App Store".
  */
 export const STORE = {

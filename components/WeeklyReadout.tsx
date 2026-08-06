@@ -1,10 +1,10 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Weekly readout  ·  the page's one authored motion moment
+ * FITZO: Weekly readout  ·  the page's one authored motion moment
  *
  * This replaces the "Trusted by athletes from" marquee, which paraded eight
  * gym brands that do not exist. A pre-launch product cannot borrow other
- * people's logos, but it can show the thing it actually does — so the scroll
+ * people's logos, but it can show the thing it actually does: so the scroll
  * scrubs a week of training being read: tonnage climbing day by day, macro
  * adherence resolving underneath, totals counting, and finally the coach's
  * read on the week.
@@ -12,7 +12,7 @@
  * The motion is the argument. Every value is bound to scroll progress, so the
  * visitor drives the instrument rather than watching a loop.
  *
- * Second pass — what a cold review correctly called out:
+ * Second pass: what a cold review correctly called out:
  *   · 320vh with the bars finishing at 0.56 meant the last 44% of the scroll
  *     delivered one fading paragraph. Now 200vh, with the read landing at 0.9.
  *   · It was a bar chart with a scroll trigger. An instrument has a scale, so
@@ -44,7 +44,7 @@ type Day = {
   day: string;
   session: string;
   volume: number;
-  /** Last week's tonnage for the same slot — drawn as a ghost to compare. */
+  /** Last week's tonnage for the same slot: drawn as a ghost to compare. */
   prev: number;
   /** Did protein / carbs / fat land inside target that day. */
   macros: [boolean, boolean, boolean];
@@ -136,7 +136,7 @@ function DayColumn({
           />
         )}
 
-        {/* Protein miss, marked on the bar itself — not only in a 6px dot */}
+        {/* Protein miss, marked on the bar itself: not only in a 6px dot */}
         {missedProtein && (
           <motion.span
             style={{ opacity: reduce ? 1 : macroOpacity }}
@@ -209,7 +209,7 @@ function ScrubValue({
   const [display, setDisplay] = useState(0);
   useMotionValueEvent(raw, "change", (v) => setDisplay(Math.round(v)));
   /* Reduced motion gets the finished figure rather than a value it would have
-     to scrub for — `reduce` is mount-gated upstream, so SSR still renders 0. */
+     to scrub for: `reduce` is mount-gated upstream, so SSR still renders 0. */
   return <>{format(reduce ? target : display)}</>;
 }
 
@@ -289,7 +289,7 @@ export default function WeeklyReadout() {
 
             {/* ━━━ Plot: axis + bars ━━━ */}
             <div className="flex gap-3 sm:gap-4">
-              {/* Volume scale — what makes this a readout, not a chart */}
+              {/* Volume scale: what makes this a readout, not a chart */}
               <div
                 aria-hidden
                 className="relative h-[clamp(88px,17vh,168px)] w-9 flex-shrink-0 sm:w-11"
@@ -335,7 +335,7 @@ export default function WeeklyReadout() {
               </div>
             </div>
 
-            {/* ━━━ Legend — the dots meant nothing without it ━━━ */}
+            {/* ━━━ Legend: the dots meant nothing without it ━━━ */}
             <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/[0.07] pt-4 text-[11px] text-ink-faint">
               {MACRO_LABELS.map((label, m) => (
                 <span key={label} className="flex items-center gap-1.5">
@@ -408,7 +408,7 @@ export default function WeeklyReadout() {
               ))}
             </div>
 
-            {/* ━━━ The read — the payoff the whole scroll builds to.
+            {/* ━━━ The read: the payoff the whole scroll builds to.
                    The slot holds its height from the start so nothing shifts,
                    and while the week is still resolving it says so rather than
                    sitting as an empty rectangle. The wait became part of the
@@ -450,7 +450,7 @@ export default function WeeklyReadout() {
                   </p>
                   <p className="mt-1.5 max-w-[62ch] text-xs leading-relaxed text-ink-muted sm:text-sm">
                     Leg volume is up 14% on last week and protein held at 148g a
-                    day across six sessions. Friday is the one you dropped —
+                    day across six sessions. Friday is the one you dropped :
                     short on protein after a heavy push. Thursday&apos;s rest
                     day landed where it should. Bench is the laggard: 2.5kg in
                     three weeks. Push the press on Friday.

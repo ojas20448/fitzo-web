@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Pricing Section
+ * FITZO: Pricing Section
  * Simple, transparent, and free for now.
  * Enhanced with Magic UI components.
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -65,12 +65,12 @@ export default function Pricing() {
             {/* Glow Effect */}
             <div className="absolute -inset-px bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-            {/* Card container — relative + overflow-hidden for Meteors, rounded for BorderBeam */}
+            {/* Card container: relative + overflow-hidden for Meteors, rounded for BorderBeam */}
             <div className="relative overflow-hidden glass-card rounded-3xl p-8 sm:p-12 border border-white/[0.08] bg-white/[0.01]">
               {/* Meteors background effect */}
               <Meteors number={20} />
 
-              {/* BorderBeam animated border — green to white, 10s loop */}
+              {/* BorderBeam animated border: green to white, 10s loop */}
               <BorderBeam
                 size={250}
                 duration={10}

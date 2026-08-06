@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/compare`,
   },
   openGraph: {
-    title: "Fitzo vs MyFitnessPal vs Strong vs Hevy — Feature Comparison",
+    title: "Fitzo vs MyFitnessPal vs Strong vs Hevy: Feature Comparison",
     description: "Compare fitness tracking apps side by side. Fitzo is free, ad-free, works offline, and has the best Indian food database.",
     type: "website",
     url: `${SITE_URL}/compare`,
@@ -135,7 +135,7 @@ export default function ComparePage() {
 
         <p className="mb-8 text-center text-xs text-ink-faint">
           Compared against each app&apos;s publicly documented features, last
-          checked {LAST_CHECKED}. Competitors ship changes often — tell us at{" "}
+          checked {LAST_CHECKED}. Competitors ship changes often: tell us at{" "}
           <a
             href="mailto:contact@fitzoapp.in"
             className="underline underline-offset-4 hover:text-white"

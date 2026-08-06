@@ -55,7 +55,7 @@ export function getSoftwareApplicationSchema() {
       priceCurrency: "INR",
     },
     /*
-     * ⚠️ aggregateRating removed deliberately — do not restore from memory.
+     * ⚠️ aggregateRating removed deliberately: do not restore from memory.
      *
      * This shipped `ratingValue: "4.8"` with `ratingCount: "2500"` to Google
      * as review markup. Two problems: the count was the tester headcount, not
@@ -65,7 +65,7 @@ export function getSoftwareApplicationSchema() {
      *
      * To put it back, take BOTH numbers from the live Play Console rating
      * summary and keep them in sync when they move. If nobody owns that,
-     * leave this out — Google reads the real rating from the Play listing
+     * leave this out: Google reads the real rating from the Play listing
      * regardless.
      */
     featureList: [

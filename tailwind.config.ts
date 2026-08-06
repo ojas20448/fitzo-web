@@ -55,7 +55,7 @@ const config: Config = {
           faint: "hsl(var(--text-tertiary))",
         },
 
-        /* ━━━ Macro triad — each colour has one job ━━━ */
+        /* ━━━ Macro triad: each colour has one job ━━━ */
         protein: "hsl(var(--protein))",
         carbs: "hsl(var(--carbs))",
         fat: "hsl(var(--fat))",

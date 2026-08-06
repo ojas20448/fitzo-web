@@ -1,9 +1,9 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — How it works
+ * FITZO: How it works
  *
  * Fixed here: the closing CTA pointed at "#waitlist", an anchor that exists
- * nowhere on this page — the button silently did nothing. Every conversion
+ * nowhere on this page: the button silently did nothing. Every conversion
  * path on the site lands on "#download".
  *
  * The 01/02/03 numerals stay: this is an ordered sequence, so the numbers
@@ -25,7 +25,7 @@ const steps = [
     glow: "shadow-[0_0_25px_rgba(74,222,128,0.15)] border-protein/40 text-protein bg-protein/10",
     dot: "bg-protein shadow-[0_0_8px_#4ade80]",
     description:
-      "Build your profile in 30 seconds. Set goals, activity level and preferences — Fitzo works out your targets from there.",
+      "Build your profile in 30 seconds. Set goals, activity level and preferences: Fitzo works out your targets from there.",
   },
   {
     number: "02",
@@ -80,7 +80,7 @@ export default function HowItWorks() {
                 variants={stackItem}
                 className="panel panel-interactive group relative flex flex-col p-5 sm:p-8"
               >
-                {/* Step numeral — structural, sits behind the content */}
+                {/* Step numeral: structural, sits behind the content */}
                 <span
                   aria-hidden
                   className="pointer-events-none absolute right-6 top-4 select-none text-[5rem] font-black leading-none tracking-tighter text-white/[0.045] transition-colors duration-300 group-hover:text-white/[0.08]"

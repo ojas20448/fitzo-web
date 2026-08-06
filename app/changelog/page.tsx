@@ -6,7 +6,7 @@ import { SITE_URL } from "@/lib/links";
 
 export const metadata: Metadata = {
   title: "Fitzo",
-  description: "Every update, feature, and improvement shipped in Fitzo. From v1.0 to v2.0 — see the complete evolution of India's best fitness tracking app.",
+  description: "Every update, feature, and improvement shipped in Fitzo. From v1.0 to v2.0: see the complete evolution of India's best fitness tracking app.",
   alternates: {
     canonical: `${SITE_URL}/changelog`,
   },
@@ -22,7 +22,7 @@ const entries = [
       "New smart dashboard with daily overview",
       "AI-powered nutrition analysis and meal suggestions",
       "XP system and leveling for gamified progress",
-      "Gym Buddies — see who's working out in real-time",
+      "Gym Buddies: see who's working out in real-time",
       "Built-In Learn module with science-backed courses",
       "Indian food database expanded to 50,000+ items",
       "Barcode scanner for packaged foods",
@@ -128,7 +128,7 @@ export default function ChangelogPage() {
             Changelog
           </h1>
           <p className="text-lg text-ink-muted">
-            Every update, feature, and fix — shipped fast, documented clearly.
+            Every update, feature, and fix: shipped fast, documented clearly.
           </p>
         </div>
 

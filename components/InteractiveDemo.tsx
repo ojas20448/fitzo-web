@@ -1,7 +1,7 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Interactive App Demo
- * "Try Fitzo" — clickable phone mockup
+ * FITZO: Interactive App Demo
+ * "Try Fitzo": clickable phone mockup
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
@@ -476,7 +476,7 @@ function DemoProfile() {
         {[
           { label: "Workouts", value: "0" },
           { label: "Streak", value: "0d" },
-          { label: "Weight", value: "—" },
+          { label: "Weight", value: ":" },
         ].map((s) => (
           <div key={s.label} className="well p-2.5 text-center">
             <p className="text-sm font-bold text-white">{s.value}</p>
@@ -559,7 +559,7 @@ export default function InteractiveDemo() {
           </h2>
           <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-ink-muted text-pretty">
             Tap through five screens of the real app. Log a set, tick off a
-            meal, nudge a buddy — it all responds.
+            meal, nudge a buddy: it all responds.
           </p>
         </motion.div>
 
@@ -593,7 +593,7 @@ export default function InteractiveDemo() {
             {/* Screen Content */}
             <div className="relative h-[calc(100%-2.75rem)] overflow-hidden">
               {/* Crossfade in place. mode="wait" ran exit (0.25s) fully before
-                  enter, so the phone went blank between every tab — the exact
+                  enter, so the phone went blank between every tab: the exact
                   defect the hero phone was rebuilt to remove. */}
               <AnimatePresence initial={false}>
                 <motion.div

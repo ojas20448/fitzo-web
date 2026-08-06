@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Sticky Navigation
+ * FITZO: Sticky Navigation
  *
  * The bar itself is the page's only always-on instrument: a hairline scroll
  * readout runs along its base, and the active section lights up as you pass it.
@@ -51,7 +51,7 @@ export default function Navbar() {
       .filter(Boolean) as HTMLElement[];
     if (!els.length) return;
 
-    /* Track the full visible set, not just the latest entry — otherwise the
+    /* Track the full visible set, not just the latest entry: otherwise the
        pill stays lit on the last matched section long after the reader has
        scrolled past every tracked one. */
     const visible = new Map<string, number>();
@@ -110,7 +110,7 @@ export default function Navbar() {
         <Link
           href="/"
           className="relative z-10 -m-2 rounded-lg p-2"
-          aria-label="Fitzo — home"
+          aria-label="Fitzo: home"
         >
           <FitzoLogo size="md" />
         </Link>
@@ -157,7 +157,7 @@ export default function Navbar() {
           </motion.a>
         </div>
 
-        {/* ━━━ Mobile toggle — 44px target ━━━ */}
+        {/* ━━━ Mobile toggle: 44px target ━━━ */}
         <button
           onClick={() => setIsOpen((v) => !v)}
           className="relative z-10 -mr-2 flex h-11 w-11 items-center justify-center rounded-xl text-white md:hidden"
@@ -169,7 +169,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* ━━━ Scroll readout — the page's progress, as an instrument ━━━ */}
+      {/* ━━━ Scroll readout: the page's progress, as an instrument ━━━ */}
       <motion.div
         aria-hidden
         style={{ scaleX: progress }}

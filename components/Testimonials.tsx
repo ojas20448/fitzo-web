@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Tester feedback
+ * FITZO: Tester feedback
  *
  * Attribution (confirmed with the product owner, do not "improve"):
  * the QUOTES are real tester feedback; the full names and cities attached to
@@ -94,7 +94,7 @@ Real words from people running Fitzo every day on Google Play and
           </p>
         </motion.div>
 
-        {/* ━━━ Beta numbers — stated as beta numbers, not launch metrics ━━━ */}
+        {/* ━━━ Beta numbers: stated as beta numbers, not launch metrics ━━━ */}
         <motion.div
           variants={rise}
           initial="hidden"
@@ -131,12 +131,12 @@ Real words from people running Fitzo every day on Google Play and
           viewport={VIEWPORT}
           /* tabIndex={0} is load-bearing, not decoration. The rail has no
              focusable children, so without it a keyboard user can reach card
-             one and nothing else — cards two to six are simply unavailable.
+             one and nothing else: cards two to six are simply unavailable.
              Chrome makes bare scrollers focusable on its own; Safari and
              Firefox do not, so it is declared explicitly. */
           tabIndex={0}
           role="region"
-          aria-label="Tester quotes — scrollable, use arrow keys"
+          aria-label="Tester quotes: scrollable, use arrow keys"
           className="scrollbar-hide -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-1 [scroll-padding-inline:1rem] focus-visible:outline-2 focus-visible:outline-offset-4 sm:-mx-6 sm:px-6 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-3"
         >
           {testimonials.map((t) => (

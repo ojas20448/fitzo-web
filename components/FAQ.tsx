@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — FAQ
+ * FITZO: FAQ
  *
  * Left-aligned against a sticky heading rather than centred: a column of
  * questions reads faster with a fixed left edge, and the heading stays with
@@ -23,7 +23,7 @@ const faqs = [
   {
     question: "Is Fitzo free to use?",
     answer:
-      "Yes. Fitzo is completely free to download and use — we believe everyone should have access to quality fitness tracking. Premium features will arrive later with additional capabilities.",
+      "Yes. Fitzo is completely free to download and use: we believe everyone should have access to quality fitness tracking. Premium features will arrive later with additional capabilities.",
   },
   {
     question: "Does it work offline?",
@@ -33,7 +33,7 @@ const faqs = [
   {
     question: "Can I track Indian food items?",
     answer:
-      "Yes — that's the point. Fitzo carries a comprehensive Indian food database alongside USDA data, so dal, roti, paneer and biryani are all there. The barcode scanner works with Indian packaged foods too.",
+      "Yes: that's the point. Fitzo carries a comprehensive Indian food database alongside USDA data, so dal, roti, paneer and biryani are all there. The barcode scanner works with Indian packaged foods too.",
   },
   {
     question: "What workout splits are available?",
@@ -43,7 +43,7 @@ const faqs = [
   {
     question: "How does the AI coach work?",
     answer:
-      "It runs on Google Gemini and answers your fitness questions — form corrections, nutrition advice, workout modifications. It reads your logged lifts and food, so the guidance is based on what you've actually done.",
+      "It runs on Google Gemini and answers your fitness questions: form corrections, nutrition advice, workout modifications. It reads your logged lifts and food, so the guidance is based on what you've actually done.",
   },
   {
     question: "Is my data secure?",
@@ -53,7 +53,7 @@ const faqs = [
   {
     question: "Can I use it with my gym trainer?",
     answer:
-      "Yes. Fitzo supports trainer profiles — your trainer can view your progress, track attendance and send motivational nudges to keep you accountable.",
+      "Yes. Fitzo supports trainer profiles: your trainer can view your progress, track attendance and send motivational nudges to keep you accountable.",
   },
   {
     question: "Which gyms is it designed for?",
@@ -89,7 +89,7 @@ export default function FAQ() {
               >
                 Email us
               </a>{" "}
-              — a human answers.
+             : a human answers.
             </p>
           </motion.div>
 

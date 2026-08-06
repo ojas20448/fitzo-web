@@ -1,10 +1,10 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Logo
+ * FITZO: Logo
  *
  * The mark is a plate, not a sticker: on the black ground it reads as a milled
  * white tile with the F cut out of it. (The previous black-on-black plate was
- * invisible on this world — only the glyph survived.)
+ * invisible on this world: only the glyph survived.)
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 

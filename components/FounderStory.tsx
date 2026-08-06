@@ -1,8 +1,8 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Built by a lifter
+ * FITZO: Built by a lifter
  *
- * The left panel used to be three concentric rings around a stroked "F" —
+ * The left panel used to be three concentric rings around a stroked "F" :
  * generic chrome standing where an authored asset belongs. It is now the
  * product's own 1-bit thermal receipt, printing the founder's week. The
  * artifact is a real Fitzo feature, so the section proves something instead of
@@ -20,7 +20,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { stack, stackItem, sweep, VIEWPORT, EASE_OUT_EXPO } from "@/lib/motion";
 
-/* ━━━ The receipt — Fitzo's own thermal share format, printed ━━━ */
+/* ━━━ The receipt: Fitzo's own thermal share format, printed ━━━ */
 const RECEIPT_ROWS = [
   ["BENCH PRESS", "4 × 80"],
   ["INCLINE DB", "3 × 30"],
@@ -98,7 +98,7 @@ function ReceiptArtifact() {
 
         <div className="my-3 border-t border-dashed border-black/25" />
 
-        {/* 1-bit dithered barbell — the product's own mark */}
+        {/* 1-bit dithered barbell: the product's own mark */}
         <div className="flex items-end justify-between">
           <Image
             src="/barbell_dither.png"
@@ -181,7 +181,7 @@ export default function FounderStory() {
               </p>
               <p className="max-w-[62ch] text-base leading-relaxed text-ink-muted text-pretty">
                 It&apos;s what happens when a lifter who codes gets tired of
-                settling. No venture capital, no growth hacks — just the tool I
+                settling. No venture capital, no growth hacks: just the tool I
                 wanted to exist, for myself and every serious lifter in India.
               </p>
             </motion.div>

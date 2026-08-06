@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Feature grid
+ * FITZO: Feature grid
  *
  * Each cell carries a real screen from the app, so the grid demonstrates
  * rather than lists. Structure change from the previous build:

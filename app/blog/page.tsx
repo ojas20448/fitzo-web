@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     canonical: `${SITE_URL}/blog`,
   },
   openGraph: {
-    title: "Fitzo Blog — Science-Backed Fitness Articles",
+    title: "Fitzo Blog: Science-Backed Fitness Articles",
     description:
       "Expert articles on training, nutrition, supplements, and building a stronger version of yourself. Written for Indian lifters.",
     type: "website",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fitzo Blog — Science-Backed Fitness Articles",
+    title: "Fitzo Blog: Science-Backed Fitness Articles",
     description:
       "Expert articles on training, nutrition, supplements, and building a stronger version of yourself.",
     creator: "@fitzoapp",

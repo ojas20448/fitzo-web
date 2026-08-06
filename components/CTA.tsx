@@ -1,6 +1,6 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Final CTA + Early Access
+ * FITZO: Final CTA + Early Access
  * The single conversion point of the page: big brand moment,
  * one working email form, honest store status.
  * Every "#download" link on the site lands here.
@@ -38,16 +38,16 @@ export default function CTA() {
       });
       if (response.ok) {
         setStatus("success");
-        setMessage("You're on the list — see you at launch. 💪");
+        setMessage("You're on the list: see you at launch. 💪");
         setEmail("");
       } else {
-        // Honest failure — never fake success and silently lose a lead
+        // Honest failure: never fake success and silently lose a lead
         setStatus("error");
         setMessage("Couldn't sign you up. Email us at contact@fitzoapp.in instead.");
       }
     } catch {
       setStatus("error");
-      setMessage("Network error — try again, or email contact@fitzoapp.in.");
+      setMessage("Network error: try again, or email contact@fitzoapp.in.");
     }
   };
 
@@ -87,7 +87,7 @@ export default function CTA() {
             className="text-lg text-ink-muted max-w-lg mx-auto mb-9 leading-relaxed text-pretty"
           >
             Android is live on Google Play. iOS is in open TestFlight beta.
-            Both free — no card, no ads.
+            Both free: no card, no ads.
           </motion.p>
 
           {/* ━━━ The real destinations.
@@ -137,7 +137,7 @@ export default function CTA() {
             <span className="h-px flex-1 bg-white/[0.09]" />
           </motion.div>
 
-          {/* ━━━ Email list — now the secondary path, not a fake download ━━━ */}
+          {/* ━━━ Email list: now the secondary path, not a fake download ━━━ */}
           <motion.form
             variants={stackItem}
             onSubmit={handleSubmit}

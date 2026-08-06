@@ -1,17 +1,17 @@
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
- * FITZO — Footer
+ * FITZO: Footer
  *
  * Two defects fixed here:
  *   · Contrast. Link and copyright text sat on neutral-600/700 over pure
- *     black — roughly 2.0–2.7:1, well under the 4.5:1 floor. Everything now
+ *     black: roughly 2.0:2.7:1, well under the 4.5:1 floor. Everything now
  *     uses the ink ramp, which is built to clear it.
  *   · Dead links. All three social icons pointed at "#". Only the X handle is
  *     evidenced anywhere in this codebase (layout.tsx twitter.creator), so
  *     that one survives and the unverifiable ones are gone.
  *
  * ⚠️ TO ADD: real Instagram / Reddit / YouTube URLs when those accounts exist.
- * Add them to SOCIALS — do not reintroduce href="#".
+ * Add them to SOCIALS: do not reintroduce href="#".
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  */
 
