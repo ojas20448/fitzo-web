@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     // for link previews, just not in the browser tab itself.
     title: "Fitzo",
     description: post.description,
+    keywords: post.keywords,
     authors: [{ name: "Fitzo" }],
     alternates: {
       canonical: url,

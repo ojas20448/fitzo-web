@@ -13,6 +13,7 @@ export interface BlogPost {
   category: string;
   featured: boolean;
   readTime: string;
+  keywords?: string[];
   content: string;
 }
 
@@ -34,6 +35,7 @@ export function getAllPosts(): BlogPost[] {
       category: data.category || "Fitness",
       featured: data.featured || false,
       readTime: stats.text,
+      keywords: data.keywords || [],
       content,
     };
   });
@@ -59,6 +61,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     category: data.category || "Fitness",
     featured: data.featured || false,
     readTime: stats.text,
+    keywords: data.keywords || [],
     content,
   };
 }

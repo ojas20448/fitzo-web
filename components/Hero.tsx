@@ -811,7 +811,7 @@ export default function Hero() {
                 <dt className="mt-1.5 text-[11px] font-medium leading-tight text-white sm:mt-2 sm:text-[13px]">
                   {s.label}
                 </dt>
-                <p className="mt-0.5 hidden text-xs text-ink-faint sm:block">{s.detail}</p>
+                <dd className="mt-0.5 hidden text-xs text-ink-faint sm:block">{s.detail}</dd>
               </div>
             ))}
           </dl>

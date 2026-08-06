@@ -53,6 +53,15 @@ export const metadata: Metadata = {
   authors: [{ name: "Fitzo" }],
   creator: "Fitzo",
   manifest: "/manifest.json",
+  alternates: {
+    languages: {
+      "en-IN": "/",
+    },
+  },
+  other: {
+    "geo.region": "IN",
+    "geo.placename": "India",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

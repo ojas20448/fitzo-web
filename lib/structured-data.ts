@@ -103,6 +103,7 @@ export function getArticleSchema(post: BlogPost) {
     "@type": "Article",
     headline: post.title,
     description: post.description,
+    keywords: post.keywords?.join(", "),
     datePublished: post.date,
     dateModified: post.date,
     author: {
