@@ -707,6 +707,7 @@ export default function Hero() {
               variants={stackItem}
               className="mb-6 text-[clamp(2.1rem,4.6vw,3.3rem)] font-black leading-[1.02] tracking-[-0.045em] text-balance"
             >
+              <span className="sr-only">Fitzo App: </span>
               Every set. Every roti.
               <br />
               <span className="text-ink-faint">One coach reads both.</span>

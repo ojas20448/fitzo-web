@@ -39,7 +39,7 @@ function DashboardMini() {
           width={28}
           height={28}
           className="h-7 w-7 rounded-full border border-white/10 bg-black object-cover"
-          alt="Ojas"
+          alt="Ojas - Fitzo User Profile"
         />
         <div>
           <p className="text-[8px] uppercase tracking-[0.14em] text-ink-faint">
