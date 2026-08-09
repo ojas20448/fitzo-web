@@ -35,6 +35,14 @@ const FOOTER_LINKS = {
     { label: "Changelog", href: "/changelog" },
     { label: "Contact", href: "mailto:contact@fitzoapp.in" },
   ],
+  Tools: [
+    { label: "BMR Calculator", href: "/tools/bmr-calculator" },
+    { label: "Macro Calculator", href: "/tools/macro-calculator" },
+    { label: "Body Fat Calculator", href: "/tools/body-fat-calculator" },
+    { label: "1RM Calculator", href: "/tools/1rm-calculator" },
+    { label: "TDEE Calculator", href: "/tools/tdee-calculator" },
+    { label: "Protein Calculator", href: "/tools/protein-calculator" },
+  ],
   Legal: [
     { label: "Privacy policy", href: "/privacy-policy" },
     { label: "Terms of service", href: "/terms" },
@@ -70,9 +78,9 @@ export default function Footer() {
       className="relative border-t border-white/[0.07] pb-8 pt-12 sm:pt-16"
     >
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 grid grid-cols-3 gap-x-4 gap-y-8 sm:gap-10 md:mb-14 md:grid-cols-4 lg:gap-16">
+        <div className="mb-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-10 md:mb-14 md:grid-cols-5 lg:gap-16">
           {/* ━━━ Brand ━━━ */}
-          <div className="col-span-3 md:col-span-1">
+          <div className="col-span-2 md:col-span-1">
             <Link href="/" className="mb-5 -m-2 inline-block p-2">
               <FitzoLogo size="sm" showWordmark />
             </Link>
