@@ -18,9 +18,14 @@ export const CalcInput = React.forwardRef<HTMLInputElement, CalcInputProps>(
         <div className="relative flex items-center">
           <input
             ref={ref}
-            className={`w-full appearance-none rounded-lg border bg-black px-4 py-3.5 text-base text-white placeholder-ink-faint shadow-sm outline-none transition-colors duration-200 focus:border-white focus:ring-1 focus:ring-white ${
+            /* [&::-webkit-...] hides Chrome/Edge/Safari's native number
+               spinner; [-moz-appearance:textfield] does the same in Firefox.
+               Without both, the spinner plus a unit suffix ate most of a
+               narrow 2-up column's width and truncated the placeholder to
+               "e.g. 2…" — confirmed from a screenshot on a real device. */
+            className={`w-full appearance-none rounded-lg border bg-black px-4 py-3.5 text-base text-white placeholder-ink-faint shadow-sm outline-none transition-colors duration-200 [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none focus:border-white focus:ring-1 focus:ring-white ${
               error
-                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                ? "border-fat focus:border-fat focus:ring-fat"
                 : "border-white/[0.12] hover:border-white/[0.2]"
             } ${suffix ? "pr-12" : ""}`}
             {...props}
@@ -31,7 +36,7 @@ export const CalcInput = React.forwardRef<HTMLInputElement, CalcInputProps>(
             </span>
           )}
         </div>
-        {error && <span className="mt-1 text-xs text-red-500">{error}</span>}
+        {error && <span className="mt-1 text-xs text-fat">{error}</span>}
       </div>
     );
   }
@@ -54,9 +59,16 @@ export const CalcSelect = React.forwardRef<HTMLSelectElement, CalcSelectProps>(
         <div className="relative">
           <select
             ref={ref}
-            className={`w-full appearance-none rounded-lg border bg-black px-4 py-3.5 text-base text-white shadow-sm outline-none transition-colors duration-200 focus:border-white focus:ring-1 focus:ring-white ${
+            /* pr-10 reserves room for the chevron below, which is always
+               present (unlike CalcInput's suffix, which is conditional).
+               Without it, long option text — "Balanced (30% P / 40% C /
+               30% F)", "Sedentary (Little/No Exercise)" — ran straight
+               under the icon and got visibly cut off mid-word; confirmed
+               on the macro-calculator's Activity Level, Goal and Diet Type
+               selects, where every option is exactly this long. */
+            className={`w-full truncate appearance-none rounded-lg border bg-black py-3.5 pl-4 pr-10 text-base text-white shadow-sm outline-none transition-colors duration-200 focus:border-white focus:ring-1 focus:ring-white ${
               error
-                ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                ? "border-fat focus:border-fat focus:ring-fat"
                 : "border-white/[0.12] hover:border-white/[0.2]"
             }`}
             {...props}
@@ -83,7 +95,7 @@ export const CalcSelect = React.forwardRef<HTMLSelectElement, CalcSelectProps>(
             </svg>
           </div>
         </div>
-        {error && <span className="mt-1 text-xs text-red-500">{error}</span>}
+        {error && <span className="mt-1 text-xs text-fat">{error}</span>}
       </div>
     );
   }

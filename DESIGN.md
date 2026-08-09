@@ -245,6 +245,7 @@ Kept in `scripts/`, all run against a dev server on `:3002`:
 | `msec.mjs` | one mobile section shot + per-card heights (`SEL=#features`) |
 | `polish-audit.mjs` | keyboard path, focus rings, scroll-region reachability, hover states, CLS, console |
 | `phonefit.mjs` | asserts no phone-mockup screen overflows its bezel |
+| `toolshot.mjs` | full-page screenshot of one `/tools/*` route — `SLUG=bmr-calculator W=390 H=844 node scripts/toolshot.mjs` |
 
 Run `audit.mjs` after any UI change. It is the floor, not the ceiling.
 
@@ -280,13 +281,66 @@ height in screens. Anything over ~2 screens on a phone needs a reason.
 
 ---
 
-## 10. Known gaps
+## 10. Tool pages (calculators)
+
+`/tools/*` — BMR, TDEE, macro, protein, body-fat, 1RM. Free calculators exist
+to funnel search traffic into the app; a tool page that dead-ends or looks
+like a different site defeats the point.
+
+**Shell:** every tool uses `ToolLayout` (`kicker`, `title`, `description`,
+`children`) — never build a bespoke page shell. It provides:
+
+- the sticky back-arrow + logo header, matching `/compare` and `/changelog`.
+  A tool page reached from search with no way back to the site is a dead end,
+  not a light page — this was missing on the first version of all six.
+- the `.panel` content card and a closing `Get Fitzo free` CTA to `/#download`.
+
+**Inputs:** use `CalcInput` / `CalcSelect` / `CalcButton` from
+`CalculatorControls.tsx`, never a raw `<input>`/`<select>`. Two defects lived
+there and would recur in any hand-rolled control:
+
+- native number-input spinner arrows plus a unit suffix (`yrs`, `cm`, `kg`)
+  ate most of a narrow 2-up column's width and truncated the placeholder to
+  "e.g. 2…" — confirmed from a screenshot on a real device. `CalcInput` hides
+  the spinner in both WebKit and Firefox.
+- `CalcSelect`'s chevron icon had no reserved padding, so a selected value
+  like "Balanced (30% P / 40% C / 30% F)" ran under it and was cut off
+  mid-word with no ellipsis. Fixed with `pr-10` plus `truncate`, so anything
+  still too long degrades to "…" instead of a hard clip.
+
+**Result panels:** use `.well`, never `border-white/[0.06] bg-black/50` —
+that ad-hoc pairing is the exact "6% border on black" anti-pattern the whole
+homepage redesign exists to refuse (§2).
+
+**Heading order:** the result label (`Your BMR Is`, `Estimated 1RM`, …) is
+`h2` — it is the only other heading on the page besides the `h1` title, and
+all six originally shipped it as `h3` (1RM also nested a stray `h4`), which
+skips a level for anyone navigating by heading. Because these headings live
+inside the result panel's conditional render, an audit that never submits
+the form won't see them — verify with a filled-in submission, not just a
+cold page load.
+
+**URLs:** every `canonical`, `openGraph.url` and JSON-LD `url` imports
+`SITE_URL` from `lib/links.ts`. All six tool pages originally hardcoded
+`https://fitzoapp.in` (no `www.`) in their JSON-LD specifically — the exact
+canonical-domain-mismatch bug §6 already fixed once, reintroduced because
+JSON-LD is a hand-stringified `<script>` tag that Next's metadata resolution
+(and metadataBase) never touches. `metadataBase` itself now derives from
+`SITE_URL` too, so this class of bug can't recur from that direction either.
+
+**Titles:** top-level `metadata.title` is `"Fitzo"`, matching every other
+route (§6 territory — this is a sitewide rule, not tools-specific).
+`openGraph.title` carries the descriptive version, colon-separated and
+brand-first — `"Fitzo BMR Calculator: Basal Metabolic Rate, Free & Instant"`
+— matching the convention `/blog` and `/compare` already use, not a `|`
+pipe. Verify with `node scripts/titles.mjs`.
+
+---
+
+## 11. Known gaps
 
 - `components/Pricing.tsx`, `components/Waitlist.tsx` and `components/Blog.tsx`
   are unimported. They still carry the pre-redesign palette. Delete them or
   migrate them before they get reused.
 - `TESTER_NUMBERS` in `Testimonials.tsx` has not been checked against a real
   dashboard.
-- `/press`, `/terms` and `/privacy-policy` use `press@` and `support@` on a
-  domain the site does not appear to own; the rest of the site uses
-  `contact@fitzoapp.in`.

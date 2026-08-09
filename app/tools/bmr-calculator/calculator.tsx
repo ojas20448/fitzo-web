@@ -30,6 +30,7 @@ export default function BmrCalculator() {
 
   return (
     <ToolLayout
+      kicker="BMR Calculator"
       title="BMR Calculator"
       description="Calculate your Basal Metabolic Rate to understand how many calories your body burns at rest."
     >
@@ -91,12 +92,12 @@ export default function BmrCalculator() {
         </form>
 
         {/* Result Side */}
-        <div className="flex flex-col items-center justify-center rounded-xl border border-white/[0.06] bg-black/50 p-8 text-center relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center well p-8 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
           
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-widest text-ink-muted">
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-widest text-ink-muted">
             Your BMR Is
-          </h3>
+          </h2>
           
           <AnimatePresence mode="wait">
             {result !== null ? (

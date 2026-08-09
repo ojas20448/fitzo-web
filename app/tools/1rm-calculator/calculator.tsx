@@ -47,6 +47,7 @@ export default function OneRepMaxCalculator() {
 
   return (
     <ToolLayout
+      kicker="1RM Calculator"
       title="1RM Calculator"
       description="Estimate your one-rep max and optimal training loads based on your current lifts."
     >
@@ -86,7 +87,7 @@ export default function OneRepMaxCalculator() {
           </p>
         </form>
 
-        <div className="flex flex-col rounded-xl border border-white/[0.06] bg-black/50 p-6 relative overflow-hidden sm:p-8">
+        <div className="flex flex-col well p-6 relative overflow-hidden sm:p-8">
           <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
           
           <AnimatePresence mode="wait">
@@ -99,9 +100,9 @@ export default function OneRepMaxCalculator() {
                 className="relative z-10 flex flex-col"
               >
                 <div className="mb-6 text-center border-b border-white/[0.06] pb-6">
-                  <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-ink-muted">
+                  <h2 className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-ink-muted">
                     Estimated 1RM
-                  </h3>
+                  </h2>
                   <div className="flex items-baseline justify-center gap-2">
                     <span className="text-5xl font-extrabold tracking-tighter text-white sm:text-6xl">
                       {result.toLocaleString()}
@@ -113,9 +114,9 @@ export default function OneRepMaxCalculator() {
                 </div>
 
                 <div>
-                  <h4 className="text-[11px] font-semibold uppercase tracking-widest text-ink-muted mb-4">
+                  <h3 className="text-[11px] font-semibold uppercase tracking-widest text-ink-muted mb-4">
                     Training Percentages
-                  </h4>
+                  </h3>
                   <div className="grid grid-cols-3 gap-2">
                     {percentages.map((p) => (
                       <div key={p.rep} className="flex flex-col bg-white/[0.02] border border-white/[0.04] rounded-lg p-3 text-center">

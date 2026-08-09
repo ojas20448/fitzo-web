@@ -71,6 +71,7 @@ export default function MacroCalculator() {
 
   return (
     <ToolLayout
+      kicker="Macro Calculator"
       title="Macro Calculator"
       description="Find out exactly how many grams of protein, carbs, and fats you need daily to hit your fitness goals."
     >
@@ -169,7 +170,7 @@ export default function MacroCalculator() {
           </CalcButton>
         </form>
 
-        <div className="flex flex-col justify-center rounded-xl border border-white/[0.06] bg-black/50 p-6 relative overflow-hidden sm:p-8">
+        <div className="flex flex-col justify-center well p-6 relative overflow-hidden sm:p-8">
           <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
           
           <AnimatePresence mode="wait">
@@ -182,9 +183,9 @@ export default function MacroCalculator() {
                 className="relative z-10 flex flex-col"
               >
                 <div className="mb-8 text-center border-b border-white/[0.06] pb-8">
-                  <h3 className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-ink-muted">
+                  <h2 className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-ink-muted">
                     Daily Calories
-                  </h3>
+                  </h2>
                   <div className="flex items-baseline justify-center gap-2">
                     <span className="text-5xl font-extrabold tracking-tighter text-white sm:text-6xl">
                       {macros.calories.toLocaleString()}

@@ -4,6 +4,7 @@ import "./globals.css";
 import MotionProvider from "@/components/MotionProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SITE_URL } from "@/lib/links";
 
 /* ━━━ Display + UI: Archivo. A signage grotesque with real width authority :
        it holds up at 900 weight for headlines and at 400 for body. ━━━ */
@@ -29,7 +30,7 @@ export const viewport: Viewport = {
 
 /* ━━━ SEO Metadata ━━━ */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.fitzoapp.in"),
+  metadataBase: new URL(SITE_URL),
   title: "Fitzo",
   description:
     "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, QR gym check-in, gym buddies, and science-backed education. Built for lifters who value data.",

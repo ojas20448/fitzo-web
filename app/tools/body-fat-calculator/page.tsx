@@ -1,16 +1,17 @@
 import { Metadata } from "next";
 import BodyFatCalculator from "./calculator";
+import { SITE_URL } from "@/lib/links";
 
 export const metadata: Metadata = {
-  title: "Body Fat Calculator (US Navy Method) | Fitzo",
+  title: "Fitzo",
   description: "Accurately estimate your body fat percentage using the free US Navy tape measure method calculator.",
   alternates: {
-    canonical: "/tools/body-fat-calculator",
+    canonical: `${SITE_URL}/tools/body-fat-calculator`,
   },
   openGraph: {
-    title: "Body Fat Calculator (US Navy Method) | Fitzo",
+    title: "Fitzo Body Fat Calculator: US Navy Tape Method",
     description: "Accurately estimate your body fat percentage using the free US Navy tape measure method calculator.",
-    url: "/tools/body-fat-calculator",
+    url: `${SITE_URL}/tools/body-fat-calculator`,
     type: "website",
   },
 };
@@ -22,7 +23,7 @@ const jsonLd = {
   description: "Estimate your body fat percentage using the US Navy tape measure method.",
   applicationCategory: "HealthApplication",
   operatingSystem: "Any",
-  url: "https://fitzoapp.in/tools/body-fat-calculator",
+  url: `${SITE_URL}/tools/body-fat-calculator`,
   offers: {
     "@type": "Offer",
     price: "0",

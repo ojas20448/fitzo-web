@@ -1,16 +1,17 @@
 import { Metadata } from "next";
 import OneRepMaxCalculator from "./calculator";
+import { SITE_URL } from "@/lib/links";
 
 export const metadata: Metadata = {
-  title: "1RM Calculator: One Rep Max Estimator | Fitzo",
+  title: "Fitzo",
   description: "Calculate your 1-Rep Max (1RM) and optimal training percentages instantly for bench press, squat, and deadlift.",
   alternates: {
-    canonical: "/tools/1rm-calculator",
+    canonical: `${SITE_URL}/tools/1rm-calculator`,
   },
   openGraph: {
-    title: "1RM Calculator: One Rep Max Estimator | Fitzo",
+    title: "Fitzo 1RM Calculator: One-Rep Max Estimator",
     description: "Calculate your 1-Rep Max (1RM) and optimal training percentages instantly for bench press, squat, and deadlift.",
-    url: "/tools/1rm-calculator",
+    url: `${SITE_URL}/tools/1rm-calculator`,
     type: "website",
   },
 };
@@ -22,7 +23,7 @@ const jsonLd = {
   description: "Calculate your 1-Rep Max (1RM) and optimal training percentages.",
   applicationCategory: "HealthApplication",
   operatingSystem: "Any",
-  url: "https://fitzoapp.in/tools/1rm-calculator",
+  url: `${SITE_URL}/tools/1rm-calculator`,
   offers: {
     "@type": "Offer",
     price: "0",

@@ -38,6 +38,7 @@ export default function ProteinCalculator() {
 
   return (
     <ToolLayout
+      kicker="Protein Calculator"
       title="Protein Calculator"
       description="Find your optimal daily protein target to maximize muscle growth and recovery."
     >
@@ -73,12 +74,12 @@ export default function ProteinCalculator() {
           </CalcButton>
         </form>
 
-        <div className="flex flex-col items-center justify-center rounded-xl border border-white/[0.06] bg-black/50 p-8 text-center relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center well p-8 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
           
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-widest text-ink-muted">
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-widest text-ink-muted">
             Daily Target
-          </h3>
+          </h2>
           
           <AnimatePresence mode="wait">
             {result !== null ? (

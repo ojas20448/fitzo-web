@@ -1,16 +1,17 @@
 import { Metadata } from "next";
 import BmrCalculator from "./calculator";
+import { SITE_URL } from "@/lib/links";
 
 export const metadata: Metadata = {
-  title: "Free BMR Calculator | Fitzo",
+  title: "Fitzo",
   description: "Calculate your Basal Metabolic Rate (BMR) instantly. Free online BMR calculator to optimize calorie tracking.",
   alternates: {
-    canonical: "/tools/bmr-calculator",
+    canonical: `${SITE_URL}/tools/bmr-calculator`,
   },
   openGraph: {
-    title: "Free BMR Calculator | Fitzo",
+    title: "Fitzo BMR Calculator: Basal Metabolic Rate, Free & Instant",
     description: "Calculate your Basal Metabolic Rate (BMR) instantly. Free online BMR calculator to optimize calorie tracking.",
-    url: "/tools/bmr-calculator",
+    url: `${SITE_URL}/tools/bmr-calculator`,
     type: "website",
   },
 };
@@ -22,7 +23,7 @@ const jsonLd = {
   description: "Calculate your Basal Metabolic Rate (BMR) instantly.",
   applicationCategory: "HealthApplication",
   operatingSystem: "Any",
-  url: "https://fitzoapp.in/tools/bmr-calculator",
+  url: `${SITE_URL}/tools/bmr-calculator`,
   offers: {
     "@type": "Offer",
     price: "0",

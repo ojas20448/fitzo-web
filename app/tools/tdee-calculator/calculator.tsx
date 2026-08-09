@@ -35,6 +35,7 @@ export default function TdeeCalculator() {
 
   return (
     <ToolLayout
+      kicker="TDEE Calculator"
       title="TDEE Calculator"
       description="Calculate your Total Daily Energy Expenditure to find out exactly how many calories you burn in a day."
     >
@@ -108,12 +109,12 @@ export default function TdeeCalculator() {
           </CalcButton>
         </form>
 
-        <div className="flex flex-col items-center justify-center rounded-xl border border-white/[0.06] bg-black/50 p-8 text-center relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center well p-8 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
           
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-widest text-ink-muted">
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-widest text-ink-muted">
             Your TDEE Is
-          </h3>
+          </h2>
           
           <AnimatePresence mode="wait">
             {result !== null ? (

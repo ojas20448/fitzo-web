@@ -59,6 +59,7 @@ export default function BodyFatCalculator() {
 
   return (
     <ToolLayout
+      kicker="Body Fat Calculator"
       title="Body Fat Calculator"
       description="Estimate your body fat percentage using the US Navy tape measure method."
     >
@@ -148,12 +149,12 @@ export default function BodyFatCalculator() {
           </CalcButton>
         </form>
 
-        <div className="flex flex-col items-center justify-center rounded-xl border border-white/[0.06] bg-black/50 p-8 text-center relative overflow-hidden">
+        <div className="flex flex-col items-center justify-center well p-8 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
           
-          <h3 className="mb-2 text-sm font-semibold uppercase tracking-widest text-ink-muted">
+          <h2 className="mb-2 text-sm font-semibold uppercase tracking-widest text-ink-muted">
             Body Fat Estimate
-          </h3>
+          </h2>
           
           <AnimatePresence mode="wait">
             {result !== null ? (

@@ -1,16 +1,17 @@
 import { Metadata } from "next";
 import ProteinCalculator from "./calculator";
+import { SITE_URL } from "@/lib/links";
 
 export const metadata: Metadata = {
-  title: "Daily Protein Intake Calculator | Fitzo",
+  title: "Fitzo",
   description: "Find out exactly how much protein you need per day to build muscle or lose fat. Free protein calculator for lifters.",
   alternates: {
-    canonical: "/tools/protein-calculator",
+    canonical: `${SITE_URL}/tools/protein-calculator`,
   },
   openGraph: {
-    title: "Daily Protein Intake Calculator | Fitzo",
+    title: "Fitzo Protein Calculator: Daily Intake for Muscle & Fat Loss",
     description: "Find out exactly how much protein you need per day to build muscle or lose fat. Free protein calculator for lifters.",
-    url: "/tools/protein-calculator",
+    url: `${SITE_URL}/tools/protein-calculator`,
     type: "website",
   },
 };
@@ -22,7 +23,7 @@ const jsonLd = {
   description: "Calculate your optimal daily protein intake.",
   applicationCategory: "HealthApplication",
   operatingSystem: "Any",
-  url: "https://fitzoapp.in/tools/protein-calculator",
+  url: `${SITE_URL}/tools/protein-calculator`,
   offers: {
     "@type": "Offer",
     price: "0",
