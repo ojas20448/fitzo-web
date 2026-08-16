@@ -31,7 +31,6 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string | null>(null);
 
   const { scrollYProgress } = useScroll();
@@ -40,8 +39,6 @@ export default function Navbar() {
     damping: 30,
     restDelta: 0.001,
   });
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => setScrolled(v > 0.01));
 
   /* Light the nav item for whichever section owns the viewport centre. */
   useEffect(() => {

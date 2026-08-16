@@ -23,31 +23,6 @@ import { Mail } from "lucide-react";
 import { rise, VIEWPORT } from "@/lib/motion";
 import FitzoLogo from "./FitzoLogo";
 
-const FOOTER_LINKS = {
-  Product: [
-    { label: "Features", href: "/#features" },
-    { label: "Try the demo", href: "/#demo" },
-    { label: "Compare", href: "/compare" },
-    { label: "Early access", href: "/#download" },
-  ],
-  Company: [
-    { label: "Blog", href: "/blog" },
-    { label: "Changelog", href: "/changelog" },
-    { label: "Contact", href: "mailto:contact@fitzoapp.in" },
-  ],
-  Tools: [
-    { label: "BMR Calculator", href: "/tools/bmr-calculator" },
-    { label: "Macro Calculator", href: "/tools/macro-calculator" },
-    { label: "Body Fat Calculator", href: "/tools/body-fat-calculator" },
-    { label: "1RM Calculator", href: "/tools/1rm-calculator" },
-    { label: "TDEE Calculator", href: "/tools/tdee-calculator" },
-    { label: "Protein Calculator", href: "/tools/protein-calculator" },
-  ],
-  Legal: [
-    { label: "Privacy policy", href: "/privacy-policy" },
-    { label: "Terms of service", href: "/terms" },
-  ],
-} as const;
 
 const SOCIALS = [
   {
