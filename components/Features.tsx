@@ -196,7 +196,7 @@ function HeatmapMini() {
         src="/heatmap.png"
         width={176}
         height={176}
-        className="h-full w-auto object-contain opacity-90 transition-transform duration-700 ease-out-expo group-hover:scale-105"
+        className="h-full w-auto object-contain opacity-90 transition-opacity duration-700 ease-out-expo group-hover:opacity-100"
         alt="Muscle heatmap showing training volume per muscle group"
       />
       <div className="pointer-events-none absolute inset-0 flex items-end justify-center bg-gradient-to-t from-black/85 via-transparent to-transparent pb-2">
@@ -312,8 +312,8 @@ function FeatureCell({
   children,
   className = "",
   showcase = false,
-  glow = "shadow-[0_0_20px_rgba(74,222,128,0.15)] border-protein/40 text-protein bg-protein/10",
-  dot = "bg-protein shadow-[0_0_8px_#4ade80]",
+  glow = "border-protein/40 text-protein bg-protein/10",
+  dot = "bg-protein",
 }: {
   icon: React.ReactNode;
   title: string;
@@ -338,7 +338,7 @@ function FeatureCell({
               : "flex-col items-start sm:flex-row sm:items-center sm:gap-3"
           }`}
         >
-          <span className={`relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl border backdrop-blur-md transition-all duration-300 group-hover:scale-105 sm:h-12 sm:w-12 ${glow}`}>
+          <span className={`relative flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl border backdrop-blur-md transition-all duration-300 group-hover:border-white/20 sm:h-12 sm:w-12 ${glow}`}>
             {icon}
             <span className={`absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full ${dot}`} />
           </span>
@@ -374,8 +374,7 @@ export default function Features() {
         <motion.div
           variants={rise}
           initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT}
+          animate="visible"
           className="mb-9 max-w-2xl sm:mb-14"
         >
           <h2 className="text-[clamp(2rem,4.6vw,3.25rem)] font-black leading-[0.98] tracking-[-0.04em] text-balance">
@@ -393,8 +392,7 @@ export default function Features() {
         <motion.div
           variants={stack}
           initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT}
+          animate="visible"
           className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3"
         >
           <FeatureCell
@@ -403,8 +401,8 @@ export default function Features() {
             description="Workouts, nutrition, streaks and daily targets in one view."
             badge="V2.0"
             className="col-span-2"
-            glow="shadow-[0_0_25px_rgba(74,222,128,0.15)] border-protein/40 text-protein bg-protein/10"
-            dot="bg-protein shadow-[0_0_8px_#4ade80]"
+            glow="border-protein/40 text-protein bg-protein/10"
+            dot="bg-protein"
             showcase
           >
             <DashboardMini />
@@ -416,8 +414,8 @@ export default function Features() {
             description="Training volume on a 3D mannequin. Tap a group for detail."
             badge="Heatmap"
             className="col-span-2 lg:col-span-1"
-            glow="shadow-[0_0_25px_rgba(250,204,21,0.15)] border-carbs/40 text-carbs bg-carbs/10"
-            dot="bg-carbs shadow-[0_0_8px_#facc15]"
+            glow="border-carbs/40 text-carbs bg-carbs/10"
+            dot="bg-carbs"
             showcase
           >
             <HeatmapMini />
@@ -429,8 +427,8 @@ export default function Features() {
             description="500K+ foods with AI scanning. Instant macros, Indian food included."
             badge="AI"
             className="col-span-2"
-            glow="shadow-[0_0_25px_rgba(34,211,238,0.15)] border-cyan-400/40 text-cyan-400 bg-cyan-400/10"
-            dot="bg-cyan-400 shadow-[0_0_8px_#22d3ee]"
+            glow="border-cyan-400/40 text-cyan-400 bg-cyan-400/10"
+            dot="bg-cyan-400"
             showcase
           >
             <FoodSearchMini />
@@ -440,8 +438,8 @@ export default function Features() {
             icon={<BookOpen className="h-5 w-5" />}
             title="Built-in education"
             description="Science-backed lessons between sets. XP for every one you finish."
-            glow="shadow-[0_0_25px_rgba(192,132,252,0.15)] border-purple-400/40 text-purple-400 bg-purple-400/10"
-            dot="bg-purple-400 shadow-[0_0_8px_#c084fc]"
+            glow="border-purple-400/40 text-purple-400 bg-purple-400/10"
+            dot="bg-purple-400"
           >
             <LearnMini />
           </FeatureCell>
@@ -450,8 +448,8 @@ export default function Features() {
             icon={<Users className="h-5 w-5" />}
             title="Gym buddies"
             description="See who's training right now. Stay accountable together."
-            glow="shadow-[0_0_25px_rgba(74,222,128,0.15)] border-protein/40 text-protein bg-protein/10"
-            dot="bg-protein shadow-[0_0_8px_#4ade80]"
+            glow="border-protein/40 text-protein bg-protein/10"
+            dot="bg-protein"
           >
             <BuddiesMini />
           </FeatureCell>
@@ -461,8 +459,8 @@ export default function Features() {
             title="1-bit thermal receipts"
             description="Print your session. Share it raw, or over a gym selfie."
             badge="Share"
-            glow="shadow-[0_0_25px_rgba(244,114,182,0.15)] border-pink-400/40 text-pink-400 bg-pink-400/10"
-            dot="bg-pink-400 shadow-[0_0_8px_#f472b6]"
+            glow="border-pink-400/40 text-pink-400 bg-pink-400/10"
+            dot="bg-pink-400"
           >
             <ReceiptMini />
           </FeatureCell>
@@ -472,8 +470,8 @@ export default function Features() {
             title="Your gym, connected"
             description="QR check-in, live crowd meter, class booking."
             badge="Gym OS"
-            glow="shadow-[0_0_25px_rgba(251,146,60,0.15)] border-orange-400/40 text-orange-400 bg-orange-400/10"
-            dot="bg-orange-400 shadow-[0_0_8px_#fb923c]"
+            glow="border-orange-400/40 text-orange-400 bg-orange-400/10"
+            dot="bg-orange-400"
           >
             <GymMini />
           </FeatureCell>

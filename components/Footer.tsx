@@ -75,70 +75,46 @@ export default function Footer() {
       initial="hidden"
       whileInView="visible"
       viewport={VIEWPORT}
-      className="relative border-t border-white/[0.07] pb-8 pt-12 sm:pt-16"
+      className="relative mt-24 border-t border-white/[0.07] pb-12 pt-12 sm:pb-24 sm:pt-16"
     >
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-10 md:mb-14 md:grid-cols-5 lg:gap-16">
-          {/* ━━━ Brand ━━━ */}
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="mb-5 -m-2 inline-block p-2">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-between gap-6 md:flex-row md:items-start">
+          <div className="flex flex-col md:max-w-2xl">
+            <div className="mb-6 flex items-center justify-center md:justify-start">
               <FitzoLogo size="sm" showWordmark />
-            </Link>
-            <p className="mb-7 max-w-[34ch] text-sm leading-relaxed text-ink-muted">
-              For serious lifters. Track workouts, nutrition and progress with
-              precision.
-            </p>
-
-            <div className="flex gap-3">
-              {SOCIALS.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  target={social.href.startsWith("http") ? "_blank" : undefined}
-                  rel={
-                    social.href.startsWith("http")
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
-                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.04] text-ink-muted transition-all duration-300 hover:border-white/20 hover:bg-white/[0.08] hover:text-protein"
-                >
-                  {social.icon}
-                </a>
-              ))}
             </div>
+            
+            <p className="font-mono text-[11px] leading-relaxed text-ink-muted sm:text-xs">
+              Fitzo v2.0.0. Built for serious lifters to track workouts, nutrition, and progress with precision.
+              Designed and engineered for the gym floor in India. Contains tools including BMR Calculator, Macro Calculator, Body Fat Calculator, 1RM Calculator, TDEE Calculator, and Protein Calculator.
+              &copy; {currentYear} Fitzo. All rights reserved.
+              {" "}
+              <Link href="/privacy-policy" className="underline hover:text-white transition-colors">Privacy</Link>
+              {" · "}
+              <Link href="/terms" className="underline hover:text-white transition-colors">Terms</Link>
+              {" · "}
+              <a href="mailto:contact@fitzoapp.in" className="underline hover:text-white transition-colors">Contact</a>
+            </p>
           </div>
-
-          {/* ━━━ Link columns ━━━ */}
-          {Object.entries(FOOTER_LINKS).map(([category, links]) => (
-            <nav key={category} aria-label={category}>
-              <h2 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-faint">
-                {category}
-              </h2>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="-my-1 inline-block py-2 text-[13px] text-ink-muted transition-colors duration-300 hover:text-white sm:text-sm"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
-        </div>
-
-        {/* ━━━ Bottom bar ━━━ */}
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/[0.07] pt-7 sm:flex-row">
-          <p className="text-xs text-ink-faint">
-            &copy; {currentYear} Fitzo. All rights reserved.
-          </p>
-          <p className="text-xs text-ink-faint">
-            Made for the gym floor, in India.
-          </p>
+          
+          <div className="mt-4 flex gap-4 md:mt-0">
+            {SOCIALS.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                aria-label={social.label}
+                target={social.href.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  social.href.startsWith("http")
+                    ? "noopener noreferrer"
+                    : undefined
+                }
+                className="text-ink-muted transition-colors duration-300 hover:text-protein"
+              >
+                {social.icon}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </motion.footer>

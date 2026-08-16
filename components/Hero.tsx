@@ -445,26 +445,14 @@ function PhoneShell({
   const Active = SCREENS[active].Component;
 
   return (
-    <div className="relative h-[580px] w-[280px] overflow-hidden rounded-[2.5rem] border border-white/[0.1] bg-[#0a0a0b] shadow-[0_2px_4px_rgba(0,0,0,0.8),0_40px_80px_-24px_rgba(0,0,0,1)] sm:h-[620px] sm:w-[300px]">
+    <div className="relative h-[580px] w-[280px] overflow-hidden rounded-2xl border border-white/[0.1] bg-background shadow-[0_2px_4px_rgba(0,0,0,0.8),0_40px_80px_-24px_rgba(0,0,0,1)] sm:h-[620px] sm:w-[300px]">
       {/* Top bezel highlight: the plate catches light */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
       />
 
-      <div className="flex items-center justify-between px-6 pb-1 pt-3">
-        <span className="font-mono text-[10px] text-ink-faint">9:41</span>
-        <div className="h-[22px] w-[72px] rounded-full bg-black" />
-        <div className="h-[10px] w-[15px] rounded-[2px] border border-white/25" />
-      </div>
-
-      {/* Screens crossfade in place: never blank.
-          The dock is an absolute overlay 56px tall sitting 12px off the base,
-          so the screen must reserve that as real padding. Without it the last
-          element of each screen renders underneath the dock: which was
-          swallowing the AI-coach line, the one place the hero states the
-          product's actual thesis. */}
-      <div className="relative h-[calc(100%-2.75rem)] overflow-hidden">
+      <div className="relative h-full overflow-hidden pt-2">
         <AnimatePresence initial={false}>
           <motion.div
             key={active}
@@ -670,7 +658,7 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[100svh] flex-col overflow-hidden pt-24 md:pt-20"
+      className="relative flex flex-col overflow-hidden pb-16 pt-32 md:pb-24 md:pt-36"
     >
       {/* One quiet backdrop: a cold overhead wash, like gym lighting */}
       <div

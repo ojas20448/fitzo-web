@@ -94,25 +94,21 @@ export default function Navbar() {
 
   return (
     <motion.header
-      initial={{ y: -72, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      initial={{ y: -72, opacity: 0, x: "-50%" }}
+      animate={{ y: 0, opacity: 1, x: "-50%" }}
       transition={{ duration: 0.7, ease: EASE_OUT_EXPO, delay: 0.1 }}
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        scrolled
-          ? "border-b border-white/[0.07] bg-black/70 backdrop-blur-xl backdrop-saturate-150"
-          : "border-b border-transparent bg-transparent"
-      }`}
+      className="fixed left-1/2 top-4 z-50 w-[calc(100vw-2rem)] max-w-max -translate-x-1/2 sm:top-6 lg:top-8"
     >
       <nav
-        className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:h-[72px] lg:px-8"
+        className="flex items-center justify-between gap-3 rounded-full border border-white/[0.08] bg-black/40 px-3 py-2 backdrop-blur-xl backdrop-saturate-150 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.5)] sm:gap-6 sm:px-4 sm:py-2.5"
         aria-label="Main"
       >
         <Link
           href="/"
-          className="relative z-10 -m-2 rounded-lg p-2"
+          className="relative z-10 flex-shrink-0 p-1"
           aria-label="Fitzo: home"
         >
-          <FitzoLogo size="md" />
+          <FitzoLogo size="sm" />
         </Link>
 
         {/* ━━━ Desktop links ━━━ */}
@@ -124,7 +120,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
-                className={`relative rounded-full px-4 py-2 text-[13px] font-medium transition-colors duration-300 ${
+                className={`relative rounded-full px-4 py-1.5 text-[13px] font-medium transition-colors duration-300 ${
                   isActive
                     ? "text-white"
                     : "text-ink-muted hover:text-white"
@@ -150,7 +146,7 @@ export default function Navbar() {
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.975 }}
             transition={{ duration: 0.18, ease: EASE_OUT_EXPO }}
-            className="group inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition-colors duration-300 hover:bg-protein"
+            className="group inline-flex flex-shrink-0 items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-semibold text-black transition-colors duration-300 hover:bg-protein sm:text-sm"
           >
             Get Fitzo
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5" />
@@ -158,25 +154,28 @@ export default function Navbar() {
         </div>
 
         {/* ━━━ Mobile toggle: 44px target ━━━ */}
-        <button
-          onClick={() => setIsOpen((v) => !v)}
-          className="relative z-10 -mr-2 flex h-11 w-11 items-center justify-center rounded-xl text-white md:hidden"
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isOpen}
-          aria-controls="mobile-menu"
-        >
-          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex md:hidden">
+          <button
+            onClick={() => setIsOpen((v) => !v)}
+            className="relative z-10 flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-white/[0.05] text-white transition-colors hover:bg-white/[0.1]"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </nav>
 
       {/* ━━━ Scroll readout: the page's progress, as an instrument ━━━ */}
-      <motion.div
-        aria-hidden
-        style={{ scaleX: progress }}
-        className={`h-px origin-left bg-gradient-to-r from-protein via-protein to-carbs transition-opacity duration-500 ${
-          scrolled ? "opacity-100" : "opacity-0"
-        }`}
-      />
+      {/* Moved inside the pill as a bottom border or completely removed. N5 says no readout but we can keep it subtle on the pill edge */}
+      <div className="absolute -bottom-[1px] left-[5%] right-[5%] h-[1px] overflow-hidden rounded-full">
+        <motion.div
+          aria-hidden
+          style={{ scaleX: progress }}
+          className="h-full w-full origin-left bg-gradient-to-r from-protein via-protein to-carbs"
+        />
+      </div>
 
       {/* ━━━ Mobile menu ━━━ */}
       <AnimatePresence>
@@ -187,9 +186,9 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl md:hidden"
+            className="fixed inset-x-0 -top-4 -bottom-[100vh] z-40 bg-black/95 backdrop-blur-2xl md:hidden sm:-top-6 lg:-top-8"
           >
-            <div className="flex h-full flex-col items-center justify-center gap-2">
+            <div className="flex h-[100svh] flex-col items-center justify-center gap-2">
               {NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.href}
