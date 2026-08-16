@@ -61,7 +61,7 @@ export default function Footer() {
             
             <p className="font-mono text-[11px] leading-relaxed text-ink-muted sm:text-xs">
               Fitzo v2.0.0. Built for serious lifters to track workouts, nutrition, and progress with precision.
-              Designed and engineered for the gym floor in India. Contains tools including BMR Calculator, Macro Calculator, Body Fat Calculator, 1RM Calculator, TDEE Calculator, and Protein Calculator.
+              Designed and engineered for the gym floor in India. Contains tools including <Link href="/tools/bmr-calculator" className="underline hover:text-white transition-colors">BMR Calculator</Link>, <Link href="/tools/macro-calculator" className="underline hover:text-white transition-colors">Macro Calculator</Link>, <Link href="/tools/body-fat-calculator" className="underline hover:text-white transition-colors">Body Fat Calculator</Link>, <Link href="/tools/1rm-calculator" className="underline hover:text-white transition-colors">1RM Calculator</Link>, <Link href="/tools/tdee-calculator" className="underline hover:text-white transition-colors">TDEE Calculator</Link>, and <Link href="/tools/protein-calculator" className="underline hover:text-white transition-colors">Protein Calculator</Link>.
               &copy; {currentYear} Fitzo. All rights reserved.
               {" "}
               <Link href="/privacy-policy" className="underline hover:text-white transition-colors">Privacy</Link>
