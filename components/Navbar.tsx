@@ -16,7 +16,6 @@ import {
   AnimatePresence,
   useScroll,
   useSpring,
-  useMotionValueEvent,
 } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import FitzoLogo from "@/components/FitzoLogo";
