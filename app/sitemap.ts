@@ -77,13 +77,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/privacy-policy`,
-      lastModified: new Date("2025-06-01"),
+      lastModified: new Date("2026-08-17"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${baseUrl}/terms`,
       lastModified: new Date("2025-06-01"),
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    // Google Play requires a publicly reachable account-deletion URL. It must
+    // stay crawlable and must not be removed — the Data safety form points here.
+    {
+      url: `${baseUrl}/delete-account`,
+      lastModified: new Date("2026-08-17"),
       changeFrequency: "yearly",
       priority: 0.3,
     },
