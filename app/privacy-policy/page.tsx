@@ -335,6 +335,11 @@ export default function PrivacyPolicy() {
                 "To verify Google Sign-In",
               ],
               [
+                "Apple",
+                "Your Apple sign-in token",
+                "To verify Sign in with Apple",
+              ],
+              [
                 "Supabase",
                 "All stored account and fitness data",
                 "Database hosting (Mumbai)",
@@ -371,6 +376,49 @@ export default function PrivacyPolicy() {
           <p>
             We may also disclose data where we are legally required to, or to
             protect the rights and safety of our users.
+          </p>
+        </Section>
+
+        {/* ━━━ 5b — the AI disclosure ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          * The single most consequential paragraph in this policy, and the one
+          * most often left vague. It is written to be true on the Gemini API
+          * tier currently in use, which permits Google to use submitted content
+          * to improve its products. Do NOT soften this to "your data is never
+          * used for training" unless and until API billing is enabled — that
+          * sentence would be false, in a document both app stores read.
+          */}
+        <Section title="5b. Artificial intelligence, in plain terms">
+          <p>
+            Three Fitzo features are powered by Google&apos;s Gemini API: the AI
+            coach, voice logging, and photo macro estimation. To answer
+            usefully, the coach is sent a summary of your recent training,
+            nutrition, recovery and any connected wearable metrics.
+          </p>
+          <p>
+            <span className="text-white font-semibold">
+              What this means for you:
+            </span>{" "}
+            under Google&apos;s terms for the API tier Fitzo currently uses,
+            content submitted to the Gemini API may be used by Google to
+            provide, improve and develop its products, and may be reviewed by
+            humans. Because the coach receives health and fitness information,
+            that information falls within scope.
+          </p>
+          <p>
+            We are stating this directly rather than burying it in a clause,
+            because it is the thing a reasonable person would most want to know.
+          </p>
+          <p>
+            <span className="text-white font-semibold">Your choice:</span> if you
+            would prefer your health data not be processed this way, simply do
+            not use the AI coach, voice logging, or photo scanning. Every other
+            part of Fitzo — manual workout logging, nutrition tracking, progress
+            charts, gym check-ins, the exercise library — works exactly the same
+            without them, and none of them send anything to Gemini.
+          </p>
+          <p className="text-sm text-neutral-400">
+            Fitzo does not train any model of its own on your data, and does not
+            supply your data to anyone else for model training.
           </p>
         </Section>
 
