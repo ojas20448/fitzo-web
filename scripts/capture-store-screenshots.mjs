@@ -8,10 +8,19 @@
  * Prerequisites:
  *   1. The reviewer account exists and is seeded:
  *        cd backend && node scripts/seed_review_account.js
- *   2. The Expo web build is serving:
- *        cd mobile && npx expo start --web --port 8099
+ *   2. The Expo web build is serving, POINTED AT PRODUCTION:
+ *        cd mobile && EXPO_PUBLIC_API_URL=https://fitzo.onrender.com/api \
+ *          npx expo start --web --port 8100
  *   3. Run from this project (Playwright lives in its node_modules):
- *        node scripts/capture-store-screenshots.mjs
+ *        FITZO_WEB_URL=http://localhost:8100 node scripts/capture-store-screenshots.mjs
+ *
+ * ── Why the API URL must be overridden ──────────────────────────────────────
+ * mobile/.env.local sets EXPO_PUBLIC_API_URL to http://localhost:3001/api and
+ * TAKES PRECEDENCE over mobile/.env. Without a local backend running, every
+ * request fails with ERR_CONNECTION_REFUSED, the login never completes, and
+ * the capture silently produces a full set of logged-out screenshots showing
+ * "0 sessions" and an untrained muscle map. The login gate below now turns
+ * that into a loud failure instead, but the override is what actually fixes it.
  *
  * ── Why two device profiles ─────────────────────────────────────────────────
  * One set cannot satisfy both stores:
@@ -81,9 +90,33 @@ for (const prof of PROFILES) {
     await inputs[0].fill(REVIEW_EMAIL);
     await inputs[1].fill(REVIEW_PASSWORD);
     await page.getByText('Log In', { exact: true }).first().click();
-    // Generous: the first authenticated render fetches home, nutrition and
-    // streak data from a cold Render instance.
-    await page.waitForTimeout(9000);
+
+    // Wait for a REAL post-login signal, not a fixed sleep.
+    //
+    // This previously slept 9 seconds and carried on regardless. When Render
+    // cold-started, the login had not completed in time, and the script
+    // captured a logged-out app without complaining — producing a full set of
+    // plausible-looking screenshots showing "0 sessions" and an untrained
+    // muscle map. Silently wrong output is worse than a crash, so a failed
+    // login is now fatal.
+    try {
+        await page.waitForFunction(
+            () => !document.body.innerText.includes('WELCOME BACK'),
+            { timeout: 90_000 },
+        );
+    } catch {
+        console.error(
+            `${prof.key}: login did not complete within 90s — still on the sign-in screen.\n` +
+            '  The API may be cold-starting, or the reviewer account may be missing.\n' +
+            '  Re-seed with: cd backend && node scripts/seed_review_account.js',
+        );
+        await page.close();
+        process.exitCode = 1;
+        continue;
+    }
+
+    // Let the authenticated home screen settle before navigating away.
+    await page.waitForTimeout(6000);
 
     for (const [name, route] of ROUTES) {
         try {
