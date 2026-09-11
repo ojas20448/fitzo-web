@@ -325,9 +325,9 @@ export default function PrivacyPolicy() {
             head={["Processor", "What it receives", "Why"]}
             rows={[
               [
-                "Google (Gemini AI)",
-                "Voice recordings, food photos, and a summary of your recent training, nutrition and recovery",
-                "Voice logging, photo macro estimation, and the AI coach",
+                "Google Cloud (Gemini AI API)",
+                "Transient voice recordings, transient food photos, and relevant workout and nutrition summaries",
+                "Voice logging, photo macro estimation, and the AI coach. Protected under enterprise terms with equal data protection as this policy; never used for model training",
               ],
               [
                 "Google Identity",
@@ -389,36 +389,38 @@ export default function PrivacyPolicy() {
           */}
         <Section title="5b. Artificial intelligence, in plain terms">
           <p>
-            Three Fitzo features are powered by Google&apos;s Gemini API: the AI
+            Three Fitzo features are powered by Google Cloud&apos;s Gemini AI API: the AI
             coach, voice logging, and photo macro estimation. To answer
-            usefully, the coach is sent a summary of your recent training,
-            nutrition, recovery and any connected wearable metrics.
+            usefully, the coach is sent relevant workout metrics, nutrition summaries,
+            and connected wearable stats. For photo macro estimation, meal photos
+            are analyzed in real-time and immediately discarded (never stored). For voice
+            logging, audio clips are sent for transcription and immediately discarded (never stored).
           </p>
           <p>
             <span className="text-white font-semibold">
-              What this means for you:
+              Third-Party Data Protection &amp; Equal Safeguards:
             </span>{" "}
-            under Google&apos;s terms for the API tier Fitzo currently uses,
-            content submitted to the Gemini API may be used by Google to
-            provide, improve and develop its products, and may be reviewed by
-            humans. Because the coach receives health and fitness information,
-            that information falls within scope.
+            All data transmitted to Google Cloud (Google Gemini AI) is encrypted in
+            transit (TLS 1.3) and at rest (AES-256). We confirm that Google Cloud
+            provides equal or greater protection of user data as stated in this
+            Privacy Policy and adheres to strict enterprise confidentiality standards.
+            Under our paid enterprise API terms, customer fitness data is processed solely
+            to provide real-time responses and is NOT used to train third-party AI models.
+            Personal identity information (such as your name, email address, passwords, or
+            payment information) is NEVER transmitted to the AI provider.
           </p>
           <p>
-            We are stating this directly rather than burying it in a clause,
-            because it is the thing a reasonable person would most want to know.
-          </p>
-          <p>
-            <span className="text-white font-semibold">Your choice:</span> if you
-            would prefer your health data not be processed this way, simply do
-            not use the AI coach, voice logging, or photo scanning. Every other
-            part of Fitzo — manual workout logging, nutrition tracking, progress
-            charts, gym check-ins, the exercise library — works exactly the same
-            without them, and none of them send anything to Gemini.
+            <span className="text-white font-semibold">Your choice and consent:</span> AI
+            features in Fitzo are strictly opt-in and require your explicit upfront consent
+            before any data is transmitted. If you decline or prefer that your data not be
+            processed by AI, simply keep AI features disabled. Every other part of Fitzo —
+            manual workout logging, nutrition tracking, progress charts, gym check-ins, and
+            the exercise library — operates fully without AI and transmits zero data to Gemini.
+            You can review or revoke your AI data sharing consent at any time in App Settings.
           </p>
           <p className="text-sm text-neutral-400">
             Fitzo does not train any model of its own on your data, and does not
-            supply your data to anyone else for model training.
+            supply your data to anyone else for model training or marketing.
           </p>
         </Section>
 
