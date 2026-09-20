@@ -1,0 +1,18 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 393, height: 852 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+await p.goto('http://localhost:8100', { waitUntil: 'networkidle', timeout: 180000 });
+await p.waitForTimeout(3000);
+const i = await p.locator('input').all();
+await i[0].fill('review@fitzo.app'); await i[1].fill('FitzoReview2026!');
+await p.getByText('Log In', { exact: true }).first().click();
+await p.waitForFunction(() => !document.body.innerText.includes('WELCOME BACK'), { timeout: 90000 });
+await p.waitForTimeout(7000);
+const el = await p.getByText('Weekly Progress').first();
+await el.scrollIntoViewIfNeeded();
+await p.waitForTimeout(1500);
+const txt = await p.innerText('body');
+const m = txt.match(/Weekly Progress[\s\S]{0,120}/);
+console.log('--- Weekly Progress block ---\n' + (m ? m[0] : 'NOT FOUND'));
+await p.screenshot({ path: 'wp.png' });
+await b.close();

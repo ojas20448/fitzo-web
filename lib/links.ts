@@ -26,13 +26,11 @@ export const SITE_URL = "https://www.fitzoapp.in";
  * "Google Play" button scrolled to an email form, while the changelog and
  * press page claimed the app was already live.
  *
- * Android ships through Google Play. iOS is in TestFlight beta and is NOT on
- * the public App Store: copy must say "TestFlight" or "beta", never
- * "Download on the App Store".
+ * Android and iOS are both live on their respective stores.
  */
 export const STORE = {
   android: "https://play.google.com/store/apps/details?id=com.fitzo.app",
-  iosTestFlight: "https://testflight.apple.com/join/ygUKHFzU",
+  ios: "#", // TODO: Add real App Store URL here
 } as const;
 
 export const CONTACT_EMAIL = "contact@fitzoapp.in";

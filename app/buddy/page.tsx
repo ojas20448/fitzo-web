@@ -8,18 +8,28 @@ function BuddyContent() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id") || searchParams.get("userId") || "";
   const username = searchParams.get("u") || searchParams.get("username") || "user";
+  const validInvite = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
   const deepLink = `fitzo://buddy?id=${encodeURIComponent(id)}&u=${encodeURIComponent(username)}`;
   const playStoreUrl = "https://play.google.com/store/apps/details?id=com.fitzo.app";
+  const appStoreUrl = "https://apps.apple.com/app/id6804647531";
 
   useEffect(() => {
-    if (typeof window !== "undefined" && id) {
+    if (typeof window !== "undefined" && validInvite) {
       // Attempt to open the Fitzo mobile app via deep link
       const timer = setTimeout(() => {
         window.location.href = deepLink;
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [id, deepLink]);
+  }, [validInvite, deepLink]);
+
+  if (!validInvite) return (
+    <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center gap-4">
+      <h1 className="text-2xl font-bold">This invite is incomplete</h1>
+      <p>Ask your buddy to share their Fitzo invite link again.</p>
+      <Link href="/" className="underline">Go to Fitzo</Link>
+    </main>
+  );
 
   return (
     <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
@@ -66,6 +76,12 @@ function BuddyContent() {
           </a>
 
           <a
+            href={appStoreUrl}
+            className="w-full flex items-center justify-center py-3 px-6 rounded-xl font-semibold text-white bg-white/5 hover:bg-white/10 border border-white/10 text-sm"
+          >
+            Download on the App Store
+          </a>
+          <a
             href={playStoreUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -76,7 +92,8 @@ function BuddyContent() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-white/10 text-xs text-neutral-500">
-          Already installed? Tap "Open in Fitzo App" to add @{username} directly.
+          Already installed? Tap &ldquo;Open in Fitzo App&rdquo; to add @{username} directly.
+          <p className="mt-2">Installing for the first time? Return to this invite after installation to connect.</p>
         </div>
       </div>
 

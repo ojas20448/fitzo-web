@@ -168,9 +168,8 @@ Anything driven by `rAF`, `setInterval` or canvas must gate on
 ## 6. Honesty rules
 
 **Distribution status (confirmed with the product owner):** Android is live on
-Google Play; iOS is in **open TestFlight beta**, not on the public App Store.
-Copy must say "TestFlight" or "beta" for iOS — never "Download on the App
-Store". Both URLs live in `lib/links.ts`; never hard-code them.
+Google Play; iOS is live on the public App Store.
+Both URLs live in `lib/links.ts`; never hard-code them.
 
 The site previously contradicted itself on this — the changelog and press page
 said it was live on both stores, the CTA said "launching soon", and there was

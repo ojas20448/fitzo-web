@@ -660,7 +660,7 @@ export default function InteractiveDemo() {
               <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1" />
             </motion.a>
             <p className="mt-4 text-xs uppercase tracking-[0.14em] text-ink-faint">
-              Google Play · iOS TestFlight beta
+              Google Play · App Store
             </p>
           </motion.div>
         </motion.div>

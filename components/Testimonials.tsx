@@ -81,16 +81,16 @@ export default function Testimonials() {
           viewport={VIEWPORT}
           className="mb-9 max-w-2xl sm:mb-14"
         >
-          <span className="kicker mb-6">Tester feedback</span>
+          <span className="kicker mb-6">User feedback</span>
           <h2 className="text-[clamp(2rem,4.6vw,3.25rem)] font-black leading-[0.98] tracking-[-0.04em] text-balance">
-            What the testers
+            What our users
             <br />
             <span className="text-ink-faint">actually said.</span>
           </h2>
           <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-ink-muted text-pretty">
-Real words from people running Fitzo every day on Google Play and
-            the iOS TestFlight beta. Quotes are theirs; names are shortened
-            because we don&apos;t publish a tester&apos;s identity without asking.
+            Real words from people running Fitzo every day on Google Play and
+            the App Store. Quotes are theirs; names are shortened
+            for privacy.
           </p>
         </motion.div>
 

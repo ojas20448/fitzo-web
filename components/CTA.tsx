@@ -86,14 +86,11 @@ export default function CTA() {
             variants={stackItem}
             className="text-lg text-ink-muted max-w-lg mx-auto mb-9 leading-relaxed text-pretty"
           >
-            Android is live on Google Play. iOS is in open TestFlight beta.
+            Available now on Google Play and the App Store.
             Both free: no card, no ads.
           </motion.p>
 
-          {/* ━━━ The real destinations.
-                 These used to be an email form wearing "Download iOS" and
-                 "Google Play" labels. They are now the actual listings, and
-                 the iOS one says TestFlight because that is what it is. ━━━ */}
+          {/* ━━━ The real destinations. ━━━ */}
           <motion.div
             variants={stackItem}
             className="mb-10 flex flex-col justify-center gap-3 sm:flex-row"
@@ -114,7 +111,7 @@ export default function CTA() {
             </motion.a>
 
             <motion.a
-              href={STORE.iosTestFlight}
+              href={STORE.ios}
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -2 }}
@@ -125,7 +122,7 @@ export default function CTA() {
               <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                 <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
               </svg>
-              Join the iOS beta
+              Download on the App Store
             </motion.a>
           </motion.div>
 
