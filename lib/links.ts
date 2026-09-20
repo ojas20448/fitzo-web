@@ -30,7 +30,7 @@ export const SITE_URL = "https://www.fitzoapp.in";
  */
 export const STORE = {
   android: "https://play.google.com/store/apps/details?id=com.fitzo.app",
-  ios: "#", // TODO: Add real App Store URL here
+  ios: "https://apps.apple.com/in/app/fitzo-fitness-tracker/id6804647531",
 } as const;
 
 export const CONTACT_EMAIL = "contact@fitzoapp.in";
