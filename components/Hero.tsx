@@ -676,15 +676,6 @@ export default function Hero() {
             animate="visible"
             className="text-center lg:text-left"
           >
-            <motion.p variants={stackItem} className="mb-5 sm:mb-7">
-              <span className="kicker">
-                <span
-                  className="h-1.5 w-1.5 rounded-full bg-protein animate-breathe"
-                  data-motion="ambient"
-                />
-                V2.0 now available
-              </span>
-            </motion.p>
 
             {/* The headline used to be "The coach that actually knows you" :
                 true, but it could sit on any AI wellness app, and the one

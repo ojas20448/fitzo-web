@@ -5,28 +5,28 @@ import { rise, stack, stackItem, VIEWPORT } from "@/lib/motion";
 
 const COMPARISONS = [
   {
-    generic: "Guesswork-based advice",
-    fitzo: "Evidence-based methodology",
+    generic: "Bloated with feeds, comments, and influencer noise",
+    fitzo: "Zero social bloat: distraction free training with buddies and kudos",
   },
   {
-    generic: "Bloated with social media features",
-    fitzo: "Laser-focused on training & nutrition",
+    generic: "Amnesiac AI wellness bots with zero memory",
+    fitzo: "14 day context window reading your logged sets, meals, and wearables",
   },
   {
-    generic: "Inaccurate calorie tracking",
-    fitzo: "AI food scanner across a 500K+ database",
+    generic: "US only generic food databases",
+    fitzo: "Indian food first: IFCT 2017 data plus AI vision meal scanning",
   },
   {
-    generic: "Cookie-cutter workout plans",
-    fitzo: "10+ customisable splits for every training style",
+    generic: "Arbitrary calorie and macro guesses",
+    fitzo: "Scientific protein scaling (1.8 to 2.0 g/kg) with custom macro targets",
   },
   {
-    generic: "US-only food databases",
-    fitzo: "Indian food first: dal, roti, paneer, biryani",
+    generic: "Disconnected from your actual gym floor",
+    fitzo: "QR check in, real time crowd capacity light, and class booking",
   },
   {
-    generic: "Zero connection to your actual gym",
-    fitzo: "QR check-in, class booking, crowd meter, trainer sync",
+    generic: "Cookie cutter generic workouts",
+    fitzo: "Curated splits, auto PR detection, plate math, and previous set ghosting",
   },
 ];
 
@@ -125,7 +125,7 @@ export default function Comparison() {
                     key={item.fitzo}
                     className="flex items-start gap-3.5 border-t border-white/[0.06] py-3.5 first:border-t-0"
                   >
-                    <span className="mt-2 h-2 w-2 rounded-full bg-protein shadow-[0_0_10px_rgba(74,222,128,0.8)] flex-shrink-0" />
+                    <span className="mt-2 h-2 w-2 rounded-full bg-protein flex-shrink-0" />
                     <p className="text-sm font-medium leading-relaxed text-white">
                       {item.fitzo}
                     </p>

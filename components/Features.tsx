@@ -398,8 +398,7 @@ export default function Features() {
           <FeatureCell
             icon={<Target className="h-5 w-5" />}
             title="Smart dashboard"
-            description="Workouts, nutrition, streaks and daily targets in one view."
-            badge="V2.0"
+            description="Workouts, nutrition, streaks, and daily targets in one unified view."
             className="col-span-2"
             glow="border-protein/40 text-protein bg-protein/10"
             dot="bg-protein"
@@ -411,7 +410,7 @@ export default function Features() {
           <FeatureCell
             icon={<Dumbbell className="h-5 w-5" />}
             title="Muscle heatmaps"
-            description="Training volume on a 3D mannequin. Tap a group for detail."
+            description="Track weekly set volume on an anatomical heat map with automatic PR detection."
             badge="Heatmap"
             className="col-span-2 lg:col-span-1"
             glow="border-carbs/40 text-carbs bg-carbs/10"
@@ -424,7 +423,7 @@ export default function Features() {
           <FeatureCell
             icon={<Sparkles className="h-5 w-5" />}
             title="AI nutrition coach"
-            description="500K+ foods with AI scanning. Instant macros, Indian food included."
+            description="Gemini AI with a 14 day context window reading your logged sets, meals, and wearables."
             badge="AI"
             className="col-span-2"
             glow="border-cyan-400/40 text-cyan-400 bg-cyan-400/10"
@@ -436,8 +435,8 @@ export default function Features() {
 
           <FeatureCell
             icon={<BookOpen className="h-5 w-5" />}
-            title="Built-in education"
-            description="Science-backed lessons between sets. XP for every one you finish."
+            title="Built in education"
+            description="Science backed lessons between sets. Earn XP for every course you finish."
             glow="border-purple-400/40 text-purple-400 bg-purple-400/10"
             dot="bg-purple-400"
           >
@@ -447,7 +446,7 @@ export default function Features() {
           <FeatureCell
             icon={<Users className="h-5 w-5" />}
             title="Gym buddies"
-            description="See who's training right now. Stay accountable together."
+            description="See who is training right now. Zero feed bloat: just live presence and kudos."
             glow="border-protein/40 text-protein bg-protein/10"
             dot="bg-protein"
           >
@@ -456,8 +455,8 @@ export default function Features() {
 
           <FeatureCell
             icon={<Target className="h-5 w-5" />}
-            title="1-bit thermal receipts"
-            description="Print your session. Share it raw, or over a gym selfie."
+            title="1 bit thermal receipts"
+            description="Export session recaps with Indian weight equivalences for Instagram Stories."
             badge="Share"
             glow="border-pink-400/40 text-pink-400 bg-pink-400/10"
             dot="bg-pink-400"
@@ -468,7 +467,7 @@ export default function Features() {
           <FeatureCell
             icon={<QrCode className="h-5 w-5" />}
             title="Your gym, connected"
-            description="QR check-in, live crowd meter, class booking."
+            description="Fast QR check in, live crowd capacity light, and class booking."
             badge="Gym OS"
             glow="border-orange-400/40 text-orange-400 bg-orange-400/10"
             dot="bg-orange-400"

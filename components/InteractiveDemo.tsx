@@ -11,7 +11,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { rise, VIEWPORT } from "@/lib/motion";
-import { BorderBeam } from "@/components/magicui/border-beam";
 import {
   Home,
   Dumbbell,
@@ -571,27 +570,9 @@ export default function InteractiveDemo() {
           viewport={VIEWPORT}
           className="flex flex-col items-center"
         >
-          <div className="relative h-[560px] w-[288px] sm:h-[660px] sm:w-[320px] rounded-[2.5rem] border border-white/[0.08] bg-panel shadow-[0_0_100px_rgba(255,255,255,0.03)] overflow-hidden">
-            {/* BorderBeam */}
-            <BorderBeam
-              size={150}
-              duration={8}
-              colorFrom="#4ade80"
-              colorTo="#ffffff"
-              delay={0}
-            />
-
-            {/* Status bar */}
-            <div className="flex items-center justify-between px-6 pt-3 pb-1">
-              <span className="text-[10px] text-ink-muted font-medium">9:41</span>
-              <div className="w-[72px] h-[22px] rounded-full bg-black" />
-              <div className="flex items-center gap-1">
-                <div className="w-[15px] h-[10px] rounded-[2px] border border-neutral-600" />
-              </div>
-            </div>
-
+          <div className="relative h-[560px] w-[288px] sm:h-[660px] sm:w-[320px] rounded-2xl border border-white/[0.1] bg-panel shadow-[0_2px_4px_rgba(0,0,0,0.8),0_40px_80px_-24px_rgba(0,0,0,1)] overflow-hidden">
             {/* Screen Content */}
-            <div className="relative h-[calc(100%-2.75rem)] overflow-hidden">
+            <div className="relative h-full overflow-hidden pt-2">
               {/* Crossfade in place. mode="wait" ran exit (0.25s) fully before
                   enter, so the phone went blank between every tab: the exact
                   defect the hero phone was rebuilt to remove. */}
