@@ -14,7 +14,7 @@ const COMPARISONS = [
   },
   {
     generic: "US only generic food databases",
-    fitzo: "Indian food first: IFCT 2017 data plus AI vision meal scanning",
+    fitzo: "Indian food first: practical meal ideas, IFCT 2017 data, and katori portions",
   },
   {
     generic: "Arbitrary calorie and macro guesses",
@@ -22,11 +22,11 @@ const COMPARISONS = [
   },
   {
     generic: "Disconnected from your actual gym floor",
-    fitzo: "QR check in, real time crowd capacity light, and class booking",
+    fitzo: "QR check in, real time crowd capacity light, and weekly leaderboard",
   },
   {
     generic: "Cookie cutter generic workouts",
-    fitzo: "Curated splits, auto PR detection, plate math, and previous set ghosting",
+    fitzo: "Starter workout suggestions, editable routines, auto PRs, and plate math",
   },
 ];
 

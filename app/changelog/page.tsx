@@ -14,6 +14,21 @@ export const metadata: Metadata = {
 
 const entries = [
   {
+    version: "v1.4.0",
+    date: "October 2026",
+    title: "Training-First Setup & Practical Meal Ideas",
+    description: "Streamlined setup flow, equipment-aware starter workouts, editable training preferences, and eight culturally verified Indian meal ideas.",
+    changes: [
+      "Short training-first setup: Goal to Routine to Plan with optional body stats and macro targets",
+      "Starter workout plans tailored to equipment, lifting experience, and schedule",
+      "Editable training preferences with keep or replace choices and retained workout history",
+      "Eight practical Indian meal ideas with vegetarian defaults, household measures, and reversible swaps",
+      "Meal categories, reviewed portion gram weights, and estimate flags recorded on food logs",
+      "Subtle screen backdrops, optional recovery check-in prompts, and detailed HealthKit / Health Connect sync status",
+    ],
+    tag: "Major",
+  },
+  {
     version: "v1.3.8",
     date: "September 2026",
     title: "Thermal Receipts & Nutrition Formula v4",

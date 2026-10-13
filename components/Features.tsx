@@ -160,18 +160,27 @@ function BuddiesMini() {
 function FoodSearchMini() {
   return (
     <div className="well space-y-2.5 p-4">
-      <p className="text-sm font-bold text-white">Add food</p>
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-bold text-white">Add food</p>
+        <span className="text-[9px] font-mono font-bold text-cyan-400">8 PRACTICAL MEAL IDEAS</span>
+      </div>
       <div className="flex items-center gap-2 rounded-lg border border-white/[0.06] bg-white/[0.04] px-3 py-2">
         <ScanLine className="h-3.5 w-3.5 text-ink-faint" />
         <span className="text-[10px] text-ink-faint">Search or scan food…</span>
       </div>
-      <div className="flex w-fit items-center gap-1.5 rounded-lg border border-white/[0.06] bg-white/[0.04] px-3 py-1.5">
-        <Sparkles className="h-3.5 w-3.5 text-protein" />
-        <span className="text-[10px] text-ink-muted">AI analysis</span>
+      <div className="flex flex-wrap items-center gap-1.5">
+        <div className="flex w-fit items-center gap-1.5 rounded-lg border border-white/[0.06] bg-white/[0.04] px-2.5 py-1">
+          <Sparkles className="h-3 w-3 text-protein" />
+          <span className="text-[9px] text-ink-muted">AI scan</span>
+        </div>
+        <div className="flex w-fit items-center gap-1.5 rounded-lg border border-white/[0.06] bg-white/[0.04] px-2.5 py-1">
+          <span className="h-1.5 w-1.5 rounded-full bg-carbs" />
+          <span className="text-[9px] text-ink-muted">Katori & gram portions</span>
+        </div>
       </div>
       {[
-        { name: "Chicken breast", cal: "165", per: "100g" },
-        { name: "Brown rice", cal: "112", per: "100g" },
+        { name: "Paneer bhurji & roti", cal: "380", per: "1 plate (2 rotis)" },
+        { name: "Dal tadka & jeera rice", cal: "340", per: "1 katori + bowl" },
       ].map((f) => (
         <div
           key={f.name}
@@ -245,14 +254,14 @@ function GymMini() {
       <div className="flex items-center justify-between rounded-lg border border-white/[0.06] bg-white/[0.03] p-2.5">
         <div>
           <p className="text-[10px] font-semibold text-white">
-            HIIT Blast · 7:30 PM
+            Weekly gym leaderboard
           </p>
           <p className="text-[9px] text-ink-faint">
-            with Coach Arjun · 4 spots left
+            #3 in Iron Temple · 420 XP
           </p>
         </div>
         <span className="rounded-full bg-white px-2 py-1 text-[9px] font-semibold text-black">
-          Book
+          Kudos 👊
         </span>
       </div>
     </div>
@@ -422,9 +431,9 @@ export default function Features() {
 
           <FeatureCell
             icon={<Sparkles className="h-5 w-5" />}
-            title="AI nutrition coach"
-            description="Gemini AI with a 14 day context window reading your logged sets, meals, and wearables."
-            badge="AI"
+            title="Practical Indian nutrition"
+            description="Verified Indian food catalog, eight ready-to-eat meal ideas with vegetarian defaults, and Gemini AI context."
+            badge="Nutrition"
             className="col-span-2"
             glow="border-cyan-400/40 text-cyan-400 bg-cyan-400/10"
             dot="bg-cyan-400"
@@ -467,7 +476,7 @@ export default function Features() {
           <FeatureCell
             icon={<QrCode className="h-5 w-5" />}
             title="Your gym, connected"
-            description="Fast QR check in, live crowd capacity light, and class booking."
+            description="Fast QR check in, live crowd capacity light, and weekly gym leaderboard."
             badge="Gym OS"
             glow="border-orange-400/40 text-orange-400 bg-orange-400/10"
             dot="bg-orange-400"

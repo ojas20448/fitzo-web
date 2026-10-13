@@ -21,11 +21,11 @@ const steps = [
   {
     number: "01",
     icon: UserPlus,
-    title: "Set your blueprint",
+    title: "Training-first setup",
     glow: "border-protein/40 text-protein bg-protein/10",
     dot: "bg-protein",
     description:
-      "Two fast steps to dial in your body stats, goal, and activity. Fitzo previews your targets live with scientific macro scaling.",
+      "Pick your goal, routine, and training split in moments. Starter workouts adapt to your gear and schedule, with optional body stats and targets.",
   },
   {
     number: "02",
