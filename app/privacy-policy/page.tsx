@@ -295,7 +295,8 @@ export default function PrivacyPolicy() {
           </p>
           <p>
             The Fitzo API is hosted by{" "}
-            <span className="text-neutral-300">Render</span>. Data is encrypted
+            <span className="text-neutral-300">Oracle Cloud</span>; legacy
+            deployments use Render. Data is encrypted
             in transit with TLS on every connection, and encrypted at rest by our
             database provider.
           </p>
@@ -348,7 +349,7 @@ export default function PrivacyPolicy() {
                 "All stored account and fitness data",
                 "Database hosting (Mumbai)",
               ],
-              ["Render", "API traffic", "Application hosting"],
+              ["Oracle Cloud; Render for legacy deployments", "API traffic", "Application hosting"],
               [
                 "Expo",
                 "Push token and notification text",
