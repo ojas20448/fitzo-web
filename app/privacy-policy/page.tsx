@@ -101,7 +101,7 @@ export default function PrivacyPolicy() {
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">
             Privacy Policy
           </h1>
-          <p className="text-ink-muted">Last updated: 17 August 2026</p>
+          <p className="text-ink-muted">Last updated: 23 October 2026</p>
         </div>
 
         {/* ━━━ Summary ━━━ */}
@@ -117,9 +117,9 @@ export default function PrivacyPolicy() {
               and we run no advertising.
             </li>
             <li>
-              Voice recordings and food photos are{" "}
-              <span className="text-neutral-300">never stored</span> — they are
-              analysed and discarded.
+              AI features send the information you choose and relevant fitness
+              context to service providers. Their safety and legal retention
+              rules still apply.
             </li>
             <li>
               We do not collect your location, contacts, or any advertising
@@ -223,14 +223,13 @@ export default function PrivacyPolicy() {
                 <li>
                   <span className="text-neutral-300">Voice logging</span> — a
                   recording of up to 90 seconds is sent for transcription so you
-                  can log a meal or workout by speaking. It is{" "}
-                  <span className="text-neutral-300">not stored</span> by Fitzo
+                  can log a meal or workout by speaking. Fitzo processes the
+                  recording temporarily; provider retention is described below
                 </li>
                 <li>
                   <span className="text-neutral-300">Food photos</span> — a photo
-                  of a meal is analysed to estimate its macros, then discarded.
-                  It is <span className="text-neutral-300">never saved</span> to
-                  our servers or database
+                  of a meal is sent for analysis to estimate its macros. Fitzo
+                  processes it temporarily; provider retention is described below
                 </li>
                 <li>
                   <span className="text-neutral-300">Gym QR check-in</span> — the
@@ -325,9 +324,14 @@ export default function PrivacyPolicy() {
             head={["Processor", "What it receives", "Why"]}
             rows={[
               [
-                "Google Cloud (Gemini AI API)",
-                "Transient voice recordings, transient food photos, and relevant workout and nutrition summaries",
-                "Voice logging, photo macro estimation, and the AI coach. Protected under enterprise terms with equal data protection as this policy; never used for model training",
+                "Google (Gemini API)",
+                "Questions, chosen photos or voice clips, and relevant profile, workout, nutrition, recovery and connected-health context",
+                "Coaching, insights, food analysis and voice logging. Paid API terms exclude prompts and responses from model improvement; safety and legal retention still apply",
+              ],
+              [
+                "Groq",
+                "Voice recordings when used for transcription",
+                "Voice transcription; separate provider retention and account settings apply",
               ],
               [
                 "Google Identity",
@@ -379,48 +383,41 @@ export default function PrivacyPolicy() {
           </p>
         </Section>
 
-        {/* ━━━ 5b — the AI disclosure ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          * The single most consequential paragraph in this policy, and the one
-          * most often left vague. It is written to be true on the Gemini API
-          * tier currently in use, which permits Google to use submitted content
-          * to improve its products. Do NOT soften this to "your data is never
-          * used for training" unless and until API billing is enabled — that
-          * sentence would be false, in a document both app stores read.
-          */}
+        {/* AI disclosures match the shared consent in the mobile app. */}
         <Section title="5b. Artificial intelligence, in plain terms">
           <p>
-            Three Fitzo features are powered by Google Cloud&apos;s Gemini AI API: the AI
-            coach, voice logging, and photo macro estimation. To answer
-            usefully, the coach is sent relevant workout metrics, nutrition summaries,
-            and connected wearable stats. For photo macro estimation, meal photos
-            are analyzed in real-time and immediately discarded (never stored). For voice
-            logging, audio clips are sent for transcription and immediately discarded (never stored).
+            Coaching, insights, food analysis and voice logging use the Gemini
+            API. Fitzo sends your questions and relevant profile, workout, food,
+            recovery and connected-health information to Google. Scans and voice
+            logging also send the photo or recording you choose. Voice
+            transcription may use Groq. Information you type, photograph or say
+            can contain personal details.
           </p>
           <p>
             <span className="text-white font-semibold">
-              Third-Party Data Protection &amp; Equal Safeguards:
+              How providers handle it:
             </span>{" "}
-            All data transmitted to Google Cloud (Google Gemini AI) is encrypted in
-            transit (TLS 1.3) and at rest (AES-256). We confirm that Google Cloud
-            provides equal or greater protection of user data as stated in this
-            Privacy Policy and adheres to strict enterprise confidentiality standards.
-            Under our paid enterprise API terms, customer fitness data is processed solely
-            to provide real-time responses and is NOT used to train third-party AI models.
-            Personal identity information (such as your name, email address, passwords, or
-            payment information) is NEVER transmitted to the AI provider.
+            Connections are encrypted. Google&apos;s paid Gemini API terms exclude
+            prompts and responses from product and model improvement. Paid
+            processing does not mean zero storage: Google may retain data for
+            safety enforcement and legal requirements. Groq may retain requests
+            for reliability or abuse investigations, subject to its account
+            settings and legal obligations. See the{" "}
+            <a href="https://ai.google.dev/gemini-api/terms" className="text-white underline">Gemini API terms</a>
+            {" "}and{" "}
+            <a href="https://console.groq.com/docs/your-data" className="text-white underline">Groq data policy</a>.
           </p>
           <p>
             <span className="text-white font-semibold">Your choice and consent:</span> AI
-            features in Fitzo are strictly opt-in and require your explicit upfront consent
-            before any data is transmitted. If you decline or prefer that your data not be
-            processed by AI, simply keep AI features disabled. Every other part of Fitzo —
-            manual workout logging, nutrition tracking, progress charts, gym check-ins, and
-            the exercise library — operates fully without AI and transmits zero data to Gemini.
-            You can review or revoke your AI data sharing consent at any time in App Settings.
+            features use one saved permission across the app, requested before
+            first use. In version 1.5.0, manage that choice in Profile → Fitzo AI;
+            older versions may show it in Settings. Turning it off stops future
+            AI requests from that installation. Manual logging remains available.
+            Scheduled daily and weekly AI processing is paused until the server
+            can verify account-level consent and revocation.
           </p>
           <p className="text-sm text-neutral-400">
-            Fitzo does not train any model of its own on your data, and does not
-            supply your data to anyone else for model training or marketing.
+            Fitzo does not train its own models on your data or sell it for marketing.
           </p>
         </Section>
 
@@ -433,8 +430,8 @@ export default function PrivacyPolicy() {
                 "Account and all fitness history",
                 "Until you delete your account",
               ],
-              ["Voice recordings", "Not retained — analysed, then discarded"],
-              ["Food photos", "Not retained — analysed, then discarded"],
+              ["Voice recordings", "Temporary Fitzo processing; Google or Groq safety, legal and account retention rules apply separately"],
+              ["Food photos", "Temporary Fitzo processing; Google's safety and legal retention rules apply separately"],
               ["Cached data", "Temporary, expires automatically"],
               ["Server error traces", "Up to 90 days"],
             ]}
