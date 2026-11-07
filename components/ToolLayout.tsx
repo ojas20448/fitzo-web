@@ -46,7 +46,7 @@ export default function ToolLayout({
   return (
     <div className="min-h-screen bg-background text-white">
       {/* ━━━ Back to site — same pattern as /compare and /changelog ━━━ */}
-      <header className="sticky top-0 z-50 border-b border-white/[0.04] bg-black/80 backdrop-blur-xl">
+      <header className="chrome-header sticky top-0 z-50">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4 sm:px-6">
           <Link
             href="/"

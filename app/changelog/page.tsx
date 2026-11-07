@@ -1,23 +1,89 @@
+import { pageMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 import Link from "next/link";
 import FitzoLogo from "@/components/FitzoLogo";
 import { ArrowLeft } from "lucide-react";
-import { SITE_URL } from "@/lib/links";
 
-export const metadata: Metadata = {
-  title: "Fitzo",
-  description: "Every update, feature, and improvement shipped in Fitzo. See the complete release history of India's workout and nutrition tracker.",
-  alternates: {
-    canonical: `${SITE_URL}/changelog`,
-  },
-};
+export const metadata: Metadata = pageMetadata(
+  "Fitzo Release Notes: App Updates & New Features",
+  "See published Fitzo updates, from workout logging and food diary improvements to gym features and optional AI coaching.",
+  "/changelog",
+);
 
 const entries = [
+{
+  "version": "October 30 update",
+  "date": "30 October 2026",
+  "title": "A smoother session, from start to finish",
+  "description": "Published app updates make workouts easier to find, resume and rearrange, with a simpler My Gym.",
+  "changes": [
+    "Resume an active workout from one clear summary card, or start an empty workout",
+    "Reorder exercises with drag handles or accessible up/down controls while retaining entered sets",
+    "Automatic workout duration and a confirmed Finish Workout action in the top bar",
+    "Fitzo Workouts and Community Workouts collections, plus warm-up and exercise guides",
+    "Demo-first My Gym with equipment categories and QR or manual code connection",
+    "Full food catalogue search alongside local matches, with nutrition estimates labelled"
+  ],
+  "tag": "Feature"
+},
+{
+  "version": "October 29 update",
+  "date": "29 October 2026",
+  "title": "Keep your place. Find your next exercise.",
+  "description": "Workout drafts now include unfinished set inputs, and the offline exercise library has grown.",
+  "changes": [
+    "246 distinct exercise movements with bundled photos and technique instructions",
+    "Local backup of partially typed set values, plus Saving, Saved and Retry feedback",
+    "Confirmation before replacing an active workout or changing its training day",
+    "Recent exercises appear first, including custom and cardio movements",
+    "Separate sessions stay separate, even when completed on the same day"
+  ],
+  "tag": "Feature"
+},
+{
+  "version": "October 25–27 updates",
+  "date": "25–27 October 2026",
+  "title": "A diary that fits your day",
+  "description": "Dedicated Workout, Food, Gym, Friends and Profile tabs bring the daily tools closer.",
+  "changes": [
+    "Log to a selected diary date, edit portions, and move saved food to another day",
+    "Recipes and practical meal ideas stay within reach from Food",
+    "Food setup can be skipped while keeping your training plan",
+    "Private exercise notes, individual rest times, and cardio minutes with optional effort",
+    "90-minute session preferences and clearer food-save notifications"
+  ],
+  "tag": "Feature"
+},
+{
+  "version": "v1.5.0",
+  "date": "23–24 October 2026",
+  "title": "One AI choice. Dates that travel with you.",
+  "description": "A shared Fitzo AI permission and timezone-aware logging across meals and workouts.",
+  "changes": [
+    "One optional AI disclosure, controlled from Profile, for coaching, voice and photo features",
+    "Meals and workouts retain their original local dates during travel",
+    "Personal summaries follow the member's timezone; gym schedules follow the gym's timezone",
+    "Compatible app updates can arrive without a new store download"
+  ],
+  "tag": "Major"
+},
+{
+  "version": "v1.4.1",
+  "date": "15 October 2026",
+  "title": "Make your workout recap yours",
+  "description": "Photo share cards with more control over placement and readability.",
+  "changes": [
+    "Pinch, drag and rotate a workout card while keeping the background photo fixed",
+    "Card size and reset controls, with more preview space on smaller screens",
+    "Improved contrast across photo-card styles"
+  ],
+  "tag": "Feature"
+},
   {
     version: "v1.4.0",
     date: "October 2026",
     title: "Training-First Setup & Practical Meal Ideas",
-    description: "Streamlined setup flow, equipment-aware starter workouts, editable training preferences, and eight culturally verified Indian meal ideas.",
+    description: "Streamlined setup flow, equipment-aware starter workouts, editable training preferences, and eight practical Indian meal ideas with reviewed catalogue values.",
     changes: [
       "Short training-first setup: Goal to Routine to Plan with optional body stats and macro targets",
       "Starter workout plans tailored to equipment, lifting experience, and schedule",
@@ -117,9 +183,9 @@ function TagBadge({ tag }: { tag: string }) {
 
 export default function ChangelogPage() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-black/80 border-b border-white/[0.04]">
+      <header className="chrome-header sticky top-0 z-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 text-ink-muted hover:text-white transition-colors">
             <ArrowLeft className="w-4 h-4" />

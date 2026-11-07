@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO: Privacy Policy Page
@@ -13,11 +14,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Fitzo",
-  description:
-    "Fitzo Privacy Policy. What we collect, where it is stored, who processes it, and how to delete it.",
-};
+export const metadata: Metadata = pageMetadata(
+  "Privacy Policy: App Data & Website Analytics | Fitzo",
+  "Learn how Fitzo handles app data, website analytics choices, data retention and account deletion.",
+  "/privacy-policy",
+);
 
 function Section({
   title,
@@ -80,7 +81,7 @@ function Table({ head, rows }: { head: string[]; rows: string[][] }) {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-background">
       {/* ━━━ Header ━━━ */}
       <header className="border-b border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 flex items-center justify-between">
@@ -101,7 +102,7 @@ export default function PrivacyPolicy() {
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">
             Privacy Policy
           </h1>
-          <p className="text-ink-muted">Last updated: 23 October 2026</p>
+          <p className="text-ink-muted">App policy and website analytics: 7 November 2026</p>
         </div>
 
         {/* ━━━ Summary ━━━ */}
@@ -137,6 +138,17 @@ export default function PrivacyPolicy() {
             </li>
           </ul>
         </div>
+
+        <section id="website-analytics" className="mb-12 scroll-mt-24">
+          <h2 className="mb-4 text-2xl font-bold text-white">Website analytics and your choice</h2>
+          <div className="space-y-4 leading-relaxed text-neutral-300">
+            <p>This section applies to www.fitzoapp.in. The app and API policy below remains separate from website analytics.</p>
+            <p>With your permission, we use Google Analytics 4 to measure website page visits and clicks to the App Store or Google Play. Google may process cookie identifiers, browser and device information, referring websites and approximate location to produce reports. This does not give Google access to your Fitzo account.</p>
+            <p>Our Google tag loads only after you select Allow analytics. No thanks leaves it disabled. Use Cookie settings at the bottom of any website page to change your choice; withdrawing permission stops future Google Analytics collection. Your choice is stored in this browser.</p>
+            <p>We do not send food or workout logs, calculator inputs, form entries, buddy identifiers or URL query strings to Google Analytics. Advertising storage, ad personalization and Google signals are disabled. Buddy invitation pages are excluded from this tracking.</p>
+            <p>Google processes analytics data on its infrastructure, which may be outside India. See <a href="https://policies.google.com/technologies/partner-sites" className="underline underline-offset-4">how Google uses information from partner sites</a>. We also use Vercel Web Analytics and Speed Insights for website usage and performance, separately from the Google Analytics cookie choice.</p>
+          </div>
+        </section>
 
         {/* ━━━ 1 ━━━ */}
         <Section title="1. Who we are">
@@ -223,13 +235,16 @@ export default function PrivacyPolicy() {
                 <li>
                   <span className="text-neutral-300">Voice logging</span> — a
                   recording of up to 90 seconds is sent for transcription so you
-                  can log a meal or workout by speaking. Fitzo processes the
-                  recording temporarily; provider retention is described below
+                  can log a meal or workout by speaking. Temporary device files
+                  and request processing are separate from Google or Groq&apos;s
+                  provider retention and account settings.
                 </li>
                 <li>
                   <span className="text-neutral-300">Food photos</span> — a photo
-                  of a meal is sent for analysis to estimate its macros. Fitzo
-                  processes it temporarily; provider retention is described below
+                  of a meal is analysed to estimate its macros. The direct route
+                  does not create a backend photo archive. Optional worker mode
+                  temporarily stores queued photos and processing copies until
+                  completion or expiry; provider retention applies separately.
                 </li>
                 <li>
                   <span className="text-neutral-300">Gym QR check-in</span> — the
@@ -334,6 +349,7 @@ export default function PrivacyPolicy() {
                 "Voice recordings when used for transcription",
                 "Voice transcription; separate provider retention and account settings apply",
               ],
+              ["Optional photo-processing worker", "Queued food photos and analysis requests", "Temporary queue and designated-laptop processing, with separate disclosure and provider terms"],
               [
                 "Google Identity",
                 "Your Google sign-in token",
@@ -384,38 +400,35 @@ export default function PrivacyPolicy() {
           </p>
         </Section>
 
-        {/* AI disclosures match the shared consent in the mobile app. */}
+        {/* Aligned with the app's October 23 data map and shared AI disclosure. */}
         <Section title="5b. Artificial intelligence, in plain terms">
           <p>
-            Coaching, insights, food analysis and voice logging use the Gemini
-            API. Fitzo sends your questions and relevant profile, workout, food,
-            recovery and connected-health information to Google. Scans and voice
-            logging also send the photo or recording you choose. Voice
-            transcription may use Groq. Information you type, photograph or say
-            can contain personal details.
+            Fitzo AI supports Spotter coaching, insights, text food estimates,
+            voice logging and photo macro estimation. Depending on the feature,
+            it sends selected text, photos, audio, or relevant workout, nutrition
+            and connected-health summaries to cloud providers. Google Gemini
+            handles AI requests; voice transcription may use Google or Groq.
           </p>
           <p>
             <span className="text-white font-semibold">
-              How providers handle it:
+              Provider processing and retention:
             </span>{" "}
             Connections are encrypted. Google&apos;s paid Gemini API terms exclude
-            prompts and responses from product and model improvement. Paid
-            processing does not mean zero storage: Google may retain data for
-            safety enforcement and legal requirements. Groq may retain requests
-            for reliability or abuse investigations, subject to its account
-            settings and legal obligations. See the{" "}
-            <a href="https://ai.google.dev/gemini-api/terms" className="text-white underline">Gemini API terms</a>
-            {" "}and{" "}
-            <a href="https://console.groq.com/docs/your-data" className="text-white underline">Groq data policy</a>.
+            prompts and responses from product and model improvement. This does
+            not mean zero storage or no human review: provider safety monitoring
+            and legal retention can apply. Groq and optional worker processing
+            have their own terms and settings. Deleting a temporary file in
+            Fitzo does not delete a provider&apos;s retained records. See the{" "}
+            <a href="https://ai.google.dev/gemini-api/terms" className="text-white underline">Gemini API terms</a>{" "}
+            and <a href="https://ai.google.dev/gemini-api/docs/usage-policies" className="text-white underline">abuse-monitoring policy</a>, plus the <a href="https://console.groq.com/docs/your-data" className="text-white underline">Groq data policy</a>.
           </p>
           <p>
             <span className="text-white font-semibold">Your choice and consent:</span> AI
-            features use one saved permission across the app, requested before
-            first use. In version 1.5.0, manage that choice in Profile → Fitzo AI;
-            older versions may show it in Settings. Turning it off stops future
-            AI requests from that installation. Manual logging remains available.
-            Scheduled daily and weekly AI processing is paused until the server
-            can verify account-level consent and revocation.
+            features use the shared Enable Fitzo AI disclosure before first use.
+            Review or change your choice in Profile → Fitzo AI. Manual workout
+            and food logging, progress charts and the exercise library remain
+            available without AI. Camera, microphone and health permissions are
+            separate choices. Optional worker mode has its own disclosure. Older versions may show the AI choice in Settings. Turning it off stops future AI requests from that installation. Scheduled daily and weekly AI processing is paused until the server can verify account-level consent and revocation.
           </p>
           <p className="text-sm text-neutral-400">
             Fitzo does not train its own models on your data or sell it for marketing.
@@ -431,8 +444,8 @@ export default function PrivacyPolicy() {
                 "Account and all fitness history",
                 "Until you delete your account",
               ],
-              ["Voice recordings", "Temporary Fitzo processing; Google or Groq safety, legal and account retention rules apply separately"],
-              ["Food photos", "Temporary Fitzo processing; Google's safety and legal retention rules apply separately"],
+              ["Voice recordings", "Temporary device files and request processing; Google/Groq retention applies separately"],
+              ["Food photos", "Temporary device files and request processing; optional worker copies until completion or expiry; provider retention applies separately"],
               ["Cached data", "Temporary, expires automatically"],
               ["Server error traces", "Up to 90 days"],
             ]}

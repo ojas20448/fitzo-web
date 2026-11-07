@@ -132,8 +132,8 @@ function ReceiptArtifact() {
 
 const FACTS = [
   { value: "10+", label: "Years under the bar" },
-  { value: "6", label: "Cities in the beta" },
-  { value: "0", label: "Investors, ads, trackers" },
+  { value: "246", label: "Exercise movements" },
+  { value: "0", label: "Ads in your way" },
 ];
 
 export default function FounderStory() {

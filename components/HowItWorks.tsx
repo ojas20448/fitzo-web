@@ -14,7 +14,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { UserPlus, QrCode, TrendingUp, ArrowRight } from "lucide-react";
+import { UserPlus, Dumbbell, TrendingUp, ArrowRight } from "lucide-react";
 import { rise, stack, stackItem, VIEWPORT, EASE_OUT_EXPO } from "@/lib/motion";
 
 const steps = [
@@ -22,28 +22,28 @@ const steps = [
     number: "01",
     icon: UserPlus,
     title: "Training-first setup",
-    glow: "border-protein/40 text-protein bg-protein/10",
-    dot: "bg-protein",
+    glow: "border-white/20 text-slate-200 bg-white/5",
+    dot: "bg-slate-300",
     description:
-      "Pick your goal, routine, and training split in moments. Starter workouts adapt to your gear and schedule, with optional body stats and targets.",
+      "Choose your goal, equipment and available time. Review your starter routine. Food targets and body measurements can wait.",
   },
   {
     number: "02",
-    icon: QrCode,
-    title: "Check in & lift",
-    glow: "border-carbs/40 text-carbs bg-carbs/10",
-    dot: "bg-carbs",
+    icon: Dumbbell,
+    title: "Make it your workout",
+    glow: "border-white/20 text-slate-200 bg-white/5",
+    dot: "bg-slate-300",
     description:
-      "Scan your gym QR, declare your focus, and log every set. Auto PR detection, plate math, and offline caching built in.",
+      "Use a plan or start empty. Log sets, adjust rest times, and move exercises around. Your draft is there when you come back.",
   },
   {
     number: "03",
     icon: TrendingUp,
-    title: "Track & dominate",
-    glow: "border-cyan-400/40 text-cyan-400 bg-cyan-400/10",
-    dot: "bg-cyan-400",
+    title: "See your work add up",
+    glow: "border-white/20 text-slate-200 bg-white/5",
+    dot: "bg-slate-300",
     description:
-      "Review your muscle volume heatmap, get daily AI coach feedback, and print 1 bit thermal receipts of your sessions.",
+      "Review personal records, muscle volume and weekly trends. Share a workout recap or explore a lesson between sessions.",
   },
 ];
 
@@ -119,9 +119,9 @@ export default function HowItWorks() {
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.975 }}
             transition={{ duration: 0.18, ease: EASE_OUT_EXPO }}
-            className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold text-black transition-colors duration-300 hover:bg-protein"
+            className="group inline-flex items-center gap-2 chrome-button"
           >
-            Start your journey
+            Find your starting point
             <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out-expo group-hover:translate-x-1" />
           </motion.a>
         </motion.div>

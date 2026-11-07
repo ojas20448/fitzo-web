@@ -1,5 +1,6 @@
+import { PRODUCT_DESCRIPTION } from "@/lib/product";
 import { BlogPost } from "./blog";
-import { SITE_URL } from "@/lib/links";
+import { SITE_URL, STORE, CONTACT_EMAIL } from "@/lib/links";
 
 
 
@@ -7,11 +8,12 @@ export function getOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
     name: "Fitzo",
+    email: CONTACT_EMAIL,
     url: SITE_URL,
     logo: `${SITE_URL}/favicon.svg`,
-    description:
-      "Science-based fitness tracking app for serious lifters. Track workouts, macros, and progress with precision.",
+    description: PRODUCT_DESCRIPTION,
     sameAs: [
       "https://twitter.com/fitzoapp",
       "https://instagram.com/fitzoapp",
@@ -28,15 +30,12 @@ export function getWebSiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    inLanguage: "en-IN",
+    publisher: { "@id": `${SITE_URL}/#organization` },
     name: "Fitzo",
     url: SITE_URL,
-    description:
-      "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, and science-backed education.",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: `${SITE_URL}/blog?q={search_term_string}`,
-      "query-input": "required name=search_term_string",
-    },
+    description: PRODUCT_DESCRIPTION,
   };
 }
 
@@ -44,11 +43,15 @@ export function getSoftwareApplicationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
+    "@id": `${SITE_URL}/#app`,
+    url: SITE_URL,
+    downloadUrl: [STORE.android, STORE.ios],
+    publisher: { "@id": `${SITE_URL}/#organization` },
     name: "Fitzo",
     operatingSystem: "iOS, Android",
     applicationCategory: "HealthApplication",
     description:
-      "Science-based fitness tracking app with 10+ workout splits, AI nutrition coach, and 50,000+ Indian food database.",
+      PRODUCT_DESCRIPTION,
     offers: {
       "@type": "Offer",
       price: "0",
@@ -69,12 +72,12 @@ export function getSoftwareApplicationSchema() {
      * regardless.
      */
     featureList: [
-      "Workout tracking with 10+ training splits",
-      "AI-powered nutrition coach",
-      "50,000+ Indian food database",
+      "Workout drafts, automatic timing and exercise reordering",
+      "Optional Fitzo AI coaching, voice and photo logging",
+      "Indian food tracking with editable diary portions and dates",
       "Macro and calorie tracking",
       "Progress analytics and charts",
-      "Offline mode",
+      "246 exercise movements with offline photos and instructions",
       "Barcode scanner",
     ],
   };
@@ -101,6 +104,9 @@ export function getArticleSchema(post: BlogPost) {
   return {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `${SITE_URL}/blog/${post.slug}#article`,
+    inLanguage: "en-IN",
+    image: `${SITE_URL}/og-image.png`,
     headline: post.title,
     description: post.description,
     keywords: post.keywords?.join(", "),

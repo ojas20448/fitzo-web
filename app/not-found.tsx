@@ -9,7 +9,7 @@ import { FitzoIcon } from "@/components/FitzoLogo";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center px-4 text-center">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 text-center">
       {/* Brand */}
       <Link href="/" aria-label="Fitzo home" className="mb-6">
         <FitzoIcon className="w-12 h-12" />

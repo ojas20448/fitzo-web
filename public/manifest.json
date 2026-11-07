@@ -1,11 +1,11 @@
 {
   "name": "Fitzo",
   "short_name": "Fitzo",
-  "description": "Science-Based Fitness Tracking for Serious Lifters",
+  "description": "Workouts, Indian meals, and your everyday progress.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#080a0d",
+  "theme_color": "#080a0d",
   "icons": [
     {
       "src": "/favicon.svg",

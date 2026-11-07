@@ -1,140 +1,20 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { rise, stack, stackItem, VIEWPORT } from "@/lib/motion";
-
-const COMPARISONS = [
-  {
-    generic: "Bloated with feeds, comments, and influencer noise",
-    fitzo: "Zero social bloat: distraction free training with buddies and kudos",
-  },
-  {
-    generic: "Amnesiac AI wellness bots with zero memory",
-    fitzo: "14 day context window reading your logged sets, meals, and wearables",
-  },
-  {
-    generic: "US only generic food databases",
-    fitzo: "Indian food first: practical meal ideas, IFCT 2017 data, and katori portions",
-  },
-  {
-    generic: "Arbitrary calorie and macro guesses",
-    fitzo: "Scientific protein scaling (1.8 to 2.0 g/kg) with custom macro targets",
-  },
-  {
-    generic: "Disconnected from your actual gym floor",
-    fitzo: "QR check in, real time crowd capacity light, and weekly leaderboard",
-  },
-  {
-    generic: "Cookie cutter generic workouts",
-    fitzo: "Starter workout suggestions, editable routines, auto PRs, and plate math",
-  },
+const details = [
+  ["Your routine changes.", "Start an empty session, choose a published workout, or keep your own split."],
+  ["Life interrupts a session.", "Return to a local workout draft, including the set you were still typing."],
+  ["Yesterday's meal needs an edit.", "Change its portion or move the entry to the right diary date."],
+  ["You want a clearer picture.", "Review muscle volume, personal records, body measurements and weekly trends."],
+  ["You decide what to connect.", "Food targets, AI, Apple Health and Health Connect are all optional."],
 ];
 
 export default function Comparison() {
   return (
-    <section id="science" className="relative overflow-hidden py-14 sm:py-24 lg:py-32">
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          variants={rise}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT}
-          className="mb-9 max-w-2xl sm:mb-14"
-        >
-          <span className="kicker mb-6">Why switch</span>
-          <h2 className="text-[clamp(2rem,4.6vw,3.25rem)] font-black leading-[0.98] tracking-[-0.04em] text-balance">
-            Most fitness apps
-            <br />
-            <span className="text-ink-faint">aren&apos;t built for lifters.</span>
-          </h2>
-          <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-ink-muted text-pretty">
-            They&apos;re built for casual users who want a step counter. Fitzo is
-            built for people who log every set.
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={stack}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT}
-          className="mx-auto grid max-w-5xl grid-cols-1 gap-4 lg:grid-cols-2 sm:gap-5"
-        >
-          {/* ━━━ The status quo: flatter, quieter, no elevation ━━━ */}
-          <motion.div
-            variants={stackItem}
-            className="hidden rounded-2xl border border-white/[0.06] bg-white/[0.012] p-7 sm:block sm:p-8"
-          >
-            <div className="mb-7 flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.03]">
-                <span className="font-mono text-sm text-ink-faint">:</span>
-              </span>
-              <div>
-                <h3 className="text-lg font-bold text-ink-muted">
-                  Generic fitness apps
-                </h3>
-                <p className="text-xs text-ink-faint">The status quo</p>
-              </div>
-            </div>
-
-            <ul className="space-y-0">
-              {COMPARISONS.map((item) => (
-                <li
-                  key={item.generic}
-                  className="flex items-start gap-3 border-t border-white/[0.05] py-3.5 first:border-t-0"
-                >
-                  <span className="mt-2.5 h-0.5 w-2.5 flex-shrink-0 rounded-full bg-white/20" />
-                  <p className="text-sm leading-relaxed text-ink-faint">
-                    {item.generic}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* ━━━ Fitzo: full elevation with official Fitzo logo & glowing protein indicators ━━━ */}
-          <motion.div
-            variants={stackItem}
-            className="panel relative overflow-hidden p-5 sm:p-8"
-          >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-protein/60 to-transparent"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_60%_at_50%_0%,rgba(74,222,128,0.07),transparent_70%)]"
-            />
-
-            <div className="relative z-10">
-              <div className="mb-7 flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black border border-white/15 shadow-md">
-                  <svg viewBox="0 0 100 100" className="h-6 w-6" fill="none">
-                    <path d="M20 20H79L74 32H32V44H67V56H32V80H20Z" fill="white" />
-                  </svg>
-                </span>
-                <div>
-                  <h3 className="text-lg font-bold text-white">Fitzo</h3>
-                  <p className="text-xs text-ink-faint">Built different</p>
-                </div>
-              </div>
-
-              <ul className="space-y-0">
-                {COMPARISONS.map((item) => (
-                  <li
-                    key={item.fitzo}
-                    className="flex items-start gap-3.5 border-t border-white/[0.06] py-3.5 first:border-t-0"
-                  >
-                    <span className="mt-2 h-2 w-2 rounded-full bg-protein flex-shrink-0" />
-                    <p className="text-sm font-medium leading-relaxed text-white">
-                      {item.fitzo}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        </motion.div>
+    <section id="science" className="py-14 sm:py-24">
+      <div className="site-container fitzo-routine">
+        <div>
+          <h2 className="section-title">Real life has a routine of its own.</h2>
+          <p>Fitzo leaves room for it. Start where you are, change what you need, and keep the work you&apos;ve already put in.</p>
+        </div>
+        <dl>{details.map(([title, text]) => <div key={title} className="routine-row"><dt>{title}</dt><dd>{text}</dd></div>)}</dl>
       </div>
     </section>
   );

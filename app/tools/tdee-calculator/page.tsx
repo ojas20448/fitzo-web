@@ -1,20 +1,13 @@
+import { pageMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 import TdeeCalculator from "./calculator";
 import { SITE_URL } from "@/lib/links";
 
-export const metadata: Metadata = {
-  title: "Fitzo",
-  description: "Calculate exactly how many calories you burn in a day with our free TDEE calculator.",
-  alternates: {
-    canonical: `${SITE_URL}/tools/tdee-calculator`,
-  },
-  openGraph: {
-    title: "Fitzo TDEE Calculator: Total Daily Energy Expenditure",
-    description: "Calculate exactly how many calories you burn in a day with our free TDEE calculator.",
-    url: `${SITE_URL}/tools/tdee-calculator`,
-    type: "website",
-  },
-};
+export const metadata: Metadata = pageMetadata(
+  "Free TDEE Calculator: Daily Calorie Needs | Fitzo",
+  "Estimate daily calorie needs from your age, height, weight and activity level. Use your TDEE as a starting point for maintenance, fat loss or muscle gain.",
+  "/tools/tdee-calculator",
+);
 
 const jsonLd = {
   "@context": "https://schema.org",

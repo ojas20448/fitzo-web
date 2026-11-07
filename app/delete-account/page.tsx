@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO: Account & Data Deletion
@@ -16,11 +17,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Delete Your Fitzo Account",
-  description:
-    "How to permanently delete your Fitzo account and all associated data, from inside the app or by email.",
-};
+export const metadata: Metadata = pageMetadata(
+  "Delete Your Fitzo Account & Data",
+  "Delete your Fitzo account and associated data from the app or by email. Find the steps and retention details here.",
+  "/delete-account",
+);
 
 function Section({
   title,
@@ -41,7 +42,7 @@ function Section({
 
 export default function DeleteAccount() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-background">
       <header className="border-b border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 flex items-center justify-between">
           <Link href="/" className="text-2xl font-bold text-white">
@@ -199,12 +200,12 @@ export default function DeleteAccount() {
 
       <footer className="border-t border-white/[0.06] py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-neutral-500">
+          <p className="text-xs text-ink-faint">
             &copy; {new Date().getFullYear()} Fitzo. All rights reserved.
           </p>
           <Link
             href="/"
-            className="text-xs text-neutral-500 hover:text-white transition-colors"
+            className="text-xs text-ink-faint hover:text-white transition-colors"
           >
             Back to Home
           </Link>

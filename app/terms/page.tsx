@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 /**
  * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  * FITZO: Terms of Service Page
@@ -8,11 +9,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Fitzo",
-  description:
-    "Fitzo Terms of Service. Read our terms and conditions for using the Fitzo fitness tracking application.",
-};
+export const metadata: Metadata = pageMetadata(
+  "Terms of Service | Fitzo",
+  "Read the terms of service for the Fitzo fitness and nutrition tracking app.",
+  "/terms",
+);
 
 function Section({
   title,
@@ -33,7 +34,7 @@ function Section({
 
 export default function TermsOfService() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-background">
       {/* ━━━ Header ━━━ */}
       <header className="border-b border-white/[0.06]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 flex items-center justify-between">

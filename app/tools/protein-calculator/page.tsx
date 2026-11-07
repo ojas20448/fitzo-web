@@ -1,20 +1,13 @@
+import { pageMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 import ProteinCalculator from "./calculator";
 import { SITE_URL } from "@/lib/links";
 
-export const metadata: Metadata = {
-  title: "Fitzo",
-  description: "Find out exactly how much protein you need per day to build muscle or lose fat. Free protein calculator for lifters.",
-  alternates: {
-    canonical: `${SITE_URL}/tools/protein-calculator`,
-  },
-  openGraph: {
-    title: "Fitzo Protein Calculator: Daily Intake for Muscle & Fat Loss",
-    description: "Find out exactly how much protein you need per day to build muscle or lose fat. Free protein calculator for lifters.",
-    url: `${SITE_URL}/tools/protein-calculator`,
-    type: "website",
-  },
-};
+export const metadata: Metadata = pageMetadata(
+  "Free Protein Calculator: Daily Protein Intake | Fitzo",
+  "Estimate a daily protein range from your weight, training and goal. Find a starting target for muscle building, fat loss or general fitness.",
+  "/tools/protein-calculator",
+);
 
 const jsonLd = {
   "@context": "https://schema.org",

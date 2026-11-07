@@ -5,6 +5,9 @@ import MotionProvider from "@/components/MotionProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_URL } from "@/lib/links";
+import { HOME_TITLE, HOME_DESCRIPTION, pageMetadata } from "@/lib/seo";
+import { GA_MEASUREMENT_ID } from "@/lib/analytics";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 /* ━━━ Display + UI: Archivo. A signage grotesque with real width authority :
        it holds up at 900 weight for headlines and at 400 for body. ━━━ */
@@ -24,71 +27,17 @@ const martianMono = Martian_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#080a0d",
   colorScheme: "dark",
 };
 
 /* ━━━ SEO Metadata ━━━ */
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Fitzo",
-  description:
-    "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, QR gym check-in, gym buddies, and science-backed education. Built for lifters who value data.",
-  keywords: [
-    "fitness tracker",
-    "macro tracking",
-    "workout app",
-    "science-based training",
-    "gym app",
-    "PPL split",
-    "nutrition tracker",
-    "AI nutrition",
-    "evidence-based fitness",
-    "calorie counter",
-    "hypertrophy training",
-    "gym check-in app",
-    "gym buddies",
-    "indian food calorie tracker",
-    "gym class booking",
-  ],
+  ...pageMetadata(HOME_TITLE, HOME_DESCRIPTION, "/"),
   authors: [{ name: "Fitzo" }],
   creator: "Fitzo",
   manifest: "/manifest.json",
-  alternates: {
-    languages: {
-      "en-IN": "/",
-    },
-  },
-  other: {
-    "geo.region": "IN",
-    "geo.placename": "India",
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://www.fitzoapp.in",
-    title: "Fitzo: Train Smarter, Build Faster",
-    description:
-      "Track workouts, macros, and progress with precision. 10+ training splits, AI nutrition, QR gym check-in, gym buddies, and science-backed education. Built for lifters who value data.",
-    siteName: "Fitzo",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Fitzo: Science-Based Fitness Tracking",
-        type: "image/png",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Fitzo: Train Smarter, Build Faster",
-    description:
-      "Track workouts, macros, and progress with precision. Built for lifters who value data.",
-    creator: "@fitzoapp",
-    images: ["/og-image.png"],
-  },
   robots: {
     index: true,
     follow: true,
@@ -113,7 +62,7 @@ export default function RootLayout({
 }>) {
   return (
     /* Single committed dark world: `dark` is permanent, not a toggle state. */
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang="en-IN" className="dark scroll-smooth" suppressHydrationWarning>
       <body
         className={`${archivo.variable} ${martianMono.variable} font-sans antialiased bg-background text-foreground`}
       >
@@ -124,6 +73,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <MotionProvider>{children}</MotionProvider>
+        <GoogleAnalytics measurementId={process.env.NODE_ENV === "production" && process.env.VERCEL_ENV !== "preview" ? GA_MEASUREMENT_ID : undefined} />
         <Analytics />
         <SpeedInsights />
       </body>

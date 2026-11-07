@@ -1,22 +1,14 @@
+import { pageMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 import Link from "next/link";
 import FitzoLogo from "@/components/FitzoLogo";
 import { ArrowLeft, Check, X } from "lucide-react";
-import { SITE_URL } from "@/lib/links";
 
-export const metadata: Metadata = {
-  title: "Fitzo",
-  description: "See how Fitzo compares to MyFitnessPal, Strong, and Hevy. Free, no ads, offline, AI nutrition, Indian food database, and 10+ workout splits.",
-  alternates: {
-    canonical: `${SITE_URL}/compare`,
-  },
-  openGraph: {
-    title: "Fitzo vs MyFitnessPal vs Strong vs Hevy: Feature Comparison",
-    description: "Compare fitness tracking apps side by side. Fitzo is free, ad-free, works offline, and has the best Indian food database.",
-    type: "website",
-    url: `${SITE_URL}/compare`,
-  },
-};
+export const metadata: Metadata = pageMetadata(
+  "Fitzo vs MyFitnessPal, Strong & Hevy: Features Compared",
+  "Compare workout logging, Indian food tracking, offline features and pricing across Fitzo, MyFitnessPal, Strong and Hevy.",
+  "/compare",
+);
 
 type Feature = {
   name: string;
@@ -59,8 +51,8 @@ const categories: { title: string; features: Feature[] }[] = [
   {
     title: "Nutrition",
     features: [
-      { name: "Food database", fitzo: "500K+", mfp: "Very large", strong: false, hevy: false },
-      { name: "Indian food coverage", fitzo: "50K+ items", mfp: "Partial", strong: false, hevy: false },
+      { name: "Food database", fitzo: "Indian + global sources", mfp: "Very large", strong: false, hevy: false },
+      { name: "Indian food coverage", fitzo: "Indian catalogue + meal ideas", mfp: "Partial", strong: false, hevy: false },
       { name: "Barcode scanner", fitzo: true, mfp: true, strong: false, hevy: false },
       { name: "AI food analysis", fitzo: true, mfp: false, strong: false, hevy: false },
     ],
@@ -105,9 +97,9 @@ export default function ComparePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-black/80 border-b border-white/[0.04]">
+      <header className="chrome-header sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 text-ink-muted hover:text-white transition-colors">
             <ArrowLeft className="w-4 h-4" />

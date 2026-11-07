@@ -114,7 +114,7 @@ export const CalcButton = React.forwardRef<HTMLButtonElement, CalcButtonProps>(
         whileHover={{ y: -1 }}
         whileTap={{ scale: 0.98 }}
         transition={{ duration: 0.18, ease: EASE_OUT_EXPO }}
-        className={`w-full rounded-lg bg-white px-6 py-4 text-sm font-bold uppercase tracking-widest text-black transition-colors hover:bg-protein disabled:opacity-50 disabled:hover:bg-white ${className}`}
+        className={`chrome-button w-full disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
         {...props}
       >
         {children}

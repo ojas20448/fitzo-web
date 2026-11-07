@@ -1,5 +1,11 @@
 # Fitzo Landing Page - Production Notes
 
+## November 2026 design update
+
+The liquid chrome theme and app content refresh are documented in [DESIGN.md](./DESIGN.md). Store links are already configured in `lib/links.ts`; the homepage uses direct downloads. The old launch signup and unverified beta-metric section are no longer on the homepage. Product copy follows the app's published October releases.
+
+Run `npm run build`, `npm run lint`, `node scripts/chrome-check.mjs`, and the route audit before deployment. `FITZO_BUILD_DIR` can isolate a local preview under the ignored `output/` directory; leave it unset for a normal `.next` deployment. The older performance estimates and launch checklist below are historical and are not current verification results.
+
 ## ✅ Production Ready Features
 
 ### Core Pages
@@ -59,17 +65,13 @@
    - `apple-touch-icon.svg` → `apple-touch-icon.png` (180x180px)
    - Update `app/layout.tsx` references after conversion
 
-4. **Environment Variables** (if using analytics):
-   ```env
-   NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
-   NEXT_PUBLIC_VERCEL_ANALYTICS_ID=xxxxx
-   ```
+4. **Analytics**: Google Analytics 4 is configured for the Fitzo web stream with visitor consent. See [SEO-ANALYTICS.md](./SEO-ANALYTICS.md) for IDs, events, deployment checks and the optional `NEXT_PUBLIC_GA_ID` override.
 
 ### Recommended Additions
-- [ ] Google Analytics or Vercel Analytics
+- [x] Google Analytics 4, Vercel Analytics and Speed Insights
 - [ ] Error tracking (Sentry/LogRocket)
 - [ ] Email collection for waitlist
-- [ ] Cookie consent banner (if tracking EU users)
+- [x] Google Analytics opt-in and persistent cookie preferences
 - [ ] Rate limiting on any API routes (none currently)
 
 ## 🚀 Deployment Commands

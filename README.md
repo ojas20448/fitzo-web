@@ -2,7 +2,7 @@
 
 > **Train Smarter, Build Faster** — Science-based fitness tracking for serious lifters
 
-A production-ready Next.js 14 landing page for the Fitzo fitness app, featuring a clean black & white design, smooth animations, and comprehensive SEO optimization.
+A Next.js 14 website for Fitzo, with a liquid chrome theme, an interactive five-tab app preview, and product content aligned with the app's October 2026 releases. See [DESIGN.md](./DESIGN.md) for the design system, source notes and UI verification commands.
 
 ## 🚀 Quick Start
 
@@ -24,11 +24,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## ✨ Features
 
-- 🎨 Pure black & white monochrome design
+- 🎨 Liquid chrome surfaces over graphite
 - 🎭 Smooth Framer Motion animations
 - 📱 Fully responsive mobile-first layout
-- ♿ WCAG 2.1 AA accessibility compliant
-- ⚡ Optimized performance (Lighthouse 95+)
+- ♿ Keyboard navigation, visible focus, reduced-motion support and responsive checks
+- ⚡ Static pages and a local interactive product preview
 - 🔍 Complete SEO optimization
 - 📄 Privacy Policy & Terms of Service pages
 - 🎯 Custom 404 page
@@ -40,7 +40,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - **Styling:** Tailwind CSS 3.4.1
 - **Animations:** Framer Motion 12.34.1
 - **Icons:** Lucide React 0.574.0
-- **Fonts:** Geist Sans & Geist Mono
+- **Fonts:** Archivo & Martian Mono
 
 ## 📦 Project Structure
 
@@ -76,3 +76,7 @@ Built with ❤️ using [Next.js](https://nextjs.org)
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Search and analytics
+
+See [SEO-ANALYTICS.md](./SEO-ANALYTICS.md) for GA4 configuration, consent behavior, page targeting, AI discovery and verification commands.

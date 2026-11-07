@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import ArticleCard from "@/components/blog/ArticleCard";
@@ -7,29 +8,11 @@ import { ArrowLeft } from "lucide-react";
 import { getBlogListSchema, getBreadcrumbSchema } from "@/lib/structured-data";
 import { SITE_URL } from "@/lib/links";
 
-export const metadata: Metadata = {
-  title: "Fitzo",
-  description:
-    "Science-backed fitness, nutrition, and training articles for Indian lifters. Learn about workout splits, macro tracking, supplements, and more.",
-  alternates: {
-    canonical: `${SITE_URL}/blog`,
-  },
-  openGraph: {
-    title: "Fitzo Blog: Science-Backed Fitness Articles",
-    description:
-      "Expert articles on training, nutrition, supplements, and building a stronger version of yourself. Written for Indian lifters.",
-    type: "website",
-    url: `${SITE_URL}/blog`,
-    siteName: "Fitzo",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Fitzo Blog: Science-Backed Fitness Articles",
-    description:
-      "Expert articles on training, nutrition, supplements, and building a stronger version of yourself.",
-    creator: "@fitzoapp",
-  },
-};
+export const metadata: Metadata = pageMetadata(
+  "Fitness & Indian Nutrition Guides | Fitzo Blog",
+  "Explore practical guides to Indian meals, workout routines, macro tracking and training. Use free fitness calculators alongside the Fitzo app.",
+  "/blog",
+);
 
 export default function BlogPage() {
   const posts = getAllPosts();
@@ -42,7 +25,7 @@ export default function BlogPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
@@ -54,7 +37,7 @@ export default function BlogPage() {
       />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 dark:bg-black/80 border-b border-black/[0.04] dark:border-white/[0.04]">
+      <header className="chrome-header sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 text-ink-muted hover:text-black dark:hover:text-white transition-colors">
             <ArrowLeft className="w-4 h-4" />

@@ -1,20 +1,13 @@
+import { pageMetadata } from "@/lib/seo";
 import { Metadata } from "next";
 import BodyFatCalculator from "./calculator";
 import { SITE_URL } from "@/lib/links";
 
-export const metadata: Metadata = {
-  title: "Fitzo",
-  description: "Accurately estimate your body fat percentage using the free US Navy tape measure method calculator.",
-  alternates: {
-    canonical: `${SITE_URL}/tools/body-fat-calculator`,
-  },
-  openGraph: {
-    title: "Fitzo Body Fat Calculator: US Navy Tape Method",
-    description: "Accurately estimate your body fat percentage using the free US Navy tape measure method calculator.",
-    url: `${SITE_URL}/tools/body-fat-calculator`,
-    type: "website",
-  },
-};
+export const metadata: Metadata = pageMetadata(
+  "Free Body Fat Calculator: US Navy Method | Fitzo",
+  "Estimate body fat percentage from tape measurements with the US Navy method. A free calculator with metric inputs and measurement guidance.",
+  "/tools/body-fat-calculator",
+);
 
 const jsonLd = {
   "@context": "https://schema.org",

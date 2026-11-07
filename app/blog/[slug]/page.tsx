@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -24,18 +25,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const url = `${SITE_URL}/blog/${post.slug}`;
 
+  const shared = pageMetadata(`${post.title} | Fitzo`, post.description, `/blog/${post.slug}`);
   return {
-    // Tab title is the site name everywhere, not per-page content: the
-    // post title still carries the page's identity via og:title/description
-    // for link previews, just not in the browser tab itself.
-    title: "Fitzo",
-    description: post.description,
+    ...shared,
     keywords: post.keywords,
     authors: [{ name: "Fitzo" }],
     alternates: {
       canonical: url,
     },
     openGraph: {
+      ...shared.openGraph,
       title: post.title,
       description: post.description,
       type: "article",
@@ -45,12 +44,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: "Fitzo",
       authors: ["Fitzo"],
       section: post.category,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.description,
-      creator: "@fitzoapp",
     },
   };
 }
@@ -62,7 +55,7 @@ export default function BlogPostPage({ params }: PageProps) {
   const allPosts = getAllPosts();
   const relatedPosts = allPosts
     .filter((p) => p.slug !== post.slug)
-    .filter((p) => p.category === post.category || true)
+    .sort((a, b) => Number(b.category === post.category) - Number(a.category === post.category))
     .slice(0, 3);
 
   const breadcrumbs = [
@@ -72,7 +65,7 @@ export default function BlogPostPage({ params }: PageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
@@ -84,7 +77,7 @@ export default function BlogPostPage({ params }: PageProps) {
       />
 
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-white/80 dark:bg-black/80 border-b border-black/[0.04] dark:border-white/[0.04]">
+      <header className="chrome-header sticky top-0 z-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link href="/blog" className="flex items-center gap-3 text-ink-muted hover:text-black dark:hover:text-white transition-colors">
             <ArrowLeft className="w-4 h-4" />
@@ -109,6 +102,7 @@ export default function BlogPostPage({ params }: PageProps) {
 
       <main id="main" className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         {/* Article Header */}
+        <p className="mb-4 text-sm text-ink-muted">Published by the Fitzo team</p>
         <div className="mb-10">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-semibold bg-black/[0.04] dark:bg-white/[0.06] text-ink-muted border border-black/[0.04] dark:border-white/[0.04] mb-6">
             {post.category}
@@ -174,13 +168,13 @@ export default function BlogPostPage({ params }: PageProps) {
               Track your fitness with Fitzo
             </p>
             <p className="text-ink-muted text-sm mb-6">
-              50,000+ Indian foods. Science-based workouts. Free forever.
+              Log workouts and Indian meals, with optional AI coaching. Available on iOS and Android.
             </p>
             <Link
               href="/#download"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
             >
-              Join the Waitlist
+              Download Fitzo
             </Link>
           </div>
         </div>

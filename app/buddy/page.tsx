@@ -24,7 +24,7 @@ function BuddyContent() {
   }, [validInvite, deepLink]);
 
   if (!validInvite) return (
-    <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 text-center gap-4">
+    <main className="min-h-screen bg-background text-white flex flex-col items-center justify-center p-6 text-center gap-4">
       <h1 className="text-2xl font-bold">This invite is incomplete</h1>
       <p>Ask your buddy to share their Fitzo invite link again.</p>
       <Link href="/" className="underline">Go to Fitzo</Link>
@@ -32,7 +32,7 @@ function BuddyContent() {
   );
 
   return (
-    <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
+    <main className="min-h-screen bg-background text-white flex flex-col items-center justify-center p-6 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#E8FF4D]/10 rounded-full blur-[100px] pointer-events-none" />
 
@@ -110,7 +110,7 @@ export default function BuddyPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-black flex items-center justify-center text-neutral-500">
+        <div className="min-h-screen bg-background flex items-center justify-center text-neutral-500">
           Loading buddy invite...
         </div>
       }
