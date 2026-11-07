@@ -2,7 +2,7 @@
 
 > **Train Smarter, Build Faster** — Science-based fitness tracking for serious lifters
 
-A Next.js 14 website for Fitzo, with a liquid chrome theme, an interactive five-tab app preview, and product content aligned with the app's October 2026 releases. See [DESIGN.md](./DESIGN.md) for the design system, source notes and UI verification commands.
+A Next.js 14 website for Fitzo, with a liquid chrome theme, a five-screen showcase captured from the real app, and product content aligned with the app's October 2026 releases. See [DESIGN.md](./DESIGN.md) for the design system, source notes and UI verification commands.
 
 ## 🚀 Quick Start
 

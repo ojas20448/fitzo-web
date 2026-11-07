@@ -15,48 +15,41 @@ try {
   const declineAnalytics = page.getByRole("button", { name: "No thanks", exact: true });
   if (await declineAnalytics.count()) await declineAnalytics.click();
   assert.match(await page.locator("body").evaluate(el => getComputedStyle(el).fontFamily), /Archivo/);
-  assert.ok(await page.locator(".preview-content").evaluate(el => el.scrollHeight <= el.clientHeight + 1), "Default workout preview must fit");
+  assert.ok(await page.locator(".phone-captures").evaluate(el => el.scrollHeight <= el.clientHeight + 1), "App screenshot must fit the phone");
   await page.screenshot({ path: out + "/desktop.png" });
   assert.equal(await page.locator("h1").count(), 1);
   assert.equal(await page.getByRole("tab").count(), 5);
 
-  const rows = page.locator(".exercise-row");
-  await page.getByRole("button", { name: "Move Seated cable row up", exact: true }).click();
-  assert.match(await rows.first().innerText(), /Seated cable row/);
-  assert.match(await rows.first().innerText(), /45 kg/);
-  await page.getByRole("button", { name: /Resume workout/ }).click();
-  await page.getByRole("button", { name: "Complete set", exact: true }).click();
-  assert.match(await page.locator(".resume-card").innerText(), /7\/12 sets/);
-
-  await page.getByRole("tab", { name: "Food", exact: true }).click();
-  await page.getByRole("button", { name: "Try adding paneer bhurji" }).click();
-  assert.match(await page.locator(".nutrition-summary").innerText(), /1,960/);
-  await page.getByRole("button", { name: "Meal added · undo" }).click();
-  assert.match(await page.locator(".nutrition-summary").innerText(), /1,640/);
-
-  await page.getByRole("tab", { name: "Gym", exact: true }).click();
-  await page.getByRole("button", { name: "Explore equipment", exact: true }).click();
-  assert.equal(await page.locator("#demo-gym-equipment").isVisible(), true);
-  await page.getByRole("button", { name: "Hide equipment", exact: true }).click();
-  assert.equal(await page.locator("#demo-gym-equipment").isVisible(), false);
-
-  await page.getByRole("tab", { name: "Friends", exact: true }).click();
-  await page.getByRole("button", { name: "Try sending kudos" }).click();
-  assert.equal(await page.getByRole("button", { name: "Kudos sent · undo" }).getAttribute("aria-pressed"), "true");
-
+  for (const name of ["Workout", "Food", "Gym", "Friends", "Profile"]) {
+    const tab = page.getByRole("tab", { name, exact: true });
+    await tab.click();
+    assert.equal(await tab.getAttribute("aria-selected"), "true");
+    assert.equal(await page.getByRole("tabpanel").count(), 1);
+    const panel = page.getByRole("tabpanel", { name, exact: true });
+    const image = panel.getByRole("img");
+    await image.evaluate(img => img.decode());
+    assert.equal(await image.getAttribute("src"), `/app-screens/${name.toLowerCase()}.webp`);
+    const dimensions = await image.evaluate(img => ({ width: img.naturalWidth, height: img.naturalHeight }));
+    assert.deepEqual(dimensions, { width: 440, height: 874 });
+    assert.ok((await image.getAttribute("alt")).length > 40);
+    await page.locator("#demo").screenshot({ path: `${out}/phone-${name.toLowerCase()}.png` });
+  }
+  assert.equal(await page.locator("#demo").getByRole("button").count(), 0, "Captured app controls must not impersonate live actions");
   await page.getByRole("tab", { name: "Workout", exact: true }).click();
-  assert.match(await page.locator(".resume-card").innerText(), /7\/12 sets/);
-  await page.getByRole("button", { name: "Set complete · undo" }).click();
-  await page.getByRole("button", { name: /Workout in progress/ }).click();
-  assert.match(await rows.first().innerText(), /Seated cable row/);
-  await page.getByRole("tab", { name: "Workout", exact: true }).focus();
   await page.keyboard.press("ArrowRight");
   assert.equal(await page.getByRole("tab", { name: "Food", exact: true }).getAttribute("aria-selected"), "true");
   await page.keyboard.press("End");
   assert.equal(await page.getByRole("tab", { name: "Profile", exact: true }).getAttribute("aria-selected"), "true");
   await page.keyboard.press("Home");
   assert.equal(await page.getByRole("tab", { name: "Workout", exact: true }).getAttribute("aria-selected"), "true");
-
+  await page.keyboard.press("ArrowLeft");
+  assert.equal(await page.getByRole("tab", { name: "Profile", exact: true }).getAttribute("aria-selected"), "true");
+  await page.keyboard.press("ArrowRight");
+  assert.equal(await page.getByRole("tab", { name: "Workout", exact: true }).getAttribute("aria-selected"), "true");
+  await page.keyboard.press("ArrowDown");
+  assert.equal(await page.getByRole("tab", { name: "Food", exact: true }).getAttribute("aria-selected"), "true");
+  await page.keyboard.press("ArrowUp");
+  assert.equal(await page.getByRole("tab", { name: "Workout", exact: true }).getAttribute("aria-selected"), "true");
   const faqSchema = await page.locator('script[type="application/ld+json"]').evaluateAll(nodes => nodes.map(n=>JSON.parse(n.textContent)).find(n=>n["@type"] === "FAQPage"));
   for (const entry of faqSchema.mainEntity) {
     const detail = page.locator("#faq details").filter({ has: page.locator("summary", { hasText: entry.name }) });
@@ -70,6 +63,13 @@ try {
     await page.waitForTimeout(250);
     const dimensions = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
     assert.ok(dimensions.scroll <= dimensions.viewport, "Horizontal overflow at " + width);
+    const ratios = await page.locator("#demo").evaluate(el => {
+      const screen = el.querySelector(".phone-screen").getBoundingClientRect();
+      const image = el.querySelector('[role="tabpanel"]:not([hidden]) img').getBoundingClientRect();
+      return { screen: screen.width / screen.height, image: image.width / image.height };
+    });
+    assert.ok(Math.abs(ratios.screen - 440 / 956) < 0.005, "Phone proportions at " + width);
+    assert.ok(Math.abs(ratios.image - 440 / 874) < 0.005, "Screenshot proportions at " + width);
     if (width === 390) {
       await page.screenshot({ path: out + "/mobile.png" });
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
@@ -97,7 +97,7 @@ try {
   assert.equal(await page.locator(".hero-copy").evaluate(el=>getComputedStyle(el).opacity), "1");
   await page.screenshot({ path: out + "/reduced-motion.png" });
   assert.deepEqual(errors, [], "Browser runtime errors");
-  console.log("PASS: preview state, reorder, undo, all five tabs, keyboard navigation, FAQ/schema parity, mobile menu, anchors, reduced motion, and 5 viewport widths.");
+  console.log("PASS: five real app captures, image loading, screen selection, keyboard navigation, FAQ/schema parity, mobile menu, anchors, reduced motion, and 5 viewport widths.");
   console.log("Screenshots: " + out);
 } finally {
   await browser.close();

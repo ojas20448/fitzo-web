@@ -43,7 +43,7 @@ Desktop keeps the proposition and download action on the left, with an interacti
 [ App Store + Google Play                                           ]
 ```
 
-The phone is a simplified website preview with labelled sample data, not a screenshot or connection to a real account. It never sends friend notifications or saves nutrition to the app. Tabs, set completion, reorder, sample food, gym expansion and kudos work locally. Do not auto-cycle tabs or overwrite visitor choices.
+The phone displays actual screenshots of the current app, captured from the Expo web export on 7 November 2026 with a fictional account. The app's own layout, typography and navigation remain intact. Five selectors switch screenshots locally, beside the phone on desktop and beneath it on mobile; the pictured app controls are part of the images. The desktop phone scales with viewport height. Do not auto-cycle screens or overwrite visitor choices. Capture provenance and refresh notes live in public/app-screens/README.md.
 
 ## Shared components
 
@@ -89,7 +89,7 @@ $env:ROUTES='/,/changelog,/blog,/tools/bmr-calculator,/compare,/privacy-policy,/
 node scripts/audit.mjs
 ```
 
-chrome-check.mjs verifies meaningful preview interactions, keyboard navigation, undo and state preservation, FAQ/schema parity, anchors, the mobile menu, reduced motion and widths from 320 to 1440 pixels. Screenshots are saved in output/chrome-review (ignored by Git).
+chrome-check.mjs verifies all five real app images, screen selection, keyboard navigation, screenshot proportions, FAQ/schema parity, anchors, the mobile menu, reduced motion and widths from 320 to 1440 pixels. Screenshots are saved in output/chrome-review (ignored by Git).
 
 The legacy audit approximates contrast from computed solid colours; it is not a full accessibility certification. It reports intentionally clipped decorative chrome and horizontally scrollable comparison tables as element overflow even when document width matches the viewport. Review screenshots and the actual page width as well.
 
@@ -105,3 +105,10 @@ Some older scripts target the previous hero's markup. Use chrome-check.mjs for t
 - Fourteen production routes returned HTTP 200, with no application JavaScript errors in the production smoke check.
 - Local production requests to Vercel's analytics script paths return 404 outside Vercel; those hosting integrations were retained.
 - Verification used desktop Chromium and emulated mobile sizes. Physical-device browsers, Safari and assistive-technology testing remain unverified. This change was not deployed.
+
+### Real app showcase refresh
+
+- Fresh captures use the app source at `91965c8` with local sample fixtures. The five WebP images preserve the current Workout, Food, Gym, Friends and Profile layouts.
+- Production build and lint passed. Browser checks verified every screen loads, arrow keys and Home/End switch screens, and 320, 390, 768, 1280 and 1440 pixel widths retain phone/image proportions with no horizontal overflow. Screen selectors meet a 44-pixel target size at those widths.
+- The final production preview passed a screen-switching smoke check with no browser console errors. Review images are in `output/real-app-review/`.
+- `scripts/chrome-check.mjs` was updated for the capture gallery and syntax-checked; this run used the browser tools for interaction and layout checks. Native-device parity and screen-reader behavior remain unverified. No deployment was performed.

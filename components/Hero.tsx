@@ -31,7 +31,6 @@ export default function Hero() {
         <div className="hero-product">
           <div className="chrome-orbit" aria-hidden="true" />
           <InteractiveDemo />
-          <div className="product-caption"><span className="caption-line" /> Five tabs. Your whole routine.</div>
         </div>
       </div>
       <div className="site-container">
