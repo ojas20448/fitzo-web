@@ -57,7 +57,7 @@ export default function TermsOfService() {
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-4">
             Terms of Service
           </h1>
-          <p className="text-ink-muted">Last updated: February 17, 2026</p>
+          <p className="text-ink-muted">Last updated: November 9, 2026</p>
         </div>
 
         {/* ━━━ Agreement ━━━ */}
@@ -78,10 +78,8 @@ export default function TermsOfService() {
         {/* ━━━ Eligibility ━━━ */}
         <Section title="2. Eligibility">
           <p>
-            You must be at least 13 years of age to use Fitzo. If you are under
-            18, you represent that your parent or legal guardian has reviewed and
-            agreed to these Terms on your behalf. By using the Service, you
-            represent and warrant that you meet these eligibility requirements.
+            You must be at least 18 years of age to use Fitzo. By using the
+            Service, you represent and warrant that you meet this requirement.
           </p>
         </Section>
 
