@@ -103,6 +103,7 @@ export default function PrivacyPolicy() {
             Privacy Policy
           </h1>
           <p className="text-ink-muted">App policy and website analytics: 7 November 2026</p>
+          <p className="text-ink-muted">YouTube publishing disclosure effective 25 November 2026</p>
         </div>
 
         {/* ━━━ Summary ━━━ */}
@@ -147,6 +148,40 @@ export default function PrivacyPolicy() {
             <p>Our Google tag loads only after you select Allow analytics. No thanks leaves it disabled. Use Cookie settings at the bottom of any website page to change your choice; withdrawing permission stops future Google Analytics collection. Your choice is stored in this browser.</p>
             <p>We do not send food or workout logs, calculator inputs, form entries, buddy identifiers or URL query strings to Google Analytics. Advertising storage, ad personalization and Google signals are disabled. Buddy invitation pages are excluded from this tracking.</p>
             <p>Google processes analytics data on its infrastructure, which may be outside India. See <a href="https://policies.google.com/technologies/partner-sites" className="underline underline-offset-4">how Google uses information from partner sites</a>. We also use Vercel Web Analytics and Speed Insights for website usage and performance, separately from the Google Analytics cookie choice.</p>
+          </div>
+        </section>
+
+        <section id="youtube-publishing" className="mb-12 scroll-mt-24">
+          <h2 className="mb-4 text-2xl font-bold text-white">YouTube publishing with Fitzo Postiz</h2>
+          <div className="space-y-4 leading-relaxed text-neutral-300">
+            <p>
+              Fitzo Postiz is a self-hosted tool that Fitzo staff use to
+              schedule videos, manage comments and review performance on Fitzo’s
+              YouTube channel. It uses YouTube API Services. This connection
+              is available to authorized Fitzo channel managers and is separate
+              from Fitzo member accounts.
+            </p>
+            <p>
+              When a channel manager authorizes the connection, Google provides
+              account profile information, an email address and authorization
+              tokens. Fitzo Postiz uses the access to identify the connected
+              channel, send videos and captions to YouTube, manage comments,
+              and read video, channel and analytics data. The scheduler stores
+              authorization tokens, channel details, scheduled content and
+              publishing records in its database. Access to the scheduler is
+              limited to authorized Fitzo staff.
+            </p>
+            <p>
+              Use of the connector is subject to the{" "}
+              <a href="https://www.youtube.com/t/terms" className="underline underline-offset-4">YouTube Terms of Service</a>.
+              Google handles the information sent to its services under the{" "}
+              <a href="https://policies.google.com/privacy" className="underline underline-offset-4">Google Privacy Policy</a>.
+              Channel managers can revoke the connection in{" "}
+              <a href="https://security.google.com/settings/security/permissions" className="underline underline-offset-4">Google Account connections</a>.
+              For removal of stored YouTube data from Fitzo Postiz or questions
+              about this integration, email{" "}
+              <a href="mailto:support@fitzoapp.in" className="underline underline-offset-4">support@fitzoapp.in</a>.
+            </p>
           </div>
         </section>
 
